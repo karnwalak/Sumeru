@@ -1,6 +1,9 @@
 <?php
-print_r($employee);
-exit;
+namespace App\Http\Controllers;
+use App\Models\hr_departments;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -207,19 +210,34 @@ exit;
 																			<div class="form-group row" data-select2-id="243">
 																				<label class="col-form-label text-left col-lg-3 col-sm-12">Parent</label>
 																				<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
+																				<?php
+																					function categoryTree($rowid, $category){
+																					$data = DB::SELECT("SELECT * FROM hr_departments WHERE parent=$rowid");
+																					foreach ($data as $value) {
+																						$row_name = $value -> category_name;
+																						$concat = $category." | ".$row_name;
+																						$cat_id = $value -> id;
+																					?>
+																					<option value="<?php echo $cat_id; ?>"><?php echo $concat; ?></option>
+																					<?php
+																					categoryTree($cat_id,$concat);        
+																					}
+																					}
+																				?>
 																					<select class="form-control" id="kt_select2_1" name="parent">
-																						<option value="AK">Alaska</option>
-																						<option value="HI">Hawaii</option>
-																						<option value="CA">California</option>
-																						<option value="NV">Nevada</option>
-																						<option value="OR">Oregon</option>
-																						<option value="WA">Washington</option>
-																						<option value="AZ">Arizona</option>
-																						<option value="CO">Colorado</option>
-																						<option value="ID">Idaho</option>
-																						<option value="MT">Montana</option>
-																						<option value="NE">Nebraska</option>
-																						<option value="NM">New Mexico</option>
+																					<option value="">Select</option>
+																					<option value="0">Parent</option>
+																					<?php 
+																						$datas = DB::SELECT("SELECT * FROM hr_departments WHERE parent=0");
+																						foreach($datas as $val){
+																						$rowid = $val -> id;
+																						$category = $val -> category_name;
+																						?>
+																						<option value="<?php echo $rowid; ?>"><?php echo $category; ?></option>
+																						<?php
+																						categoryTree($rowid,$category);
+																						}
+																					?>
 																					</select>
 																					<span class="field_error" id="parent_error" style="color:red;"></span>
 																				</div>
@@ -230,6 +248,7 @@ exit;
 																				<label class="col-form-label text-left col-lg-3 col-sm-12">Lead</label>
 																				<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
 																					<select class="form-control" id="kt_select2_1" name="lead">
+																					    <option value="">Select</option>
 																						@foreach($employee as $emp)
 																						<option value="{{$emp -> id}}">{{$emp -> employee_name}}</option>
 																						@endforeach

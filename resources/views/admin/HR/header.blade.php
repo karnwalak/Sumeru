@@ -5,7 +5,7 @@
 						<!--begin::Left-->
 						<div class="d-flex align-items-stretch mr-2">
 							<!--begin::Page Title-->
-							<a href="../HR/dashboard" class="menu-link" style="display:grid !important;place-items:center !important;">
+							<a href="../ERP/dashboard" class="menu-link" style="display:grid !important;place-items:center !important;">
 								<h3 class="d-none text-dark d-lg-flex align-items-center mr-10 mb-0">Dashboard</h3>
 							</a>
 							<!--end::Page Title-->
