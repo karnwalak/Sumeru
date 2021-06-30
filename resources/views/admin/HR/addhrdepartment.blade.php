@@ -214,7 +214,7 @@ use Illuminate\Support\Facades\DB;
 																					function categoryTree($rowid, $category){
 																					$data = DB::SELECT("SELECT * FROM hr_departments WHERE parent=$rowid");
 																					foreach ($data as $value) {
-																						$row_name = $value -> category_name;
+																						$row_name = $value -> name;
 																						$concat = $category." | ".$row_name;
 																						$cat_id = $value -> id;
 																					?>
@@ -231,7 +231,7 @@ use Illuminate\Support\Facades\DB;
 																						$datas = DB::SELECT("SELECT * FROM hr_departments WHERE parent=0");
 																						foreach($datas as $val){
 																						$rowid = $val -> id;
-																						$category = $val -> category_name;
+																						$category = $val -> name;
 																						?>
 																						<option value="<?php echo $rowid; ?>"><?php echo $category; ?></option>
 																						<?php
@@ -286,6 +286,8 @@ use Illuminate\Support\Facades\DB;
 																			<!--begin::Dropdown-->
 																			<!-- <div class="btn-group ml-2"> -->
 																				 <button type="submit" class="btn btn-primary font-weight-bold btn-sm font-size-base">Submit</button>
+																				 <span id="error_msg" class="text-danger"></span>
+																				 <span id="success_msg" class="text-success"></span>
 																				<!--<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
 																				<div class="dropdown-menu dropdown-menu-sm p-0 m-0 dropdown-menu-right">
 																					<ul class="navi py-5">
@@ -377,8 +379,21 @@ use Illuminate\Support\Facades\DB;
 				  method : 'POST',
 				  data : $('#form').serialize(),
 				  dataType : 'JSON',
-                  success : function(data){
-					
+                  success : function(result){
+					if (result.status == 'error') {
+						$('#error_msg').html(result.error);
+						$.each(result.error,function(key,val){
+						// console.log(key);
+						// console.log(val);
+						$('#'+key+'_error').html(val[0]);
+						})
+					}else if(result.status == 'success'){
+						$('#form')[0].reset();
+						$('#success_msg').html(result.msg);
+						setTimeout(function(){
+						window.location.href = '../HR/hrdepartment'; 
+						}, 1000);
+					}
 				  }
 			  })
 

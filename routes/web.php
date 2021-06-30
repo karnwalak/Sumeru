@@ -81,9 +81,10 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::post('admin/ERP/searchproduct','App\Http\Controllers\MaterialController@index');
         Route::post('admin/ERP/searchstock','App\Http\Controllers\MaterialStockController@index');
         Route::post('admin/ERP/editSeller','App\Http\Controllers\SellerController@editSeller');
+        Route::view('admin/ERP/searchstock','admin/ERP/searchstock');
+        /**********************************************FLAT Inventory*******************************************************/
         Route::view('admin/FLAT/dashboard','admin/FLAT/dashboard');
         Route::view('admin/FLAT/searchflat','admin/FLAT/searchflat');
-        Route::view('admin/ERP/searchstock','admin/ERP/searchstock');
         Route::view('admin/FLAT/searchflatcategory','admin/FLAT/searchflatcategory');
         Route::view('admin/FLAT/flatdashboard','admin/FLAT/flatdashboard');
         Route::view('admin/FLAT/addflatstockcategory','admin/FLAT/addflatstockcategory');
@@ -104,10 +105,10 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::post('admin/FLAT/addFlat','App\Http\Controllers\FlatController@addFlat');
         Route::get(' admin/FLAT/deleteflat/{id}','App\Http\Controllers\FlatController@deleteFlat');
         Route::post('admin/FLAT/editFlat','App\Http\Controllers\FlatController@editFlat');
-        //HR AND PAYROLL
+        /*****************************************HR AND PAYROLL*****************************************************************/
         Route::view('admin/HR/hrdashboard','admin/HR/hrdashboard');
-
         Route::view('admin/HR/hrdepartment','admin/HR/hrdepartment');
+        Route::get('admin/HR/hrdepartment',[HrDepartmentsController::class,'show']);
         Route::view('admin/HR/hrdashboard','admin/HR/hrdashboard');
         Route::view('admin/HR/addemployees','admin/HR/addemployees');
         Route::view('admin/HR/addhrdepartment','admin/HR/addhrdepartment');
@@ -118,12 +119,12 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::view('admin/HR/addtasks','admin/HR/addtasks');
         Route::view('admin/HR/allowances','admin/HR/allowances');
         Route::view('admin/HR/editemployees','admin/HR/editemployees');
+        Route::get('admin/HR/edithrdepartment/{id}',[HrDepartmentsController::class,'edit']);
         Route::view('admin/HR/edithrdepartment','admin/HR/edithrdepartment');
         Route::view('admin/HR/edithrdesignation','admin/HR/edithrdesignation');
         Route::view('admin/HR/editshifts','admin/HR/editshifts');
         Route::view('admin/HR/employeeprofile','admin/HR/employeeprofile');
         Route::view('admin/HR/employees','admin/HR/employees');
-        Route::view('admin/HR/hrdepartment','admin/HR/hrdepartment');
         Route::view('admin/HR/hrdesignation','admin/HR/hrdesignation');
         Route::view('admin/HR/shifts','admin/HR/shifts');
         Route::view('admin/HR/tasksandprojects','admin/HR/tasksandprojects');
