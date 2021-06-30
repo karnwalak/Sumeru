@@ -368,7 +368,7 @@
 																							</svg>
 																					</span>
 																			</a>
-																			<a href="deletedepartment/{{$value -> id}}" class="btn btn-sm btn-clean btn-icon" title="Delete">
+																			<a href="deletedepartment/{{$value -> id}}" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-clean btn-icon" title="Delete">
 																					<span class="svg-icon svg-icon-md">
 																							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 																									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
