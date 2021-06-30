@@ -185,7 +185,7 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Name</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" />
+																					<input class="form-control form-control-solid form-control-lg" name="name" type="text" value="{{$data -> name}}" />
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -202,19 +202,11 @@
 																			<div class="form-group row" data-select2-id="243">
 																				<label class="col-form-label text-left col-lg-3 col-sm-12">Parent</label>
 																				<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
-																					<select class="form-control" id="kt_select2_1" name="param">
-																						<option value="AK">Alaska</option>
-																						<option value="HI">Hawaii</option>
-																						<option value="CA">California</option>
-																						<option value="NV">Nevada</option>
-																						<option value="OR">Oregon</option>
-																						<option value="WA">Washington</option>
-																						<option value="AZ">Arizona</option>
-																						<option value="CO">Colorado</option>
-																						<option value="ID">Idaho</option>
-																						<option value="MT">Montana</option>
-																						<option value="NE">Nebraska</option>
-																						<option value="NM">New Mexico</option>
+																					<select class="form-control" id="kt_select2_1" name="parent">
+																						<option value="">Select</option>
+																						@foreach($data as $val)
+																						<option value="{{$val -> parent}}">{{$val -> parent}}</option>
+																						@endforeach
 																					</select>
 																				</div>
 																			</div>
@@ -224,18 +216,10 @@
 																				<label class="col-form-label text-left col-lg-3 col-sm-12">Lead</label>
 																				<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
 																					<select class="form-control" id="kt_select2_1" name="param">
-																						<option value="AK">Alaska</option>
-																						<option value="HI">Hawaii</option>
-																						<option value="CA">California</option>
-																						<option value="NV">Nevada</option>
-																						<option value="OR">Oregon</option>
-																						<option value="WA">Washington</option>
-																						<option value="AZ">Arizona</option>
-																						<option value="CO">Colorado</option>
-																						<option value="ID">Idaho</option>
-																						<option value="MT">Montana</option>
-																						<option value="NE">Nebraska</option>
-																						<option value="NM">New Mexico</option>
+																					   <option value="">Select</option>
+																						@foreach($data as $val)
+																						<option value="{{$val -> employee_id}}">{{$val -> employee_id}}</option>
+																						@endforeach
 																					</select>
 																				</div>
 																			</div>
@@ -245,18 +229,10 @@
 																				<label class="col-form-label text-left col-lg-3 col-sm-12">Status</label>
 																				<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
 																					<select class="form-control" id="kt_select2_1" name="param">
-																						<option value="AK">Alaska</option>
-																						<option value="HI">Hawaii</option>
-																						<option value="CA">California</option>
-																						<option value="NV">Nevada</option>
-																						<option value="OR">Oregon</option>
-																						<option value="WA">Washington</option>
-																						<option value="AZ">Arizona</option>
-																						<option value="CO">Colorado</option>
-																						<option value="ID">Idaho</option>
-																						<option value="MT">Montana</option>
-																						<option value="NE">Nebraska</option>
-																						<option value="NM">New Mexico</option>
+																					    <option value="">Select</option>
+																						@foreach($data as $val)
+																						<option value="{{$val -> status}}">{{$val -> status}}</option>
+																						@endforeach
 																					</select>
 																				</div>
 																			</div>
