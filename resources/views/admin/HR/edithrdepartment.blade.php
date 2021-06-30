@@ -1,3 +1,6 @@
+<?php
+$value=$data[0];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -5,6 +8,7 @@
 <head>
 <meta charset="utf-8" />
 	<title>ERP</title>
+	<base href="../">
 	<meta name="description" content="Updates and statistics" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!--begin::Fonts-->
@@ -175,7 +179,8 @@
 																<a href="hrdepartment" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
 															</div>
 															<!--begin::Wizard Form-->
-															<form class="form" id="kt_form">
+															<form class="form" id="form">
+															{{@csrf_field()}}
 																<div class="row justify-content-center">
 																	<div class="col-xl-9">
 																		<!--begin::Wizard Step 1-->
@@ -185,7 +190,9 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Name</label>
 																				<div class="col-lg-9 col-xl-9">
+																					<input type="hidden" name="pid" value="{{$data -> id}}" />
 																					<input class="form-control form-control-solid form-control-lg" name="name" type="text" value="{{$data -> name}}" />
+																					<span class="field_error" id="name_error" style="color:red;"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -203,11 +210,39 @@
 																				<label class="col-form-label text-left col-lg-3 col-sm-12">Parent</label>
 																				<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
 																					<select class="form-control" id="kt_select2_1" name="parent">
-																						<option value="">Select</option>
-																						@foreach($data as $val)
-																						<option value="{{$val -> parent}}">{{$val -> parent}}</option>
+																					<option value="">Select</option>
+																					@foreach($department as $val)
+																						@if($data -> parent == $val -> parent)
+																						  @if($val -> parent == 0)
+																						  <option value="0" selected>Parent</option>
+																						  @else
+																						  <option value="{{$data -> parent}}" selected>                                                                 
+																						  <?php 
+																							$pid = $data -> parent;
+																							$pdata = DB::SELECT("SELECT * FROM hr_departments WHERE id = $pid"); 
+																							foreach ($pdata as  $pval) {
+																							}
+																							echo $pval -> name;
+																						   ?>
+																	                       </option>
+																						  @endif
+																						@else
+																						  @if($val -> parent == 0)
+																						  <option value="0" selected>Parent</option>
+																						  @else
+																						  <option value="{{$val -> id}}"><?php 
+																							$pid = $val -> id;
+																							$pdat = DB::SELECT("SELECT * FROM hr_departments WHERE id = $pid"); 
+																							foreach ($pdat as  $pvalu) {
+																							}
+																							echo $pvalu -> name;
+																						?>;
+																						</option>
+																						  @endif
+																						@endif
 																						@endforeach
 																					</select>
+																					<span class="field_error" id="parent_error" style="color:red;"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -215,12 +250,31 @@
 																			<div class="form-group row" data-select2-id="243">
 																				<label class="col-form-label text-left col-lg-3 col-sm-12">Lead</label>
 																				<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
-																					<select class="form-control" id="kt_select2_1" name="param">
+																					<select class="form-control" id="kt_select2_1" name="lead">
 																					   <option value="">Select</option>
-																						@foreach($data as $val)
-																						<option value="{{$val -> employee_id}}">{{$val -> employee_id}}</option>
+																					   @foreach($employees as $val)
+																						@if($data -> employee_id == $val -> id)
+																						<option value="{{$data -> employee_id}}" selected>                                                                    
+																						<?php 
+																							$pid = $data -> employee_id;
+																							$pdata = DB::SELECT("SELECT * FROM hr_employees WHERE id = $pid"); 
+																							foreach ($pdata as  $pval) {
+																							}
+																							echo $pval -> employee_name;
+																						?>
+																	                    </option>
+																						@else
+																						<option value="{{$val -> id}}"><?php 
+																							$pid = $val -> id;
+																							$pdat = DB::SELECT("SELECT * FROM hr_employees WHERE id = $pid"); 
+																							foreach ($pdat as  $pvalu) {
+																							}
+																							echo $pvalu -> employee_name;
+																						?></option>
+																						@endif
 																						@endforeach
 																					</select>
+																					<span class="field_error" id="lead_error" style="color:red;"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -228,61 +282,29 @@
 																			<div class="form-group row" data-select2-id="243">
 																				<label class="col-form-label text-left col-lg-3 col-sm-12">Status</label>
 																				<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
-																					<select class="form-control" id="kt_select2_1" name="param">
+																					<select class="form-control" id="kt_select2_1" name="status">
 																					    <option value="">Select</option>
-																						@foreach($data as $val)
-																						<option value="{{$val -> status}}">{{$val -> status}}</option>
-																						@endforeach
+																						@if($data -> status == 'Active')
+																						<option value="{{$data -> status}}" selected>{{$data -> status}}</option>
+																						<option value="Inactive">Inactive</option>
+																						@else
+																						<option value="Active">Active</option>
+																						<option value="{{$data -> status}}" selected>{{$data -> status}}</option>
+																						@endif
 																					</select>
+																					<span class="field_error" id="status_error" style="color:red;"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
 																		</div>
-																		<!--begin::Wizard Actions-->
-																		<div class="d-flex justify-content-between border-top pt-10 mt-15">
-																			<div class="mr-2">
-																				<button type="button" id="prev-step" class="btn btn-light-primary font-weight-bolder px-9 py-4" data-wizard-type="action-prev">Previous</button>
-																			</div>
-																			<div>
-																				<button type="button" class="btn btn-success font-weight-bolder px-9 py-4" data-wizard-type="action-submit">Submit</button>
-																				<!-- <button type="button" id="next-step" class="btn btn-primary font-weight-bolder px-9 py-4" data-wizard-type="action-next">Next</button> -->
-																			</div>
-																		</div>
-																		<!--end::Wizard Actions-->
 																		<div class="row" style="display:grid;place-items:end;">		
 																			<!--begin::Dropdown-->
 																			<div class="btn-group ml-2">
-																				<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
-																				<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-																				<div class="dropdown-menu dropdown-menu-sm p-0 m-0 dropdown-menu-right">
-																					<ul class="navi py-5">
-																						<li class="navi-item">
-																							<a href="#" class="navi-link">
-																								<span class="navi-icon">
-																									<i class="flaticon2-writing"></i>
-																								</span>
-																								<span class="navi-text">Save &amp; continue</span>
-																							</a>
-																						</li>
-																						<li class="navi-item">
-																							<a href="#" class="navi-link">
-																								<span class="navi-icon">
-																									<i class="flaticon2-medical-records"></i>
-																								</span>
-																								<span class="navi-text">Save &amp; add new</span>
-																							</a>
-																						</li>
-																						<li class="navi-item">
-																							<a href="#" class="navi-link">
-																								<span class="navi-icon">
-																									<i class="flaticon2-hourglass-1"></i>
-																								</span>
-																								<span class="navi-text">Save &amp; exit</span>
-																							</a>
-																						</li>
-																					</ul>
-																				</div>
+																				<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
+																				
 																			</div>
+																			<span class="text-success" id="success_msg"></span>
+																			<span class="text-danger" id="error_msg"></span>
 																			<!--end::Dropdown-->
 																		</div>
 																	</div>
@@ -333,6 +355,37 @@
 			<!--end::Svg Icon-->
 		</span>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script>
+	   $(document).ready(function(){
+          $('#form').submit(function(e){
+			  e.preventDefault();
+			  $.ajax({
+				  url : 'edithrdepart',
+				  method : 'POST',
+				  data : $('#form').serialize(),
+				  dataType : 'JSON',
+                  success : function(result){
+					if (result.status == 'error') {
+						$('#error_msg').html(result.error);
+						$.each(result.error,function(key,val){
+						// console.log(key);
+						// console.log(val);
+						$('#'+key+'_error').html(val[0]);
+						})
+					}else if(result.status == 'success'){
+						$('#form')[0].reset();
+						$('#success_msg').html(result.msg);
+						setTimeout(function(){
+						window.location.href = '../HR/hrdepartment'; 
+						}, 1000);
+					}
+				  }
+			  })
+
+		  });
+	   });
+	</script>
 	<!--end::Scrolltop-->
 	<script>
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
