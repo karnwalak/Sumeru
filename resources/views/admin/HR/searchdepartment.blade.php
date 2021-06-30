@@ -223,11 +223,11 @@
                                 <!--begin::Header-->
                                 <div class="card-header flex-wrap border-0 pt-6 pb-0">
                                     <div class="card-title">
-                                        <h3 class="card-label">Department
+                                        <h3 class="card-label">Search Result
                                             <!-- <span class="d-block text-muted pt-2 font-size-sm">Materials made easy</span></h3> -->
                                     </div>
                                     <div class="row" style="display:grid;place-items:end;padding:10px 15px;">
-                                        <a href="addhrdepartment" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Add Department</a>
+                                        <a href="hrdepartment" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
                                     </div>
                                 </div>
                                 <!--end::Header-->
@@ -239,44 +239,6 @@
 
 											<div class="card card-custom gutter-b">
 												<div class="card-body">
-													<!--begin: Search Form-->
-													<!--begin::Search Form-->
-                                                    <form action="searchdepartment" method="post">
-                                                    {{@csrf_field()}}
-													<div class="mb-7">
-														<div class="row align-items-center">
-															<div class="col-lg-7 col-xl-7">
-																<div class="row align-items-center">
-																	<div class="col-md-5 my-2 my-md-0">
-																		<div class="input-icon">
-																			<input type="text" class="form-control" name="dname" placeholder="Search..." id="kt_datatable_search_query">
-																			<span>
-																			<i class="flaticon2-search-1 text-muted"></i>
-																			</span>
-																		</div>
-																	</div>
-																	<div class="col-md-7 my-2 my-md-0">
-																		<div class="row">
-																			<label class="col-form-label text-left col-lg-4 col-sm-12">Status</label>
-																			<div class="col-lg-8 col-md-8	 col-sm-12" data-select2-id="242">
-																				<select class="form-control" id="kt_select2_1" name="status">
-																					<option value="">Select</option>
-																					<option value="Active">Active</option>
-																					<option value="Inactive">Inactive</option>
-																				</select>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<div class="col-lg-5 col-xl-5 ">
-																<button type="submit" class="btn btn-light-primary px-6 font-weight-bold">Search</button>
-															</div>
-														</div>
-													</div>
-                                                    <form>
-													<!--end::Search Form-->
-													<!--end: Search Form-->
 													<!--begin: Selected Rows Group Action Form-->
 													<div class="mt-10 mb-5 collapse" id="kt_datatable_group_action_form">
 														<div class="d-flex align-items-center">
@@ -345,7 +307,14 @@
                                                                         }
                                                                     ?>
                                                                     </span></td>
-																	<td data-field="Lead" aria-label="Aakash" class="datatable-cell"><span style="width: 120px;">{{$value -> employee_name}}</span></td>
+																	<td data-field="Lead" aria-label="Aakash" class="datatable-cell"><span style="width: 120px;">
+                                                                    <?php 
+                                                                        $pid = $value -> employee_id;
+                                                                        $pdata = DB::SELECT("SELECT * FROM hr_employees WHERE id = $pid"); 
+                                                                        foreach ($pdata as  $pval) {
+                                                                        }
+                                                                        echo $pval -> employee_name;
+                                                                    ?></span></td>
 																	<td data-field="Status" aria-label="5" class="datatable-cell">
                                                                     <span style="width: 120px;">
                                                                     @if($value -> status == 'Active')

@@ -113,7 +113,11 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::view('admin/HR/addemployees','admin/HR/addemployees');
         Route::view('admin/HR/addhrdepartment','admin/HR/addhrdepartment');
         Route::get('admin/HR/addhrdepartment',[HrDepartmentsController::class,'showdata']);
+        Route::get('admin/HR/deletedepartment/{id}',[HrDepartmentsController::class,'delete']);
         Route::post('admin/HR/addhrdepart',[HrDepartmentsController::class,'create']);
+        Route::post('admin/HR/searchdepartment',[HrDepartmentsController::class,'index']);
+        Route::post('admin/HR/editdepartmentstatus',[HrDepartmentsController::class,'editstatus']);
+        Route::post('admin/HR/edithrdepart',[HrDepartmentsController::class,'edithrdepart']);
         Route::view('admin/HR/addhrdesignation','admin/HR/addhrdesignation');
         Route::view('admin/HR/addshifts','admin/HR/addshifts');
         Route::view('admin/HR/addtasks','admin/HR/addtasks');
