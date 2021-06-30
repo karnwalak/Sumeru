@@ -233,11 +233,11 @@
 									<!--begin::Header-->
 									<div class="card-header flex-wrap border-0 pt-6 pb-0">
 										<div class="card-title">
-											<h3 class="card-label">Allowances
+											<h3 class="card-label">Search Result
 											<!-- <span class="d-block text-muted pt-2 font-size-sm">Materials made easy</span></h3> -->
 										</div>
 										<div class="row" style="display:grid;place-items:end;padding:10px 15px;">
-												<a href="addhrallowances" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Add Allowances</a>
+												<a href="hrallowance" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
 												</div>
 									</div>
 									<!--end::Header-->
@@ -246,42 +246,6 @@
 											<!--begin: Datatable-->
 											<div class="card card-custom gutter-b">
 												<div class="card-body">
-													<!--begin: Search Form-->
-													<form action="searchallowence" method="post">
-													{{@csrf_field()}}
-													<div class="mb-7">
-														<div class="row align-items-center">
-															<div class="col-lg-7 col-xl-7">
-																<div class="row align-items-center">
-																	<div class="col-md-5 my-2 my-md-0">
-																		<div class="input-icon">
-																			<input type="text" class="form-control" name="name" placeholder="Search..." id="kt_datatable_search_query">
-																			<span>
-																			<i class="flaticon2-search-1 text-muted"></i>
-																			</span>
-																		</div>
-																	</div>
-																	<div class="col-md-7 my-2 my-md-0">
-																		<div class="row">
-																			<label class="col-form-label text-left col-lg-4 col-sm-12">Status</label>
-																			<div class="col-lg-8 col-md-8	 col-sm-12" data-select2-id="242">
-																				<select class="form-control" id="kt_select2_1" name="status">
-																					<option value="">Select</option>
-																					<option value="Active">Active</option>
-																					<option value="Inactive">Inactive</option>
-																				</select>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<div class="col-lg-5 col-xl-5 ">
-																<button type="submit" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
-															</div>
-														</div>
-													</div>
-													</form>
-													<!--end: Search Form-->
 													<!--begin: Selected Rows Group Action Form-->
 													<div class="mt-10 mb-5 collapse" id="kt_datatable_group_action_form">
 														<div class="d-flex align-items-center">
