@@ -244,7 +244,7 @@
                                                                     <div class="row" style="display:grid;place-items:end;">
                                                                         <!--begin::Dropdown-->
                                                                         <div class="btn-group ml-2">
-                                                                            <button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
+                                                                            <button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Update</button>
                                                                            
                                                                         </div>
                                                                         <span class="text-danger" id="error_msg"></span>

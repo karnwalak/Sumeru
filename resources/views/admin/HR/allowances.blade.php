@@ -204,6 +204,9 @@
                                         <h3 class="card-label">Allowances</h3>
                                         <!-- <span class="d-block text-muted pt-2 font-size-sm">Materials made easy</span></h3> -->
                                     </div>
+                                    <div class="row justify-content-end">
+                                    <a href="addhrallowances" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Add Allowances</a>
+                                    </div>
                                 </div>
                                 <!--begin::Body-->
                                 <div class="card-body">

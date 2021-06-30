@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\HrDepartmentsController;
 use App\Http\Controllers\HrDesignationController;
+use App\Http\Controllers\HrAllowenceController;
 use App\Http\Controllers\HrEmployeesController;
 /*
 |--------------------------------------------------------------------------
@@ -117,17 +118,26 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/HR/hrdesignation',[HrDesignationController::class,'showdata']);
         Route::get('admin/HR/deletedepartment/{id}',[HrDepartmentsController::class,'delete']);
         Route::get('admin/HR/deletehrdesignation/{id}',[HrDesignationController::class,'delete']);
+        Route::get('admin/HR/deletehrallowances/{id}',[HrAllowenceController::class,'delete']);
         Route::post('admin/HR/addhrdesignation',[HrDesignationController::class,'addhrdesignation']);
         Route::get('admin/HR/addhrdesignation',[HrDesignationController::class,'show']);
         Route::post('admin/HR/addhrdepart',[HrDepartmentsController::class,'create']);
+        Route::post('admin/HR/addhrallowences',[HrAllowenceController::class,'create']);
+        Route::get('admin/HR/hrallowance',[HrAllowenceController::class,'showdata']);
+        Route::get('admin/HR/edithrallowances/{id}',[HrAllowenceController::class,'edithrallowances']);
         Route::post('admin/HR/searchdesignation',[HrDesignationController::class,'index']);
         Route::post('admin/HR/searchdepartment',[HrDepartmentsController::class,'index']);
+        Route::post('admin/HR/searchallowence',[HrAllowenceController::class,'index']);
         Route::post('admin/HR/editdepartmentstatus',[HrDepartmentsController::class,'editstatus']);
         Route::post('admin/HR/editdesignationstatus',[HrDesignationController::class,'editstatus']);
+        Route::post('admin/HR/editallowencestatus',[HrAllowenceController::class,'editstatus']);
         Route::post('admin/HR/edithrdepart',[HrDepartmentsController::class,'edithrdepart']);
+        Route::post('admin/HR/edithrallowence',[HrAllowenceController::class,'edithrallowence']);
         // Route::view('admin/HR/addhrdesignation','admin/HR/addhrdesignation');
         Route::view('admin/HR/addshifts','admin/HR/addshifts');
         Route::view('admin/HR/addtasks','admin/HR/addtasks');
+        Route::view('admin/HR/addhrallowances','admin/HR/addhrallowances');
+        // Route::view('admin/HR/hrallowance','admin/HR/hrallowance');
         Route::view('admin/HR/allowances','admin/HR/allowances');
         Route::view('admin/HR/editemployees','admin/HR/editemployees');
         Route::get('admin/HR/edithrdepartment/{id}',[HrDepartmentsController::class,'edit']);

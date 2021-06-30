@@ -104,15 +104,21 @@ class HrDesignationController extends Controller
        
     }
     if($value -> status == "Active"){
-     $result = DB::table('hr_designations') 
+     $res = DB::table('hr_designations') 
         ->where('id', $id)
         ->limit(1) 
-        ->update(['status' => 'Inactive']); 
+        ->update(['status' => 'Inactive']);
+        if($res){
+            return response()->json(['status' => 'inactive']);
+        }
     }else{
      $result = DB::table('hr_designations') 
         ->where('id', $id)
         ->limit(1) 
         ->update(['status' => 'Active']);
+        if($result){
+            return response()->json(['status' => 'active']);
+        }
     }
 }
    public function index(Request $req){
