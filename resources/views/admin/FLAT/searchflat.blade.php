@@ -329,7 +329,7 @@
 														<table class="datatable-table" style="display: block;">
 															<thead class="datatable-head">
 																<tr class="datatable-row" style="left: 0px;">
-																	<th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th>
+																	<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 																	<th data-field="ID" class="datatable-cell datatable-cell-sort"><span style="width: 140px;">ID</span></th>
 																	<th data-field="StockName" class="datatable-cell datatable-cell-sort"><span style="width: 140px;">Stock Name</span></th>
 																	<th data-field="Category" class="datatable-cell datatable-cell-sort"><span style="width: 140px;">Category</span></th>
@@ -343,10 +343,20 @@
 																<?php $a = 1; ?>
 																@foreach($data as $value)
 																<tr data-row="0" class="datatable-row" style="left: 0px;">
-																	<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
+																	<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
 																	<td data-field="Sno" aria-label="{{$a++}}" class="datatable-cell"><span style="width: 140px;">{{$a++}}</span></td>
 																	<td data-field="{{$value -> flat_stock_name}}" aria-label="{{$value -> flat_stock_name}}" class="datatable-cell"><span style="width: 140px;">{{$value -> flat_stock_name}}</span></td>
-																	<td data-field="{{$value -> flat_category_id}}" aria-label="{{$value -> flat_category_id}}" class="datatable-cell"><span style="width: 140px;">{{$value -> flat_category_id}}</span></td>
+																	<td data-field="{{$value -> flat_category_id}}" aria-label="{{$value -> flat_category_id}}" class="datatable-cell"><span style="width: 140px;">
+																	
+																	<?php 
+																			$pid = $value->flat_category_id;
+																			$pdata = DB::SELECT("SELECT * FROM flat_categories WHERE id = $pid"); 
+																			// echo count($pdata);
+																			foreach ($pdata as  $pval) {
+																			}
+																			echo $pval -> category_name;
+																		?>
+																	</span></td>
 																	<td data-field="{{$value -> flat_price}}" aria-label="{{$value -> flat_price}}" class="datatable-cell"><span style="width: 140px;">{{$value -> flat_price}}</span></td>
 																	<td data-field="Status" aria-label="" class="datatable-cell"><span style="width: 140px; margin-left: 40px;">
 																		@if($value -> flat_status == 'Active')

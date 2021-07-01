@@ -33,7 +33,7 @@ class FlatCategoryController extends Controller
          $query = DB::table('flat_categories') 
             ->where('id', $id)
             ->limit(1) 
-            ->update(['category_status' => 'Inactive']);
+            ->update(['category_status' => 'delete']);
         if ($query) {
             session() -> flash('success','Flat Category Deleted!');
             return redirect('admin/FLAT/flatstockcategory');
@@ -110,14 +110,14 @@ class FlatCategoryController extends Controller
        $status = $st; 
        // return $req;
        if ($category_name == null && $status == null) {
-           $data = DB::SELECT("SELECT * FROM flat_categories");
+           $data = DB::SELECT("SELECT * FROM flat_categories WHERE category_status!='delete'");
            if ($data) {
                return view('../admin/FLAT/searchflatcategory',compact('data'));
            }else{
                return redirect('../admin/FLAT/searchflatcategory');
            }
        }else if ($category_name == $cname && $status == null) {
-           $data = DB::SELECT("SELECT * FROM flat_categories WHERE category_name LIKE '%$cname%'");
+           $data = DB::SELECT("SELECT * FROM flat_categories WHERE category_name LIKE '%$cname%' AND category_status!='delete'");
            if ($data) {
                return view('../admin/FLAT/searchflatcategory',compact('data'));
            }else{
@@ -140,7 +140,7 @@ class FlatCategoryController extends Controller
        }
    }
    public function show(Request $req){
-    $data = FlatCategory::paginate(10);
+    $data = FlatCategory::where('category_status','!=','delete')->paginate(10);
     return view('../admin/FLAT/flatstockcategory',compact('data'));
 }
 }

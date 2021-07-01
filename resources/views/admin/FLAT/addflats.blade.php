@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 // $data = DB::SELECT("SELECT * FROM sellers");
-$data = FlatCategory::get();
+$data = FlatCategory::where('category_status','!=','delete')->where('category_status','!=','Inactive')->get();
 
 ?>
 <!DOCTYPE html>
@@ -238,6 +238,7 @@ $data = FlatCategory::get();
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<!--begin::Card-->
 								<div class="card card-custom card-transparent">
 									<div class="card-body p-0">
@@ -488,7 +489,7 @@ $data = FlatCategory::get();
             success:function(result){
             	// console.log(result.msg);
               if (result.status == 'error') {
-                $('#error_msg').html(result.error);
+				$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
                 $.each(result.error,function(key,val){
                   // console.log(key);
                   // console.log(val);
@@ -496,7 +497,7 @@ $data = FlatCategory::get();
                 })
               }else if(result.status == 'success'){
                 $('.form')[0].reset();
-                $('#success_msg').html(result.msg);
+				$('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                 setTimeout(function(){
                    window.location.href = '../FLAT/flatstockinventory'; 
                 }, 1000);

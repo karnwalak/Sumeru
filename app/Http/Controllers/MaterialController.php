@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Material;
+use App\Models\MaterialStock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +48,7 @@ class MaterialController extends Controller
        $type = $ty; 
        // return $req;
        if ($sname == null && $ty == null) {
-           $data = Material::orderBy('id')->paginate(10);
+           $data = Material::orderBy('id')->where('material_status','!=','delete')->paginate(10);
            if ($data) {
                return view('../admin/ERP/searchproduct',compact('data'));
            }else{
@@ -55,14 +56,14 @@ class MaterialController extends Controller
            }
        }else if ($sname == $pname && $ty == null) {
            // $data = DB::SELECT("SELECT * FROM sellers WHERE seller_name LIKE '%$sname%'");
-          $data = Material::where('material_name', 'like', '%' . $pname . '%')->paginate(10);
+          $data = Material::where('material_name', 'like', '%' . $pname . '%')->where('material_status','!=','delete')->paginate(10);
           if ($data) {
                return view('../admin/ERP/searchproduct',compact('data'));
            }else{
                return redirect('../materialspage');
            }
        }else if ($sname == null && $ty == $type) {
-           $data = Material::where('release_type', $type)->paginate(10);
+           $data = Material::where('release_type', $type)->where('material_status','!=','delete')->paginate(10);
           if ($data) {
                return view('../admin/ERP/searchproduct',compact('data'));
            }else{
@@ -71,6 +72,7 @@ class MaterialController extends Controller
        }else if ($sname == $pname && $ty == $type) {
          $data = Material::where('material_name', 'like', '%' . $pname . '%')
          ->Where('release_type', $type)
+         ->where('material_status','!=','delete')
          ->paginate(10);
 
            if ($data) {
@@ -159,7 +161,7 @@ class MaterialController extends Controller
        $query = DB::table('inventory_materials') 
             ->where('id', $id)
             ->limit(1) 
-            ->update(['material_status' => 'Inactive']);
+            ->update(['material_status' => 'delete']);
             if ($query) {
                 session() -> flash('success','Category Deleted!');
                 return redirect('admin/ERP/materialspage');
@@ -169,7 +171,7 @@ class MaterialController extends Controller
             }
     }
     public function show(Request $req){
-        $data = Material::paginate(10);
+        $data = Material::where('material_status','!=','delete')->paginate(10);
         return view('../admin/ERP/materialspage',compact('data'));
     }
 }

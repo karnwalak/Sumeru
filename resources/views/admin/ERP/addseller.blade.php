@@ -82,7 +82,7 @@ class="logo-default max-h-30px" />
 <div class="aside-brand d-flex flex-column align-items-center flex-column-auto py-4 py-lg-8">
 <!--begin::Logo-->
 <a href="../admin/dashboard">
-<img alt="Logo" src="../img/logoicon.png" class="logo-default max-h-30px" />
+<img alt="Logo" src="/../img/logoicon.png" class="logo-default max-h-30px" />
 </a>
 <!--end::Logo-->
 </div>
@@ -154,6 +154,7 @@ fill="#000000" opacity="0.3" />
 <div class="d-flex flex-column-fluid">
 <!--begin::Container-->
 <div class="container">
+<div class="row justify-content-center" id="msg"></div>
 <!--begin::Card-->
 <div class="card card-custom card-transparent">
 <div class="card-body p-0">
@@ -250,8 +251,7 @@ fill="#000000" opacity="0.3" />
 					<div class="btn-group ml-2">
 						<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Save &amp; Continue</button>
 					</div>
-					<span style="color:red" id="error_msg"></span>
-            <span style="color:green" id="success_msg"></span>
+					
 					<!--end::Dropdown-->
 				</div>
 			</div>
@@ -393,7 +393,7 @@ var KTAppSettings = {
             success:function(result){
             	// console.log(result.msg);
               if (result.status == 'error') {
-                $('#error_msg').html(result.error);
+                $('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
                 $.each(result.error,function(key,val){
                   // console.log(key);
                   // console.log(val);
@@ -401,12 +401,15 @@ var KTAppSettings = {
                 })
               }else if(result.status == 'success'){
                 $('.form')[0].reset();
-                $('#success_msg').html(result.msg);
+                $('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                 setTimeout(function(){
                    window.location.href = '../ERP/seller'; 
                 }, 1000);
               }
-            }
+            },
+            complete:function(){
+          		$('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
+        	}
           });
         })
       });

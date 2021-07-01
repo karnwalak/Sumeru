@@ -195,55 +195,57 @@
                                         </li>
                                     </ul>
                               </div>
-															<div class="modal fade" id="exampleModalCustomScrollable" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-																<div class="modal-dialog" role="document">
-																		<div class="modal-content">
-																				<div class="modal-header">
-																						<h5 class="modal-title" id="exampleModalLabel">Allowances</h5>
-																						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																								<i aria-hidden="true" class="ki ki-close"></i>
-																						</button>
-																				</div>
-																				<div class="modal-body">
-																	<!--begin::Body-->
-																	<div class="card-body">
-                                    <!--begin: Datatable-->
-                                    <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                <table class="table table-bordered table-hover" id="invoiceItem">
-                                                    <thead>
-                                                        <tr>
-                                                            <th width="100%">Select Allowances</th>
-                                                            <th><a href="#" class="addRow btn btn-primary">+</button></a></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" />
-                                                            </td>
-                                                            <td><a href="#" class="btn btn-danger remove" style="">-</button></a></td>
-                                                        </tr>
-                                                    </tbody>
-
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end: Datatable-->
-                                </div>
-                                <!--end::Body-->
-																				</div>
-																				<div class="modal-footer">
-																						<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-																						<button type="button" class="btn btn-primary font-weight-bold">Save changes</button>
-																				</div>
-																		</div>
-																</div>
-														</div>
+		
 															<!--begin::Wizard Form-->
-															<form class="form" id="kt_form">
+															<form class="form" id="form">
+															{{@csrf_field()}}
+															<div class="modal fade" id="exampleModalCustomScrollable" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+															<div class="modal-dialog" role="document">
+																	<div class="modal-content">
+																			<div class="modal-header">
+																					<h5 class="modal-title" id="exampleModalLabel">Allowances</h5>
+																					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																							<i aria-hidden="true" class="ki ki-close"></i>
+																					</button>
+																			</div>
+																			<div class="modal-body">
+																				<!--begin::Body-->
+																				<div class="card-body">
+																					<!--begin: Datatable-->
+																					<div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+																						<div class="row">
+																							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+																								<table class="table table-bordered table-hover" id="invoiceItem">
+																									<thead>
+																										<tr>
+																											<th width="100%">Select Allowances</th>
+																											<th><a href="#" class="addRow btn btn-primary">+</button></a></th>
+																										</tr>
+																									</thead>
+																									<tbody>
+																										<tr>
+																											<td>
+																												<input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" />
+																											</td>
+																											<td><a href="#" class="btn btn-danger remove" style="">-</button></a></td>
+																										</tr>
+																									</tbody>
+
+																								</table>
+																							</div>
+																						</div>
+																					</div>
+																					<!--end: Datatable-->
+																				</div>
+																				<!--end::Body-->
+																			</div>
+																			<div class="modal-footer">
+																					<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+																					<button type="button" class="btn btn-primary font-weight-bold">Save changes</button>
+																			</div>
+																	</div>
+															</div>
+													</div>
 																<div class="row justify-content-center">
 																	<div class="col-xl-9">
 																		<!--begin::Wizard Step 1-->
@@ -259,6 +261,7 @@
 																							<i class="fa fa-pen icon-sm text-muted"></i>
 																							<input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" />
 																							<input type="hidden" name="profile_avatar_remove" />
+																							<span class="text-danger field_error" id="profile_avatar_error"></span>
 																						</label>
 																						<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
 																							<i class="ki ki-bold-close icon-xs text-muted"></i>
@@ -272,6 +275,7 @@
 																				<label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
 																				<div class="col-lg-9 col-xl-9">
 																					<input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" />
+																					<span class="text-danger field_error" id="firstname_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -280,6 +284,7 @@
 																				<label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
 																				<div class="col-lg-9 col-xl-9">
 																					<input class="form-control form-control-solid form-control-lg" name="lastname" type="text" value="" />
+																					<span class="text-danger field_error" id="lastname_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -287,20 +292,13 @@
 																			<div class="form-group row" data-select2-id="243">
 																				<label class="col-form-label text-left col-lg-3 col-sm-12">Shift</label>
 																				<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
-																					<select class="form-control" id="kt_select2_1" name="param">
-																						<option value="AK">Alaska</option>
-																						<option value="HI">Hawaii</option>
-																						<option value="CA">California</option>
-																						<option value="NV">Nevada</option>
-																						<option value="OR">Oregon</option>
-																						<option value="WA">Washington</option>
-																						<option value="AZ">Arizona</option>
-																						<option value="CO">Colorado</option>
-																						<option value="ID">Idaho</option>
-																						<option value="MT">Montana</option>
-																						<option value="NE">Nebraska</option>
-																						<option value="NM">New Mexico</option>
+																					<select class="form-control" id="kt_select2_1" name="shift">
+																						<option value="">Select</option>
+																						@foreach($shift as $value)
+																						<option value="{{$value -> id}}">{{$value -> shift_name}}</option>
+																						@endforeach
 																					</select>
+																					<span class="text-danger field_error" id="shift_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -308,20 +306,13 @@
 																			<div class="form-group row" data-select2-id="243">
 																				<label class="col-form-label text-left col-lg-3 col-sm-12">Department</label>
 																				<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
-																					<select class="form-control" id="kt_select2_1" name="param">
-																						<option value="AK">Alaska</option>
-																						<option value="HI">Hawaii</option>
-																						<option value="CA">California</option>
-																						<option value="NV">Nevada</option>
-																						<option value="OR">Oregon</option>
-																						<option value="WA">Washington</option>
-																						<option value="AZ">Arizona</option>
-																						<option value="CO">Colorado</option>
-																						<option value="ID">Idaho</option>
-																						<option value="MT">Montana</option>
-																						<option value="NE">Nebraska</option>
-																						<option value="NM">New Mexico</option>
+																					<select class="form-control" id="kt_select2_1" name="department">
+																					    <option value="">Select</option>
+																						@foreach($department as $val)
+																						<option value="{{$val -> id}}">{{$val -> name}}</option>
+																						@endforeach
 																					</select>
+																					<span class="text-danger field_error" id="department_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -336,6 +327,7 @@
 																							</span>
 																						</div>
 																						<input type="text" class="form-control form-control-solid form-control-lg" name="phone" value="" placeholder="Phone" />
+																						<span class="text-danger field_error" id="phone_error"></span>
 																					</div>
 																					<span class="form-text text-muted">Enter valid Indian phone number(e.g: 9876-543-210).</span>
 																				</div>
@@ -352,6 +344,7 @@
 																							</span>
 																						</div>
 																						<input type="text" class="form-control form-control-solid form-control-lg" name="email" value="" />
+																						<span class="text-danger field_error" id="email_error"></span>
 																					</div>
 																				</div>
 																			</div>
@@ -361,7 +354,8 @@
 																				<label class="col-xl-3 col-lg-3 col-form-label">Salary</label>
 																				<div class="col-lg-9 col-xl-9">
 																					<div class="input-group input-group-solid input-group-lg">
-																						<input type="text" class="form-control form-control-solid form-control-lg" name="companywebsite" placeholder="Username" value="Rs." />
+																						<input type="text" class="form-control form-control-solid form-control-lg" name="salary" placeholder="Rs." />
+																						<span class="text-danger field_error" id="salary_error"></span>
 																						<div class="input-group-append">
 																						</div>
 																					</div>
@@ -372,12 +366,7 @@
 																		<!--end::Wizard Step 1-->
 																		<!--begin::Wizard Step 2-->
 																		<div class="my-5 step" data-wizard-type="step-content">
-																			<h5 class="text-dark font-weight-bold mb-10 mt-5">User's Account Details</h5>
-																			<!--begin::Group-->
-																			<!--end::Group-->
-																			<!--begin::Group-->
-																			<!--end::Group-->
-																			<!--begin::Group-->
+																			<!-- <h5 class="text-dark font-weight-bold mb-10 mt-5">User's Account Details</h5>
 																			<div class="form-group row">
 																				<label class="col-form-label col-xl-3 col-lg-3">Communication</label>
 																				<div class="col-xl-9 col-lg-9 col-form-label">
@@ -393,22 +382,22 @@
 																						<span></span>Phone</label>
 																					</div>
 																				</div>
-																			</div>
+																			</div> -->
 																			<!--end::Group-->
 																			<div class="separator separator-dashed my-10"></div>
 																			<h5 class="text-dark font-weight-bold mb-10">User's Account Settings</h5>
 																			<!--begin::Group-->
-																			<div class="form-group row">
+																			<!-- <div class="form-group row">
 																				<label class="col-form-label col-xl-3 col-lg-3">Login verification</label>
 																				<div class="col-xl-9 col-lg-9">
 																					<button type="button" class="btn btn-light-primary font-weight-bold btn-sm">Setup login verification</button>
 																					<div class="form-text text-muted mt-3">After you log in, you will be asked for additional information to confirm your identity and protect your account from being compromised. 
 																					<a href="#">Learn more</a>.</div>
 																				</div>
-																			</div>
+																			</div> -->
 																			<!--end::Group-->
 																			<!--begin::Group-->
-																			<div class="form-group row">
+																			<!-- <div class="form-group row">
 																				<label class="col-form-label col-xl-3 col-lg-3">Password reset verification</label>
 																				<div class="col-xl-9 col-lg-9">
 																					<div class="checkbox-inline">
@@ -419,15 +408,15 @@
 																					<div class="form-text text-muted">For extra security, this requires you to confirm your email or phone number when you reset your password. 
 																					<a href="#" class="font-weight-bold">Learn more</a>.</div>
 																				</div>
-																			</div>
+																			</div> -->
 																			<!--end::Group-->
 																			<!--begin::Group-->
-																			<div class="form-group row mt-10">
+																			<!-- <div class="form-group row mt-10">
 																				<label class="col-xl-3 col-lg-3"></label>
 																				<div class="col-xl-9 col-lg-9">
 																					<button type="button" class="btn btn-light-danger font-weight-bold btn-sm">Deactivate your account ?</button>
 																				</div>
-																			</div>
+																			</div> -->
 																			<!--end::Group-->
 																		</div>
 																		<!--end::Wizard Step 2-->
@@ -435,36 +424,36 @@
 																		<div class="my-5 step" data-wizard-type="step-content">
 																			<h5 class="mb-10 font-weight-bold text-dark">Setup Your Address</h5>
 																			<!--begin::Group-->
-																			<div class="form-group">
+																			<!-- <div class="form-group">
 																				<label>Address Line 1</label>
 																				<input type="text" class="form-control form-control-solid form-control-lg" name="address1" placeholder="Address Line 1" value="Address Line 1" />
 																				<span class="form-text text-muted">Please enter your Address.</span>
-																			</div>
+																			</div> -->
 																			<!--end::Group-->
 																			<!--begin::Group-->
-																			<div class="form-group">
+																			<!-- <div class="form-group">
 																				<label>Address Line 2</label>
 																				<input type="text" class="form-control form-control-solid form-control-lg" name="address2" placeholder="Address Line 2" value="Address Line 2" />
 																				<span class="form-text text-muted">Please enter your Address.</span>
-																			</div>
+																			</div> -->
 																			<!--begin::Row-->
 																			<div class="row">
 																				<div class="col-xl-6">
 																					<!--begin::Group-->
-																					<div class="form-group">
+																					<!-- <div class="form-group">
 																						<label>Postcode</label>
 																						<input type="text" class="form-control form-control-solid form-control-lg" name="postcode" placeholder="Postcode" value="3000" />
 																						<span class="form-text text-muted">Please enter your Postcode.</span>
-																					</div>
+																					</div> -->
 																				</div>
 																				<!--end::Group-->
 																				<!--begin::Group-->
 																				<div class="col-xl-6">
-																					<div class="form-group">
+																					<!-- <div class="form-group">
 																						<label>City</label>
 																						<input type="text" class="form-control form-control-solid form-control-lg" name="city" placeholder="City" value="Melbourne" />
 																						<span class="form-text text-muted">Please enter your City.</span>
-																					</div>
+																					</div> -->
 																				</div>
 																				<!--end::Group-->
 																			</div>
@@ -473,18 +462,18 @@
 																			<div class="row">
 																				<div class="col-xl-6">
 																					<!--begin::Group-->
-																					<div class="form-group">
+																					<!-- <div class="form-group">
 																						<label>State</label>
 																						<input type="text" class="form-control form-control-solid form-control-lg" name="state" placeholder="State" value="VIC" />
 																						<span class="form-text text-muted">Please enter your State.</span>
-																					</div>
+																					</div> -->
 																					<!--end::Group-->
 																				</div>
 																				<div class="col-xl-6">
 																					<!--begin::Group-->
-																					<div class="form-group">
+																					<!-- <div class="form-group">
 																						<label>Country</label>
-																					</div>
+																					</div> -->
 																					<!--end::Group-->
 																				</div>
 																			</div>
@@ -494,28 +483,28 @@
 																		<div class="my-5 step" data-wizard-type="step-content">
 																			<h5 class="mb-10 font-weight-bold text-dark">Review your Details and Submit</h5>
 																			<!--begin::Item-->
-																			<div class="border-bottom mb-5 pb-5">
+																			<!-- <div class="border-bottom mb-5 pb-5">
 																				<div class="font-weight-bolder mb-3">Your Account Details:</div>
 																				<div class="line-height-xl">John Wick 
 																				<br />Phone: +61412345678 
 																				<br />Email: johnwick@reeves.com</div>
-																			</div>
+																			</div> -->
 																			<!--end::Item-->
 																			<!--begin::Item-->
-																			<div class="border-bottom mb-5 pb-5">
+																			<!-- <div class="border-bottom mb-5 pb-5">
 																				<div class="font-weight-bolder mb-3">Your Address Details:</div>
 																				<div class="line-height-xl">Address Line 1 
 																				<br />Address Line 2 
 																				<br />Melbourne 3000, VIC, Australia</div>
-																			</div>
+																			</div> -->
 																			<!--end::Item-->
 																			<!--begin::Item-->
-																			<div>
+																			<!-- <div>
 																				<div class="font-weight-bolder">Payment Details:</div>
 																				<div class="line-height-xl">Card Number: xxxx xxxx xxxx 1111 
 																				<br />Card Name: John Wick 
 																				<br />Card Expiry: 01/21</div>
-																			</div>
+																			</div> -->
 																			<!--end::Item-->
 																		</div>
 																		<!--end::Wizard Step 4-->
@@ -527,40 +516,11 @@
 																			<div>
 																				<button type="button" class="btn btn-success font-weight-bolder px-9 py-4" data-wizard-type="action-submit">Submit</button>
 
-									<!--begin::Dropdown-->
-									<div class="btn-group ml-2">
-										<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
-										<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-										<div class="dropdown-menu dropdown-menu-sm p-0 m-0 dropdown-menu-right">
-											<ul class="navi py-5">
-												<li class="navi-item">
-													<a href="#" class="navi-link">
-														<span class="navi-icon">
-															<i class="flaticon2-writing"></i>
-														</span>
-														<span class="navi-text">Save &amp; continue</span>
-													</a>
-												</li>
-												<li class="navi-item">
-													<a href="#" class="navi-link">
-														<span class="navi-icon">
-															<i class="flaticon2-medical-records"></i>
-														</span>
-														<span class="navi-text">Save &amp; add new</span>
-													</a>
-												</li>
-												<li class="navi-item">
-													<a href="#" class="navi-link">
-														<span class="navi-icon">
-															<i class="flaticon2-hourglass-1"></i>
-														</span>
-														<span class="navi-text">Save &amp; exit</span>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<!--end::Dropdown-->
+																		<!--begin::Dropdown-->
+																		<div class="btn-group ml-2">
+																			<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
+																		</div>
+																		<!--end::Dropdown-->
 																			</div>
 																		</div>
 																		<!--end::Wizard Actions-->
@@ -612,6 +572,7 @@
 		</span>
 	</div>
 	<!--end::Scrolltop-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script>
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 	</script>
@@ -676,38 +637,53 @@
 			"font-family": "Poppins"
 		};
 	</script>
-	    <script>
-        $('.addRow').on('click', function() {
-            addRow();
-        });
+	<script>
+	$('.addRow').on('click',function(){
+        addRow();
+    });
+	count = 0;
+    function addRow()
+    {
+		var htmlRows = '';
+		htmlRows += '<tr>';
+		var material_id_html = jQuery('#productName').html();
+		htmlRows += '<td><input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" /></td>';
+		htmlRows += '<td><a href="#" class="btn btn-danger remove" onclick="remove()">-</a></td>';
+		htmlRows += '</tr>';
+		$('tbody').append(htmlRows);
+	}; 
+</script>
+<script>
+	$("#invoiceItem").on("click", ".remove", function() {
+		var last = $('tbody tr').length;
+		// alert(last);
+		if(last == 1){
+			alert('You can not remove last row!');
+		}else{
+            $(this).closest("tr").remove();
+		}
+});
+	
+</script>
+<script>
+$(document).ready(function(){
+  $('#form').submit(function(e){
+    e.preventDefault();
+    $.ajax({
+       url : 'addemployee',
+	   method : 'POST',
+	   data :  $('#form').serialize(),
+	   dataType : 'JSON',
+	   success : function(data){
 
-
-
-        function addRow() {
-            //alert('hr');
-            var htmlRows = '';
-            htmlRows += '<tr>';
-            var material_id_html = jQuery('#productName').html();
-            htmlRows += '<td><input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" /></td>';
-            htmlRows += '<td><a href="#" class="btn btn-danger remove" onclick="remove()">-</a></td>';
-            htmlRows += '</tr>';
-            $('tbody').append(htmlRows);
-        };
-
-        $('.remove').on('click', function() {
-            // alert("sndvkbjs");
-            var last = $('tbody htmlRows').length;
-            if (last == 1) {
-                alert("you can not remove last row");
-            } else {
-                $(this).parent().parent().remove();
-            }
-        });
-
-    </script>
-	<!--end::Global Config-->
-	<!--begin::Global Theme Bundle(used by all pages)-->
-    <script src="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.js?v=7.2.8"></script>
+	   }
+	});
+  });
+});
+</script>
+<!--end::Global Config-->
+<!--begin::Global Theme Bundle(used by all pages)-->
+<script src="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.js?v=7.2.8"></script>
 <script src="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.js?v=7.2.8"></script>
 <script src="/../theme/html/demo4/dist/assets/js/scripts.bundle49d8.js?v=7.2.8"></script>
 <!--end::Global Theme Bundle-->

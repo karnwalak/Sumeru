@@ -95,7 +95,7 @@ class CategoryController extends Controller
          $query = DB::table('inventory_material_categories') 
             ->where('id', $id)
             ->limit(1) 
-            ->update(['category_status' => 'Inactive']);
+            ->update(['category_status' => 'delete']);
         if ($query) {
             $query2= DB::table('inventory_material_categories') 
             ->where('category_parent', $id) 
@@ -123,14 +123,14 @@ class CategoryController extends Controller
        $status = $st; 
        // return $req;
        if ($category_name == null && $status == null) {
-           $data = DB::SELECT("SELECT * FROM inventory_material_categories");
+           $data = DB::SELECT("SELECT * FROM inventory_material_categories WHERE category_status != 'delete'");
            if ($data) {
                return view('../admin/ERP/searchcategory',compact('data'));
            }else{
                return redirect('../admin/ERP/searchcategory');
            }
        }else if ($category_name == $cname && $status == null) {
-           $data = DB::SELECT("SELECT * FROM inventory_material_categories WHERE category_name LIKE '%$cname%'");
+           $data = DB::SELECT("SELECT * FROM inventory_material_categories WHERE category_name LIKE '%$cname%' AND category_status != 'delete'");
            if ($data) {
                return view('../admin/ERP/searchcategory',compact('data'));
            }else{
@@ -153,7 +153,7 @@ class CategoryController extends Controller
        }
     }
     public function show(Request $req){
-        $data = Category::paginate(10);
+        $data = Category::where('category_status','!=','delete')->paginate(10);
         return view('../admin/ERP/materialcategory',compact('data'));
     }
 }

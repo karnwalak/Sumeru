@@ -155,6 +155,7 @@
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<!--begin::Card-->
 								<div class="card card-custom card-transparent">
 									<div class="card-body p-0">
@@ -177,7 +178,7 @@
 																		<h3 class="card-label">Edit Flat Stock Category</h3>
 																	</div>
 																	<div class="col-md-6" style="display:grid;place-items:end;padding:10px 15px;">
-																	<a href="../admin/FLAT/flatstockcategory" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
+																	<a href="../FLAT/flatstockcategory" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
 																	</div>
 																</div>
 																<div class="row justify-content-center">
@@ -412,13 +413,13 @@
             type:'post',
             success:function(result){
               if (result.status == 'error') {
-                $('#error_msg').html(result.error);
+                $('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
                 $.each(result.error,function(key,val){
                   $('#'+key+'_error').html(val[0]);
                 })
               }else if(result.status == 'success'){
                 $('.form')[0].reset();
-                $('#success_msg').html(result.msg);
+                $('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                 setTimeout(function(){
                    window.location.href = '../FLAT/flatstockcategory'; 
                 }, 1000);
