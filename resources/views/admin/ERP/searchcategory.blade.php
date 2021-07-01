@@ -217,7 +217,7 @@
 												<table class="datatable-table" style="display: block;">
 													<thead class="datatable-head">
 														<tr class="datatable-row" style="left: 0px;">
-															<th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th>
+															<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 															<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 137px;">S No.</span></th>
 															<th data-field="Name" class="datatable-cell datatable-cell-sort"><span style="width: 137px;">Name</span></th>
 															<th data-field="Parent" class="datatable-cell datatable-cell-sort"><span style="width: 137px;">Parent</span></th>
@@ -230,7 +230,7 @@
 														@if(isset($data))
 														@foreach($data as $value)
 														<tr data-row="0" class="datatable-row" style="left: 0px;">
-															<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
+															<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
 															<td data-field="Sno" aria-label="{{$value -> id}}" class="datatable-cell"><span style="width: 120px;">{{$a++}}</span></td>
 															<td data-field="Name" aria-label="{{$value -> category_name}}" class="datatable-cell"><span style="width: 120px;">{{$value -> category_name}}</span></td>
 															<td data-field="category_parent" aria-label="{{$value -> category_parent}}" class="datatable-cell"><span style="width: 120px;">

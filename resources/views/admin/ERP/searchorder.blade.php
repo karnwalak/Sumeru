@@ -1,13 +1,3 @@
-<?php
-namespace App\Http\Controllers;
-use App\Models\Purchase;
-use App\Models\Seller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
-// $data = DB::SELECT("SELECT * FROM inventory_materials");
-$data = Purchase::orderBy('id')->paginate(10);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -327,7 +317,7 @@ $data = Purchase::orderBy('id')->paginate(10);
 												<table class="datatable-table" style="display: block;">
 													<thead class="datatable-head">
 														<tr class="datatable-row" style="left: 0px;">
-															<th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th>
+															<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 															<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
 															<th data-field="SellerName" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Seller Name</span></th>
 															<th data-field="SellerContact" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Seller Contact</span></th>
@@ -344,7 +334,7 @@ $data = Purchase::orderBy('id')->paginate(10);
 														<?php $a = 1; ?>
 														@foreach($data as $value)
 														<tr data-row="0" class="datatable-row" style="left: 0px;">
-															<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
+															<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
 															<td data-field="Sno" aria-label="{{$value -> id}}" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
 															<td data-field="SellerName" aria-label="{{$value -> seller_id}}" class="datatable-cell"><span style="width: 100px;">
 																<?php 

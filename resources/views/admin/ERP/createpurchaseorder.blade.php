@@ -229,6 +229,7 @@ type="text/css" />
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<form id="form" enctype="multipart/form-data">
 								<!--begin::Card-->
 								{{@csrf_field()}}
@@ -241,7 +242,7 @@ type="text/css" />
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-3" style="margin:10px;margin-top:16px;" >
+										<div class="col-md-3" style="margin:10px;margin-top:16px;">
 											<div class="row">
 											<!-- begin::Group -->
 											<div class="form-group row" data-select2-id="243" style="margin-bottom:0px !important">
@@ -255,6 +256,7 @@ type="text/css" />
 													</select>
 													<span style="color:red;" id="seller_error" class="field_error"></span>
 												</div>
+												<a href="addseller" style="margin-left:162px;">New Seller!</a>
 											</div>
 											<!--end::Group-->
 											</div>
@@ -540,6 +542,7 @@ type="text/css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
    }) 
   </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script>
 	$('.addRow').on('click',function(){
         addRow();
@@ -656,7 +659,7 @@ type="text/css" />
                 processData: false,
                 success:function(result) {
                   if (result.status == 'error') {
-                  $('#error_msg').html(result.error);
+					$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
                   $.each(result.error,function(key,val){
                   // console.log(key);
                   // console.log(val);
@@ -664,12 +667,15 @@ type="text/css" />
                   })
                   }else if(result.status == 'success'){
                   $('#form')[0].reset();
-                  $('#success_msg').html(result.msg);
+                  $('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                   setTimeout(function(){
                    window.location.href = '../ERP/purchaseorder'; 
                  }, 1000);
                 }   
-                }
+                },
+            complete:function(){
+          		$('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
+        	}
            });
         });
     });

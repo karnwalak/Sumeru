@@ -204,7 +204,7 @@
 								<!--begin::Details-->
 								<div class="d-flex align-items-center flex-wrap mr-2">
 									<!--begin::Title-->
-									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Edit Flats</h5>
+									
 
 									<!--end::Title-->
 									<!--begin::Separator-->
@@ -230,6 +230,7 @@
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<!--begin::Card-->
 								<div class="card card-custom card-transparent">
 									<div class="card-body p-0">
@@ -248,7 +249,7 @@
 																{{@csrf_field()}}
 																<div class="row justify-content-center d-flex py-5">
 																	<div class="card-title col-md-6">
-																		<h3 class="card-label">Edit Flats</h3>
+																		<h5 class="card-label">Edit Flats</h5>
 																	</div>
 																	<div class="col-md-6" style="display:grid;place-items:end;padding:10px 15px;">
 																	<a href="../FLAT/flatstockinventory" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
@@ -285,7 +286,23 @@
 																				<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
 																					<select class="form-control" id="kt_select2_1" name="category">
 																						<option value="">Select</option>
-																						<option value="{{$val -> id}}" selected>{{$val -> flat_category_id}}</option>
+																						@foreach($data as $value)
+																						  @if($value ->id ==$val -> flat_category_id)
+																						  <option value="{{$val -> id}}" selected>
+																						  <?php 
+																								$pid = $val -> flat_category_id;
+																								$pdata = DB::SELECT("SELECT * FROM flat_categories WHERE id = $pid"); 
+																								// echo count($pdata);
+																								foreach ($pdata as  $pval) {
+																								}
+																								echo $pval -> category_name;
+																							?>
+																						  </option>
+																						  @else
+																						  <option value="{{$value -> id}}">{{$value->category_name}}</option>
+																						  @endif
+																						@endforeach
+																						
 																					</select>
 																					<span style="color:red;" class="field_error" id="category_error"></span>
 																				</div>
@@ -483,7 +500,7 @@
             success:function(result){
             	// console.log(result.msg);
               if (result.status == 'error') {
-                $('#error_msg').html(result.error);
+				$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
                 $.each(result.error,function(key,val){
                   // console.log(key);
                   // console.log(val);
@@ -491,7 +508,7 @@
                 })
               }else if(result.status == 'success'){
                 $('.form')[0].reset();
-                $('#success_msg').html(result.msg);
+				$('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                 setTimeout(function(){
                    window.location.href = '../FLAT/flatstockinventory'; 
                 }, 1000);

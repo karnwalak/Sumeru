@@ -233,6 +233,7 @@ type="text/css" />
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<form id="form" enctype="multipart/form-data">
 								<!--begin::Card-->
 								{{@csrf_field()}}
@@ -241,7 +242,7 @@ type="text/css" />
 									<!--begin::Header-->
 									<div class="card-header flex-wrap border-0 pt-6 pb-0">
 										<div class="card-title">
-											<h3 class="card-label">Create Purchase Order</h3>
+											<h3 class="card-label">Edit Purchase Order</h3>
 											<!-- <span class="d-block text-muted pt-2 font-size-sm">Materials made easy</span></h3> -->
 										</div>
 									</div>
@@ -435,8 +436,8 @@ type="text/css" />
 <!--begin::Dropdown-->
 <div class="col-md-10">
 </div>
-<div class="btn-group ml-2 col-md-2">
-		<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Update</button>
+<div style="margin-bottom:100px;" class="btn-group ml-2 mb-5 col-md-2">
+	<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Update</button>
 </div>
 <div class="btn-group ml-2 col-md-2">
 <span style="color:red" id="error_msg"></span>
@@ -691,7 +692,7 @@ type="text/css" />
                 processData: false,
                 success:function(result) {
                   if (result.status == 'error') {
-                  $('#error_msg').html(result.error);
+					$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
                   $.each(result.error,function(key,val){
                   // console.log(key);
                   // console.log(val);
@@ -699,12 +700,15 @@ type="text/css" />
                   })
                   }else if(result.status == 'success'){
                   $('#form')[0].reset();
-                  $('#success_msg').html(result.msg);
+                  $('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                   setTimeout(function(){
                    window.location.href = '../ERP/purchaseorder'; 
                  }, 1000);
                 }   
-                }
+                },
+            complete:function(){
+          		$('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
+        	}
            });
         });
     });

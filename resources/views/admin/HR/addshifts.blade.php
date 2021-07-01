@@ -182,7 +182,8 @@
 															<a href="shifts" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
 														</div>
 															<!--begin::Wizard Form-->
-															<form class="form" id="kt_form">
+															<form class="form" id="form">
+															{{@csrf_field()}}
 																<div class="row justify-content-center">
 																	<div class="col-xl-9">
 																		<!--begin::Wizard Step 1-->
@@ -192,7 +193,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Shift Name</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" />
+																					<input class="form-control form-control-solid form-control-lg" name="shiftname" type="text" value="" />
+																					<span class="field_error text-danger" id="shiftname_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -200,20 +202,12 @@
 																			<div class="form-group row" data-select2-id="243">
 																				<label class="col-form-label text-left col-lg-3 col-sm-12">Shift Status</label>
 																				<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
-																					<select class="form-control" id="kt_select2_1" name="param">
-																						<option value="AK">Alaska</option>
-																						<option value="HI">Hawaii</option>
-																						<option value="CA">California</option>
-																						<option value="NV">Nevada</option>
-																						<option value="OR">Oregon</option>
-																						<option value="WA">Washington</option>
-																						<option value="AZ">Arizona</option>
-																						<option value="CO">Colorado</option>
-																						<option value="ID">Idaho</option>
-																						<option value="MT">Montana</option>
-																						<option value="NE">Nebraska</option>
-																						<option value="NM">New Mexico</option>
+																					<select class="form-control" id="kt_select2_1" name="status">
+																						<option value="">Select</option>
+																						<option value="Active">Active</option>
+																						<option value="Inactive">Inactive</option>
 																					</select>
+																					<span class="field_error text-danger" id="status_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -221,13 +215,13 @@
 																		</div>
 																		<div class="row">
 																			<div class="col-md-3"></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button class="btn btn-primary" onclick="muestra_oculta('contenido_a_mostrar1')">Sun</button></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button class="btn btn-primary" onclick="muestra_oculta('contenido_a_mostrar2')">Mon</button></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button class="btn btn-primary" onclick="muestra_oculta('contenido_a_mostrar3')">Tue</button></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button class="btn btn-primary" onclick="muestra_oculta('contenido_a_mostrar4')">Wed</button></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button class="btn btn-primary" onclick="muestra_oculta('contenido_a_mostrar5')">Thu</button></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button class="btn btn-primary" onclick="muestra_oculta('contenido_a_mostrar6')">Fri</button></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button class="btn btn-primary" onclick="muestra_oculta('contenido_a_mostrar7')">Sat</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="sun">Sun</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="mon">Mon</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="tue">Tue</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="wed">Wed</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="thu">Thu</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="fri">Fri</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="sat">Sat</button></div>
 																			<div class="col-md-2"></div>
 																		</div>
 																		<div id="oculto">
@@ -240,13 +234,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="sundayfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="sundayto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -259,13 +253,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="mondayfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="mondayto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -278,13 +272,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="tuesdayfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="tuesdayto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -297,13 +291,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="wednesdayfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="wednesdayto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -316,13 +310,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="thrusdayfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="thrusdayto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -335,13 +329,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="fridayfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="fridayto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -354,13 +348,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="saturdayfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="firstname" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="saturdayto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -375,37 +369,10 @@
 
 									<!--begin::Dropdown-->
 									<div class="btn-group ml-2">
-										<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
-										<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-										<div class="dropdown-menu dropdown-menu-sm p-0 m-0 dropdown-menu-right">
-											<ul class="navi py-5">
-												<li class="navi-item">
-													<a href="#" class="navi-link">
-														<span class="navi-icon">
-															<i class="flaticon2-writing"></i>
-														</span>
-														<span class="navi-text">Save &amp; continue</span>
-													</a>
-												</li>
-												<li class="navi-item">
-													<a href="#" class="navi-link">
-														<span class="navi-icon">
-															<i class="flaticon2-medical-records"></i>
-														</span>
-														<span class="navi-text">Save &amp; add new</span>
-													</a>
-												</li>
-												<li class="navi-item">
-													<a href="#" class="navi-link">
-														<span class="navi-icon">
-															<i class="flaticon2-hourglass-1"></i>
-														</span>
-														<span class="navi-text">Save &amp; exit</span>
-													</a>
-												</li>
-											</ul>
-										</div>
+										<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
 									</div>
+									<span class="text-success" id="success_msg"></span>
+									<span class="text-danger" id="error_msg"></span>
 									<!--end::Dropdown-->
 																			</div>
 																		</div>
@@ -458,6 +425,41 @@
 		</span>
 	</div>
 	<!--end::Scrolltop-->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script>
+	   $(document).ready(function(){
+		  $('.day').click(function(){
+             var res = $(this).val();
+			 alert(res);
+		  });
+          $('#form').submit(function(e){
+
+			//   e.preventDefault();
+			//   $.ajax({
+			// 	  url : 'addhrdepart',
+			// 	  method : 'POST',
+			// 	  data : $('#form').serialize(),
+			// 	  dataType : 'JSON',
+            //       success : function(result){
+			// 		if (result.status == 'error') {
+			// 			$('#error_msg').html(result.error);
+			// 			$.each(result.error,function(key,val){
+			// 			// console.log(key);
+			// 			// console.log(val);
+			// 			$('#'+key+'_error').html(val[0]);
+			// 			})
+			// 		}else if(result.status == 'success'){
+			// 			$('#form')[0].reset();
+			// 			$('#success_msg').html(result.msg);
+			// 			setTimeout(function(){
+			// 			window.location.href = '../HR/hrdepartment'; 
+			// 			}, 1000);
+			// 		}
+			// 	  }
+			//   });
+		  });
+	   });
+	</script>
 <script>
 function muestra_oculta(id){
   if (document.getElementById){

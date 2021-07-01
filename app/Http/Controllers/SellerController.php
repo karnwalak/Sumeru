@@ -62,7 +62,7 @@ class SellerController extends Controller
         $result = DB::table('sellers') 
             ->where('id', $id)
             ->limit(1) 
-            ->update(['seller_status' => 'Inactive']);
+            ->update(['seller_status' => 'delete']);
         if ($result) {
             session() -> flash('success','Seller deleted!');
             return redirect('admin/ERP/seller');  
@@ -136,14 +136,14 @@ class SellerController extends Controller
        $status = $st; 
        // return $req;
        if ($seller_name == null && $status == null) {
-           $data = DB::SELECT("SELECT * FROM sellers");
+           $data = DB::SELECT("SELECT * FROM sellers WHERE seller_status != 'delete'");
            if ($data) {
                return view('../admin/ERP/searchresult',compact('data'));
            }else{
                return redirect('../seller');
            }
        }else if ($seller_name == $sname && $status == null) {
-           $data = DB::SELECT("SELECT * FROM sellers WHERE seller_name LIKE '%$sname%'");
+           $data = DB::SELECT("SELECT * FROM sellers WHERE seller_name LIKE '%$sname%' AND seller_status != 'delete'");
            if ($data) {
                return view('../admin/ERP/searchresult',compact('data'));
            }else{
@@ -166,7 +166,7 @@ class SellerController extends Controller
        }
     }
     public function show(Request $req){
-        $data = Seller::paginate(10);
+        $data = Seller::where('seller_status','!=','delete')->paginate(10);
         return view('../admin/ERP/seller',compact('data'));
     }
 }

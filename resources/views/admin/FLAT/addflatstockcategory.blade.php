@@ -162,6 +162,7 @@ use Illuminate\Support\Facades\DB;
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<!--begin::Card-->
 								<div class="card card-custom card-transparent">
 									<div class="card-body p-0">
@@ -411,13 +412,13 @@ use Illuminate\Support\Facades\DB;
             type:'post',
             success:function(result){
               if (result.status == 'error') {
-                $('#error_msg').html(result.error);
+                $('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
                 $.each(result.error,function(key,val){
                   $('#'+key+'_error').html(val[0]);
                 })
               }else if(result.status == 'success'){
                 $('.form')[0].reset();
-                $('#success_msg').html(result.msg);
+                $('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                 setTimeout(function(){
                    window.location.href = '../admin/FLAT/flatstockcategory'; 
                 }, 1000);

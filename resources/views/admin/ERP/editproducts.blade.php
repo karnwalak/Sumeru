@@ -158,6 +158,7 @@
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<!--begin::Card-->
 								<div class="card card-custom card-transparent">
 									<div class="card-body p-0">
@@ -221,7 +222,7 @@
 			<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
 				<?php
 	    function categoryTree($rowid, $category){
-	      $data = DB::SELECT("SELECT * FROM inventory_material_categories WHERE category_parent=$rowid");
+	      $data = DB::SELECT("SELECT * FROM inventory_material_categories WHERE category_parent=$rowid AND category_status != 'delete'");
 	      foreach ($data as $value) {
 	        $row_name = $value -> category_name;
 	        $concat = $category." | ".$row_name;
@@ -236,7 +237,7 @@
 		<select class="form-control" id="kt_select2_1" name="category">
 			<option value="">Select</option>
 			 <?php 
-			     $datas = DB::SELECT("SELECT * FROM inventory_material_categories WHERE category_parent=0");
+			     $datas = DB::SELECT("SELECT * FROM inventory_material_categories WHERE category_parent=0 AND category_status != 'delete'");
                  foreach($datas as $val){
                   $rowid = $val -> id;
                   $category = $val -> category_name;
@@ -444,18 +445,21 @@
             type:'post',
             success:function(result){
               if (result.status == 'error') {
-                $('#error_msg').html(result.error);
+				$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
                 $.each(result.error,function(key,val){
                   $('#'+key+'_error').html(val[0]);
                 })
               }else if(result.status == 'success'){
                 $('.form')[0].reset();
-                $('#success_msg').html(result.msg);
+				$('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                 setTimeout(function(){
                    window.location.href = '../ERP/materialspage'; 
                 }, 1000);
               }
-            }
+            },
+            complete:function(){
+          		$('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
+        	}
           });
         })
       });

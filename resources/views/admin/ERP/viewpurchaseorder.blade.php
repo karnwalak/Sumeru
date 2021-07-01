@@ -237,7 +237,7 @@ type="text/css" />
 									<!--begin::Header-->
 									<div class="card-header flex-wrap border-0 pt-6 pb-0">
 										<div class="card-title">
-											<h3 class="card-label" style="text-align:left;">Edit Purchase Order</h3>
+											<h3 class="card-label" style="text-align:left;">Purchase Order</h3>
 											<!-- {{print_r($orders)}} -->
 											<!-- <span class="d-block text-muted pt-2 font-size-sm">Materials made easy</span></h3> -->
 										</div>

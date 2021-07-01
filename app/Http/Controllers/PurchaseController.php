@@ -33,7 +33,7 @@ class PurchaseController extends Controller
        $query = DB::table('inventory_purchase_orders') 
             ->where('id', $id)
             ->limit(1) 
-            ->update(['status' => 'Inactive']);
+            ->update(['status' => 'delete']);
         if ($query) {
             session() -> flash('success','Order Deleted!');
             return redirect('admin/ERP/purchaseorder');
@@ -133,9 +133,8 @@ class PurchaseController extends Controller
             'total' => 'required|array|distinct',
             'status' => 'required',
             'fullamount' => 'required|numeric',
-            'invoice_file' => 'required|mimes:pdf|max:512',
+            'invoice_file' => 'mimes:pdf|max:512',
             'comment' => 'required|max:200',
- 
             'item_name' => 'required|array|distinct|not_in:0',
             'quantity' => 'required|array|distinct',
             'price' => 'required|array|distinct',
@@ -168,7 +167,7 @@ class PurchaseController extends Controller
             for ($i=0; $i < count($req -> item_name) ; $i++) {
                 $stock = [
                     'material_id' => $material_id[$i] ,
-                    'stock_type' => $type[$i] ,
+                    'stock_type' => 'ADD' ,
                     'stock_date' => $date ,
                     'invoice_id' => $invoice_id,
                     'stock_quantity' => $quantity[$i] ,
@@ -214,7 +213,7 @@ class PurchaseController extends Controller
        $status = $st; 
        // return $req;
        if ($category_name == null && $status == null) {
-           $data = Purchase::get();
+           $data = Purchase::where('status','!=','delete')->paginate(10);
            if ($data) {
                return view('../admin/ERP/searchorder',compact('data'));
            }else{
@@ -222,7 +221,7 @@ class PurchaseController extends Controller
            }
        }
        else if ($category_name == $cname && $status == null) {
-           $data = Purchase::where('invoice_id', 'like', '%' . $cname . '%')->paginate(10);
+           $data = Purchase::where('invoice_id', 'like', '%' . $cname . '%')->where('status','!=','delete')->paginate(10);
            if ($data) {
                return view('../admin/ERP/searchorder',compact('data'));
            }else{
@@ -249,16 +248,16 @@ class PurchaseController extends Controller
        }
     }
     public function show(Request $req){
-        $data = Purchase::paginate(10);
+        $data = Purchase::orderBy('id', 'DESC')->where('status','!=','delete')->paginate(10);
         return view('../admin/ERP/purchaseorder',compact('data'));
     }
     public function showorder(Request $req,$id){
         // return $id;
-        $data = Purchase::where('seller_id',$id)->paginate(10);
+        $data = Purchase::where('seller_id',$id)->where('status','!=','delete')->paginate(10);
         return view('../admin/ERP/sellerpurchaseorder',compact('data'));
     }
     public function showdata(Request $req,$id){
-        $orders = Purchase::join('sellers','inventory_purchase_orders.seller_id','=','sellers.id')->
+        $orders = Purchase::where('status','!=','delete')->join('sellers','inventory_purchase_orders.seller_id','=','sellers.id')->
         where('inventory_purchase_orders.id',$id)->get(['inventory_purchase_orders.*','sellers.seller_name','sellers.seller_contact']);
         
         //fetch order materials and ma
@@ -266,8 +265,8 @@ class PurchaseController extends Controller
         where('purchase_order_materials.purchase_order_id',$id)->get(['inventory_materials.*','purchase_order_materials.*']);
       
 
-        $seller = Seller::get();   
-        $material = Material::get();
+        $seller = Seller::where('seller_status','!=','delete')->where('seller_status','!=','Inactive')->get();   
+        $material = Material::where('material_status','!=','delete')->where('material_status','!=','Inactive')->get();
         // print_r($orer);
         // print_r($item);
         return view('../admin/ERP/editpurchaseorder') -> with('orders',$orders) 
@@ -275,7 +274,7 @@ class PurchaseController extends Controller
         
     }
     public function showpurchase(Request $req,$id){
-        $orders = Purchase::join('sellers','inventory_purchase_orders.seller_id','=','sellers.id')->
+        $orders = Purchase::where('status','!=','delete')->join('sellers','inventory_purchase_orders.seller_id','=','sellers.id')->
         where('inventory_purchase_orders.id',$id)->get(['inventory_purchase_orders.*','sellers.seller_name','sellers.seller_contact']);
         
         //fetch order materials and ma
@@ -283,8 +282,8 @@ class PurchaseController extends Controller
         where('purchase_order_materials.purchase_order_id',$id)->get(['inventory_materials.*','purchase_order_materials.*']);
       
 
-        $seller = Seller::get();   
-        $material = Material::get();
+        $seller = Seller::where('seller_status','!=','delete')->where('seller_status','!=','Inactive')->get();   
+        $material = Material::where('material_status','!=','delete')->where('material_status','!=','Inactive')->get();
         // print_r($orer);
         // print_r($item);
         return view('../admin/ERP/viewpurchaseorder') -> with('orders',$orders) 
@@ -293,8 +292,8 @@ class PurchaseController extends Controller
     }
 
     public function showseller(Request $req){
-        $seller = Seller::get();   
-        $material = Material::get();
+        $seller = Seller::where('seller_status','!=','delete')->where('seller_status','!=','Inactive')->get();   
+        $material = Material::where('material_status','!=','delete')->where('material_status','!=','Inactive')->get();
         // print_r($orer);
         // print_r($item);
         return view('../admin/ERP/createpurchaseorder') -> with('seller',$seller)-> with('material',$material);

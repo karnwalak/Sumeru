@@ -276,7 +276,7 @@
 												<table class="datatable-table" style="display: block;">
 													<thead class="datatable-head">
 														<tr class="datatable-row" style="left: 0px;">
-															<th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th>
+															<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 															<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
 															<th data-field="Name" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Name</span></th>
 															<th data-field="Category" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Category</span></th>
@@ -289,11 +289,11 @@
 														</tr>
 													</thead>
 													<tbody class="datatable-body" style="">
-														
+														<?php $a = 1; ?>
 														@foreach($data as $value)
 														<tr data-row="0" class="datatable-row" style="left: 0px;">
-															<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
-															<td data-field="Sno" aria-label="{{$value -> id}}" class="datatable-cell"><span style="width: 100px;">{{$value -> id}}</span></td>
+															<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
+															<td data-field="Sno" aria-label="{{$value -> id}}" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
 															<td data-field="Name" aria-label="{{$value -> material_name}}" class="datatable-cell"><span style="width: 100px;">{{$value -> material_name}}</span></td>
 															<td data-field="{{$value -> material_category}}" aria-label="{{$value -> material_category}}" class="datatable-cell"><span style="width: 100px;">
 																<?php 
@@ -308,7 +308,13 @@
 															<td data-field="Modal" aria-label="{{$value -> modal}}" class="datatable-cell"><span style="width: 100px;">{{$value -> modal}}</span></td>
 															<td data-field="Sku" aria-label="{{$value -> sku}}" class="datatable-cell"><span style="width: 100px;">{{$value -> sku}}</span></td>
 															<td data-field="Type" aria-label="{{$value -> type}}" class="datatable-cell"><span style="width: 100px;">{{$value -> type}}</span></td>
-															<td data-field="Stock" aria-label="Brazil" class="datatable-cell"><span style="width: 100px;"><a href="#">2016</a></span></td>
+															<td data-field="Stock" aria-label="Brazil" class="datatable-cell"><span style="width: 100px;"><a href="#">
+															<?php 
+																$id = $value -> id;
+                                                                $result = DB::SELECT("SELECT * FROM material_stock_records WHERE material_id = $id");
+                                                                echo count($result);
+																?>
+															</a></span></td>
 															<td data-field="Status" aria-label="5" class="datatable-cell">
 								                               @if($value -> material_status == 'Active')
 								                                <div class="form-check form-switch">

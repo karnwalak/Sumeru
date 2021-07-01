@@ -155,6 +155,7 @@ fill="#000000" opacity="0.3" />
 <div class="d-flex flex-column-fluid">
 <!--begin::Container-->
 <div class="container">
+<div class="row justify-content-center" id="msg"></div>
 <!--begin::Card-->
 <div class="card card-custom card-transparent">
 <div class="card-body p-0">
@@ -259,8 +260,7 @@ fill="#000000" opacity="0.3" />
 						<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">UPDATE</button><br><br>
 
 					</div>
-					<p style="color:red" id="error_msg"></p>
-                        <p style="color:green" id="success_msg"></p>
+					
 					<!--end::Dropdown-->
 				</div>
 			</div>
@@ -401,18 +401,21 @@ var KTAppSettings = {
             type:'post',
             success:function(result){
               if (result.status == 'error') {
-                $('#error_msg').html(result.error);
+                $('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
                 $.each(result.error,function(key,val){
                   $('#'+key+'_error').html(val[0]);
                 })
               }else if(result.status == 'success'){
                 $('.form')[0].reset();
-                $('#success_msg').html(result.msg);
+                $('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                 setTimeout(function(){
                    window.location.href = '../ERP/seller'; 
                 }, 1000);
               }
-            }
+            },
+            complete:function(){
+          		$('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
+        	}
           });
         })
       });

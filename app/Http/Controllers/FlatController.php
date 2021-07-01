@@ -65,14 +65,14 @@ class FlatController extends Controller
        $status = $st; 
        // return $req;
        if ($category_name == null && $status == null) {
-           $data = Flat::get();
+           $data = Flat::where('flat_status','!=','delete')->get();
            if ($data) {
                return view('../admin/FLAT/searchflat',compact('data'));
            }else{
                return redirect('../admin/FLAT/searchflat');
            }
        }else if ($category_name == $cname && $status == null) {
-           $data = Flat::where('flat_stock_name', 'like', '%' . $cname . '%')->paginate(10);
+           $data = Flat::where('flat_status','!=','delete')->where('flat_stock_name', 'like', '%' . $cname . '%')->paginate(10);
            if ($data) {
                return view('../admin/FLAT/searchflat',compact('data'));
            }else{
@@ -97,7 +97,10 @@ class FlatController extends Controller
        }
    }
    public function edit(Request $req,$id){
-    return view('../admin/FLAT/editflats') -> with('val',Flat::find($id));
+    $data = FlatCategory::where('category_status','!=','delete')->paginate(10);
+    return view('../admin/FLAT/editflats') 
+    -> with('val',Flat::find($id))
+    -> with('data',$data);
    }
    public function editFlat(Request $req){
       $valid = Validator::make($req -> all(),[
@@ -137,7 +140,7 @@ class FlatController extends Controller
        $result = DB::table('flat_ inventories') 
             ->where('id', $id)
             ->limit(1) 
-            ->update(['flat_status' => 'Inactive']); 
+            ->update(['flat_status' => 'delete']); 
             if ($result) {
                 session() -> flash('success','Flat deleted!');
                 return redirect('../admin/FLAT/flatstockinventory');
@@ -147,7 +150,7 @@ class FlatController extends Controller
             }
    }
    public function show(Request $req){
-    $data = Flat::paginate(10);
+    $data = Flat::where('flat_status','!=','delete')->paginate(10);
     return view('../admin/Flat/flatstockinventory',compact('data'));
 }
 }

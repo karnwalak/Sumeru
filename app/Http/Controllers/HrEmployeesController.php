@@ -1,85 +1,23 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use App\Models\hr_employees;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\hr_employees;
+use App\Models\hr_department;
+use App\Models\hr_shift;
+use App\Models\hr_designation;
+use Validator;
 
 class HrEmployeesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function show(Request $req){
+         return view('../admin/HR/addemployees') 
+         -> with('shift',hr_shift::get())
+         -> with('department',hr_department::get());
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Request $req)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\hr_employees  $hr_employees
-     * @return \Illuminate\Http\Response
-     */
-    public function show(hr_employees $hr_employees)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\hr_employees  $hr_employees
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(hr_employees $hr_employees)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\hr_employees  $hr_employees
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, hr_employees $hr_employees)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\hr_employees  $hr_employees
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(hr_employees $hr_employees)
-    {
-        //
+        return $req;
     }
 }
+?>
