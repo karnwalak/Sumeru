@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MaterialStock;
 use App\Models\Material;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
 
 class MaterialStockController extends Controller
@@ -52,9 +53,16 @@ class MaterialStockController extends Controller
      }
     public function show(Request $req,$id){
         $data = MaterialStock::where('material_id',$id) -> paginate(10);
+        foreach($data as $val){}
+        $in = $val -> invoice_id;
+        $order = Purchase::where('invoice_id',$in)->get();
+        // return print_r($order);
         $datas = Material::where('id',$id) -> get();
-        return view('../admin/ERP/productstockrecord',compact('data'));
-        return view('../admin/ERP/productstockrecord',compact('datas'));
-        // return view('../admin/ERP/productstockrecord')->with('val',Material::find($id));
+        // return view('../admin/ERP/productstockrecord',compact('data'));
+        // return view('../admin/ERP/productstockrecord',compact('datas'));
+        return view('../admin/ERP/productstockrecord')
+        ->with('data',$data)
+        ->with('datas',$datas)
+        ->with('order',$order);
     }
 }

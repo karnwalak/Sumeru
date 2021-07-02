@@ -1,3 +1,6 @@
+<?php
+$seller = $order[0];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -323,11 +326,27 @@
 														<tr data-row="0" class="datatable-row datatable-row-even" style="left: 0px;">
 															<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
 															<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
-															<td data-field="Name" aria-label="Brazil" class="datatable-cell"><span style="width: 100px;">{{$value -> material_id}}</span></td>
+															<td data-field="Name" aria-label="Brazil" class="datatable-cell"><span style="width: 100px;">
+															<?php 
+																$pid = $value -> material_id;
+																$pdata = DB::SELECT("SELECT * FROM inventory_materials WHERE id = $pid"); 
+																foreach ($pdata as  $pval) {
+																}
+																echo $pval -> material_name;
+															?>
+															</span></td>
 															<td data-field="Type" aria-label="Oriole Pass" class="datatable-cell"><span style="width: 100px;">{{$value -> stock_type}}</span></td>
 															<td data-field="Date" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$value -> stock_date}}</span></td>
 															<td data-field="Comment" aria-label="Brazil" class="datatable-cell"><span style="width: 100px;">{{$value -> comment}}</span></td>
-															<td data-field="Buyer/Seller" aria-label="Oriole Pass" class="datatable-cell"><span style="width: 100px;">sam samd</span></td>
+															<td data-field="Buyer/Seller" aria-label="Oriole Pass" class="datatable-cell"><span style="width: 100px;">
+															<?php 
+																$pid = $seller ->seller_id;
+																$pdata = DB::SELECT("SELECT * FROM sellers WHERE id = $pid"); 
+																foreach ($pdata as  $pval) {
+																}
+																echo $pval -> seller_name;
+															?>
+															</span></td>
 															<td data-field="Cost/Item" aria-label="Brazil" class="datatable-cell"><span style="width: 100px;">{{$value -> stock_cost}}</span></td>
 														</tr>
 													@endforeach

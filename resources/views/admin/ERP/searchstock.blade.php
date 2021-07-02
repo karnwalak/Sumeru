@@ -202,12 +202,18 @@
 							<div class="container">
 								<!--begin::Card-->
 								<div class="card card-custom">
-									<!--begin::Header-->
-									<div class="card-header flex-wrap border-0 pt-6 pb-0">
+								<div class="card-header flex-wrap border-0 pt-6 pb-0">
 										<div class="card-title">
 											<h3 class="card-label">Search Result</h3>
 										</div>
+                                        <span class="text-success">{{session() -> get('success')}}</span>
+                                        <span class="text-danger">{{session() -> get('error')}}</span>
+										<div class="row" style="display:grid;place-items:end;padding:10px 15px;">
+										<a href="ERP/productstockrecord" class="btn btn-default font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
+										</div>
 									</div>
+									<!--begin::Header-->
+									
 									<!--end::Header-->
 									<!--begin::Body-->
 									<div class="card-body">

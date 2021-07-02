@@ -360,7 +360,6 @@
                                                                 foreach ($result as $valu) {
                                                                 	echo $valu -> seller_name;
                                                                 }
-                                                                
 																?>
 															</span></td>
 															<td data-field="SellerContact" aria-label="9876543212" class="datatable-cell"><span style="width: 100px;"><?php foreach ($result as $valu) {
@@ -368,8 +367,37 @@
                                                                 } ?></span></td>
 															<td data-field="InvoiceNo" aria-label="{{$value -> invoice_id}}" class="datatable-cell"><span style="width: 100px;">{{$value -> invoice_id}}</span></td>
 															<td data-field="Amount" aria-label="{{$value -> order_amount}}" class="datatable-cell"><span style="width: 100px;">Rs. {{$value -> order_amount}}</span></td>
-															<td data-field="Released" aria-label="21/2/2020" class="datatable-cell"><span style="width: 100px;">{{$value -> date}}</span></td>
-															<td data-field="Balance" aria-label="Rs. 98765" class="datatable-cell"><span style="width: 100px;">Rs. 98765</span></td>
+															<td data-field="Released" aria-label="21/2/2020" class="datatable-cell"><span style="width: 100px;">
+															<?php
+																$id = $value -> id;
+																$result = DB::SELECT("SELECT * FROM purchase_order_payment_logs WHERE purchase_order_id = $id");
+																foreach ($result as $valu) {
+																}
+																if (isset($valu -> txn_amount)) {
+																	echo $valu -> txn_amount;
+																}else{
+																	echo "0";
+																}
+																
+															?>
+															</span></td>
+															<td data-field="Balance" aria-label="Rs. 98765" class="datatable-cell"><span style="width: 100px;">
+															<?php
+																$id = $value -> id;
+																$order_am=$value -> order_amount;
+																//echo $order_am;
+																$res = DB::SELECT("SELECT * FROM purchase_order_payment_logs WHERE purchase_order_id = $id");
+																if($res){
+																	foreach ($res as $va) {
+																	}
+																	$release = $va -> txn_amount;
+																	$bal = $order_am - $release;
+																	echo $bal;
+																}else{
+																	echo $order_am;
+																}
+															?>
+															</span></td>
 															<td data-field="Status" aria-label="5" class="datatable-cell">
 								                               <!-- @if($value -> order_status == 'Active')
 								                                <div class="form-check form-switch">
