@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Purchase;
 use App\Models\Seller;
 use App\Models\PurchaseOrder;
+use App\Models\MaterialStock;
 use App\Models\Material;
 use Illuminate\Http\Request;
 use Validator;
@@ -34,7 +35,11 @@ class PurchaseController extends Controller
             ->where('id', $id)
             ->limit(1) 
             ->update(['status' => 'delete']);
-        if ($query) {
+        $query2 = DB::table('material_stock_records') 
+            ->where('purchase_order_id', $id)
+            ->limit(1) 
+            ->update(['status' => 'remove']);
+        if ($query && $query2) {
             session() -> flash('success','Order Deleted!');
             return redirect('admin/ERP/purchaseorder');
         }else{
@@ -162,7 +167,9 @@ class PurchaseController extends Controller
         $price = $req -> price;
         $quantity = $req -> quantity;
         $file = $req -> file('invoice_file'); 
-        $file_name = time().'.'.$file->getClientOriginalExtension();
+        if (isset($file)) {
+            $file_name = time().'.'.$file->getClientOriginalExtension();
+        }
         if($order_status == 'Recieved'){
             for ($i=0; $i < count($req -> item_name) ; $i++) {
                 $stock = [
@@ -178,10 +185,17 @@ class PurchaseController extends Controller
                 $stock_data = DB::table('material_stock_records') -> insert($stock);
             }
         }
-        $result = DB::table('inventory_purchase_orders') 
+        if(isset($file_name)){
+            $result = DB::table('inventory_purchase_orders') 
         ->where('id', $pro_id)
         ->limit(1) 
         ->update(['id'=>$pro_id,'seller_id' => $seller_id,'invoice_id'=>$invoice_id,'order_amount'=>$order_amount,'order_status'=>$order_status,'invoice'=>$file_name,'comment'=>$comment,'discount'=>$discount,'date'=>$date,'total'=>$sub_total,'status'=>$status]); 
+        }else{
+            $result = DB::table('inventory_purchase_orders') 
+            ->where('id', $pro_id)
+            ->limit(1) 
+            ->update(['id'=>$pro_id,'seller_id' => $seller_id,'invoice_id'=>$invoice_id,'order_amount'=>$order_amount,'order_status'=>$order_status,'comment'=>$comment,'discount'=>$discount,'date'=>$date,'total'=>$sub_total,'status'=>$status]); 
+        }
         $de = DB::DELETE("DELETE FROM purchase_order_materials WHERE purchase_order_id = $pro_id");
         for ($i=0; $i < count($req -> item_name) ; $i++) {
             $data2 = [
