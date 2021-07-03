@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\HrDepartmentsController;
 use App\Http\Controllers\HrDesignationController;
+use App\Http\Controllers\HrShiftController;
 use App\Http\Controllers\HrAllowenceController;
 use App\Http\Controllers\HrEmployeesController;
 /*
@@ -114,6 +115,8 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::view('admin/HR/hrdashboard','admin/HR/hrdashboard');
         Route::get('admin/HR/addemployees',[HrEmployeesController::class,'show']);
         Route::POST('admin/HR/addemployee',[HrEmployeesController::class,'create']);
+        Route::POST('admin/HR/addshift',[HrShiftController::class,'create']);
+        Route::get('admin/HR/shifts',[HrShiftController::class,'show']);
         Route::view('admin/HR/addhrdepartment','admin/HR/addhrdepartment');
         Route::get('admin/HR/addhrdepartment',[HrDepartmentsController::class,'showdata']);
         Route::get('admin/HR/hrdesignation',[HrDesignationController::class,'showdata']);
@@ -149,7 +152,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::view('admin/HR/employeeprofile','admin/HR/employeeprofile');
         Route::view('admin/HR/employees','admin/HR/employees');
         // Route::view('admin/HR/hrdesignation','admin/HR/hrdesignation');
-        Route::view('admin/HR/shifts','admin/HR/shifts');
+        // Route::view('admin/HR/shifts','admin/HR/shifts');
         Route::view('admin/HR/tasksandprojects','admin/HR/tasksandprojects');
         Route::view('admin/HR/viewtasks','admin/HR/viewtasks');
         Route::get('admin/logout', function () {
