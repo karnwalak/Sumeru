@@ -156,6 +156,7 @@
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<!--begin::Card-->
 								<div class="card card-custom card-transparent">
 									<div class="card-body p-0">

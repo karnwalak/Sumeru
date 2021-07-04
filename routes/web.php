@@ -135,6 +135,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::post('admin/HR/editdepartmentstatus',[HrDepartmentsController::class,'editstatus']);
         Route::post('admin/HR/editdesignationstatus',[HrDesignationController::class,'editstatus']);
         Route::post('admin/HR/editallowencestatus',[HrAllowenceController::class,'editstatus']);
+        Route::post('admin/HR/editshiftstatus',[HrShiftController::class,'editstatus']);
         Route::post('admin/HR/edithrdepart',[HrDepartmentsController::class,'edithrdepart']);
         Route::post('admin/HR/edithrallowence',[HrAllowenceController::class,'edithrallowence']);
         // Route::view('admin/HR/addhrdesignation','admin/HR/addhrdesignation');
@@ -148,7 +149,9 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::view('admin/HR/edithrdepartment','admin/HR/edithrdepartment');
         Route::get('admin/HR/edithrdesignation/{id}',[HrDesignationController::class,'edithrdesignation']);
         Route::post('admin/HR/edithrdesignation',[HrDesignationController::class,'edit']);
-        Route::view('admin/HR/editshifts','admin/HR/editshifts');
+        Route::get('admin/HR/editshifts/{id}',[HrShiftController::class,'edit']);
+        Route::get('admin/HR/deleteshift/{id}',[HrShiftController::class,'delete']);
+        Route::post('admin/HR/editshift',[HrShiftController::class,'editshift']);
         Route::view('admin/HR/employeeprofile','admin/HR/employeeprofile');
         Route::view('admin/HR/employees','admin/HR/employees');
         // Route::view('admin/HR/hrdesignation','admin/HR/hrdesignation');

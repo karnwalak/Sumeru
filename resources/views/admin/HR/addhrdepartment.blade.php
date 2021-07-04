@@ -166,6 +166,7 @@ use Illuminate\Support\Facades\DB;
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<!--begin::Card-->
 								<div class="card card-custom card-transparent">
 									<div class="card-body p-0">
@@ -286,8 +287,7 @@ use Illuminate\Support\Facades\DB;
 																			<!--begin::Dropdown-->
 																			<!-- <div class="btn-group ml-2"> -->
 																				 <button type="submit" class="btn btn-primary font-weight-bold btn-sm font-size-base">Submit</button>
-																				 <span id="error_msg" class="text-danger"></span>
-																				 <span id="success_msg" class="text-success"></span>
+																				
 																				<!--<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
 																				<div class="dropdown-menu dropdown-menu-sm p-0 m-0 dropdown-menu-right">
 																					<ul class="navi py-5">
@@ -381,7 +381,7 @@ use Illuminate\Support\Facades\DB;
 				  dataType : 'JSON',
                   success : function(result){
 					if (result.status == 'error') {
-						$('#error_msg').html(result.error);
+						$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
 						$.each(result.error,function(key,val){
 						// console.log(key);
 						// console.log(val);
@@ -389,11 +389,14 @@ use Illuminate\Support\Facades\DB;
 						})
 					}else if(result.status == 'success'){
 						$('#form')[0].reset();
-						$('#success_msg').html(result.msg);
+						$('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
 						setTimeout(function(){
 						window.location.href = '../HR/hrdepartment'; 
 						}, 1000);
 					}
+				  },
+				  complete:function(){
+						$('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
 				  }
 			  })
 
