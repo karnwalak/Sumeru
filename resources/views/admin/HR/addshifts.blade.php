@@ -167,6 +167,7 @@
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<!--begin::Card-->
 								<div class="card card-custom card-transparent">
 									<div class="card-body p-0">
@@ -215,17 +216,17 @@
 																		</div>
 																		<div class="row">
 																			<div class="col-md-3"></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="sun">Sun</button></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="mon">Mon</button></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="tue">Tue</button></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="wed">Wed</button></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="thu">Thu</button></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="fri">Fri</button></div>
-																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" value="sat">Sat</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" id="sun">Sun</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" id="mon">Mon</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" id="tue">Tue</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" id="wed">Wed</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" id="thu">Thu</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" id="fri">Fri</button></div>
+																			<div class="col-md-1 col-3" style="padding:10px 20px"><button type="button" class="btn btn-primary day" id="sat">Sat</button></div>
 																			<div class="col-md-2"></div>
 																		</div>
 																		<div id="oculto">
-																			<div id="contenido_a_mostrar1" class="box-info">
+																			<div id="sunDiv" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Sunday</p>
 																				</div>
@@ -234,17 +235,17 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="sundayfrom" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="sunfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="sundayto" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="sunto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
-																			<div id="contenido_a_mostrar2" class="box-info">
+																			<div id="monDiv" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Monday</p>
 																				</div>
@@ -253,17 +254,17 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="mondayfrom" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="monfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="mondayto" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="monto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
-																			<div id="contenido_a_mostrar3" class="box-info">
+																			<div id="tueDiv" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Tuesday</p>
 																				</div>
@@ -272,17 +273,17 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="tuesdayfrom" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="tuefrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="tuesdayto" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="tueto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
-																			<div id="contenido_a_mostrar4" class="box-info">
+																			<div id="wedDiv" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Wednesday</p>
 																				</div>
@@ -291,17 +292,17 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="wednesdayfrom" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="wedfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="wednesdayto" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="wedto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
-																			<div id="contenido_a_mostrar5" class="box-info">
+																			<div id="thuDiv" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Thursday</p>
 																				</div>
@@ -310,17 +311,17 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="thrusdayfrom" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="thufrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="thrusdayto" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="thuto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
-																			<div id="contenido_a_mostrar6" class="box-info">
+																			<div id="friDiv" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Friday</p>
 																				</div>
@@ -329,17 +330,17 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="fridayfrom" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="frifrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="fridayto" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="frito" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
-																			<div id="contenido_a_mostrar7" class="box-info">
+																			<div id="satDiv" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Saturday</p>
 																				</div>
@@ -348,13 +349,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="saturdayfrom" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="satfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="saturdayto" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" name="satto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -366,14 +367,11 @@
 																			</div>
 																			<div>
 																				<button type="button" class="btn btn-success font-weight-bolder px-9 py-4" data-wizard-type="action-submit">Submit</button>
-
-									<!--begin::Dropdown-->
-									<div class="btn-group ml-2">
-										<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
-									</div>
-									<span class="text-success" id="success_msg"></span>
-									<span class="text-danger" id="error_msg"></span>
-									<!--end::Dropdown-->
+																			<!--begin::Dropdown-->
+																			<div class="btn-group ml-2">
+																				<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
+																			</div>
+																			<!--end::Dropdown-->
 																			</div>
 																		</div>
 																		<!--end::Wizard Actions-->
@@ -428,35 +426,54 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script>
 	   $(document).ready(function(){
-		  $('.day').click(function(){
-             var res = $(this).val();
-			 alert(res);
+		  $('#sun').click(function(){
+             $('#sunDiv').removeClass('d-none').toggle();
+		  });
+		  $('#mon').click(function(){
+             $('#monDiv').removeClass('d-none').toggle();
+		  });
+		  $('#tue').click(function(){
+             $('#tueDiv').removeClass('d-none').toggle();
+		  });
+		  $('#wed').click(function(){
+             $('#wedDiv').removeClass('d-none').toggle();
+		  });
+		  $('#thu').click(function(){
+             $('#thuDiv').removeClass('d-none').toggle();
+		  });
+		  $('#fri').click(function(){
+             $('#friDiv').removeClass('d-none').toggle();
+		  });
+		  $('#sat').click(function(){
+             $('#satDiv').removeClass('d-none').toggle();
 		  });
           $('#form').submit(function(e){
-
-			//   e.preventDefault();
-			//   $.ajax({
-			// 	  url : 'addhrdepart',
-			// 	  method : 'POST',
-			// 	  data : $('#form').serialize(),
-			// 	  dataType : 'JSON',
-            //       success : function(result){
-			// 		if (result.status == 'error') {
-			// 			$('#error_msg').html(result.error);
-			// 			$.each(result.error,function(key,val){
-			// 			// console.log(key);
-			// 			// console.log(val);
-			// 			$('#'+key+'_error').html(val[0]);
-			// 			})
-			// 		}else if(result.status == 'success'){
-			// 			$('#form')[0].reset();
-			// 			$('#success_msg').html(result.msg);
-			// 			setTimeout(function(){
-			// 			window.location.href = '../HR/hrdepartment'; 
-			// 			}, 1000);
-			// 		}
-			// 	  }
-			//   });
+			  e.preventDefault();
+			  $.ajax({
+				  url : 'addshift',
+				  method : 'POST',
+				  data : $('#form').serialize(),
+				  dataType : 'JSON',
+                  success : function(result){
+					if (result.status == 'error') {
+						$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
+						$.each(result.error,function(key,val){
+						// console.log(key);
+						// console.log(val);
+						$('#'+key+'_error').html(val[0]);
+						})
+					}else if(result.status == 'success'){
+						$('#form')[0].reset();
+						$('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
+						setTimeout(function(){
+						window.location.href = '../HR/shifts'; 
+						}, 1000);
+					}
+				  },
+				  complete:function(){
+						$('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
+				  }
+			  });
 		  });
 	   });
 	</script>

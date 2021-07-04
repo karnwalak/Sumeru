@@ -4,6 +4,7 @@
 
 <head>
 	<meta charset="utf-8" />
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -238,6 +239,21 @@
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row p-3 justify-content-center">
+							@if ($message = Session::get('success'))
+							<div class="col-md-4 alert alert-primary alert-block">
+								<button type="button" class="close" data-dismiss="alert">×</button>    
+								<strong>{{ $message }}</strong>
+							</div>
+							@endif
+							@if ($message = Session::get('error'))
+							<div class="col-md-4 alert alert-danger alert-block">
+								<button type="button" class="close" data-dismiss="alert">×</button>    
+								<strong>{{ $message }}</strong>
+							</div>
+							@endif
+								
+							</div>
 								<!--begin::Card-->
 								<div class="card card-custom">
 									<!--begin::Header-->
@@ -281,14 +297,20 @@
 													<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
 													<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 80px;">{{$a++}}</span></td>
 													<td data-field="ShiftName" aria-label="Morning" class="datatable-cell"><span style="width: 80px;">{{$value -> shift_name}}</span></td>
-                                                    <td data-field="Sunday" aria-label="09-20"  class="datatable-cell"><span style="width: 80px;">{{$value -> mon_in}}-{{$value -> mon_out}}</span></td>
-                                                    <td data-field="Monday"  aria-label="09-20" class="datatable-cell"><span style="width: 80px;">09-20</span></td>
-                                                    <td data-field="Tuesday" aria-label="09-20"  class="datatable-cell"><span style="width: 80px;">09-20</span></td>
-                                                    <td data-field="Wednesday" aria-label="09-20"  class="datatable-cell"><span style="width: 90px;">09-20</span></td>
-                                                    <td data-field="Thursday" aria-label="09-20"  class="datatable-cell "><span style="width: 80px;">09-20</span></td>
-                                                    <td data-field="Friday" aria-label="09-20"  class="datatable-cell "><span style="width: 80px;">09-20</span></td>
-                                                    <td data-field="Saturday"  aria-label="09-20" class="datatable-cell"><span style="width: 80px;">09-20</span></td>
-													<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value="{{$value -> shift_status}}" style="color:white" onclick="setColor(event, 'button', '#101010')" ; data-count="1" /></span></td>
+                                                    <td data-field="Sunday" aria-label="09-20"  class="datatable-cell"><span style="width: 80px;">09-20</span></td>
+                                                    <td data-field="Monday"  aria-label="09-20" class="datatable-cell"><span style="width: 80px;">{{substr($value -> mon_in,0,2)}}-{{substr($value -> mon_out,0,2)}}</span></td>
+                                                    <td data-field="Tuesday" aria-label="09-20"  class="datatable-cell"><span style="width: 80px;">{{substr($value -> tue_in,0,2)}}-{{substr($value -> tue_out,0,2)}}</span></td>
+                                                    <td data-field="Wednesday" aria-label="09-20"  class="datatable-cell"><span style="width: 90px;">{{substr($value -> wed_in,0,2)}}-{{substr($value -> wed_out,0,2)}}</span></td>
+                                                    <td data-field="Thursday" aria-label="09-20"  class="datatable-cell "><span style="width: 80px;">{{substr($value -> thu_in,0,2)}}-{{substr($value -> thu_out,0,2)}}</span></td>
+                                                    <td data-field="Friday" aria-label="09-20"  class="datatable-cell "><span style="width: 80px;">{{substr($value -> fri_in,0,2)}}-{{substr($value -> fri_out,0,2)}}</span></td>
+                                                    <td data-field="Saturday"  aria-label="09-20" class="datatable-cell"><span style="width: 80px;">{{substr($value -> sat_in,0,2)}}-{{substr($value -> sat_out,0,2)}}</span></td>
+													<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;">
+													    @if($value -> shift_status == 'Active')
+														<button class="btn btn-success statuschange" id="{{$value -> id}}" href="">{{$value -> shift_status}}</button>
+														@elseif($value -> shift_status == 'Inactive')
+														<button class="btn btn-danger statuschange" id="{{$value -> id}}" href="">{{$value -> shift_status}}</button>
+														@endif
+													</span></td>
 													<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
 														<span style="overflow: visible; position: relative; width: 100px;">
 															<a href="editshifts/{{$value -> id}}" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">
@@ -302,7 +324,7 @@
 																	</svg>
 																</span>
 															</a>
-															<a href="deleteshift/{{$value -> id}}" class="btn btn-sm btn-clean btn-icon" title="Delete">
+															<a href="deleteshift/{{$value -> id}}" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-clean btn-icon" title="Delete">
 																<span class="svg-icon svg-icon-md">
 																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 																		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -361,6 +383,26 @@
 		</span>
 	</div>
 	<!--end::Scrolltop-->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+		$(document).ready(function(){
+		  $(".statuschange").click(function () {
+		    var rowid = $(this).attr('id');
+		    // alert(rowid);
+		    $.ajax({
+		      url: "editshiftstatus",
+		      method: "POST",
+		      data : {id : rowid},
+		      headers: {
+			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			    },
+		      success: function (data) {
+                window.location.href = '../HR/shifts'; 
+		      }
+		    });
+		  });
+		});
+	</script>
 	<script>
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 	</script>

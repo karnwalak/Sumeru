@@ -164,6 +164,7 @@ $value=$data[0];
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<!--begin::Card-->
 								<div class="card card-custom card-transparent">
 									<div class="card-body p-0">
@@ -303,8 +304,6 @@ $value=$data[0];
 																				<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Update</button>
 																				
 																			</div>
-																			<span class="text-success" id="success_msg"></span>
-																			<span class="text-danger" id="error_msg"></span>
 																			<!--end::Dropdown-->
 																		</div>
 																	</div>
@@ -367,7 +366,7 @@ $value=$data[0];
 				  dataType : 'JSON',
                   success : function(result){
 					if (result.status == 'error') {
-						$('#error_msg').html(result.error);
+						$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
 						$.each(result.error,function(key,val){
 						// console.log(key);
 						// console.log(val);
@@ -375,11 +374,14 @@ $value=$data[0];
 						})
 					}else if(result.status == 'success'){
 						$('#form')[0].reset();
-						$('#success_msg').html(result.msg);
+						$('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
 						setTimeout(function(){
 						window.location.href = '../HR/hrdepartment'; 
 						}, 1000);
 					}
+				  },
+				  complete:function(){
+						$('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
 				  }
 			  })
 
