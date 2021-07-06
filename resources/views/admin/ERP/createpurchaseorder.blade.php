@@ -569,8 +569,6 @@ type="text/css" />
 		var ci = $('#materialtype'+id).children(":selected").attr('type');
 		$('#type'+id).val(ci);
 	}
-  
-	
 </script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -679,7 +677,7 @@ type="text/css" />
            });
         });
     });
-    </script>
+</script>
 </body>
 <!--end::Body-->
 

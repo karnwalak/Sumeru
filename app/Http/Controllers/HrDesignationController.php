@@ -9,7 +9,7 @@ use Validator;
 class HrDesignationController extends Controller
 {
    public function show(Request $req){
-     return view('../admin/HR/addhrdesignation') -> with('data',hr_department::get());
+     return view('../admin/HR/addhrdesignation') -> with('data',hr_department::where('status','!=','delete')->get());
    }
    public function addhrdesignation(Request $req)
    {
@@ -43,7 +43,7 @@ class HrDesignationController extends Controller
    }
    public function showdata(Request $req)
    {
-       $data = hr_designation::paginate(10);
+       $data = hr_designation::where('status','!=','delete')->paginate(10);
        return view('../admin/HR/hrdesignation') -> with('data',$data);
    }
    public function edithrdesignation(Request $req,$id){
@@ -87,7 +87,7 @@ class HrDesignationController extends Controller
         $result=DB::table('hr_designations') 
         ->where('id', $id)
         ->limit(1) 
-        ->update(['status'=>'Inactive']); 
+        ->update(['status'=>'delete']); 
         if($result){
             session()->flash('success','Designation Deleted!');
             return redirect('../admin/HR/hrdesignation');
@@ -129,7 +129,7 @@ class HrDesignationController extends Controller
      $type = $ty; 
      // return $req;
      if ($sname == null && $ty == null) {
-         $data = hr_designation::orderBy('id')->paginate(10);
+         $data = hr_designation::where('status','!=','delete')->orderBy('id')->paginate(10);
          if ($data) {
              return view('../admin/HR/searchdesignation',compact('data'));
          }else{
@@ -137,7 +137,7 @@ class HrDesignationController extends Controller
          }
      }else if ($sname == $pname && $ty == null) {
          // $data = DB::SELECT("SELECT * FROM sellers WHERE seller_name LIKE '%$sname%'");
-        $data = hr_designation::where('name', 'like', '%' . $pname . '%')->paginate(10);
+        $data = hr_designation::where('status','!=','delete')->where('name', 'like', '%' . $pname . '%')->paginate(10);
         if ($data) {
              return view('../admin/HR/searchdesignation',compact('data'));
          }else{

@@ -254,7 +254,7 @@
 												<!--end::User-->
 												<!--begin::Name-->
 												<div class="my-0">
-													<a href="hr_management" class="text-dark font-weight-bold text-hover-primary font-size-h4">HR & Payroll Management</a>
+													<a href="../HR/hrdashboard" class="text-dark font-weight-bold text-hover-primary font-size-h4">HR & Payroll Management</a>
 												</div>
 												<!--end::Name-->
 											</div>

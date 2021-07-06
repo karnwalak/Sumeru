@@ -35,7 +35,7 @@ class HrDepartmentsController extends Controller
     }
     public function showdata(Request $req)
     {
-        $emp = DB::table('hr_employees')->get();
+        $emp = DB::table('hr_employees')->where('employee_status','=','Active')->get();
         // return $emp;
         return view('../admin/HR/addhrdepartment') ->with('employee',$emp);
     }
@@ -43,6 +43,7 @@ class HrDepartmentsController extends Controller
        $data = DB::table('hr_departments')
        ->join('hr_employees', 'hr_departments.employee_id', '=', 'hr_employees.id')
        ->select('hr_departments.*', 'hr_employees.employee_name')
+       ->where('hr_departments.status','!=','delete')
        ->get();
        return view('../admin/HR/hrdepartment') -> with('data',$data);
     }
@@ -89,14 +90,21 @@ class HrDepartmentsController extends Controller
     }
     public function delete(Request $req,$id)
     {
+        $res = DB::table('hr_departments')
+        -> where('parent',$id)
+        ->update(['parent'=> 0]); 
         $result=DB::table('hr_departments') 
             ->where('id', $id)
             ->limit(1) 
-            ->update(['status'=>'Inactive']); 
-            if($result){
+            ->update(['status'=>'delete']); 
+            if($result && $res){
                 session()->flash('success','Department Deleted!');
                 return redirect('../admin/HR/hrdepartment');
-            }else{
+            }elseif($result){
+                session()->flash('success','Department Deleted!');
+                return redirect('../admin/HR/hrdepartment');
+            }
+            else{
                 session()->flash('error','Department not Deleted!');
                 return redirect('../admin/HR/hrdepartment');
             } 
@@ -129,7 +137,7 @@ class HrDepartmentsController extends Controller
         $type = $ty; 
         // return $req;
         if ($sname == null && $ty == null) {
-            $data = hr_department::orderBy('id')->paginate(10);
+            $data = hr_department::where('status','!=','delete')->orderBy('id')->paginate(10);
             if ($data) {
                 return view('../admin/HR/searchdepartment',compact('data'));
             }else{
@@ -137,7 +145,7 @@ class HrDepartmentsController extends Controller
             }
         }else if ($sname == $pname && $ty == null) {
             // $data = DB::SELECT("SELECT * FROM sellers WHERE seller_name LIKE '%$sname%'");
-           $data = hr_department::where('name', 'like', '%' . $pname . '%')->paginate(10);
+           $data = hr_department::where('status','!=','delete')->where('name', 'like', '%' . $pname . '%')->paginate(10);
            if ($data) {
                 return view('../admin/HR/searchdepartment',compact('data'));
             }else{

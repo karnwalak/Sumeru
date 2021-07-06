@@ -140,7 +140,7 @@ use Illuminate\Support\Facades\DB;
 								<!--begin::Details-->
 								<div class="d-flex align-items-center flex-wrap mr-2">
 									<!--begin::Title-->
-									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Add Department</h5>
+									
 									<!--end::Title-->
 									<!--begin::Separator-->
 									<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
@@ -177,6 +177,7 @@ use Illuminate\Support\Facades\DB;
 												<!--begin::Body-->
 												<div class="card-body p-0">
 													<div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
+													<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Add Department</h5>
 														<div class="col-xl-12 col-xxl-10">
 															<div class="row" style="display:grid; justify-content:end;">
 																<a href="hrdepartment" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
@@ -213,7 +214,7 @@ use Illuminate\Support\Facades\DB;
 																				<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
 																				<?php
 																					function categoryTree($rowid, $category){
-																					$data = DB::SELECT("SELECT * FROM hr_departments WHERE parent=$rowid");
+																					$data = DB::SELECT("SELECT * FROM hr_departments WHERE parent=$rowid AND status='Active'");
 																					foreach ($data as $value) {
 																						$row_name = $value -> name;
 																						$concat = $category." | ".$row_name;
@@ -229,7 +230,7 @@ use Illuminate\Support\Facades\DB;
 																					<option value="">Select</option>
 																					<option value="0">Parent</option>
 																					<?php 
-																						$datas = DB::SELECT("SELECT * FROM hr_departments WHERE parent=0");
+																						$datas = DB::SELECT("SELECT * FROM hr_departments WHERE parent=0 AND status='Active'");
 																						foreach($datas as $val){
 																						$rowid = $val -> id;
 																						$category = $val -> name;

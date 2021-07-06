@@ -138,7 +138,7 @@ $value=$data[0];
 								<!--begin::Details-->
 								<div class="d-flex align-items-center flex-wrap mr-2">
 									<!--begin::Title-->
-									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Edit Department</h5>
+									
 									<!--end::Title-->
 									<!--begin::Separator-->
 									<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
@@ -175,6 +175,7 @@ $value=$data[0];
 												<!--begin::Body-->
 												<div class="card-body p-0">
 													<div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
+													<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Edit Department</h5>
 														<div class="col-xl-12 col-xxl-10">
 															<div class="row" style="display:grid; justify-content:end;">
 																<a href="hrdepartment" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
