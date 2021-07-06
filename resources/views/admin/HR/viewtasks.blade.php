@@ -4,6 +4,7 @@
 
 <head>
 	<meta charset="utf-8" />
+	<base href="../">
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -123,7 +124,7 @@
 			<!--begin::Wrapper-->
 			<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 				<!-- add header -->
-				@include('admin/HR/sidebar')
+				@include('admin/HR/header')
 				<!-- add header end -->
 
 					<!--begin::Content-->
@@ -146,7 +147,7 @@
 												<div class="d-flex align-items-center justify-content-between flex-wrap">
 													<div class="mr-3">
 														<!--begin::Name-->
-														<a href="#" class="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">Task Name
+														<a href="#" class="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">{{$viewtasks -> task_title}}
 														<!-- <i class="flaticon2-correct text-success icon-md ml-2"></i></a> -->
 														<!--end::Name-->
 													</div>
@@ -197,15 +198,17 @@
 											<div class="d-flex align-items-left flex-lg-fill mr-5 my-1">
 											<a href="#" class="btn btn-light-success font-weight-bold mr-2">Start</a>
 											<a href="#" class="btn btn-light-success font-weight-bold mr-2">Finish</a>
-												<div class="dropdown mr-1">
-													<button type="button" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-															More...
-													</button>
-													<div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-															...
-													</div>
+											<div class="dropdown">
+											<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												More..
+											</button>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+												<button class="dropdown-item btn btn-success" type="button">Copy</button>
+												<button class="dropdown-item btn btn-success" type="button">Delete</button>
+												<button class="dropdown-item btn btn-success" type="button">Create Subtask</button>
 											</div>
-											<a href="#" class="btn btn-hover-bg-primary btn-text-dark btn-hover-text-white border-0 font-weight-bold mr-2">Edit</a>
+											</div>
+											<a href="edittask/{{$viewtasks -> id}}" class="btn btn-hover-bg-primary btn-text-dark btn-hover-text-white border-0 font-weight-bold mr-2">Edit</a>
 										</div>
 											<!--end: Item-->
 											<!--begin: Item-->
@@ -260,12 +263,13 @@
 													<!--begin::Title-->
 													<div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
 														<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">Deadline:</a>
+									
 													</div>
 													<!--end::Title-->
 													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
-															<span class="text-dark-75 font-weight-bolder font-size-h6">None</span>
+															<span class="text-dark-75 font-weight-bolder font-size-h6">{{$viewtasks -> deadline}}</span>
 														</div>
 													</div>
 													<!--end::Info-->
@@ -301,7 +305,7 @@
 													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
-															<span class="text-dark-75 font-weight-bolder font-size-h4">None</span>
+															<span class="text-dark-75 font-weight-bolder font-size-h4">{{$viewtasks -> created_at}}</span>
 														</div>
 													</div>
 													<!--end::Info-->
@@ -352,7 +356,14 @@
 													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
-															<span class="text-dark-75 font-weight-bolder font-size-h4"></span>
+															<span class="text-dark-75 font-weight-bolder font-size-h4">
+															<?php 
+																$pid = $viewtasks -> created_by;
+																$pdata = DB::SELECT("SELECT * FROM users WHERE id = $pid"); 
+																foreach ($pdata as  $pval) {
+																}
+																echo $pval -> user_email;
+															?></span>
 														</div>
 													</div>
 													<!--end::Info-->

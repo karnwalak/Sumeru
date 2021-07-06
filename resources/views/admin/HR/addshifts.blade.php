@@ -141,7 +141,7 @@
 								<!--begin::Details-->
 								<div class="d-flex align-items-center flex-wrap mr-2">
 									<!--begin::Title-->
-									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Add Shifts</h5>
+									
 									<!--end::Title-->
 									<!--begin::Separator-->
 									<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
@@ -178,6 +178,7 @@
 												<!--begin::Body-->
 												<div class="card-body p-0">
 													<div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
+													<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Add Shifts</h5>
 														<div class="col-xl-12 col-xxl-10">
 														<div class="row" style="display:grid; justify-content:end;">
 															<a href="shifts" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
@@ -194,7 +195,12 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Shift Name</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="shiftname" type="text" value="" />
+																					<select class="form-control" id="kt_select2_1" name="shiftname">
+																						<option value="">Select</option>
+																						<option value="Morning">Morning</option>
+																						<option value="Evening">Evening</option>
+																						<option value="Night">Night</option>
+																					</select>
 																					<span class="field_error text-danger" id="shiftname_error"></span>
 																				</div>
 																			</div>

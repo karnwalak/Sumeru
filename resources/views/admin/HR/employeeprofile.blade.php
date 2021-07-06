@@ -4,6 +4,7 @@
 
 <head>
 	<meta charset="utf-8" />
+	<base href="../">
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -163,7 +164,7 @@
 											<!--begin: Pic-->
 											<div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
 												<div class="symbol symbol-50 symbol-lg-120">
-													<img src="../../../../theme/html/demo4/dist/assets/media/users/300_1.jpg" alt="image" />
+													<img src="/../upload/{{$employee -> employee_img}}" alt="image" />
 												</div>
 												<div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
 													<span class="font-size-h3 symbol-label font-weight-boldest">JM</span>
@@ -175,14 +176,14 @@
 												<!--begin::Title-->
 												<div class="d-flex justify-content-between flex-wrap mt-1">
 													<div class="d-flex mr-3">
-														<a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">Jason Muller</a>
+														<a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">{{$employee -> employee_name}}</a>
 														<a href="#">
 															<i class="flaticon2-correct text-success font-size-h5"></i>
 														</a>
 													</div>
 													<div class="my-lg-0 my-3">
-														<a href="#" class="btn btn-sm btn-light-success font-weight-bolder text-uppercase mr-3">ask</a>
-														<a href="#" class="btn btn-sm btn-info font-weight-bolder text-uppercase">hire</a>
+														<!-- <a href="#" class="btn btn-sm btn-light-success font-weight-bolder text-uppercase mr-3">ask</a> -->
+														<a href="employees" class="btn  btn-info font-weight-bolder text-uppercase">Back</a>
 													</div>
 												</div>
 												<!--end::Title-->
@@ -191,11 +192,21 @@
 													<div class="d-flex flex-column flex-grow-1 pr-8">
 														<div class="d-flex flex-wrap mb-4">
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-															<i class="flaticon2-new-email mr-2 font-size-lg"></i>jason@siastudio.com</a>
+															<i class="flaticon2-new-email mr-2 font-size-lg"></i>{{$employee -> email_id}}</a>
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-															<i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>PR Manager</a>
+															<i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>
+															<?php 
+                                                                $pid = $employee -> department_id;
+                                                                $pdata = DB::SELECT("SELECT * FROM hr_departments WHERE id = $pid"); 
+                                                                // print_r($pdata);
+                                                                // // echo count($pdata);
+                                                                foreach ($pdata as  $pval) {
+                                                                }
+                                                                echo $pval -> name;
+                                                            ?>
+															</a>
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold">
-															<i class="flaticon2-placeholder mr-2 font-size-lg"></i>Melbourne</a>
+															<i class="flaticon2-placeholder mr-2 font-size-lg"></i>{{$employee -> employee_city}}</a>
 														</div>
 														<span class="font-weight-bold text-dark-50">I distinguish three main text objectives could be merely to inform people.</span>
 														<span class="font-weight-bold text-dark-50">A second could be persuade people.You want people to bay objective</span>
@@ -224,7 +235,7 @@
 												<div class="d-flex flex-column text-dark-75">
 													<span class="font-weight-bolder font-size-sm">Earnings</span>
 													<span class="font-weight-bolder font-size-h5">
-													<span class="text-dark-50 font-weight-bold">$</span>249,500</span>
+													<span class="text-dark-50 font-weight-bold">$</span>{{$employee -> employee_basic_salary}}</span>
 												</div>
 											</div>
 											<!--end::Item-->

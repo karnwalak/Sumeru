@@ -76,7 +76,7 @@ class HrShiftController extends Controller
         'shiftname' => 'required',
         'status' => 'required|not_in:0'
     ]);
-
+    return $req;
     if (!$valid -> passes()) {
         return response() -> json(['status' => 'error',
         'error' => $valid -> errors()]);

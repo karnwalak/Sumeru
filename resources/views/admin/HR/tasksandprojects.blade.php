@@ -344,32 +344,50 @@
 												<table class="datatable-table" style="display: block;">
 													<thead class="datatable-head">
 														<tr class="datatable-row" style="left: 0px;">
-															<th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th>
+															<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 															<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
 															<th data-field="TaskName" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Task Name</span></th>
 															<th data-field="Active" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Active</span></th>
 															<th data-field="Deadline" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Deadline</span></th>
 															<th data-field="CreatedBy" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Created By</span></th>
 															<th data-field="Responsible" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Responsible</span></th>
-															<th data-field="Des" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Des</span></th>
+															<th data-field="Des" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Description</span></th>
 															<th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Status</span></th>
 															<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 170px;">Actions</span></th>
 														</tr>
 													</thead>
 													<tbody class="datatable-body" style="">
+													<?php $a = 1; ?>
+													@foreach($tasks as $task)
 														<tr data-row="0" class="datatable-row" style="left: 0px;">
-															<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
-															<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">64616-103</span></td>
-															<td data-field="Name" aria-label="Flooring" class="datatable-cell"><span style="width: 100px;">Flooring</span></td>
+															<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
+															<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
+															<td data-field="Name" aria-label="Flooring" class="datatable-cell"><span style="width: 100px;">{{$task -> task_title}}</span></td>
 															<td data-field="Active" aria-label="09876543212" class="datatable-cell"><span style="width: 100px;">09876543212</span></td>
-															<td data-field="Deadline" aria-label="06/2/2024" class="datatable-cell"><span style="width: 100px;">06/2/2024</span></td>
-															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">Aman Rajvanshi</span></td>
-															<td data-field="Responsible" aria-label="Akash Rikh" class="datatable-cell"><span style="width: 100px;">Akash Rikh</span></td>
-															<td data-field="CreatedBy" aria-label="#######" class="datatable-cell"><span style="width: 100px;">#######</span></td>
-															<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value="Status" style="color:white" onclick="setColor(event, 'button', '#101010')"; data-count="1" /></span></td>
+															<td data-field="Deadline" aria-label="06/2/2024" class="datatable-cell"><span style="width: 100px;">{{$task -> deadline}}</span></td>
+															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">
+															<?php 
+																$pid = $task -> created_by;
+																$pdata = DB::SELECT("SELECT * FROM users WHERE id = $pid"); 
+																foreach ($pdata as  $pval) {
+																}
+																echo $pval -> user_email;
+															?>
+															</span></td>
+															<td data-field="Responsible" aria-label="Akash Rikh" class="datatable-cell"><span style="width: 100px;">
+															<?php 
+																$pid = $task -> emplyee_id;
+																$pdata = DB::SELECT("SELECT * FROM hr_employees WHERE id = $pid"); 
+																foreach ($pdata as  $pval) {
+																}
+																echo $pval -> employee_name;
+															?>
+															</span></td>
+															<td data-field="CreatedBy" aria-label="#######" class="datatable-cell"><span style="width: 100px;">{!!$task -> task_discription!!}</span></td>
+															<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value="{{$task -> task_status}}" style="color:white" onclick="setColor(event, 'button', '#101010')"; data-count="1" /></span></td>
 															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
 																<span style="overflow: visible; position: relative; width: 170px;">
-																	<a href="viewtasks" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
+																	<a href="viewtasks/{{$task -> id}}" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
 																		<span class="svg-icon svg-icon-md">
 																		<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
 																		</span>
@@ -377,70 +395,12 @@
 																</span>
 															</td>
 														</tr>
-														<tr data-row="1" class="datatable-row datatable-row-even" style="left: 0px;">
-															<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
-															<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">64616-103</span></td>
-															<td data-field="Name" aria-label="Flooring" class="datatable-cell"><span style="width: 100px;">Flooring</span></td>
-															<td data-field="Active" aria-label="09876543212" class="datatable-cell"><span style="width: 100px;">09876543212</span></td>
-															<td data-field="Deadline" aria-label="06/2/2024" class="datatable-cell"><span style="width: 100px;">06/2/2024</span></td>
-															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">Aman Rajvanshi</span></td>
-															<td data-field="Responsible" aria-label="Akash Rikh" class="datatable-cell"><span style="width: 100px;">Akash Rikh</span></td>
-															<td data-field="CreatedBy" aria-label="#######" class="datatable-cell"><span style="width: 100px;">#######</span></td>
-															<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value="Status" style="color:white" onclick="setColor(event, 'button', '#101010')"; data-count="1" /></span></td>
-															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																<span style="overflow: visible; position: relative; width: 170px;">
-																	<a href="viewtasks" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
-																		<span class="svg-icon svg-icon-md">
-																		<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
-																		</span>
-																	</a>
-																</span>
-															</td>
-														</tr>
-														<tr data-row="2" class="datatable-row" style="left: 0px;">
-															<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
-															<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">64616-103</span></td>
-															<td data-field="Name" aria-label="Flooring" class="datatable-cell"><span style="width: 100px;">Flooring</span></td>
-															<td data-field="Active" aria-label="09876543212" class="datatable-cell"><span style="width: 100px;">09876543212</span></td>
-															<td data-field="Deadline" aria-label="06/2/2024" class="datatable-cell"><span style="width: 100px;">06/2/2024</span></td>
-															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">Aman Rajvanshi</span></td>
-															<td data-field="Responsible" aria-label="Akash Rikh" class="datatable-cell"><span style="width: 100px;">Akash Rikh</span></td>
-															<td data-field="CreatedBy" aria-label="#######" class="datatable-cell"><span style="width: 100px;">#######</span></td>
-															<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value="Status" style="color:white" onclick="setColor(event, 'button', '#101010')"; data-count="1" /></span></td>
-															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																<span style="overflow: visible; position: relative; width: 170px;">
-																	<a href="viewtasks" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
-																		<span class="svg-icon svg-icon-md">
-																		<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
-																		</span>
-																	</a>
-																</span>
-															</td>
-														</tr>
-														<tr data-row="3" class="datatable-row datatable-row-even" style="left: 0px;">
-															<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
-															<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">64616-103</span></td>
-															<td data-field="Name" aria-label="Flooring" class="datatable-cell"><span style="width: 100px;">Flooring</span></td>
-															<td data-field="Active" aria-label="09876543212" class="datatable-cell"><span style="width: 100px;">09876543212</span></td>
-															<td data-field="Deadline" aria-label="06/2/2024" class="datatable-cell"><span style="width: 100px;">06/2/2024</span></td>
-															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">Aman Rajvanshi</span></td>
-															<td data-field="Responsible" aria-label="Akash Rikh" class="datatable-cell"><span style="width: 100px;">Akash Rikh</span></td>
-															<td data-field="CreatedBy" aria-label="#######" class="datatable-cell"><span style="width: 100px;">#######</span></td>
-															<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value="Status" style="color:white" onclick="setColor(event, 'button', '#101010')"; data-count="1" /></span></td>
-															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																<span style="overflow: visible; position: relative; width: 170px;">
-																	<a href="viewtasks" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
-																		<span class="svg-icon svg-icon-md">
-																		<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
-																		</span>
-																	</a>
-																</span>
-															</td>
-														</tr>
+													@endforeach
 													</tbody>
 												</table>
 												<div class="datatable-pager datatable-paging-loaded">
-													<ul class="datatable-pager-nav my-2 mb-sm-0">
+												
+													<!-- <ul class="datatable-pager-nav my-2 mb-sm-0">
 														<li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
 														<li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
 														<li style="display: none;"><input type="text" class="datatable-pager-input form-control" title="Page number"></li>
@@ -451,8 +411,8 @@
 														<li><a class="datatable-pager-link datatable-pager-link-number" data-page="5" title="5">5</a></li>
 														<li><a title="Next" class="datatable-pager-link datatable-pager-link-next" data-page="2"><i class="flaticon2-next"></i></a></li>
 														<li><a title="Last" class="datatable-pager-link datatable-pager-link-last" data-page="35"><i class="flaticon2-fast-next"></i></a></li>
-													</ul>
-													<div class="datatable-pager-info my-2 mb-sm-0">
+													</ul> -->
+													<!-- <div class="datatable-pager-info my-2 mb-sm-0">
 														<div class="dropdown bootstrap-select datatable-pager-size" style="width: 60px;">
 															<select class="selectpicker datatable-pager-size" title="Select page size" data-width="60px" data-container="body" data-selected="10">
 																<option class="bs-title-option" value=""></option>
@@ -463,10 +423,9 @@
 																<option value="50">50</option>
 																<option value="100">100</option>
 															</select>
-															<!-- <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-5" aria-haspopup="listbox" aria-expanded="false" title="Select page size"> -->
+															<button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-5" aria-haspopup="listbox" aria-expanded="false" title="Select page size">
 																<div class="filter-option">
 																	<div class="filter-option-inner">
-																		<!-- <div class="filter-option-inner-inner">10</div> -->
 																	</div>
 																</div>
 															</button>
@@ -477,7 +436,7 @@
 															</div>
 														</div>
 														<span class="datatable-pager-detail">Showing 1 - 10 of 350</span>
-													</div>
+													</div> -->
 												</div>
 											</div>
 											<!--end: Datatable-->

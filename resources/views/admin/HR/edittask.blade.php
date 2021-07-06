@@ -4,6 +4,7 @@
 
 <head>
 <meta charset="utf-8" />
+<base href="../">
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -151,7 +152,7 @@
 													
 															<!--begin::Header-->
 															<div class="d-flex align-items-center justify-content-between py-5 pl-8 pr-5 border-bottom">
-																	<h5 class="font-weight-bold m-0">Add Task</h5>
+																	<h5 class="font-weight-bold m-0">Edit Task</h5>
 															</div>
 															<!--end::Header-->
 															<!--begin::Body-->
@@ -159,13 +160,14 @@
 																	<!--begin::Subject-->
 																	<div class="border-bottom">
 																		<div class="d-flex align-items-center">
-																			<input class="form-control border-0 px-8 min-h-45px" name="compose_subject" placeholder="What's on your mind.">
+                                                                            <input type="hidden" name="pid" value="{{$taskedit -> id}}">
+																			<input class="form-control border-0 px-8 min-h-45px" name="compose_subject" value="{{$taskedit -> task_title}}" placeholder="What's on your mind.">
 																			<span class="field_error text-danger" id="compose_subject_error"></span>
 																		</div>
 																	</div>
 																	<!--end::Subject-->
 																	<div id="">
-																	   <textarea id="editor" name="message" cols="30" rows="10"></textarea>
+																	   <textarea id="editor" name="message" cols="30" rows="10">{!!$taskedit -> task_discription!!}</textarea>
 																	   <span class="text-danger field_error" id="message_error"></span>
 																	</div>
 															</div>
@@ -176,17 +178,32 @@
 						</div>
 						<div class="col-md-6 col-12">
 							<div class="row" style="margin: 25px; justify-content:center;">
+                                @if($taskedit -> is_priority == 'Yes')
+								<input type="checkbox" id="priority" checked name="priority" value="high" style="margin: 2px;margin-bottom: 8px;!important">
+                                @else
 								<input type="checkbox" id="priority" name="priority" value="high" style="margin: 2px;margin-bottom: 8px;!important">
+                                @endif
 								<label for="priority">High Priority</label>
 							</div>
 							<div class="row" style="margin:2em;">
 								<p style="font-size:20px;"><b>Responsible Person</b></p><br>
 							</div>
 							<div class="row" style="margin:2em;">
+                                 <?php
+                                 $tid = $taskedit -> id;
+                                 $res = DB::SELECT("SELECT * FROM hr_task_emplyees WHERE task_id = $tid");
+                                 ?>
 								<select id="myselect" class="form-select form-select-lg mb-3" name="responsible_person[]" multiple aria-label=".form-select-lg example" style="width:100%;background-color:transparent;border:1px solid black;border-radius:5px;height:40px;">
 										<option value="">Open this select menu</option>
-										@foreach($employee as $emp)
-										<option value="{{$emp -> id}}">{{$emp -> employee_name}}</option>
+										@foreach($res as $emp)
+										<option value="{{$emp -> emplyee_id}}" selected>
+                                        <?php
+                                        $eid = $emp -> emplyee_id;
+                                        $res = DB::SELECT("SELECT * FROM hr_employees WHERE id = $eid");
+                                        foreach($res as $re){}
+                                        echo $re -> employee_name;
+                                        ?>
+                                        </option>
 										@endforeach
 								</select>
 								<span class="field_error text-danger" id="responsible_person_error"></span>
@@ -195,23 +212,39 @@
 								<p style="font-size:20px;"><b>Deadline</b></p><br>
 							</div>
 							<div class="row" style="margin:2em;">
-								<input type="date" class="form-control form-control-solid form-control-lg" min="<?php date('y-m-d');?>" name="deadline" />
+								<input type="date" class="form-control form-control-solid form-control-lg" value="{{$taskedit -> deadline}}" name="deadline" />
 								<span class="field_error text-danger" id="deadline_error"></span>
 							</div>
 							<div class="row" style="margin:2em;">
 							<p style="font-size:20px;"><b>Status</b></p><br>
-                              <select class="form-control" name="status" id="">
+                             @if($taskedit -> task_status = 'Pending')
+                             <select class="form-control" name="status" id="">
 							    <option value="">Select</option>
-								<option value="Pending">Pending</option>
+								<option value="Pending" selected>Pending</option>
 								<option value="Ongoing">Ongoing</option>
 								<option value="Complete">Complete</option>
 							  </select>
+                             @elseif($taskedit -> task_status = 'Ongoing')
+                             <select class="form-control" name="status" id="">
+							    <option value="">Select</option>
+								<option value="Pending">Pending</option>
+								<option value="Ongoing" selected>Ongoing</option>
+								<option value="Complete">Complete</option>
+							  </select>
+                             @elseif($taskedit -> task_status = 'Complete')
+                             <select class="form-control" name="status" id="">
+							    <option value="">Select</option>
+								<option value="Pending">Pending</option>
+								<option value="Ongoing">Ongoing</option>
+								<option value="Complete" selected>Complete</option>
+							  </select>
+                             @endif
 							  <span class="field_error text-danger" id="status_error"></span>
 							</div>
 							<div class="row" style="display: grid;place-items: end;margin: 25px;">
 								<!--begin::Dropdown-->
 								<div class="btn-group ml-2">
-									<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
+									<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Update</button>
 								</div>
 								<!--end::Dropdown-->
 							</div>
@@ -332,7 +365,7 @@
         $('.field_error').html('');
            $.ajax({
                 // headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                url: '../HR/addtasks',
+                url: '../HR/edittasks',
                 method:"POST",
                 data:new FormData(this),
                 dataType:'JSON',

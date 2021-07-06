@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>ERP</title>
     <meta name="description" content="Updates and statistics" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -134,7 +135,7 @@
                             <!--begin::Details-->
                             <div class="d-flex align-items-center flex-wrap mr-2">
                                 <!--begin::Title-->
-                                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Employees</h5>
+                                <!-- <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Employees</h5> -->
                                 <!--end::Title-->
                                 <!--begin::Separator-->
                                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
@@ -204,6 +205,21 @@
                     <div class="d-flex flex-column-fluid">
                         <!--begin::Container-->
                         <div class="container">
+                        <div class="row p-3 justify-content-center">
+							@if ($message = Session::get('success'))
+							<div class="col-md-4 alert alert-primary alert-block">
+								<button type="button" class="close" data-dismiss="alert">×</button>    
+								<strong>{{ $message }}</strong>
+							</div>
+							@endif
+							@if ($message = Session::get('error'))
+							<div class="col-md-4 alert alert-danger alert-block">
+								<button type="button" class="close" data-dismiss="alert">×</button>    
+								<strong>{{ $message }}</strong>
+							</div>
+							@endif
+								
+							</div>
                             <!--begin::Card-->
                             <div class="card card-custom">
                                 <!--begin::Header-->
@@ -239,79 +255,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody style="" class="datatable-body">
-                                                <tr data-row="0" class="datatable-row" style="left: 0px;">
-                                                    <td class="datatable-cell-sorted datatable-cell-left datatable-cell" data-field="RecordID" aria-label="1"><span style="width: 40px;"><span class="font-weight-bolder">1</span></span></td>
-                                                    <td data-field="OrderID" aria-label="64616-103" class="datatable-cell">
-                                                        <span style="width: 250px;">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="symbol symbol-40 symbol-sm flex-shrink-0"> <img class="" src="" alt="photo"> </div>
-                                                                <div class="ml-4">
-                                                                    <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
-                                                                    <!-- <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>								 -->
-                                                                </div>
-                                                            </div>
-                                                        </span>
-                                                    </td>
-                                                    <td data-field="ShipDate" aria-label="10/15/2017" class="datatable-cell">
-                                                        <span style="width: 158px;">
-                                                            <div class="font-weight-bolder mb-0">9876543210</div>
-                                                            <!-- <div class="text-muted">Rejected</div> -->
-                                                        </span>
-                                                    </td>
-                                                    <td data-field="ShipDate" aria-label="10/15/2017" class="datatable-cell">
-                                                        <span style="width: 158px;">
-                                                            <div class="font-weight-bolder mb-0">Management</div>
-                                                            <!-- <div class="text-muted">Rejected</div> -->
-                                                        </span>
-                                                    </td>
-                                                    <td data-field="CompanyName" aria-label="Casper-Kerluke" class="datatable-cell">
-                                                        <span style="width: 158px;">
-                                                            <div class="font-weight-bold text-muted">10-20</div>
-                                                        </span>
-                                                    </td>
-                                                    <td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 158px;"><input type="button" id="button" value="Status" style="color:white" onclick="setColor(event, 'button', '#101010')" ; data-count="1" /></span></td>
-                                                    <td data-field="Actions" data-autohide-disabled="false" aria-label="null" class="datatable-cell">
-                                                        <span style="overflow: visible; position: relative; width: 130px;">
-                                                            <a href="employeeprofile" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
-                                                                <span class="svg-icon svg-icon-md">
-                                                                    <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                                                                        <path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path>
-                                                                    </svg>
-                                                                </span>
-                                                            </a>
-                                                            <a href="editemployees" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
-                                                                <span class="svg-icon svg-icon-md">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                            <rect x="0" y="0" width="24" height="24"></rect>
-                                                                            <path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953) "></path>
-                                                                            <path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                                                        </g>
-                                                                    </svg>
-                                                                </span>
-                                                            </a>
-                                                            <a href="javascript:;" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon" title="Delete">
-                                                                <span class="svg-icon svg-icon-md">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                            <rect x="0" y="0" width="24" height="24"></rect>
-                                                                            <path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero"></path>
-                                                                            <path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"></path>
-                                                                        </g>
-                                                                    </svg>
-                                                                </span>
-                                                            </a>
-                                                        </span>
-                                                    </td>
-                                                </tr>
+                                            <?php $a = 1;?>
+                                            @foreach($employee as $emp)
                                                 <tr data-row="0" class="datatable-row datatable-row-even datatable-row-hover" style="left: 0px;">
-                                                    <td class="datatable-cell-sorted datatable-cell-left datatable-cell" data-field="RecordID" aria-label="1"><span style="width: 40px;"><span class="font-weight-bolder">1</span></span></td>
+                                                    <td class="datatable-cell-sorted datatable-cell-left datatable-cell" data-field="RecordID" aria-label="1"><span style="width: 40px;"><span class="font-weight-bolder">{{$a++}}</span></span></td>
                                                     <td data-field="OrderID" aria-label="64616-103" class="datatable-cell">
                                                         <span style="width: 250px;">
                                                             <div class="d-flex align-items-center">
-                                                                <div class="symbol symbol-40 symbol-sm flex-shrink-0"> <img class="" src="" alt="photo"> </div>
+                                                                <div class="symbol symbol-40 symbol-sm flex-shrink-0"> <img class="" src="/../upload/{{$emp -> employee_img}}" alt="photo"> </div>
                                                                 <div class="ml-4">
-                                                                    <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                    <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">{{$emp -> employee_name}}</div>
                                                                     <!-- <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>								 -->
                                                                 </div>
                                                             </div>
@@ -319,32 +272,61 @@
                                                     </td>
                                                     <td data-field="ShipDate" aria-label="10/15/2017" class="datatable-cell">
                                                         <span style="width: 158px;">
-                                                            <div class="font-weight-bolder mb-0">9876543210</div>
+                                                            <div class="font-weight-bolder mb-0">{{$emp -> employee_contact_no}}</div>
                                                             <!-- <div class="text-muted">Rejected</div> -->
                                                         </span>
                                                     </td>
                                                     <td data-field="ShipDate" aria-label="10/15/2017" class="datatable-cell">
                                                         <span style="width: 158px;">
-                                                            <div class="font-weight-bolder mb-0">Management</div>
+                                                            <div class="font-weight-bolder mb-0">
+                                                            <?php 
+                                                                $pid = $emp -> department_id;
+                                                                $pdata = DB::SELECT("SELECT * FROM hr_departments WHERE id = $pid"); 
+                                                                // echo count($pdata);
+                                                                foreach ($pdata as  $pval) {
+                                                                }
+                                                                echo $pval -> name;
+                                                            ?>
+                                                            </div>
                                                             <!-- <div class="text-muted">Rejected</div> -->
                                                         </span>
                                                     </td>
                                                     <td data-field="CompanyName" aria-label="Casper-Kerluke" class="datatable-cell">
                                                         <span style="width: 158px;">
-                                                            <div class="font-weight-bold text-muted">10-20</div>
+                                                            <div class="font-weight-bold text-muted">
+                                                            <?php 
+                                                                $pid = $emp -> shift_id;
+                                                                $pdata = DB::SELECT("SELECT * FROM hr_shifts WHERE id = $pid"); 
+                                                                // print_r($pdata);
+                                                                // // echo count($pdata);
+                                                                foreach ($pdata as  $pval) {
+                                                                }
+                                                                echo substr($pval -> mon_in,0,2);
+                                                                echo "-";
+                                                                echo substr($pval -> mon_out,0,2);
+                                                            ?>
+                                                            </div>
                                                         </span>
                                                     </td>
-                                                    <td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 158px;"><input type="button" id="button" value="Status" style="color:white" onclick="setColor(event, 'button', '#101010')" ; data-count="1" /></span></td>
+                                                    <td data-field="Status" aria-label="5" class="datatable-cell">
+                                                    <span style="width: 120px;">
+                                                    @if($emp -> employee_status == 'Active')
+                                                    <button class="btn btn-success statuschange" id="{{$emp -> id}}" href="">{{$emp -> employee_status}}</button>
+                                                    @elseif($emp -> employee_status == 'Inactive')
+                                                    <button class="btn btn-danger statuschange" id="{{$emp -> id}}" href="">{{$emp -> employee_status}}</button>
+                                                    @endif
+                                                    </span>
+                                                    </td>
                                                     <td data-field="Actions" data-autohide-disabled="false" aria-label="null" class="datatable-cell">
                                                         <span style="overflow: visible; position: relative; width: 130px;">
-                                                            <a href="employeeprofile" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
+                                                            <a href="employeeprofile/{{$emp -> id}}" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
                                                                 <span class="svg-icon svg-icon-md">
                                                                     <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                                                         <path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path>
                                                                     </svg>
                                                                 </span>
                                                             </a>
-                                                            <a href="editemployees" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
+                                                            <a href="editemployees/{{$emp -> id}}" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
                                                                 <span class="svg-icon svg-icon-md">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -355,7 +337,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </a>
-                                                            <a href="javascript:;" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon" title="Delete">
+                                                            <a href="deleteemployee/{{$emp -> id}}" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon" title="Delete">
                                                                 <span class="svg-icon svg-icon-md">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -369,46 +351,11 @@
                                                         </span>
                                                     </td>
                                                 </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                         <div class="datatable-pager datatable-paging-loaded">
-                                            <ul class="datatable-pager-nav my-2 mb-sm-0">
-                                                <li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
-                                                <li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
-                                                <li style="display: none;"><input type="text" class="datatable-pager-input form-control" title="Page number"></li>
-                                                <li><a class="datatable-pager-link datatable-pager-link-number datatable-pager-link-active" data-page="1" title="1">1</a></li>
-                                                <li><a class="datatable-pager-link datatable-pager-link-number" data-page="2" title="2">2</a></li>
-                                                <li><a class="datatable-pager-link datatable-pager-link-number" data-page="3" title="3">3</a></li>
-                                                <li><a class="datatable-pager-link datatable-pager-link-number" data-page="4" title="4">4</a></li>
-                                                <li><a class="datatable-pager-link datatable-pager-link-number" data-page="5" title="5">5</a></li>
-                                                <li><a title="Next" class="datatable-pager-link datatable-pager-link-next" data-page="2"><i class="flaticon2-next"></i></a></li>
-                                                <li><a title="Last" class="datatable-pager-link datatable-pager-link-last" data-page="35"><i class="flaticon2-fast-next"></i></a></li>
-                                            </ul>
-                                            <div class="datatable-pager-info my-2 mb-sm-0">
-                                                <div class="dropdown bootstrap-select datatable-pager-size" style="width: 60px;">
-                                                    <select class="selectpicker datatable-pager-size" title="10" data-width="60px" data-container="body" data-selected="10">
-                                                        <option class="bs-title-option" value=""></option>
-                                                        <option value="10">10</option>
-                                                        <option value="20">20</option>
-                                                        <option value="30">30</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                    </select>
-                                                    <!-- <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-2" aria-haspopup="listbox" aria-expanded="false" title="Select page size"> -->
-                                                    <div class="filter-option">
-                                                        <div class="filter-option-inner">
-                                                            <!-- <div class="filter-option-inner-inner">10</div> -->
-                                                        </div>
-                                                    </div>
-                                                    </button>
-                                                    <div class="dropdown-menu ">
-                                                        <div class="inner show" role="listbox" id="bs-select-2" tabindex="-1">
-                                                            <ul class="dropdown-menu inner show" role="presentation"></ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <span class="datatable-pager-detail">Showing 1 - 10 of 350</span>
-                                            </div>
+                                           {{$employee -> links()}}
                                         </div>
                                     </div>
                                     <!--end: Datatable-->
@@ -447,6 +394,26 @@
         </span>
     </div>
     <!--end::Scrolltop-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+		$(document).ready(function(){
+		  $(".statuschange").click(function () {
+		    var rowid = $(this).attr('id');
+		    // alert(rowid);
+		    $.ajax({
+		      url: "editemployeestatus",
+		      method: "POST",
+		      data : {id : rowid},
+		      headers: {
+			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			    },
+		      success: function (data) {
+                window.location.href = '../HR/employees'; 
+		      }
+		    });
+		  });
+		});
+	</script>
     <script>
         var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 
