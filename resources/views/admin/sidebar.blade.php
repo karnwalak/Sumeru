@@ -12,8 +12,7 @@
 						<!--begin::Item-->
 						<li class="nav-item mb-5" data-toggle="tooltip" data-placement="right" data-container="body"
 							data-boundary="window" title="HR and Payrole">
-							<a href="#" class="nav-link btn btn-icon btn-icon-white btn-lg" data-toggle="tab"
-								data-target="#kt_aside_tab_2" role="tab">
+							<a href="../HR/hrdashboard" class="nav-link btn btn-icon btn-icon-white btn-lg">
 								<i class="flaticon2-user	icon-2x"></i>
 							</a>
 						</li>
@@ -21,8 +20,7 @@
 						<!--begin::Item-->
 						<li class="nav-item mb-5" data-toggle="tooltip" data-placement="right" data-container="body"
 							data-boundary="window" title="CRM">
-							<a href="#" class="nav-link btn btn-icon btn-icon-white btn-lg" data-toggle="tab"
-								data-target="#kt_aside_tab_3" role="tab">
+							<a href="../CRM/crmdashboard" class="nav-link btn btn-icon btn-icon-white btn-lg">
 								<i class="flaticon-users-1 icon-2x"></i>
 							</a>
 						</li>
