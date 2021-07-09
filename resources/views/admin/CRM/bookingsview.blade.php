@@ -1,9 +1,12 @@
+<?php
+$data = $booking[0]
+?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-
 <head>
-<meta name="description" content="Updates and statistics" />
+    <base href="../">
+    <meta name="description" content="Updates and statistics" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!--begin::Fonts-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
@@ -141,7 +144,7 @@
 											<!--begin: Pic-->
 											<div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
 												<div class="symbol symbol-50 symbol-lg-120">
-													<img src="theme/html/demo4/dist/assets/media/users/300_1.jpg" alt="image" />
+													<img src="/../upload/{{$data -> contact_img}}" alt="image" />
 												</div>
 												<div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
 													<span class="font-size-h3 symbol-label font-weight-boldest">JM</span>
@@ -153,14 +156,14 @@
 												<!--begin::Title-->
 												<div class="d-flex justify-content-between flex-wrap mt-1">
 													<div class="d-flex mr-3">
-														<a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">Jason Muller</a>
+														<a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">{{$data -> contact_full_name}}</a>
 														<a href="#">
 															<i class="flaticon2-correct text-success font-size-h5"></i>
 														</a>
 													</div>
 													<div class="my-lg-0 my-3">
-														<a href="#" class="btn btn-sm btn-light-success font-weight-bolder text-uppercase mr-3">ask</a>
-														<a href="#" class="btn btn-sm btn-info font-weight-bolder text-uppercase">hire</a>
+														<!-- <a href="#" class="btn btn-sm btn-light-success font-weight-bolder text-uppercase mr-3">ask</a> -->
+														<a href="bookings" class="btn btn-sm btn-info font-weight-bolder text-uppercase">Back</a>
 													</div>
 												</div>
 												<!--end::Title-->
@@ -169,11 +172,11 @@
 													<div class="d-flex flex-column flex-grow-1 pr-8">
 														<div class="d-flex flex-wrap mb-4">
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-															<i class="flaticon2-new-email mr-2 font-size-lg"></i>jason@siastudio.com</a>
+															<i class="flaticon2-new-email mr-2 font-size-lg"></i>{{$data -> contact_email}}</a>
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-															<i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>PR Manager</a>
+															<i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>{{$data -> contact_occuption}}</a>
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold">
-															<i class="flaticon2-placeholder mr-2 font-size-lg"></i>Melbourne</a>
+															<i class="flaticon2-placeholder mr-2 font-size-lg"></i>{{$data -> contact_state}}</a>
 														</div>
 														<span class="font-weight-bold text-dark-50">I distinguish three main text objectives could be merely to inform people.</span>
 														<span class="font-weight-bold text-dark-50">A second could be persuade people.You want people to bay objective</span>
@@ -200,7 +203,7 @@
 														<label class="col-xl-4 col-lg-4 col-form-label" style="text-align:right">Total</label>
 														<div class="col-lg-8 col-xl-8">
 															<div class="input-group input-group-solid input-group-lg">
-																<input type="number" class="form-control form-control-solid form-control-lg" name="Total" value="" placeholder="Amount" />
+																<input type="number" class="form-control form-control-solid form-control-lg" name="Total" value="{{$data -> booking_amount}}" readonly placeholder="Amount" />
 															</div>
 														</div>
 													</div>
@@ -212,7 +215,7 @@
 														<label class="col-xl-4 col-lg-4 col-form-label align-right" style="text-align:right">Self</label>
 														<div class="col-lg-8 col-xl-8">
 															<div class="input-group input-group-solid input-group-lg">
-															<input type="number" class="form-control form-control-solid form-control-lg" name="Self" value="" placeholder="Amount" />
+															<input type="number" class="form-control form-control-solid form-control-lg" name="Self" value="{{$data -> payment_by_self}}" readonly placeholder="Amount" />
 															</div>
 														</div>
 													</div>
@@ -224,7 +227,7 @@
 														<label class="col-xl-4 col-lg-4 col-form-label" style="text-align:right">By Bank</label>
 														<div class="col-lg-8 col-xl-8">
 															<div class="input-group input-group-solid input-group-lg">
-															<input type="number" class="form-control form-control-solid form-control-lg" name="Bank" value="" placeholder="Amount" />
+															<input type="number" class="form-control form-control-solid form-control-lg" name="Bank" value="{{$data -> payment_by_banker}}" readonly placeholder="Amount" />
 															</div>
 														</div>
 													</div>
@@ -257,6 +260,8 @@
 											<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 													<div class="modal-dialog" role="document">
 															<div class="modal-content">
+                                                                <form id="form">
+																	{{@csrf_field()}}
 																	<div class="modal-header">
 																			<h5 class="modal-title" id="exampleModalLabel">Add Payment</h5>
 																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -264,13 +269,17 @@
 																			</button>
 																	</div>
 																	<div class="modal-body">
+																	<span class="text-success" id="success_msg"></span>
+																	<span class="text-danger" id="error_msg"></span>
 																			<!--begin::Group-->
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Amount</label>
 																				<div class="col-lg-9 col-xl-9">
 																					<div class="input-group input-group-solid input-group-lg">
+																						<input type="hidden" name="booking_id" value="{{$data -> id}}">
 																						<input type="number" class="form-control form-control-solid form-control-lg" name="amount" value="" placeholder="₹" />
 																					</div>
+																					<span class="field_error text-danger" id="amount_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -278,12 +287,14 @@
 																				<div class="form-group row" data-select2-id="243">
 																					<label class="col-form-label text-left col-lg-3 col-sm-12">Transaction Type</label>
 																					<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
-																						<select class="form-control" id="kt_select2_1" name="param">
+																						<select class="form-control" id="kt_select2_1" name="transaction_type">
+																							<option value="">Select</option>
 																							<option value="Cash">Cash</option>
 																							<option value="Chaque">Chaque</option>
 																							<option value="Online Trasc">Online Trasc</option>
 																							<option value="other">other</option>
 																						</select>
+																						<span class="field_error text-danger" id="transaction_type_error"></span>
 																					</div>
 																				</div>
 																				<!--end::Group-->
@@ -294,14 +305,16 @@
 																					<div class="input-group input-group-solid input-group-lg">
 																						<input type="text" class="form-control form-control-solid form-control-lg" name="comment" value="" placeholder="Comment" />
 																					</div>
+																					<span class="field_error text-danger" id="comment_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
 																	</div>
 																	<div class="modal-footer">
 																			<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-																			<button type="button" class="btn btn-primary font-weight-bold">Save changes</button>
+																			<button type="submit" class="btn btn-primary font-weight-bold">Save changes</button>
 																	</div>
+																</form>
 															</div>
 													</div>
 											</div>
@@ -313,7 +326,7 @@
 													<table class="datatable-table" style="display: block;">
 														<thead class="datatable-head">
 															<tr class="datatable-row" style="left: 0px;">
-																<th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th>
+																<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 																<th data-field="ID" class="datatable-cell datatable-cell-sort"><span style="width: 140px;">S No.</span></th>
 																<th data-field="Amount" class="datatable-cell datatable-cell-sort"><span style="width: 140px;">Amount</span></th>
 																<th data-field="Date" class="datatable-cell datatable-cell-sort"><span style="width: 140px;">Date</span></th>
@@ -321,16 +334,19 @@
 															</tr>
 														</thead>
 														<tbody class="datatable-body" style="">
+															<?php $a =1;?>
+                                                            @foreach($payment as $pay)
 															<tr data-row="0" class="datatable-row" style="left: 0px;">
-																<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
-																<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 140px;">64616-103</span></td>
-																<td data-field="Amount" aria-label="456446" class="datatable-cell"><span style="width: 140px;">456446</span></td>
-																<td data-field="Date" aria-label="12/2/2021" class="datatable-cell"><span style="width: 140px;">12/2/2021</span></td>
-																<td data-field="Method" aria-label="Cash" class="datatable-cell"><span style="width: 140px;">Cash</span></td>
+																<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
+																<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 140px;">{{$a++}}</span></td>
+																<td data-field="Amount" aria-label="456446" class="datatable-cell"><span style="width: 140px;">{{$pay -> amount}}</span></td>
+																<td data-field="Date" aria-label="12/2/2021" class="datatable-cell"><span style="width: 140px;">{{$pay -> date}}</span></td>
+																<td data-field="Method" aria-label="Cash" class="datatable-cell"><span style="width: 140px;">{{$pay -> payment_method}}</span></td>
 															</tr>
+															@endforeach
 														</tbody>
 													</table>
-													<div class="datatable-pager datatable-paging-loaded">
+													<!-- <div class="datatable-pager datatable-paging-loaded">
 														<ul class="datatable-pager-nav my-2 mb-sm-0">
 															<li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
 															<li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
@@ -354,10 +370,10 @@
 																	<option value="50">50</option>
 																	<option value="100">100</option>
 																</select>
-																<!-- <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-5" aria-haspopup="listbox" aria-expanded="false" title="Select page size"> -->
+																 <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-5" aria-haspopup="listbox" aria-expanded="false" title="Select page size">
 																	<div class="filter-option">
 																		<div class="filter-option-inner">
-																			<!-- <div class="filter-option-inner-inner">10</div> -->
+																			 <div class="filter-option-inner-inner">10</div> 
 																		</div>
 																	</div>
 																</button>
@@ -369,7 +385,7 @@
 															</div>
 															<span class="datatable-pager-detail">Showing 1 - 10 of 350</span>
 														</div>
-													</div>
+													</div> -->
 												</div>
 												<!--end: Datatable-->
 											</div>
@@ -760,6 +776,37 @@
 		</span>
 	</div>
 	<!--end::Scrolltop-->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+        $(document).ready(function(){
+        $("#form").submit(function(e){
+          e.preventDefault();
+          $('.field_error').html('');
+          $.ajax({
+            url:'addPayment',
+			method:"POST",
+			data:$('#form').serialize(),
+			dataType:'JSON',
+            success:function(result){
+              if (result.status == 'error') {
+				$('#error_msg').html(result.error);
+                $.each(result.error,function(key,val){
+                  // console.log(key);
+                  // console.log(val);
+                  $('#'+key+'_error').html(val[0]);
+                })
+              }else if(result.status == 'success'){
+                $('.form')[0].reset();
+				$('#success_msg').html(result.msg);
+                setTimeout(function(){
+                   window.location.href = '../CRM/bookings'; 
+                }, 1000);
+              }
+            }
+          });
+        })
+      });
+    </script>
 	<script>
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 	</script>

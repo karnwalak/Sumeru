@@ -154,6 +154,20 @@
 							<div class="d-flex flex-column-fluid">
 									<!--begin::Container-->
 									<div class="container">
+									<div class="row p-3 justify-content-center">
+									@if ($message = Session::get('success'))
+									<div class="col-md-6 alert alert-primary alert-block">
+										<button type="button" class="close" data-dismiss="alert">×</button>    
+										<strong>{{ $message }}</strong>
+									</div>
+									@endif
+									@if ($message = Session::get('error'))
+									<div class="col-md-6 alert alert-danger alert-block">
+										<button type="button" class="close" data-dismiss="alert">×</button>    
+										<strong>{{ $message }}</strong>
+									</div>
+									@endif
+									</div>
 											<!--begin::Card-->
 											<div class="card card-custom">		
 											<!--begin::Details-->
@@ -329,7 +343,7 @@
 																		<table class="datatable-table" style="display: block;">
 																			<thead class="datatable-head">
 																				<tr class="datatable-row" style="left: 0px;">
-																					<th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th>
+																					<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 																					<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
 																					<th data-field="Name" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Name</span></th>
 																					<th data-field="Contact" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Contact</span></th>
@@ -342,23 +356,25 @@
 																				</tr>
 																			</thead>
 																			<tbody class="datatable-body" style="">
+																			<?php $a = 1; ?>
+                                                                                @foreach($data as $book)
 																				<tr data-row="0" class="datatable-row" style="left: 0px;">
-																					<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
-																					<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">64616-103</span></td>
-																					<td data-field="Name" aria-label="Aman Rajvanshi" class="datatable-cell"><span style="width: 100px;">Aman Rajvanshi</span></td>
-																					<td data-field="Contact" aria-label="9876543210" class="datatable-cell"><span style="width: 100px;">9876543210</span></td>
-																					<td data-field="Email" aria-label="abcd@email.com" class="datatable-cell"><span style="width: 100px;">abcd@email.com	</span></td>
-																					<td data-field="Product" aria-label="2BHK Flat" class="datatable-cell"><span style="width: 100px;">2BHK Flat</span></td>
-																					<td data-field="BookingAmount" aria-label="₹500000" class="datatable-cell"><span style="width: 100px;">₹500000</span></td>
-																					<td data-field="StartDate" aria-label="19/1/2021" class="datatable-cell"><span style="width: 80px;">19/1/2021</span></td>
+																					<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
+																					<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
+																					<td data-field="Name" aria-label="Aman Rajvanshi" class="datatable-cell"><span style="width: 100px;">{{$book -> contact_full_name}}</span></td>
+																					<td data-field="Contact" aria-label="9876543210" class="datatable-cell"><span style="width: 100px;">{{$book -> contact_mob_no}}</span></td>
+																					<td data-field="Email" aria-label="abcd@email.com" class="datatable-cell"><span style="width: 100px;">{{$book -> contact_email}}</span></td>
+																					<td data-field="Product" aria-label="2BHK Flat" class="datatable-cell"><span style="width: 100px;">{{$book -> flat_stock_name}}</span></td>
+																					<td data-field="BookingAmount" aria-label="₹500000" class="datatable-cell"><span style="width: 100px;">₹{{$book -> booking_amount}}</span></td>
+																					<td data-field="StartDate" aria-label="19/1/2021" class="datatable-cell"><span style="width: 80px;">{{$book -> booking_date}}</span></td>
 																					<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value = "Active" style= "color:white" onclick="setColor('button', '#101010')";/></span></td>
 																					<td class="datatable-cell-left datatable-cell nowrap" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																					<a href="bookingsview" class="btn btn-sm btn-clean btn-icon mr-2" title="View details">
+																					<a href="bookingsview/{{$book -> id}}" class="btn btn-sm btn-clean btn-icon mr-2" title="View details">
 																							<span class="svg-icon svg-icon-md">
 																								<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
 																							</span>
 																						</a>
-																						<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">
+																						<a href="deletebooking/{{$book -> id}}" onclick="return confirm('Are you sure!')" class="btn btn-sm btn-clean btn-icon" title="Delete">
 																							<span class="svg-icon svg-icon-md">
 																								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 																									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -371,6 +387,7 @@
 																						</a>
 																					</td>
 																				</tr>
+																				@endforeach
 																			</tbody>
 																		</table>
 																		<div class="datatable-pager datatable-paging-loaded">

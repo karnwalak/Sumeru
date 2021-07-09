@@ -130,9 +130,7 @@
 							<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
 								<!--begin::Details-->
 								<div class="d-flex align-items-center flex-wrap mr-2">
-									<!--begin::Title-->
-									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">New Contact</h5>
-									<!--end::Title-->
+									
 									<!--begin::Separator-->
 									<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
 									<!--end::Separator-->
@@ -157,6 +155,7 @@
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<!--begin::Card-->
 								<div class="card card-custom card-transparent">
 									<div class="card-body p-0">
@@ -167,12 +166,16 @@
 												<!--begin::Body-->
 												<div class="card-body p-0">
 													<div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
+													<!--begin::Title-->
+													<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">New Contact</h5>
+													<!--end::Title-->
 														<div class="col-xl-12 col-xxl-10">															
 															<div class="row" style="display:grid; justify-content:end;">
 																<a href="contacts" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
 															</div>
 															<!--begin::Wizard Form-->
 															<form class="form" id="kt_form">
+															{{@csrf_field()}}
 																<div class="row justify-content-center">
 																	<div class="col-xl-11">
 																		<!--begin::Wizard Step 1-->
@@ -184,30 +187,45 @@
 																					<div class="form-group row">
 																						<label class="col-xl-3 col-lg-3 col-form-label">Full Name</label>
 																						<div class="col-lg-9 col-xl-9">
-																							<input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" required/>
+																							<input class="form-control form-control-solid form-control-lg" name="name" type="text" value="" />
+																							<span class="field_error text-danger" id="name_error"></span>
 																						</div>
 																					</div>
 																					<div class="form-group row">
 																						<label class="col-xl-3 col-lg-3 col-form-label">Father's/Husband Name</label>
 																						<div class="col-lg-9 col-xl-9">
-																							<input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" required/>
+																							<input class="form-control form-control-solid form-control-lg" name="fathername" type="text" value="" />
+																							<span class="field_error text-danger" id="fathername_error"></span>
 																						</div>
 																					</div>
 																				</div>
 																				<div class="col-xl-2 col-md-2 col-sm-12">
+																				<div class="form-group row">
 																					<div class="col-lg-9 col-xl-9">
 																						<div class="image-input image-input-outline" id="kt_user_add_avatar">
-																							<div class="image-input-wrapper" style="background-image: url(theme/html/demo4/dist/assets/media/users/100_6.jpg)"></div>
+																							<img class="image-input-wrapper" id="output" src="/../img/21372076.jpg">
 																							<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
 																								<i class="fa fa-pen icon-sm text-muted"></i>
-																								<input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" />
-																								<input type="hidden" name="profile_avatar_remove" />
+																								<input type="file" name="applicant_image" id="" accept=".png, .jpg, .jpeg" onchange="loadFile(event)">
+																								<script>
+																								    var loadFile = function(event) {
+																									var output = document.getElementById('output');
+																									output.src = URL.createObjectURL(event.target.files[0]);
+																									output.onload = function() {
+																									URL.revokeObjectURL(output.src) // free memory
+																									}
+																								};
+																								</script>
+																								
 																							</label>
+
 																							<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
 																								<i class="ki ki-bold-close icon-xs text-muted"></i>
 																							</span>
 																						</div>
+																						<span class="field_error text-danger" id="applicant_image_error"></span>
 																					</div>
+																				</div>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -222,6 +240,7 @@
 																								<div class="input-group-append">
 																								</div>
 																							</div>
+																							<span class="field_error text-danger" id="dob_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -230,12 +249,11 @@
 																						<label class="col-xl-3 col-lg-3 col-form-label">Gender</label>
 																						<div class="col-lg-9 col-xl-9">
 																							<div class="input-group  input-group-lg">
-																								<form action="">
 																									<input type="radio" name="gender" value="male" style="margin:20px"> Male
 																									<input type="radio" name="gender" value="female" style="margin:20px"> Female
 																									<input type="radio" name="gender" value="other" style="margin:20px"> Other
-																								</form>
 																							</div>
+																							<span class="field_error text-danger" id="gender_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -247,7 +265,8 @@
 																					<div class="form-group row">
 																						<label class="col-xl-3 col-lg-3 col-form-label">Pan Number</label>
 																						<div class="col-lg-9 col-xl-9">
-																							<input class="form-control form-control-solid form-control-lg" name="pan" type="text" value="" required style="text-transform: uppercase;"/>
+																							<input class="form-control form-control-solid form-control-lg" name="pan" type="text" value=""  style="text-transform: uppercase;"/>
+																							<span class="field_error text-danger" id="pan_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -255,20 +274,14 @@
 																					<div class="form-group row" data-select2-id="243">
 																						<label class="col-form-label text-left col-lg-4 col-sm-12">Occupation</label>
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
-																							<select class="form-control" id="kt_select2_1" name="param">
-																								<option value="AK">Alaska</option>
-																								<option value="HI">Hawaii</option>
-																								<option value="CA">California</option>
-																								<option value="NV">Nevada</option>
-																								<option value="OR">Oregon</option>
-																								<option value="WA">Washington</option>
-																								<option value="AZ">Arizona</option>
-																								<option value="CO">Colorado</option>
-																								<option value="ID">Idaho</option>
-																								<option value="MT">Montana</option>
-																								<option value="NE">Nebraska</option>
-																								<option value="NM">New Mexico</option>
+																							<select class="form-control" id="kt_select2_1" name="occupation">
+																								<option value="">Select</option>
+																								<option value="Student">Student</option>
+																								<option value="Professional">Professional</option>
+																								<option value="Teacher">Teacher</option>
+																								<option value="Engineer">Engineer</option>
 																							</select>
+																							<span class="field_error text-danger" id="occupation_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -278,7 +291,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Address(Correspondance)</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" id="address" name="address" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" id="address" name="address" type="text" value="" />
+																					<span class="field_error text-danger" id="address_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -295,6 +309,7 @@
 																								<option value="Uttar Pradesh">Uttar Pradesh</option>
 																								<option value="Haryana">Haryana</option>
 																							</select>
+																							<span class="field_error text-danger" id="state_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -302,12 +317,13 @@
 																					<div class="form-group row" data-select2-id="243">
 																						<label class="col-form-label text-left col-lg-4 col-sm-12">City</label>
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
-																							<select class="form-control" id="district" name="district">
+																							<select class="form-control" id="district" name="city">
 																								<option value="">Select</option>
 																								<option value="Saharanpur">Saharanpur</option>
 																								<option value="Meerut">Meerut</option>
 																								<option value="Dehradun">Dehradun</option>
 																							</select>
+																							<span class="field_error text-danger" id="city_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -315,7 +331,8 @@
 																					<div class="form-group row">
 																						<label class="col-xl-4 col-lg-4 col-form-label">Pin Code</label>
 																						<div class="col-lg-8 col-xl-8">
-																							<input class="form-control form-control-solid form-control-lg" name="pincode" id="pincode" type="text" value="" required/>
+																							<input class="form-control form-control-solid form-control-lg" name="pincode" id="pincode" type="text" value="" />
+																							<span class="field_error text-danger" id="pincode_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -336,7 +353,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Address(Permanent)</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="addressc" id="addressc" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="addresspermanent" id="addressc" type="text" value="" />
+																					<span class="field_error text-danger" id="addresspermanent_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -346,13 +364,14 @@
 																					<div class="form-group row" data-select2-id="243">
 																						<label class="col-form-label text-left col-lg-4 col-sm-12">State</label>
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
-																						    <select class="form-control" id="statec" name="statec">
+																						    <select class="form-control" name="statepermanent" id="statec">
 																								<option value="">Select</option>
 																								<option value="Delhi">Delhi</option>
 																								<option value="Uttarakhand">Uttarakhand</option>
 																								<option value="Uttar Pradesh">Uttar Pradesh</option>
 																								<option value="Haryana">Haryana</option>
 																							</select>
+																							<span class="field_error text-danger" id="statepermanent_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -360,12 +379,13 @@
 																					<div class="form-group row" data-select2-id="243">
 																						<label class="col-form-label text-left col-lg-4 col-sm-12">City</label>
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
-																						    <select class="form-control" id="districtc" name="districtc">
+																						    <select class="form-control" id="districtc" name="citypermanent">
 																								<option value="">Select</option>
 																								<option value="Saharanpur">Saharanpur</option>
 																								<option value="Meerut">Meerut</option>
 																								<option value="Dehradun">Dehradun</option>
 																							</select>
+																							<span class="field_error text-danger" id="citypermanent_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -373,7 +393,8 @@
 																					<div class="form-group row">
 																						<label class="col-xl-4 col-lg-4 col-form-label">Pin Code</label>
 																						<div class="col-lg-8 col-xl-8">
-																							<input class="form-control form-control-solid form-control-lg" name="pincodec" id="pincodec" type="text" value="" required/>
+																							<input class="form-control form-control-solid form-control-lg" name="pincodepermanent" id="pincodec" type="text" value="" />
+																							<span class="field_error text-danger" id="pincodepermanent_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -395,6 +416,7 @@
 																								<input type="number" class="form-control form-control-solid form-control-lg" name="mobile"  placeholder="Phone" />
 																							</div>
 																							<span class="form-text text-muted">Enter valid Indian phone number(e.g: 9876-543-210).</span>
+																							<span class="field_error text-danger" id="mobile_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -411,6 +433,7 @@
 																								<input type="number" class="form-control form-control-solid form-control-lg" name="officephone"  placeholder="Phone" />
 																							</div>
 																							<span class="form-text text-muted">Enter valid Indian phone number(e.g: 9876-543-210).</span>
+																							<span class="field_error text-danger" id="officephone_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -428,9 +451,10 @@
 																										<i class="la la-phone"></i>
 																									</span>
 																								</div>
-																								<input type="number" class="form-control form-control-solid form-control-lg" name="mobile"  placeholder="Phone" />
+																								<input type="number" class="form-control form-control-solid form-control-lg" name="residencephone"  placeholder="Phone" />
 																							</div>
 																							<span class="form-text text-muted">Enter valid Indian phone number(e.g: 9876-543-210).</span>
+																							<span class="field_error text-danger" id="residencephone_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -444,7 +468,8 @@
 																										<i class="la la-at"></i>
 																									</span>
 																								</div>
-																								<input type="text" class="form-control form-control-solid form-control-lg" name="email" value="" required/>
+																								<input type="text" class="form-control form-control-solid form-control-lg" name="email" value="" />
+																								<span class="field_error text-danger" id="email_error"></span>
 																							</div>
 																						</div>
 																					</div>
@@ -459,30 +484,45 @@
 																					<div class="form-group row">
 																						<label class="col-xl-3 col-lg-3 col-form-label">Full Name</label>
 																						<div class="col-lg-9 col-xl-9">
-																							<input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" required/>
+																							<input class="form-control form-control-solid form-control-lg" name="coapplicantname" type="text" value="" />
+																							<span class="field_error text-danger" id="coapplicantname_error"></span>
 																						</div>
 																					</div>
 																					<div class="form-group row">
 																						<label class="col-xl-3 col-lg-3 col-form-label">Father's/Husband Name</label>
 																						<div class="col-lg-9 col-xl-9">
-																							<input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" required/>
+																							<input class="form-control form-control-solid form-control-lg" name="coapplicantfathername" type="text" value="" />
+																							<span class="field_error text-danger" id="coapplicantfathername_error"></span>
 																						</div>
 																					</div>
 																				</div>
 																				<div class="col-xl-2 col-md-2 col-sm-12">
+																				<div class="form-group row">
 																					<div class="col-lg-9 col-xl-9">
 																						<div class="image-input image-input-outline" id="kt_user_add_avatar">
-																							<div class="image-input-wrapper" style="background-image: url(theme/html/demo4/dist/assets/media/users/100_6.jpg)"></div>
+																							<img class="image-input-wrapper" id="cooutput" src="/../img/21372076.jpg">
 																							<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
 																								<i class="fa fa-pen icon-sm text-muted"></i>
-																								<input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" />
-																								<input type="hidden" name="profile_avatar_remove" />
+																								<input type="file" name="coapplicant_image" id="" accept=".png, .jpg, .jpeg" onchange="loadFiles(event)">
+																								<script>
+																								    var loadFiles = function(event) {
+																									var cooutput = document.getElementById('cooutput');
+																									cooutput.src = URL.createObjectURL(event.target.files[0]);
+																									cooutput.onload = function() {
+																									URL.revokeObjectURL(cooutput.src) // free memory
+																									}
+																								};
+																								</script>
+																								
 																							</label>
+
 																							<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
 																								<i class="ki ki-bold-close icon-xs text-muted"></i>
 																							</span>
 																						</div>
+																						<span class="field_error text-danger" id="coapplicant_image_error"></span>
 																					</div>
+																				</div>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -493,9 +533,10 @@
 																						<label class="col-xl-3 col-lg-3 col-form-label">Date Of Birth</label>
 																						<div class="col-lg-9 col-xl-9">
 																							<div class="input-group  input-group-lg">
-																								<input type="date" class="form-control form-control-solid form-control-lg" name="dob" placeholder="Username" value="Rs." />
+																								<input type="date" class="form-control form-control-solid form-control-lg" name="coapplicantdob" placeholder="Username" value="Rs." />
 																								<div class="input-group-append">
 																								</div>
+																								<span class="field_error text-danger" id="coapplicantdob_error"></span>
 																							</div>
 																						</div>
 																					</div>
@@ -505,12 +546,11 @@
 																						<label class="col-xl-3 col-lg-3 col-form-label">Gender</label>
 																						<div class="col-lg-9 col-xl-9">
 																							<div class="input-group  input-group-lg">
-																								<form action="">
-																									<input type="radio" name="gender" value="male" style="margin:20px"> Male
-																									<input type="radio" name="gender" value="female" style="margin:20px"> Female
-																									<input type="radio" name="gender" value="other" style="margin:20px"> Other
-																								</form>
+																									<input type="radio" name="coapplicantgender" value="male" style="margin:20px"> Male
+																									<input type="radio" name="coapplicantgender" value="female" style="margin:20px"> Female
+																									<input type="radio" name="coapplicantgender" value="other" style="margin:20px"> Other
 																							</div>
+																							<span class="field_error text-danger" id="coapplicantgender_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -522,7 +562,8 @@
 																					<div class="form-group row">
 																						<label class="col-xl-3 col-lg-3 col-form-label">Pan Number</label>
 																						<div class="col-lg-9 col-xl-9">
-																							<input class="form-control form-control-solid form-control-lg" name="pan" type="text" value="" required style="text-transform: uppercase;"/>
+																							<input class="form-control form-control-solid form-control-lg" name="coapplicantpan" type="text" value=""  style="text-transform: uppercase;"/>
+																							<span class="field_error text-danger" id="coapplicantpan_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -530,20 +571,14 @@
 																					<div class="form-group row" data-select2-id="243">
 																						<label class="col-form-label text-left col-lg-4 col-sm-12">Occupation</label>
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
-																							<select class="form-control" id="kt_select2_1" name="param">
-																								<option value="AK">Alaska</option>
-																								<option value="HI">Hawaii</option>
-																								<option value="CA">California</option>
-																								<option value="NV">Nevada</option>
-																								<option value="OR">Oregon</option>
-																								<option value="WA">Washington</option>
-																								<option value="AZ">Arizona</option>
-																								<option value="CO">Colorado</option>
-																								<option value="ID">Idaho</option>
-																								<option value="MT">Montana</option>
-																								<option value="NE">Nebraska</option>
-																								<option value="NM">New Mexico</option>
+																							<select class="form-control" id="kt_select2_1" name="coapplicantoccupation">
+																							    <option value="">Select</option>
+																								<option value="Student">Student</option>
+																								<option value="Professional">Professional</option>
+																								<option value="Teacher">Teacher</option>
+																								<option value="Engineer">Engineer</option>
 																							</select>
+																							<span class="text-danger field_error" id="coapplicantoccupation_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -553,7 +588,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Address(Correspondance)</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" id="addressco" name="addressco" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" id="addressco" name="coapplicantaddress" type="text" value="" />
+																					<span class="text-danger field_error" id="coapplicantaddress_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -563,13 +599,14 @@
 																					<div class="form-group row" data-select2-id="243">
 																						<label class="col-form-label text-left col-lg-4 col-sm-12">State</label>
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
-																							<select class="form-control" id="stateco" name="stateco">
+																							<select class="form-control" id="stateco" name="coapplicantstate">
 																								<option value="">Select</option>
 																								<option value="Delhi">Delhi</option>
 																								<option value="Uttarakhand">Uttarakhand</option>
 																								<option value="Uttar Pradesh">Uttar Pradesh</option>
 																								<option value="Haryana">Haryana</option>
 																							</select>
+																							<span class="text-danger field_error" id="coapplicantstate_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -577,12 +614,13 @@
 																					<div class="form-group row" data-select2-id="243">
 																						<label class="col-form-label text-left col-lg-4 col-sm-12">City</label>
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
-																							<select class="form-control" id="districtco" name="districtco">
+																							<select class="form-control" id="districtco" name="coapplicantcity">
 																								<option value="">Select</option>
 																								<option value="Saharanpur">Saharanpur</option>
 																								<option value="Meerut">Meerut</option>
 																								<option value="Dehradun">Dehradun</option>
 																							</select>
+																							<span class="text-danger field_error" id="coapplicantcity_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -590,7 +628,8 @@
 																					<div class="form-group row">
 																						<label class="col-xl-4 col-lg-4 col-form-label">Pin Code</label>
 																						<div class="col-lg-8 col-xl-8">
-																							<input class="form-control form-control-solid form-control-lg" name="pincodeco" id="pincodeco" type="text" value="" required/>
+																							<input class="form-control form-control-solid form-control-lg" name="coapplicantpincode" id="pincodeco" type="text" value="" />
+																							<span class="text-danger field_error" id="coapplicantpincode_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -611,7 +650,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Address(Permanent)</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="addresscco" id="addresscco" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="coapplicantaddresspermanent" id="addresscco" type="text" value="" />
+																					<span class="text-danger field_error" id="coapplicantaddresspermanent_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -621,13 +661,14 @@
 																					<div class="form-group row" data-select2-id="243">
 																						<label class="col-form-label text-left col-lg-4 col-sm-12">State</label>
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
-																						    <select class="form-control" id="statecco" name="statecco">
+																						    <select class="form-control" id="statecco" name="coapplicantstatepermanent">
 																								<option value="">Select</option>
 																								<option value="Delhi">Delhi</option>
 																								<option value="Uttarakhand">Uttarakhand</option>
 																								<option value="Uttar Pradesh">Uttar Pradesh</option>
 																								<option value="Haryana">Haryana</option>
 																							</select>
+																							<span class="text-danger field_error" id="coapplicantstatepermanent_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -635,12 +676,13 @@
 																					<div class="form-group row" data-select2-id="243">
 																						<label class="col-form-label text-left col-lg-4 col-sm-12">City</label>
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
-																						    <select class="form-control" id="districtcco" name="districtcco">
+																						    <select class="form-control" id="districtcco" name="coapplicantcitypermanent">
 																								<option value="">Select</option>
 																								<option value="Saharanpur">Saharanpur</option>
 																								<option value="Meerut">Meerut</option>
 																								<option value="Dehradun">Dehradun</option>
 																							</select>
+																							<span class="text-danger field_error" id="coapplicantcitypermanent_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -648,7 +690,8 @@
 																					<div class="form-group row">
 																						<label class="col-xl-4 col-lg-4 col-form-label">Pin Code</label>
 																						<div class="col-lg-8 col-xl-8">
-																							<input class="form-control form-control-solid form-control-lg" name="pincodecco" id="pincodecco" type="text" value="" required/>
+																							<input class="form-control form-control-solid form-control-lg" name="coapplicantpincodepermanent" id="pincodecco" type="text" value="" />
+																							<span class="text-danger field_error" id="coapplicantpincodepermanent_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -667,9 +710,10 @@
 																										<i class="la la-phone"></i>
 																									</span>
 																								</div>
-																								<input type="number" class="form-control form-control-solid form-control-lg" name="mobile"  placeholder="Phone" />
+																								<input type="number" class="form-control form-control-solid form-control-lg" name="coapplicantmobile"  placeholder="Phone" />
 																							</div>
 																							<span class="form-text text-muted">Enter valid Indian phone number(e.g: 9876-543-210).</span>
+																							<span class="text-danger field_error" id="coapplicantmobile_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -683,9 +727,10 @@
 																										<i class="la la-phone"></i>
 																									</span>
 																								</div>
-																								<input type="number" class="form-control form-control-solid form-control-lg" name="officephone"  placeholder="Phone" />
+																								<input type="number" class="form-control form-control-solid form-control-lg" name="coapplicantofficephone"  placeholder="Phone" />
 																							</div>
 																							<span class="form-text text-muted">Enter valid Indian phone number(e.g: 9876-543-210).</span>
+																							<span class="text-danger field_error" id="coapplicantofficephone_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -703,9 +748,10 @@
 																										<i class="la la-phone"></i>
 																									</span>
 																								</div>
-																								<input type="number" class="form-control form-control-solid form-control-lg" name="mobile"  placeholder="Phone" />
+																								<input type="number" class="form-control form-control-solid form-control-lg" name="coapplicantresidencephone"  placeholder="Phone" />
 																							</div>
 																							<span class="form-text text-muted">Enter valid Indian phone number(e.g: 9876-543-210).</span>
+																							<span class="text-danger field_error" id="coapplicantresidencephone_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -719,7 +765,8 @@
 																										<i class="la la-at"></i>
 																									</span>
 																								</div>
-																								<input type="text" class="form-control form-control-solid form-control-lg" name="email" value="" required/>
+																								<input type="text" class="form-control form-control-solid form-control-lg" name="coapplicantemail" value="" />
+																								<span class="text-danger field_error" id="coapplicantemail_error"></span>
 																							</div>
 																						</div>
 																					</div>
@@ -748,7 +795,7 @@
 																				<label class="col-form-label col-xl-3 col-lg-3">Communication</label>
 																				<div class="col-xl-9 col-lg-9 col-form-label">
 																					<div class="checkbox-inline">
-																						<label class="checkbox">
+																						<!-- <label class="checkbox">
 																						<input name="communication" type="checkbox" />
 																						<span></span>Email</label>
 																						<label class="checkbox">
@@ -756,7 +803,7 @@
 																						<span></span>SMS</label>
 																						<label class="checkbox">
 																						<input name="communication" type="checkbox" />
-																						<span></span>Phone</label>
+																						<span></span>Phone</label> -->
 																					</div>
 																				</div>
 																			</div>
@@ -767,9 +814,9 @@
 																			<div class="form-group row">
 																				<label class="col-form-label col-xl-3 col-lg-3">Login verification</label>
 																				<div class="col-xl-9 col-lg-9">
-																					<button type="button" class="btn btn-light-primary font-weight-bold btn-sm">Setup login verification</button>
+																					<!-- <button type="button" class="btn btn-light-primary font-weight-bold btn-sm">Setup login verification</button>
 																					<div class="form-text text-muted mt-3">After you log in, you will be asked for additional information to confirm your identity and protect your account from being compromised. 
-																					<a href="#">Learn more</a>.</div>
+																					<a href="#">Learn more</a>.</div> -->
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -778,12 +825,12 @@
 																				<label class="col-form-label col-xl-3 col-lg-3">Password reset verification</label>
 																				<div class="col-xl-9 col-lg-9">
 																					<div class="checkbox-inline">
-																						<label class="checkbox mb-2">
+																						<!-- <label class="checkbox mb-2">
 																						<input type="checkbox" />
-																						<span></span>Require personal information to reset your password.</label>
+																						<span></span>Require personal information to reset your password.</label> -->
 																					</div>
-																					<div class="form-text text-muted">For extra security, this requires you to confirm your email or phone number when you reset your password. 
-																					<a href="#" class="font-weight-bold">Learn more</a>.</div>
+																					<!-- <div class="form-text text-muted">For extra security, this requires you to confirm your email or phone number when you reset your password. 
+																					<a href="#" class="font-weight-bold">Learn more</a>.</div> -->
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -791,7 +838,7 @@
 																			<div class="form-group row mt-10">
 																				<label class="col-xl-3 col-lg-3"></label>
 																				<div class="col-xl-9 col-lg-9">
-																					<button type="button" class="btn btn-light-danger font-weight-bold btn-sm">Deactivate your account ?</button>
+																					<!-- <button type="button" class="btn btn-light-danger font-weight-bold btn-sm">Deactivate your account ?</button> -->
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -802,34 +849,34 @@
 																			<h5 class="mb-10 font-weight-bold text-dark">Setup Your Address</h5>
 																			<!--begin::Group-->
 																			<div class="form-group">
-																				<label>Address Line 1</label>
+																				<!-- <label>Address Line 1</label>
 																				<input type="text" class="form-control form-control-solid form-control-lg" name="address1" placeholder="Address Line 1" value="Address Line 1" />
-																				<span class="form-text text-muted">Please enter your Address.</span>
+																				<span class="form-text text-muted">Please enter your Address.</span> -->
 																			</div>
 																			<!--end::Group-->
 																			<!--begin::Group-->
 																			<div class="form-group">
-																				<label>Address Line 2</label>
+																				<!-- <label>Address Line 2</label>
 																				<input type="text" class="form-control form-control-solid form-control-lg" name="address2" placeholder="Address Line 2" value="Address Line 2" />
-																				<span class="form-text text-muted">Please enter your Address.</span>
+																				<span class="form-text text-muted">Please enter your Address.</span> -->
 																			</div>
 																			<!--begin::Row-->
 																			<div class="row">
 																				<div class="col-xl-6">
 																					<!--begin::Group-->
 																					<div class="form-group">
-																						<label>Postcode</label>
+																						<!-- <label>Postcode</label>
 																						<input type="text" class="form-control form-control-solid form-control-lg" name="postcode" placeholder="Postcode" value="3000" />
-																						<span class="form-text text-muted">Please enter your Postcode.</span>
+																						<span class="form-text text-muted">Please enter your Postcode.</span> -->
 																					</div>
 																				</div>
 																				<!--end::Group-->
 																				<!--begin::Group-->
 																				<div class="col-xl-6">
 																					<div class="form-group">
-																						<label>City</label>
+																						<!-- <label>City</label>
 																						<input type="text" class="form-control form-control-solid form-control-lg" name="city" placeholder="City" value="Melbourne" />
-																						<span class="form-text text-muted">Please enter your City.</span>
+																						<span class="form-text text-muted">Please enter your City.</span> -->
 																					</div>
 																				</div>
 																				<!--end::Group-->
@@ -840,9 +887,9 @@
 																				<div class="col-xl-6">
 																					<!--begin::Group-->
 																					<div class="form-group">
-																						<label>State</label>
+																						<!-- <label>State</label>
 																						<input type="text" class="form-control form-control-solid form-control-lg" name="state" placeholder="State" value="VIC" />
-																						<span class="form-text text-muted">Please enter your State.</span>
+																						<span class="form-text text-muted">Please enter your State.</span> -->
 																					</div>
 																					<!--end::Group-->
 																				</div>
@@ -952,25 +999,33 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script>
 	  $(document).ready(function(){
-		$('#checkbox').change(function(){
-            var address = $('#address').val();
-            var state = $('#state').val();
-            var district = $('#district').val();
-            var pincode = $('#pincode').val();
-			$('#addressc').val(address);
-			$('#statec').val(state);
-			$('#districtc').val(district);
-			$('#pincodec').val(pincode);
+		$("#checkbox").on("click", function(){
+         if (this.checked) { 
+                $("#addressc").val($("#address").val());
+                $("#statec").val($("#state").val());
+                $("#districtc").val($("#district").val());                         
+                $("#pincodec").val($("#pincode").val());                         
+		}
+		else {
+			$("#addressc").val('');
+			$("#statec").val('');
+			$("#districtc").val('');           
+			$("#pincodec").val('');           
+		}
 		});
-		$('#checkboxco').change(function(){
-            var addressco = $('#addressco').val();
-            var stateco = $('#stateco').val();
-            var districtco = $('#districtco').val();
-            var pincodeco = $('#pincodeco').val();
-			$('#addresscco').val(addressco);
-			$('#statecco').val(stateco);
-			$('#districtcco').val(districtco);
-			$('#pincodecco').val(pincodeco);
+		$("#checkboxco").on("click", function(){
+         if (this.checked) { 
+                $("#addresscco").val($("#addressco").val());
+                $("#statecco").val($("#stateco").val());
+                $("#districtcco").val($("#districtco").val());                         
+                $("#pincodecco").val($("#pincodeco").val());                         
+		}
+		else {
+			$("#addresscco").val('');
+			$("#statecco").val('');
+			$("#districtcco").val('');           
+			$("#pincodecco").val('');           
+		}
 		});
 	  })
 	</script>
@@ -1039,6 +1094,42 @@
 		};
 	</script>
 	<!--end::Global Config-->
+	<script type="text/javascript">
+        $(document).ready(function(){
+        $(".form").submit(function(e){
+          e.preventDefault();
+          $('.field_error').html('');
+          $.ajax({
+            url:'addContact',
+			method:"POST",
+			data:new FormData(this),
+			dataType:'JSON',
+			cache:false,
+			contentType: false,
+			processData: false,
+            success:function(result){
+              if (result.status == 'error') {
+				$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
+                $.each(result.error,function(key,val){
+                  // console.log(key);
+                  // console.log(val);
+                  $('#'+key+'_error').html(val[0]);
+                })
+              }else if(result.status == 'success'){
+                $('.form')[0].reset();
+				$('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
+                setTimeout(function(){
+                   window.location.href = '../CRM/contacts'; 
+                }, 1000);
+              }
+            },
+            complete:function(){
+          		$('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
+        	}
+          });
+        })
+      });
+    </script>
 	<!--begin::Global Theme Bundle(used by all pages)-->
 	<script src="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.js?v=7.2.8"></script>
 	<script src="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.js?v=7.2.8"></script>

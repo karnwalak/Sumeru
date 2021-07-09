@@ -131,7 +131,6 @@
 								<!--begin::Details-->
 								<div class="d-flex align-items-center flex-wrap mr-2">
 									<!--begin::Title-->
-									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Edit Contact</h5>
 									<!--end::Title-->
 									<!--begin::Separator-->
 									<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
@@ -152,6 +151,7 @@
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<!--begin::Card-->
 								<div class="card card-custom card-transparent">
 									<div class="card-body p-0">
@@ -162,12 +162,14 @@
 												<!--begin::Body-->
 												<div class="card-body p-0">
 													<div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
+													<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Edit Contact</h5>
 														<div class="col-xl-12 col-xxl-10">															
 															<div class="row" style="display:grid; justify-content:end;">
 																<a href="contacts" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
 															</div>
 															<!--begin::Wizard Form-->
-															<form class="form" id="kt_form">
+															<form id="form">
+															{{@csrf_field()}}
 																<div class="row justify-content-center">
 																	<div class="col-xl-9">
 																		<!--begin::Wizard Step 1-->
@@ -177,25 +179,37 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label text-left">Avatar</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<div class="image-input image-input-outline" id="kt_user_add_avatar">
-																						<div class="image-input-wrapper" style="background-image: url"></div>
-																						<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-																							<i class="fa fa-pen icon-sm text-muted"></i>
-																							<input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" />
-																							<input type="hidden" name="profile_avatar_remove" />
-																						</label>
-																						<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-																							<i class="ki ki-bold-close icon-xs text-muted"></i>
-																						</span>
-																					</div>
+																				<input type="hidden" name="pid" value="{{$data -> id}}">
+																				<div class="image-input image-input-outline" id="kt_user_add_avatar">
+																					<img class="image-input-wrapper" id="cooutput" src="/../upload/{{$data -> contact_img}}">
+																					<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+																						<i class="fa fa-pen icon-sm text-muted"></i>
+																						<input type="file" name="applicant_image" id="" accept=".png, .jpg, .jpeg" onchange="loadFiles(event)">
+																						<script>
+																							var loadFiles = function(event) {
+																							var cooutput = document.getElementById('cooutput');
+																							cooutput.src = URL.createObjectURL(event.target.files[0]);
+																							cooutput.onload = function() {
+																							URL.revokeObjectURL(cooutput.src) // free memory
+																							}
+																						};
+																						</script>
+																						
+																					</label>
+																					<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+																						<i class="ki ki-bold-close icon-xs text-muted"></i>
+																					</span>
 																				</div>
+																				</div>
+																				<span class="field_error text-danger" id="applicant_image_error"></span>
 																			</div>
 																			<!--end::Group-->
 																			<!--begin::Group-->
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Full Name</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="name" type="text" value="{{$data -> contact_full_name}}"/>
+																					<span class="field_error text-danger" id="name_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -203,7 +217,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Father's/Husband's Name</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="fathers/husbandname" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="fathername" type="text" value="{{$data -> contact_father}}"/>
+																					<span class="field_error text-danger" id="fathername_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -211,7 +226,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Address(Correspondance)</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="addressc" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="address" type="text" value="{{$data -> contact_correspondence_address}}" />
+																					<span class="field_error text-danger" id="address_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -219,7 +235,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">City</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="cityc" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="city" type="text" value="{{$data -> contact_city}}" />
+																					<span class="field_error text-danger" id="city_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -227,7 +244,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">State</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="statec" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="state" type="text" value="{{$data -> contact_state}}" />
+																					<span class="field_error text-danger" id="city_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -235,7 +253,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Pin Code</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="pincodec" type="number" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="pincode" type="number" value="{{$data -> contact_pin}}" />
+																					<span class="field_error text-danger" id="pincode_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -243,7 +262,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Address(Permanent)</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="addressp" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="addresspermanent" type="text" value="{{$data -> contact_permanent_address}}" />
+																					<span class="field_error text-danger" id="addresspermanent_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -251,7 +271,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">City</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="cityp" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="citypermanent" type="text" value="{{$data -> contact_city}}"/>
+																					<span class="field_error text-danger" id="citypermanent_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -259,7 +280,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">State</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="statep" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="statepermanent" type="text" value="{{$data -> contact_state}}"/>
+																					<span class="field_error text-danger" id="statepermanent_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -267,7 +289,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Pin Code</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="pincodep" type="number" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="pincodepermanent" type="number" value="{{$data -> contact_pin}}" />
+																					<span class="field_error text-danger" id="pincodepermanent_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -275,7 +298,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Pan</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="pan" type="text" value="" required style="text-transform: uppercase;"/>
+																					<input class="form-control form-control-solid form-control-lg" name="pan" type="text" value="{{$data -> contact_pancard}}"  style="text-transform: uppercase;"/>
+																					<span class="field_error text-danger" id="pan_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -284,10 +308,11 @@
 																				<label class="col-xl-3 col-lg-3 col-form-label">Date Of Birth</label>
 																				<div class="col-lg-9 col-xl-9">
 																					<div class="input-group input-group-solid input-group-lg">
-																						<input type="date" class="form-control form-control-solid form-control-lg" name="dob" placeholder="Username" value="Rs." />
+																						<input type="date" class="form-control form-control-solid form-control-lg" name="dob" placeholder="Username" value="{{$data -> contact_dob}}" />
 																						<div class="input-group-append">
 																						</div>
 																					</div>
+																					<span class="field_error text-danger" id="dob_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -296,12 +321,11 @@
 																				<label class="col-xl-3 col-lg-3 col-form-label">Gender</label>
 																				<div class="col-lg-9 col-xl-9">
 																					<div class="input-group input-group-solid input-group-lg">
-																					<form action="">
-																						<input type="radio" name="gender" value="male" style="margin:20px"> Male
-																						<input type="radio" name="gender" value="female" style="margin:20px"> Female
-																						<input type="radio" name="gender" value="other" style="margin:20px"> Other
-																					</form>
+																						<input type="radio" name="gender" value="male" style="margin:20px" {{ $data->contact_gender == 'male' ? 'checked' : ''}}> Male
+																						<input type="radio" name="gender" value="female" style="margin:20px" {{ $data->contact_gender == 'female' ? 'checked' : ''}}> Female
+																						<input type="radio" name="gender" value="other" style="margin:20px" {{ $data->contact_gender == 'other' ? 'checked' : ''}}> Other
 																					</div>
+																					<span class="field_error text-danger" id="gender_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -309,7 +333,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Occupation</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="occupation" type="text" value="" required style="text-transform: uppercase;"/>
+																					<input class="form-control form-control-solid form-control-lg" name="occupation" type="text" value="{{$data -> contact_occuption}}"  style="text-transform: uppercase;"/>
+																					<span class="field_error text-danger" id="occupation_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -324,9 +349,10 @@
 																								<i class="la la-phone"></i>
 																							</span>
 																						</div>
-																						<input type="number" class="form-control form-control-solid form-control-lg" name="mobile"  placeholder="Phone" />
+																						<input type="number" class="form-control form-control-solid form-control-lg" name="mobile" value="{{$data -> contact_mob_no}}"  placeholder="Phone" />
 																					</div>
 																					<span class="form-text text-muted">Enter valid Indian phone number(e.g: 9876-543-210).</span>
+																					<span class="field_error text-danger" id="mobile_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -340,9 +366,10 @@
 																								<i class="la la-phone"></i>
 																							</span>
 																						</div>
-																						<input type="number" class="form-control form-control-solid form-control-lg" name="officephone"  placeholder="Phone" />
+																						<input type="number" class="form-control form-control-solid form-control-lg" value="{{$data -> contact_office_no}}" name="officephone"  placeholder="Phone" />
 																					</div>
 																					<span class="form-text text-muted">Enter valid Indian phone number(e.g: 9876-543-210).</span>
+																					<span class="field_error text-danger" id="officephone_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -356,9 +383,10 @@
 																								<i class="la la-phone"></i>
 																							</span>
 																						</div>
-																						<input type="number" class="form-control form-control-solid form-control-lg" name="residencephone"  placeholder="Phone" />
+																						<input type="number" class="form-control form-control-solid form-control-lg" name="residencephone" value="{{$data -> contact_residence_no}}"  placeholder="Phone" />
 																					</div>
 																					<span class="form-text text-muted">Enter valid Indian phone number(e.g: 9876-543-210).</span>
+																					<span class="field_error text-danger" id="residencephone_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -372,8 +400,9 @@
 																								<i class="la la-at"></i>
 																							</span>
 																						</div>
-																						<input type="text" class="form-control form-control-solid form-control-lg" name="email" value="" required/>
+																						<input type="text" class="form-control form-control-solid form-control-lg" name="email" value="{{$data -> contact_email}}" />
 																					</div>
+																					<span class="field_error text-danger" id="email_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -383,25 +412,35 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label text-left">Avatar</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<div class="image-input image-input-outline" id="kt_user_add_avatar">
-																						<div class="image-input-wrapper" style="background-image: url(../../../../theme/html/demo4/dist/assets/media/users/100_6.jpg)"></div>
-																						<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-																							<i class="fa fa-pen icon-sm text-muted"></i>
-																							<input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" />
-																							<input type="hidden" name="profile_avatar_remove" />
-																						</label>
-																						<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-																							<i class="ki ki-bold-close icon-xs text-muted"></i>
-																						</span>
-																					</div>
+																				<div class="image-input image-input-outline" id="kt_user_add_avatar">
+																					<img class="image-input-wrapper" id="output" src="/../upload/{{$data -> co_applicant_img}}">
+																					<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+																						<i class="fa fa-pen icon-sm text-muted"></i>
+																						<input type="file" name="coapplicant_image" id="" accept=".png, .jpg, .jpeg" onchange="loadFile(event)">
+																						<script>
+																							var loadFile = function(event) {
+																							var output = document.getElementById('output');
+																							output.src = URL.createObjectURL(event.target.files[0]);
+																							output.onload = function() {
+																							URL.revokeObjectURL(output.src) // free memory
+																							}
+																						};
+																						</script>
+																						
+																					</label>
+																					<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+																						<i class="ki ki-bold-close icon-xs text-muted"></i>
+																					</span>
 																				</div>
 																			</div>
+																			<span class="field_error text-danger" id="coapplicant_image_error"></span></div>
 																			<!--end::Group-->
 																			<!--begin::Group-->
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Full Name</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="coapplicantname" type="text" value="{{$data -> Co_applicant_full_name}}" />
+																					<span class="field_error text-danger" id="coapplicantname_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -409,7 +448,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Father's/Husband's Name</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="fathers/husbandname" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="coapplicantfathername" type="text" value="{{$data -> co_applicant_father}}" />
+																					<span class="field_error text-danger" id="coapplicantfathername_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -417,7 +457,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Address(Correspondance)</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="addressc" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="coapplicantaddress" type="text" value="{{$data -> co_applicant_correspondence_address}}" />
+																					<span class="field_error text-danger" id="coapplicantaddress_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -425,7 +466,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">City</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="cityc" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="coapplicantcity" type="text" value="{{$data -> co_applicant_city}}" />
+																					<span class="field_error text-danger" id="coapplicantcity_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -433,7 +475,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">State</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="statec" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="coapplicantstate" type="text" value="{{$data -> co_applicant_state}}" />
+																					<span class="field_error text-danger" id="coapplicantstate_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -441,7 +484,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Pin Code</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="pincodec" type="number" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="coapplicantpincode" type="number" value="{{$data -> co_applicant_pincode}}" />
+																					<span class="field_error text-danger" id="coapplicantpincode_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -449,7 +493,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Address(Permanent)</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="addressp" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="coapplicantaddresspermanent" type="text" value="{{$data -> co_applicant_permanent_address}}" />
+																					<span class="field_error text-danger" id="coapplicantaddresspermanent_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -457,7 +502,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">City</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="cityp" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="coapplicantcitypermanent" type="text" value="{{$data -> co_applicant_city}}" />
+																					<span class="field_error text-danger" id="coapplicantcitypermanent_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -465,7 +511,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">State</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="statep" type="text" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="coapplicantstatepermanent" type="text" value="{{$data -> co_applicant_state}}" />
+																					<span class="field_error text-danger" id="coapplicantstatepermanent_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -473,7 +520,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Pin Code</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="pincodep" type="number" value="" required/>
+																					<input class="form-control form-control-solid form-control-lg" name="coapplicantpincodepermanent" type="number" value="{{$data -> co_applicant_pincode}}" />
+																					<span class="field_error text-danger" id="coapplicantpincodepermanent_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -481,7 +529,8 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Pan</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="pan" type="text" value="" required style="text-transform: uppercase;"/>
+																					<input class="form-control form-control-solid form-control-lg" name="coapplicantpan" type="text" value="{{$data -> co_applicant_pancard}}"  style="text-transform: uppercase;"/>
+																					<span class="field_error text-danger" id="coapplicantpan_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -490,10 +539,11 @@
 																				<label class="col-xl-3 col-lg-3 col-form-label">Date Of Birth</label>
 																				<div class="col-lg-9 col-xl-9">
 																					<div class="input-group input-group-solid input-group-lg">
-																						<input type="date" class="form-control form-control-solid form-control-lg" name="dob" placeholder="Username" value="Rs." />
+																						<input type="date" class="form-control form-control-solid form-control-lg" name="coapplicantdob" placeholder="Username" value="{{$data -> co_applicant_dob}}" />
 																						<div class="input-group-append">
 																						</div>
 																					</div>
+																					<span class="field_error text-danger" id="coapplicantdob_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -502,12 +552,11 @@
 																				<label class="col-xl-3 col-lg-3 col-form-label">Gender</label>
 																				<div class="col-lg-9 col-xl-9">
 																					<div class="input-group input-group-solid input-group-lg">
-																					<form action="">
-																						<input type="radio" name="gender" value="male" style="margin:20px"> Male
-																						<input type="radio" name="gender" value="female" style="margin:20px"> Female
-																						<input type="radio" name="gender" value="other" style="margin:20px"> Other
-																					</form>
+																						<input type="radio" name="coapplicantgender" value="male" style="margin:20px" {{ $data->co_applicant_gender == 'male' ? 'checked' : ''}}> Male
+																						<input type="radio" name="coapplicantgender" value="female" style="margin:20px" {{ $data->co_applicant_gender == 'female' ? 'checked' : ''}}> Female
+																						<input type="radio" name="coapplicantgender" value="other" style="margin:20px" {{ $data->co_applicant_gender == 'other' ? 'checked' : ''}}> Other
 																					</div>
+																					<span class="field_error text-danger" id="coapplicantgender_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -515,8 +564,9 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Occupation</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<input class="form-control form-control-solid form-control-lg" name="occupation" type="text" value="" required style="text-transform: uppercase;"/>
+																					<input class="form-control form-control-solid form-control-lg" name="coapplicantoccupation" type="text" value="{{$data -> co_applicant_occuption}}"  style="text-transform: uppercase;"/>
 																				</div>
+																				<span class="field_error text-danger" id="coapplicantoccupation_error"></span>
 																			</div>
 																			<!--end::Group-->
 																			<h5 class="text-dark font-weight-bold mb-10">Contact Details</h5>
@@ -530,9 +580,10 @@
 																								<i class="la la-phone"></i>
 																							</span>
 																						</div>
-																						<input type="number" class="form-control form-control-solid form-control-lg" name="mobile"  placeholder="Phone" />
+																						<input type="number" class="form-control form-control-solid form-control-lg" name="coapplicantmobile" value="{{$data -> co_applicant_mob_no}}"  placeholder="Phone" />
 																					</div>
 																					<span class="form-text text-muted">Enter valid Indian phone number(e.g: 9876-543-210).</span>
+																					<span class="field_error text-danger" id="coapplicantmobile_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -546,9 +597,10 @@
 																								<i class="la la-phone"></i>
 																							</span>
 																						</div>
-																						<input type="number" class="form-control form-control-solid form-control-lg" name="officephone"  placeholder="Phone" />
+																						<input type="number" class="form-control form-control-solid form-control-lg" name="coapplicantofficephone" value="{{$data -> co_applicant_office_no}}" placeholder="Phone" />
 																					</div>
 																					<span class="form-text text-muted">Enter valid Indian phone number(e.g: 9876-543-210).</span>
+																					<span class="field_error text-danger" id="coapplicantofficephone_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -562,9 +614,10 @@
 																								<i class="la la-phone"></i>
 																							</span>
 																						</div>
-																						<input type="number" class="form-control form-control-solid form-control-lg" name="residencephone"  placeholder="Phone" />
+																						<input type="number" class="form-control form-control-solid form-control-lg" name="coapplicantresidencephone" value="{{$data -> co_applicant_residence_no}}"  placeholder="Phone" />
 																					</div>
 																					<span class="form-text text-muted">Enter valid Indian phone number(e.g: 9876-543-210).</span>
+																					<span class="field_error text-danger" id="coapplicantresidencephone_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -578,8 +631,9 @@
 																								<i class="la la-at"></i>
 																							</span>
 																						</div>
-																						<input type="text" class="form-control form-control-solid form-control-lg" name="email" value="" required/>
+																						<input type="text" class="form-control form-control-solid form-control-lg" name="coapplicantemail" value="{{$data -> co_applicant_email}}" />
 																					</div>
+																					<span class="field_error text-danger" id="coapplicantemail_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -592,7 +646,7 @@
 																			<div class="form-group row">
 																				<label class="col-form-label col-xl-3 col-lg-3">Language</label>
 																				<div class="col-xl-9 col-lg-9">
-																					<select class="form-control form-control-lg form-control-solid" name="language">
+																					<!-- <select class="form-control form-control-lg form-control-solid" name="language">
 																						<option value="">Select Language...</option>
 																						<option value="id">Bahasa Indonesia - Indonesian</option>
 																						<option value="msa">Bahasa Melayu - Malay</option>
@@ -641,7 +695,7 @@
 																						<option value="ja">日本語 - Japanese</option>
 																						<option value="zh-cn">简体中文 - Simplified Chinese</option>
 																						<option value="zh-tw">繁體中文 - Traditional Chinese</option>
-																					</select>
+																					</select> -->
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -649,7 +703,7 @@
 																			<div class="form-group row">
 																				<label class="col-form-label col-xl-3 col-lg-3">Time Zone</label>
 																				<div class="col-xl-9 col-lg-9">
-																					<select class="form-control form-control-lg form-control-solid" name="timezone">
+																					<!-- <select class="form-control form-control-lg form-control-solid" name="timezone">
 																						<option data-offset="-39600" value="International Date Line West">(GMT-11:00) International Date Line West</option>
 																						<option data-offset="-39600" value="Midway Island">(GMT-11:00) Midway Island</option>
 																						<option data-offset="-39600" value="Samoa">(GMT-11:00) Samoa</option>
@@ -793,7 +847,7 @@
 																						<option data-offset="43200" value="Auckland">(GMT+12:00) Auckland</option>
 																						<option data-offset="43200" value="Wellington">(GMT+12:00) Wellington</option>
 																						<option data-offset="46800" value="Nuku'alofa">(GMT+13:00) Nuku'alofa</option>
-																					</select>
+																					</select> -->
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -802,7 +856,7 @@
 																				<label class="col-form-label col-xl-3 col-lg-3">Communication</label>
 																				<div class="col-xl-9 col-lg-9 col-form-label">
 																					<div class="checkbox-inline">
-																						<label class="checkbox">
+																						<!-- <label class="checkbox">
 																						<input name="communication" type="checkbox" />
 																						<span></span>Email</label>
 																						<label class="checkbox">
@@ -810,7 +864,7 @@
 																						<span></span>SMS</label>
 																						<label class="checkbox">
 																						<input name="communication" type="checkbox" />
-																						<span></span>Phone</label>
+																						<span></span>Phone</label> -->
 																					</div>
 																				</div>
 																			</div>
@@ -832,9 +886,9 @@
 																				<label class="col-form-label col-xl-3 col-lg-3">Password reset verification</label>
 																				<div class="col-xl-9 col-lg-9">
 																					<div class="checkbox-inline">
-																						<label class="checkbox mb-2">
+																						<!-- <label class="checkbox mb-2">
 																						<input type="checkbox" />
-																						<span></span>Require personal information to reset your password.</label>
+																						<span></span>Require personal information to reset your password.</label> -->
 																					</div>
 																					<div class="form-text text-muted">For extra security, this requires you to confirm your email or phone number when you reset your password. 
 																					<a href="#" class="font-weight-bold">Learn more</a>.</div>
@@ -856,34 +910,34 @@
 																			<h5 class="mb-10 font-weight-bold text-dark">Setup Your Address</h5>
 																			<!--begin::Group-->
 																			<div class="form-group">
-																				<label>Address Line 1</label>
+																				<!-- <label>Address Line 1</label>
 																				<input type="text" class="form-control form-control-solid form-control-lg" name="address1" placeholder="Address Line 1" value="Address Line 1" />
-																				<span class="form-text text-muted">Please enter your Address.</span>
+																				<span class="form-text text-muted">Please enter your Address.</span> -->
 																			</div>
 																			<!--end::Group-->
 																			<!--begin::Group-->
 																			<div class="form-group">
-																				<label>Address Line 2</label>
+																				<!-- <label>Address Line 2</label>
 																				<input type="text" class="form-control form-control-solid form-control-lg" name="address2" placeholder="Address Line 2" value="Address Line 2" />
-																				<span class="form-text text-muted">Please enter your Address.</span>
+																				<span class="form-text text-muted">Please enter your Address.</span> -->
 																			</div>
 																			<!--begin::Row-->
 																			<div class="row">
 																				<div class="col-xl-6">
 																					<!--begin::Group-->
 																					<div class="form-group">
-																						<label>Postcode</label>
+																						<!-- <label>Postcode</label>
 																						<input type="text" class="form-control form-control-solid form-control-lg" name="postcode" placeholder="Postcode" value="3000" />
-																						<span class="form-text text-muted">Please enter your Postcode.</span>
+																						<span class="form-text text-muted">Please enter your Postcode.</span> -->
 																					</div>
 																				</div>
 																				<!--end::Group-->
 																				<!--begin::Group-->
 																				<div class="col-xl-6">
 																					<div class="form-group">
-																						<label>City</label>
+																						<!-- <label>City</label>
 																						<input type="text" class="form-control form-control-solid form-control-lg" name="city" placeholder="City" value="Melbourne" />
-																						<span class="form-text text-muted">Please enter your City.</span>
+																						<span class="form-text text-muted">Please enter your City.</span> -->
 																					</div>
 																				</div>
 																				<!--end::Group-->
@@ -894,16 +948,16 @@
 																				<div class="col-xl-6">
 																					<!--begin::Group-->
 																					<div class="form-group">
-																						<label>State</label>
+																						<!-- <label>State</label>
 																						<input type="text" class="form-control form-control-solid form-control-lg" name="state" placeholder="State" value="VIC" />
-																						<span class="form-text text-muted">Please enter your State.</span>
+																						<span class="form-text text-muted">Please enter your State.</span> -->
 																					</div>
 																					<!--end::Group-->
 																				</div>
 																				<div class="col-xl-6">
 																					<!--begin::Group-->
 																					<div class="form-group">
-																						<label>Country</label>
+																						<!-- <label>Country</label>
 																						<select name="country" class="form-control form-control-solid form-control-lg">
 																							<option value="">Select</option>
 																							<option value="AX">Åland Islands</option>
@@ -1154,7 +1208,7 @@
 																							<option value="YE">Yemen</option>
 																							<option value="ZM">Zambia</option>
 																							<option value="ZW">Zimbabwe</option>
-																						</select>
+																						</select> -->
 																					</div>
 																					<!--end::Group-->
 																				</div>
@@ -1166,26 +1220,26 @@
 																			<h5 class="mb-10 font-weight-bold text-dark">Review your Details and Submit</h5>
 																			<!--begin::Item-->
 																			<div class="border-bottom mb-5 pb-5">
-																				<div class="font-weight-bolder mb-3">Your Account Details:</div>
+																				<!-- <div class="font-weight-bolder mb-3">Your Account Details:</div>
 																				<div class="line-height-xl">John Wick 
 																				<br />Phone: +61412345678 
-																				<br />Email: johnwick@reeves.com</div>
+																				<br />Email: johnwick@reeves.com</div> -->
 																			</div>
 																			<!--end::Item-->
 																			<!--begin::Item-->
 																			<div class="border-bottom mb-5 pb-5">
-																				<div class="font-weight-bolder mb-3">Your Address Details:</div>
+																				<!-- <div class="font-weight-bolder mb-3">Your Address Details:</div>
 																				<div class="line-height-xl">Address Line 1 
 																				<br />Address Line 2 
-																				<br />Melbourne 3000, VIC, Australia</div>
+																				<br />Melbourne 3000, VIC, Australia</div> -->
 																			</div>
 																			<!--end::Item-->
 																			<!--begin::Item-->
 																			<div>
-																				<div class="font-weight-bolder">Payment Details:</div>
+																				<!-- <div class="font-weight-bolder">Payment Details:</div>
 																				<div class="line-height-xl">Card Number: xxxx xxxx xxxx 1111 
 																				<br />Card Name: John Wick 
-																				<br />Card Expiry: 01/21</div>
+																				<br />Card Expiry: 01/21</div> -->
 																			</div>
 																			<!--end::Item-->
 																		</div>
@@ -1198,40 +1252,11 @@
 																			<div>
 																				<button type="button" class="btn btn-success font-weight-bolder px-9 py-4" data-wizard-type="action-submit">Submit</button>
 
-									<!--begin::Dropdown-->
-									<div class="btn-group ml-2">
-										<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
-										<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-										<div class="dropdown-menu dropdown-menu-sm p-0 m-0 dropdown-menu-right">
-											<ul class="navi py-5">
-												<li class="navi-item">
-													<a href="#" class="navi-link">
-														<span class="navi-icon">
-															<i class="flaticon2-writing"></i>
-														</span>
-														<span class="navi-text">Save &amp; continue</span>
-													</a>
-												</li>
-												<li class="navi-item">
-													<a href="#" class="navi-link">
-														<span class="navi-icon">
-															<i class="flaticon2-medical-records"></i>
-														</span>
-														<span class="navi-text">Save &amp; add new</span>
-													</a>
-												</li>
-												<li class="navi-item">
-													<a href="#" class="navi-link">
-														<span class="navi-icon">
-															<i class="flaticon2-hourglass-1"></i>
-														</span>
-														<span class="navi-text">Save &amp; exit</span>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<!--end::Dropdown-->
+																			<!--begin::Dropdown-->
+																			<div class="btn-group ml-2">
+																				<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
+																			</div>
+																			<!--end::Dropdown-->
 																			</div>
 																		</div>
 																		<!--end::Wizard Actions-->
@@ -1348,6 +1373,43 @@
 		};
 	</script>
 	<!--end::Global Config-->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+        $(document).ready(function(){
+        $("#form").submit(function(e){
+          e.preventDefault();
+          $('.field_error').html('');
+          $.ajax({
+            url:'editContact',
+			method:"POST",
+			data:new FormData(this),
+			dataType:'JSON',
+			cache:false,
+			contentType: false,
+			processData: false,
+            success:function(result){
+              if (result.status == 'error') {
+				$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
+                $.each(result.error,function(key,val){
+                  // console.log(key);
+                  // console.log(val);
+                  $('#'+key+'_error').html(val[0]);
+                })
+              }else if(result.status == 'success'){
+                $('#form')[0].reset();
+				$('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
+                setTimeout(function(){
+                   window.location.href = '../CRM/contacts'; 
+                }, 1000);
+              }
+            },
+            complete:function(){
+          		$('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
+        	}
+          });
+        })
+      });
+    </script>
 	<!--begin::Global Theme Bundle(used by all pages)-->
 	<script src="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.js?v=7.2.8"></script>
 	<script src="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.js?v=7.2.8"></script>

@@ -3,7 +3,8 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-<meta name="description" content="Updates and statistics" />
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<meta name="description" content="Updates and statistics" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!--begin::Fonts-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
@@ -129,7 +130,7 @@
 								<!--begin::Details-->
 								<div class="d-flex align-items-center flex-wrap mr-2">
 									<!--begin::Title-->
-									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Create Bookings</h5>
+									
 									<!--end::Title-->
 									<!--begin::Separator-->
 									<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
@@ -154,6 +155,7 @@
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+							<div class="row justify-content-center" id="msg"></div>
 								<!--begin::Card-->
 								<div class="card card-custom card-transparent">
 									<div class="card-body p-0">
@@ -165,11 +167,13 @@
 												<div class="card-body p-0">
 													<div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
 														<div class="col-xl-12 col-xxl-10">
+														<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Create Bookings</h5>
 															<div class="row" style="display:grid; justify-content:end;">
 																<a href="bookings" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
 															</div>
 															<!--begin::Wizard Form-->
-															<form class="form" id="kt_form">
+															<form class="form" id="form">
+															{{@csrf_field()}}
 																<div class="row justify-content-center">
 																	<div class="col-xl-9">
 																		<!--begin::Wizard Step 1-->
@@ -197,21 +201,14 @@
 																				<div class="form-group row" data-select2-id="243">
 																					<label class="col-form-label text-left col-lg-3 col-sm-12">Select Contact</label>
 																					<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
-																						<select class="form-control" id="selectcontact" name="param">
-																							<option value="AK">Alaska</option>
-																							<option value="HI">Hawaii</option>
-																							<option value="CA">California</option>
-																							<option value="NV">Nevada</option>
-																							<option value="OR">Oregon</option>
-																							<option value="WA">Washington</option>
-																							<option value="AZ">Arizona</option>
-																							<option value="CO">Colorado</option>
-																							<option value="ID">Idaho</option>
-																							<option value="MT">Montana</option>
-																							<option value="NE">Nebraska</option>
-																							<option value="NM">New Mexico</option>
+																						<select class="form-control" id="contact" name="contact">
+																							<option value="">Select</option>
+																							@foreach($contact as $val)
+																							<option value="{{$val -> id}}">{{$val -> contact_full_name}}</option>
+																							@endforeach
 																						</select>
 																					</div>
+																					<span class="text-danger field_error" id="contact_error"></span>
 																				</div>
 																				<!--end::Group-->
 																				<div class="row">
@@ -220,9 +217,10 @@
 																						<div class="form-group row">
 																							<label class="col-xl-3 col-lg-3 col-form-label">Name</label>
 																							<div class="col-lg-9 col-xl-9">
-																								<div class="input-group input-group-solid input-group-lg">
-																									<input type="text" class="form-control form-control-solid form-control-lg" name="username" value="" placeholder="Name" />
+																								<div class="input-group input-group-lg">
+																									<input type="text" class="form-control form-control-solid form-control-lg" name="name" id="name" value="" placeholder="Name" readonly />
 																								</div>
+																								<span class="text-danger field_error" id="name_error"></span>
 																							</div>
 																						</div>
 																						<!--end::Group-->
@@ -232,9 +230,10 @@
 																						<div class="form-group row">
 																							<label class="col-xl-3 col-lg-3 col-form-label">Contact</label>
 																							<div class="col-lg-9 col-xl-9">
-																								<div class="input-group input-group-solid input-group-lg">
-																									<input type="text" class="form-control form-control-solid form-control-lg" name="usercontact" value="" placeholder="Contact" />
+																								<div class="input-group input-group-lg">
+																									<input type="text" class="form-control form-control-solid form-control-lg" name="mobile" value="" id="mobile" placeholder="Contact" readonly />
 																								</div>
+																								<span class="text-danger field_error" id="mobile_error"></span>
 																							</div>
 																						</div>
 																						<!--end::Group-->
@@ -244,9 +243,10 @@
 																					<div class="form-group row">
 																						<label class="col-xl-3 col-lg-3 col-form-label">Address</label>
 																						<div class="col-lg-9 col-xl-9">
-																							<div class="input-group input-group-solid input-group-lg">
-																								<input type="text" class="form-control form-control-solid form-control-lg" name="useraddress" value="" placeholder="Address" />
+																							<div class="input-group input-group-lg">
+																								<input type="text" class="form-control form-control-solid form-control-lg" name="address" id="address" value="" placeholder="Address" readonly />
 																							</div>
+																							<span class="text-danger field_error" id="address_error"></span>
 																						</div>
 																					</div>
 																					<!--end::Group-->
@@ -254,20 +254,13 @@
 																				<div class="form-group row" data-select2-id="243">
 																					<label class="col-form-label text-left col-lg-3 col-sm-12">Product</label>
 																					<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
-																						<select class="form-control" id="kt_select2_1" name="param">
-																							<option value="AK">Alaska</option>
-																							<option value="HI">Hawaii</option>
-																							<option value="CA">California</option>
-																							<option value="NV">Nevada</option>
-																							<option value="OR">Oregon</option>
-																							<option value="WA">Washington</option>
-																							<option value="AZ">Arizona</option>
-																							<option value="CO">Colorado</option>
-																							<option value="ID">Idaho</option>
-																							<option value="MT">Montana</option>
-																							<option value="NE">Nebraska</option>
-																							<option value="NM">New Mexico</option>
+																						<select class="form-control" name="product" id="product">
+																						    <option value="">Select</option>
+																							@foreach($flat as $value)
+																							<option value="{{$value -> id}}">{{$value -> flat_stock_name}}</option>
+																							@endforeach
 																						</select>
+																						<span class="text-danger field_error" id="product_error"></span>
 																					</div>
 																				</div>
 																				<!--end::Group-->
@@ -275,9 +268,10 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Product Price</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<div class="input-group input-group-solid input-group-lg">
-																						<input type="number" class="form-control form-control-solid form-control-lg" name="productprice" value="" placeholder="Amount" />
+																					<div class="input-group input-group-lg">
+																						<input type="number" class="form-control form-control-solid form-control-lg" name="productprice" id="productprice" readonly value="" placeholder="Product Price" />
 																					</div>
+																					<span class="text-danger field_error" id="productprice_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -285,9 +279,10 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Booking Amount</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<div class="input-group input-group-solid input-group-lg">
-																						<input type="text" class="form-control form-control-solid form-control-lg" name="bookingamount" value="" placeholder="Amount" />
+																					<div class="input-group input-group-lg">
+																						<input type="text" class="form-control form-control-solid form-control-lg" name="bookingamount" id="bookingamount" value="" placeholder="Booking Amount" />
 																					</div>
+																					<span class="text-danger field_error" id="bookingamount_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -298,9 +293,10 @@
 																						<div class="form-group row">
 																							<label class="col-xl-3 col-lg-3 col-form-label">Self</label>
 																							<div class="col-lg-9 col-xl-9">
-																								<div class="input-group input-group-solid input-group-lg">
-																									<input type="number" class="form-control form-control-solid form-control-lg" name="Self" value="" placeholder="Amount" />
+																								<div class="input-group input-group-lg">
+																									<input type="number" class="form-control form-control-solid form-control-lg" id="selfamount" name="self" value="" placeholder="Self Amount" />
 																								</div>
+																								<span class="text-danger field_error" id="self_error"></span>
 																							</div>
 																						</div>
 																						<!--end::Group-->
@@ -310,9 +306,10 @@
 																						<div class="form-group row">
 																							<label class="col-xl-3 col-lg-3 col-form-label">Bank</label>
 																							<div class="col-lg-9 col-xl-9">
-																								<div class="input-group input-group-solid input-group-lg">
-																									<input type="number" class="form-control form-control-solid form-control-lg" name="Bank" value="" placeholder="Amount" />
+																								<div class="input-group input-group-lg">
+																									<input type="number" class="form-control form-control-solid form-control-lg" id="bank" name="bank" value="" placeholder="Bank Amount" />
 																								</div>
+																								<span class="text-danger field_error" id="bank_error"></span>
 																							</div>
 																						</div>
 																						<!--end::Group-->
@@ -322,9 +319,10 @@
 																						<div class="form-group row">
 																							<label class="col-xl-7 col-lg-7 col-form-label">Number Of Payments</label>
 																							<div class="col-lg-5 col-xl-5">
-																								<div class="input-group input-group-solid input-group-lg">
-																									<input type="number" class="form-control form-control-solid form-control-lg" name="Number Of Payments" value="" placeholder="No." />
+																								<div class="input-group input-group-lg">
+																									<input type="number" class="form-control form-control-solid form-control-lg" name="no_of_payments" value="" placeholder="No." />
 																								</div>
+																								<span class="text-danger field_error" id="no_of_payments_error"></span>
 																							</div>
 																						</div>
 																						<!--end::Group-->
@@ -334,9 +332,10 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">User Amount</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<div class="input-group input-group-solid input-group-lg">
-																						<input type="number" class="form-control form-control-solid form-control-lg" name="useramount" value="" placeholder="Amount" />
+																					<div class="input-group input-group-lg">
+																						<input type="number" class="form-control form-control-solid form-control-lg" name="useramount" value="" placeholder="User Amount" />
 																					</div>
+																					<span class="text-danger field_error" id="useramount_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -344,12 +343,14 @@
 																				<div class="form-group row" data-select2-id="243">
 																					<label class="col-form-label text-left col-lg-3 col-sm-12">Transaction Type	</label>
 																					<div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
-																						<select class="form-control" id="kt_select2_1" name="param">
+																						<select class="form-control" id="kt_select2_1" name="transaction_type">
+																						    <option value="">Select</option>
 																							<option value="cash">Cash</option>
 																							<option value="cheque">Cheque</option>
 																							<option value="online">Online Transaction</option>
 																							<option value="others">Others</option>
 																						</select>
+																						<span class="text-danger field_error" id="transaction_type_error"></span>
 																					</div>
 																				</div>
 																				<!--end::Group-->
@@ -357,9 +358,10 @@
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">Comment(IF ANY)</label>
 																				<div class="col-lg-9 col-xl-9">
-																					<div class="input-group input-group-solid input-group-lg">
-																						<input type="text" class="form-control form-control-solid form-control-lg" name="phone"/>
+																					<div class="input-group input-group-lg">
+																						<input type="text" class="form-control form-control-solid form-control-lg" name="comment"/>
 																					</div>
+																					<span class="text-danger field_error" id="comment_error"></span>
 																				</div>
 																			</div>
 																			<!--end::Group-->
@@ -389,7 +391,7 @@
 																					<label class="col-form-label col-xl-3 col-lg-3">Communication</label>
 																					<div class="col-xl-9 col-lg-9 col-form-label">
 																						<div class="checkbox-inline">
-																							<label class="checkbox">
+																							<!-- <label class="checkbox">
 																							<input name="communication" type="checkbox" />
 																							<span></span>Email</label>
 																							<label class="checkbox">
@@ -397,7 +399,7 @@
 																							<span></span>SMS</label>
 																							<label class="checkbox">
 																							<input name="communication" type="checkbox" />
-																							<span></span>Phone</label>
+																							<span></span>Phone</label> -->
 																						</div>
 																					</div>
 																				</div>
@@ -408,9 +410,9 @@
 																				<div class="form-group row">
 																					<label class="col-form-label col-xl-3 col-lg-3">Login verification</label>
 																					<div class="col-xl-9 col-lg-9">
-																						<button type="button" class="btn btn-light-primary font-weight-bold btn-sm">Setup login verification</button>
-																						<div class="form-text text-muted mt-3">After you log in, you will be asked for additional information to confirm your identity and protect your account from being compromised. 
-																						<a href="#">Learn more</a>.</div>
+																						<!-- <button type="button" class="btn btn-light-primary font-weight-bold btn-sm">Setup login verification</button> -->
+																						<!-- <div class="form-text text-muted mt-3">After you log in, you will be asked for additional information to confirm your identity and protect your account from being compromised. 
+																						<a href="#">Learn more</a>.</div> -->
 																					</div>
 																				</div>
 																				<!--end::Group-->
@@ -419,21 +421,21 @@
 																					<label class="col-form-label col-xl-3 col-lg-3">Password reset verification</label>
 																					<div class="col-xl-9 col-lg-9">
 																						<div class="checkbox-inline">
-																							<label class="checkbox mb-2">
+																							<!-- <label class="checkbox mb-2">
 																							<input type="checkbox" />
-																							<span></span>Require personal information to reset your password.</label>
+																							<span></span>Require personal information to reset your password.</label> -->
 																						</div>
-																						<div class="form-text text-muted">For extra security, this requires you to confirm your email or phone number when you reset your password. 
-																						<a href="#" class="font-weight-bold">Learn more</a>.</div>
+																						<!-- <div class="form-text text-muted">For extra security, this requires you to confirm your email or phone number when you reset your password. 
+																						<a href="#" class="font-weight-bold">Learn more</a>.</div> -->
 																					</div>
 																				</div>
 																				<!--end::Group-->
 																				<!--begin::Group-->
 																				<div class="form-group row mt-10">
-																					<label class="col-xl-3 col-lg-3"></label>
+																					<!-- <label class="col-xl-3 col-lg-3"></label>
 																					<div class="col-xl-9 col-lg-9">
 																						<button type="button" class="btn btn-light-danger font-weight-bold btn-sm">Deactivate your account ?</button>
-																					</div>
+																					</div> -->
 																				</div>
 																				<!--end::Group-->
 																			</div>
@@ -443,34 +445,34 @@
 																				<h5 class="mb-10 font-weight-bold text-dark">Setup Your Address</h5>
 																				<!--begin::Group-->
 																				<div class="form-group">
-																					<label>Address Line 1</label>
+																					<!-- <label>Address Line 1</label>
 																					<input type="text" class="form-control form-control-solid form-control-lg" name="address1" placeholder="Address Line 1" value="Address Line 1" />
-																					<span class="form-text text-muted">Please enter your Address.</span>
+																					<span class="form-text text-muted">Please enter your Address.</span> -->
 																				</div>
 																				<!--end::Group-->
 																				<!--begin::Group-->
 																				<div class="form-group">
-																					<label>Address Line 2</label>
+																					<!-- <label>Address Line 2</label>
 																					<input type="text" class="form-control form-control-solid form-control-lg" name="address2" placeholder="Address Line 2" value="Address Line 2" />
-																					<span class="form-text text-muted">Please enter your Address.</span>
+																					<span class="form-text text-muted">Please enter your Address.</span> -->
 																				</div>
 																				<!--begin::Row-->
 																				<div class="row">
 																					<div class="col-xl-6">
 																						<!--begin::Group-->
 																						<div class="form-group">
-																							<label>Postcode</label>
+																							<!-- <label>Postcode</label>
 																							<input type="text" class="form-control form-control-solid form-control-lg" name="postcode" placeholder="Postcode" value="3000" />
-																							<span class="form-text text-muted">Please enter your Postcode.</span>
+																							<span class="form-text text-muted">Please enter your Postcode.</span> -->
 																						</div>
 																					</div>
 																					<!--end::Group-->
 																					<!--begin::Group-->
 																					<div class="col-xl-6">
 																						<div class="form-group">
-																							<label>City</label>
+																							<!-- <label>City</label>
 																							<input type="text" class="form-control form-control-solid form-control-lg" name="city" placeholder="City" value="Melbourne" />
-																							<span class="form-text text-muted">Please enter your City.</span>
+																							<span class="form-text text-muted">Please enter your City.</span> -->
 																						</div>
 																					</div>
 																					<!--end::Group-->
@@ -481,9 +483,9 @@
 																					<div class="col-xl-6">
 																						<!--begin::Group-->
 																						<div class="form-group">
-																							<label>State</label>
+																							<!-- <label>State</label>
 																							<input type="text" class="form-control form-control-solid form-control-lg" name="state" placeholder="State" value="VIC" />
-																							<span class="form-text text-muted">Please enter your State.</span>
+																							<span class="form-text text-muted">Please enter your State.</span> -->
 																						</div>
 																						<!--end::Group-->
 																					</div>
@@ -537,36 +539,8 @@
 
 										<!--begin::Dropdown-->
 									<div class="btn-group ml-2">
-										<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
-										<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-										<div class="dropdown-menu dropdown-menu-sm p-0 m-0 dropdown-menu-right">
-											<ul class="navi py-5">
-												<li class="navi-item">
-													<a href="#" class="navi-link">
-														<span class="navi-icon">
-															<i class="flaticon2-writing"></i>
-														</span>
-														<span class="navi-text">Save &amp; continue</span>
-													</a>
-												</li>
-												<li class="navi-item">
-													<a href="#" class="navi-link">
-														<span class="navi-icon">
-															<i class="flaticon2-medical-records"></i>
-														</span>
-														<span class="navi-text">Save &amp; add new</span>
-													</a>
-												</li>
-												<li class="navi-item">
-													<a href="#" class="navi-link">
-														<span class="navi-icon">
-															<i class="flaticon2-hourglass-1"></i>
-														</span>
-														<span class="navi-text">Save &amp; exit</span>
-													</a>
-												</li>
-											</ul>
-										</div>
+										<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
+										
 									</div>
 									<!--end::Dropdown-->
 																			</div>
@@ -624,21 +598,76 @@
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 	</script>
 	<!--begin::Global Config(global config for global JS scripts)-->
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script>
-$(document).ready(function(){
-$('#selectcontact').on('change', function (e) {
-    var optionSelected = $("option:selected", this);
-    var valueSelected = this.value;
-		$.post('http://example.com/form.php', {category:'client', type:'premium'}, function(response){ 
-      alert("success");
-      $("#mypar").html(response.name);
-      $("#mypar").html(response.address);
-      $("#mypar").html(response.contact);
-});
-});
-
-});
+	$(document).ready(function(){
+		$('#selfamount').change(function(){
+         var selfamount = $('#selfamount').val();
+         var bookingamount = $('#bookingamount').val();
+         $('#bank').val(bookingamount-selfamount);
+		});
+		$('#contact').change(function(){
+			var type = $('#contact option:selected').val(); 
+			$.ajax({
+				url: "fetchcontact",
+				method: "POST",
+				data : {id : type},
+				dataType:'JSON',
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+				success: function (result) {
+					$('#name').val(result.name);
+					$('#mobile').val(result.mobile);
+					$('#address').val(result.address);
+				}
+				});
+		});
+		$('#product').change(function(){
+			var id = $('#product option:selected').val(); 
+			$.ajax({
+				url: "fetchproduct",
+				method: "POST",
+				data : {id : id},
+				dataType:'JSON',
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+				success: function (result) {
+					$('#productprice').val(result.productprice);
+				}
+				});
+		});
+		$("#form").submit(function(e){
+          e.preventDefault();
+          $('.field_error').html('');
+          $.ajax({
+            url:'addBooking',
+			method:"POST",
+			data:$('#form').serialize(),
+			dataType:'JSON',
+            success:function(result){
+              if (result.status == 'error') {
+				$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
+                $.each(result.error,function(key,val){
+                  // console.log(key);
+                  // console.log(val);
+                  $('#'+key+'_error').html(val[0]);
+                })
+              }else if(result.status == 'success'){
+                $('.form')[0].reset();
+				$('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
+                setTimeout(function(){
+                   window.location.href = '../CRM/bookings'; 
+                }, 1000);
+              }
+            },
+            complete:function(){
+          		$('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
+        	}
+          });
+        });
+	});
 	</script>
 	<script>
 		var KTAppSettings = {

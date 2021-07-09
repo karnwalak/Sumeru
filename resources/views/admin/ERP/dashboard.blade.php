@@ -150,7 +150,7 @@
 												<!--end::User-->
 												<!--begin::Name-->
 												<div class="my-0">
-													<a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4">CRM</a>
+													<a href="../CRM/crmdashboard" class="text-dark font-weight-bold text-hover-primary font-size-h4">CRM</a>
 												</div>
 												<!--end::Name-->
 											</div>
