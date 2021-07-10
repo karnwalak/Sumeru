@@ -232,25 +232,25 @@
 											</div>
 											<!--end::Details-->
 											<div class="row" style="justify-content:center;">
-														<ul class="nav nav-pills" id="myTab" role="tablist">
+											            <ul class="nav nav-pills" id="myTab" role="tablist">
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px 20px 20px;">
-																				<a href="#" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Today</a>
+																				<a href="sortleads/{{'today'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Today</a>
 																		</div>
 																</li>
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px;">
-																				<a href="#" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Future</a>
+																				<a href="sortleads/{{'future'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Future</a>
 																		</div>
 																</li>
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px;">
-																				<a href="#" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Sent By Me</a>
+																				<a href="sortleads/{{'sentbyme'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Sent By Me</a>
 																		</div>
 																</li>
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px;">
-																				<a href="#" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Dead</a>
+																				<a href="sortleads/{{'dead'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Dead</a>
 																		</div>
 																</li>
 														</ul>

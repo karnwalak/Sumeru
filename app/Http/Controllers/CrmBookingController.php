@@ -12,6 +12,18 @@ use Illuminate\Support\Facades\DB;
 use Validator;
 class CrmBookingController extends Controller
 {
+    public function sortbookings(Request $req,$st){
+        $data = crm_booking::where('status','=',$st)
+        ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
+        ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
+        // ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_email','flat_ inventories.flat_stock_name']);
+        ->paginate(10);
+        if ($data) {
+            return view('../admin/CRM/shortbooking',compact('data'));
+        }else{
+            return redirect('../admin/CRM/bookings');
+        }
+    }
    public function showdata(Request $req)
    {
        return view('../admin/CRM/createbookings') 
@@ -45,6 +57,7 @@ class CrmBookingController extends Controller
         ]);
    }
    public function addBooking(Request $req){
+    // return $req;
     $valid = Validator::make($req -> all(),[
         'contact' => 'required|not_in:0',
         'name' => 'required',
@@ -68,22 +81,34 @@ class CrmBookingController extends Controller
         $maxid =$mid + 1;
         $ba = $req -> post('bookingamount');
         $date = date('y-m-d');
+        if ($req -> post('bank') == 0) {
+           $stat = 'booked';
+        }else{
+           $stat = 'partiallybooked';
+        }
         $data = [
-         'id' =>9,
+         'id' =>12,
          'contact_id' =>$req -> post('contact'),
          'product_id' =>$req -> post('product'),
          'total_amount' =>$req -> post('productprice'),
          'booking_amount' =>$req -> post('bookingamount'),
          'booking_date' =>date('y-m-d'),
-         'status' => 'Active',
+         'status' => $stat,
          'next_remainder' =>'NA',
          'employee_id' =>0,
          'payment_by_banker' =>$req -> post('bank'),
          'payment_by_self' =>$req -> post('self'),
         ];
         $res = crm_booking::insert($data);
-        $payment = DB::INSERT("INSERT INTO crm_booking_payment_plans (booking_id,booking_price,days) VALUES('$maxid','$ba','$date')");
-        if($res && $payment){
+        for ($i=0; $i < count($req -> amount) ; $i++) {
+            $data2 = [
+             'booking_id' => $maxid,
+             'booking_price' => $req -> amount[$i],
+             'days' => $req -> date[$i],
+            ];
+            $dd2 = DB::table('crm_booking_payment_plans') -> insert($data2);
+         }
+        if($res && $dd2){
             return response() -> json(['status' => 'success',
              'msg' => 'Booking successfull!'
             ]);
@@ -96,10 +121,12 @@ class CrmBookingController extends Controller
    }
    public function show(Request $req)
    {
-    $booking = crm_booking::where('status','!=','delete')
+    $booking = crm_booking::orderBy('crm_bookings.id', 'DESC')
+    ->where('status','!=','delete')
     ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
     ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
-    ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_email','flat_ inventories.flat_stock_name']);
+    // ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_email','flat_ inventories.flat_stock_name'])
+    ->paginate(10);
     return view('../admin/CRM/bookings') -> with('data',$booking);
    }
    public function deletebooking($id)
@@ -117,14 +144,15 @@ class CrmBookingController extends Controller
     }
    }
    public function bookingsview(Request $req,$id){
-    $payment = crm_booking_payment_plan::join('crm_booking_payment_logs','crm_booking_payment_plans.booking_id','=','crm_booking_payment_logs.booking_id')
-    ->where('crm_booking_payment_logs.booking_id','=',$id)
-    ->get(['crm_booking_payment_logs.*','crm_booking_payment_plans.*']);
+    // $payment = crm_booking_payment_log::join('crm_booking_payment_plans','crm_booking_payment_logs.booking_id','=','crm_booking_payment_plans.booking_id')
+    // ->where('crm_booking_payment_plans.booking_id','=',$id)
+    // ->get(['crm_booking_payment_logs.*','crm_booking_payment_plans.*']);
+    $payment = crm_booking_payment_log::where('booking_id','=',$id)->get();
     $booking = crm_booking::where('status','!=','delete')
     ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
     ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
     ->where('crm_bookings.id','=',$id)
-    ->get(['crm_bookings.*','crm_contacts.*','flat_ inventories.flat_stock_name']);
+    ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name']);
     return view('../admin/CRM/bookingsview') 
     -> with('payment',$payment)
     -> with('booking',$booking);
@@ -149,7 +177,13 @@ class CrmBookingController extends Controller
            'comment'  => $req -> post('comment'),
         ];
         $res = crm_booking_payment_log::insert($data);
-        if ($res) {
+        $data2 = [
+            'booking_id'  => $req -> post('booking_id'),
+            'booking_price'  => $req -> post('amount'),
+            'days'  =>  date('y-m-d'),
+        ];
+        $res2 = crm_booking_payment_plan::insert($data2);
+        if ($res && $res2) {
             return response() -> json([
               'status' => 'success',
               'msg' => 'Payment Added!'
@@ -162,4 +196,60 @@ class CrmBookingController extends Controller
         }
     }
    }
+   public function index(Request $req){
+    $cname = $req -> post('name');
+    $category_name = $cname; 
+    $st = $req -> post('status');
+    $status = $st; 
+    // return $req;
+    if ($category_name == null && $status == null) {
+        $booking = crm_booking::where('status','!=','delete')
+                ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
+                ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
+                // ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name'])
+                ->paginate(10);    
+        if ($booking) {
+            return view('../admin/CRM/searchbooking',compact('booking'));
+        }else{
+            return redirect('../admin/CRM/bookings');
+        }
+    }else if ($category_name == $cname && $status == null) {
+        $booking = crm_booking::where('status','!=','delete')
+                ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
+                ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
+                ->where('crm_contacts.contact_full_name','like', '%' . $cname . '%')
+                // ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name']);
+                ->paginate(10);  
+        if ($booking) {
+            return view('../admin/CRM/searchbooking',compact('booking'));
+        }else{
+            return redirect('../admin/CRM/bookings');
+        }
+    }else if ($category_name == null && $status == $st) {
+        $booking = crm_booking::where('status','!=','delete')
+        ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
+        ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
+        ->where('crm_bookings.status','=', $st)
+        // ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name']); 
+        ->paginate(10);   
+        if ($booking) {
+            return view('../admin/CRM/searchbooking',compact('booking'));
+        }else{
+            return redirect('../admin/CRM/bookings');
+        }
+    }else if ($category_name == $cname && $status == $st) {
+        $booking = crm_booking::where('status','!=','delete')
+        ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
+        ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
+        ->where('crm_contacts.contact_full_name','like', '%' . $cname . '%')
+        ->where('crm_bookings.status','=', $st)
+        // ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name']);  
+        ->paginate(10);  
+        if ($booking) {
+            return view('../admin/CRM/searchbooking',compact('booking'));
+        }else{
+            return redirect('../admin/CRM/bookings');
+        }
+    }
+}
 }

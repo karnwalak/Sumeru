@@ -150,10 +150,13 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::post('admin/HR/edithrallowence',[HrAllowenceController::class,'edithrallowence']);
         // Route::view('admin/HR/addhrdesignation','admin/HR/addhrdesignation');
         Route::view('admin/HR/addshifts','admin/HR/addshifts');
-        // Route::view('admin/HR/addtasks','admin/HR/addtasks');
+        Route::view('admin/HR/shorttasks','admin/HR/shorttasks');
         Route::post('admin/HR/addtasks',[HrTaskController::class,'create']);
+        Route::post('admin/HR/serachtask',[HrTaskController::class,'index']);
         Route::get('admin/HR/viewtasks/{id}',[HrTaskController::class,'view']);
+        Route::get('admin/HR/task/{st}',[HrTaskController::class,'mytask']);
         Route::view('admin/HR/addhrallowances','admin/HR/addhrallowances');
+        Route::view('admin/HR/searchtask','admin/HR/searchtask');
         // Route::view('admin/HR/hrallowance','admin/HR/hrallowance');
         Route::view('admin/HR/allowances','admin/HR/allowances');
         // Route::view('admin/HR/editemployees','admin/HR/editemployees');
@@ -178,6 +181,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/CRM/createleads',[CrmLeadController::class,'show']);
         Route::post('admin/CRM/updateleads',[CrmLeadController::class,'updateleads']);
         Route::post('admin/CRM/searchlead',[CrmLeadController::class,'index']);
+        Route::get('admin/CRM/sortleads/{st}',[CrmLeadController::class,'sortleads']);
         Route::get('admin/CRM/leads',[CrmLeadController::class,'showdata']);
         Route::post('admin/CRM/addleads',[CrmLeadController::class,'addleads']);
         Route::post('admin/CRM/addContact',[CrmContactController::class,'addContact']);
@@ -186,19 +190,24 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/CRM/deletecontact/{id}',[CrmContactController::class,'deletecontact']);
         Route::post('admin/CRM/editcontactstatus',[CrmContactController::class,'editstatus']);
         Route::view('admin/CRM/editleads','admin/CRM/editleads');
+        Route::view('admin/CRM/sortleads','admin/CRM/sortleads');
         Route::get('admin/CRM/contacts',[CrmContactController::class,'showdata']);
         Route::get('admin/CRM/createbookings',[CrmBookingController::class,'showdata']);
         Route::get('admin/CRM/bookings',[CrmBookingController::class,'show']);
         Route::get('admin/CRM/deletebooking/{id}',[CrmBookingController::class,'deletebooking']);
         Route::post('admin/CRM/fetchcontact',[CrmBookingController::class,'fetchcontact']);
+        Route::get('admin/CRM/sortbookings/{st}',[CrmBookingController::class,'sortbookings']);
         Route::post('admin/CRM/fetchproduct',[CrmBookingController::class,'fetchproduct']);
         Route::post('admin/CRM/addBooking',[CrmBookingController::class,'addBooking']);
         Route::post('admin/CRM/addPayment',[CrmBookingController::class,'addPayment']);
+        Route::post('admin/CRM/searchbooking',[CrmBookingController::class,'index']);
+        Route::view('admin/CRM/shortbooking','admin/CRM/shortbooking');
         Route::view('admin/CRM/editcontacts','admin/CRM/editcontacts');
         Route::get('admin/CRM/bookingsview/{id}',[CrmBookingController::class,'bookingsview']);
-        Route::view('admin/CRM/bookings','admin/CRM/bookings');
+        // Route::view('admin/CRM/bookings','admin/CRM/bookings');
         // Route::view('admin/CRM/bookingsview','admin/CRM/bookingsview');
         Route::view('admin/CRM/cashcredit','admin/CRM/cashcredit');
+        Route::view('admin/CRM/searchbooking','admin/CRM/searchbooking');
         Route::get('admin/CRM/contactview/{id}',[CrmContactController::class,'contactview']);
         Route::get('admin/CRM/editcontacts/{id}',[CrmContactController::class,'edit']);
         Route::get('admin/logout', function () {

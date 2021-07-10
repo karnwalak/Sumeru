@@ -3,14 +3,15 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <meta charset="utf-8" />
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<meta charset="utf-8" />
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<!--begin::Fonts-->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-	<!--end::Fonts-->
-	<!--begin::Page Vendors Styles(used by this page)-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Page Vendors Styles(used by this page)-->
 	<link href="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.css?v=7.2.8"
 	rel="stylesheet" type="text/css" />
 	<link href="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.css?v=7.2.8" rel="stylesheet"
@@ -25,6 +26,8 @@
 	<!--end::Global Theme Styles-->
 	<!--begin::Layout Themes(used by all pages)-->
 	<link rel="shortcut icon" href="/../img/icon.jpg" />
+	<!--end::Global Theme Styles-->
+	<!--begin::Layout Themes(used by all pages)-->	
 	<style>
 	#button{
 		height:30px;
@@ -34,10 +37,6 @@
 		background:green;
 		color:white;
 	}
-	.hiddenField {
-  display: none;
-}
-
 	</style>
 </head>
 <!--end::Head-->
@@ -105,7 +104,7 @@
 				</div>
 				<!--end::Brand-->
 				<!--begin::Nav Wrapper-->
-				@include('admin/sidebar')
+					@include('admin/sidebar')
 				<!--end::Nav Wrapper-->
 				<!--begin::Footer-->
 				<div class="aside-footer d-flex flex-column align-items-center flex-column-auto py-8">
@@ -135,53 +134,21 @@
 			<!--begin::Wrapper-->
 			<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 				<!-- add header -->
-				@include('admin/CRM/header')
+				@include('admin/HR/header')
 				<!-- add header end -->
 					<!--begin::Content-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 							<!--begin::Subheader-->
 							<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
 									<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-											<!--begin::Toolbar-->
-											<div class="d-flex align-items-center">
-													<!--begin::Button-->
-													<a href="/metronic/demo4/.html" class=""></a>
-													<!--end::Button-->
-													<!--begin::Button-->
-													<!--end::Button-->
-											</div>
-											<!--end::Toolbar-->
-									</div>
-							</div>
-							<!--end::Subheader-->
-							<!--begin::Entry-->
-							<div class="d-flex flex-column-fluid">
-									<!--begin::Container-->
-									<div class="container">
-									<div class="row p-3 justify-content-center">
-									@if ($message = Session::get('success'))
-									<div class="col-md-6 alert alert-primary alert-block">
-										<button type="button" class="close" data-dismiss="alert">×</button>    
-										<strong>{{ $message }}</strong>
-									</div>
-									@endif
-									@if ($message = Session::get('error'))
-									<div class="col-md-6 alert alert-danger alert-block">
-										<button type="button" class="close" data-dismiss="alert">×</button>    
-										<strong>{{ $message }}</strong>
-									</div>
-									@endif
-									</div>
-											<!--begin::Card-->
-											<div class="card card-custom">
 											<!--begin::Details-->
 											<div class="d-flex align-items-center flex-wrap mr-2">
 													<!--begin::Title-->
+													<!-- <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Employees</h5> -->
 													<!--end::Title-->
 													<!--begin::Separator-->
 													<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
 													<!--end::Separator-->
-														<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5 pl-10 pt-5">Leads	</h5>
 													<!--begin::Group Actions-->
 													<div class="d-flex- align-items-center flex-wrap mr-2 d-none" id="kt_subheader_group_actions">
 															<div class="text-dark-50 font-weight-bold">
@@ -231,26 +198,44 @@
 													<!--end::Group Actions-->
 											</div>
 											<!--end::Details-->
-											<div class="row" style="justify-content:center;">
+											<!--begin::Toolbar-->
+											<div class="d-flex align-items-center">
+													<!--begin::Button-->
+													<a href="/metronic/demo4/.html" class=""></a>
+													<!--end::Button-->
+													<!--begin::Button-->
+													<!--end::Button-->
+											</div>
+											<!--end::Toolbar-->
+									</div>
+							</div>
+							<!--end::Subheader-->
+							<!--begin::Entry-->
+							<div class="d-flex flex-column-fluid">
+									<!--begin::Container-->
+									<div class="container">
+											<!--begin::Card-->
+											<div class="card card-custom">
+												<div class="row" style="justify-content:center;">
 														<ul class="nav nav-pills" id="myTab" role="tablist">
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px 20px 20px;">
-																				<a href="sortleads/{{'today'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Today</a>
+																				<a href="task/{{'mytask'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">My Tasks</a>
 																		</div>
 																</li>
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px;">
-																				<a href="sortleads/{{'future'}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Future</a>
+																				<a href="task/{{'ongoing'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">On Going</a>
 																		</div>
 																</li>
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px;">
-																				<a href="sortleads/{{'sentbyme'}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Sent By Me</a>
+																				<a href="task/{{'setbyme'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Set By Me</a>
 																		</div>
 																</li>
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px;">
-																				<a href="sortleads/{{'dead'}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Dead</a>
+																				<a href="task/{{'assisting'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Assisting</a>
 																		</div>
 																</li>
 														</ul>
@@ -258,25 +243,64 @@
 													<!--begin::Header-->
 													<div class="card-header flex-wrap border-0 pt-6 pb-0">
 															<div class="card-title">
-																	<h3 class="card-label">
+																	<h3 class="card-label">Search Result
 																			<!-- <span class="d-block text-muted pt-2 font-size-sm">User management made easy</span> -->
 																	</h3>
 															</div>
 															<div class="card-toolbar">
 																	<!--begin::Button-->
-																	<a href="#">
-																	<a href="leads" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
-																	</a>
+																	<a href="tasksandprojects" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
 																	<!--end::Button-->
 															</div>
 													</div>
 													<!--end::Header-->
 													<!--begin::Body-->
-													<div class="card-body">
-															<!--begin: Datatable-->
 
-															<div class="card card-custom gutter-b">
+
+													<div class="card-body">
+											<!--begin: Datatable-->
+
+
+											<div class="card card-custom gutter-b">
 										<div class="card-body">
+											<!--begin: Search Form-->
+											<!--begin::Search Form-->
+											<!-- <form action="serachtask" method="post">
+											{{@csrf_field()}}
+											<div class="mb-7">
+												<div class="row align-items-center">
+													<div class="col-lg-7 col-xl-7">
+														<div class="row align-items-center">
+															<div class="col-md-5 my-2 my-md-0">
+																<div class="input-icon">
+																	<input type="text" name="task" class="form-control" placeholder="Search..." id="kt_datatable_search_query">
+																	<span>
+																	<i class="flaticon2-search-1 text-muted"></i>
+																	</span>
+																</div>
+															</div>
+															<div class="col-md-7 my-2 my-md-0">
+																<div class="row">
+																	<label class="col-form-label text-left col-lg-4 col-sm-12">Status</label>
+																	<div class="col-lg-8 col-md-8	 col-sm-12" data-select2-id="242">
+																		<select class="form-control" id="kt_select2_1" name="status">
+																			<option value="">Select</option>
+																			<option value="pending">Pending</option>
+																			<option value="ongoing">Ongoing</option>
+																			<option value="complete">Complete</option>
+																		</select>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-lg-5 col-xl-5 ">
+														<button type="submit" class="btn btn-light-primary px-6 font-weight-bold">Search</button>
+													</div>
+												</div>
+											</div>
+											</form> -->
+											<!--end::Search Form-->
 											<!--end: Search Form-->
 											<!--begin: Selected Rows Group Action Form-->
 											<div class="mt-10 mb-5 collapse" id="kt_datatable_group_action_form">
@@ -316,63 +340,63 @@
 												<table class="datatable-table" style="display: block;">
 													<thead class="datatable-head">
 														<tr class="datatable-row" style="left: 0px;">
+															<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 															<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
-															<th data-field="Name" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Name</span></th>
-															<th data-field="Contact" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Contact</span></th>
-															<th data-field="Email" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Email</span></th>
-															<th data-field="Product" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Product</span></th>
-															<th data-field="LeadSource" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Lead Source</span></th>
-															<th data-field="StartDate" class="datatable-cell datatable-cell-sort"><span style="width: 80px;">Start Date</span></th>
+															<th data-field="TaskName" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Task Name</span></th>
+															<th data-field="Active" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Active</span></th>
+															<th data-field="Deadline" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Deadline</span></th>
+															<th data-field="CreatedBy" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Created By</span></th>
+															<th data-field="Responsible" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Responsible</span></th>
+															<th data-field="Des" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Description</span></th>
 															<th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Status</span></th>
-															<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 150px;">Actions</span></th>
+															<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 170px;">Actions</span></th>
 														</tr>
 													</thead>
 													<tbody class="datatable-body" style="">
 													<?php $a = 1; ?>
-													@foreach($data as $value)
+													@foreach($tasks as $task)
 														<tr data-row="0" class="datatable-row" style="left: 0px;">
+															<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
 															<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
-															<td data-field="Name" aria-label="Aman Rajvanshi" class="datatable-cell"><span style="width: 100px;">{{$value -> lead_name}}</span></td>
-															<td data-field="Contact" aria-label="9876543210" class="datatable-cell"><span style="width: 100px;">{{$value -> lead_contact}}</span></td>
-															<td data-field="Email" aria-label="abcd@email.com" class="datatable-cell"><span style="width: 100px;">{{$value -> lead_email}}</span></td>
-															<td data-field="Product" aria-label="2BHK Flat" class="datatable-cell"><span style="width: 100px;">{{$value -> category_name}}</span></td>
-															<td data-field="LeadSource" aria-label="Cold Calling" class="datatable-cell"><span style="width: 100px;">{{$value -> lead_source}}</span></td>
-															<td data-field="StartDate" aria-label="19/1/2021" class="datatable-cell"><span style="width: 80px;">{{$value -> lead_start_date}}</span></td>
-															<td data-field="Status" aria-label="5" class="datatable-cell">
-															<span style="width: 100px;">
-															<button class="btn btn-danger">{{$value -> lead_status}}</button>
-															</span>
-															</td>
+															<td data-field="Name" aria-label="Flooring" class="datatable-cell"><span style="width: 100px;">{{$task -> task_title}}</span></td>
+															<td data-field="Active" aria-label="09876543212" class="datatable-cell"><span style="width: 100px;">09876543212</span></td>
+															<td data-field="Deadline" aria-label="06/2/2024" class="datatable-cell"><span style="width: 100px;">{{$task -> deadline}}</span></td>
+															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">
+															<?php 
+																$pid = $task -> created_by;
+																$pdata = DB::SELECT("SELECT * FROM users WHERE id = $pid"); 
+																foreach ($pdata as  $pval) {
+																}
+																echo $pval -> user_email;
+															?>
+															</span></td>
+															<td data-field="Responsible" aria-label="Akash Rikh" class="datatable-cell"><span style="width: 100px;">
+															<?php 
+																$pid = $task -> emplyee_id;
+																$pdata = DB::SELECT("SELECT * FROM hr_employees WHERE id = $pid"); 
+																foreach ($pdata as  $pval) {
+																}
+																echo $pval -> employee_name;
+															?>
+															</span></td>
+															<td data-field="CreatedBy" aria-label="#######" class="datatable-cell"><span style="width: 100px;">{!!$task -> task_discription!!}</span></td>
+															<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value="{{$task -> task_status}}" style="color:white" onclick="setColor(event, 'button', '#101010')"; data-count="1" /></span></td>
 															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																<button data-toggle="modal" data-id="{{$value -> id}}" id="editbutton" data-target="#exampleModalCenter" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">
-																	<span class="svg-icon svg-icon-md">
-																		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																			<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																				<rect x="0" y="0" width="24" height="24"></rect>
-																				<path d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "></path>
-																				<rect fill="#000000" opacity="0.3" x="5" y="20" width="15" height="2" rx="1"></rect>
-																			</g>
-																		</svg>
-																	</span>
-																</button>
-																<a href="deletelead/{{$value -> id}}" onclick="return confirm('Are you sure!')" class="btn btn-sm btn-clean btn-icon" title="Delete">
-																	<span class="svg-icon svg-icon-md">
-																		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																			<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																				<rect x="0" y="0" width="24" height="24"></rect>
-																				<path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero"></path>
-																				<path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"></path>
-																			</g>
-																		</svg>
-																	</span>
-																</a>
+																<span style="overflow: visible; position: relative; width: 170px;">
+																	<a href="viewtasks/{{$task -> id}}" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
+																		<span class="svg-icon svg-icon-md">
+																		<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
+																		</span>
+																	</a>
+																</span>
 															</td>
 														</tr>
 													@endforeach
 													</tbody>
 												</table>
-												<!-- <div class="datatable-pager datatable-paging-loaded">
-													<ul class="datatable-pager-nav my-2 mb-sm-0">
+												<div class="datatable-pager datatable-paging-loaded">
+												
+													<!-- <ul class="datatable-pager-nav my-2 mb-sm-0">
 														<li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
 														<li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
 														<li style="display: none;"><input type="text" class="datatable-pager-input form-control" title="Page number"></li>
@@ -383,8 +407,8 @@
 														<li><a class="datatable-pager-link datatable-pager-link-number" data-page="5" title="5">5</a></li>
 														<li><a title="Next" class="datatable-pager-link datatable-pager-link-next" data-page="2"><i class="flaticon2-next"></i></a></li>
 														<li><a title="Last" class="datatable-pager-link datatable-pager-link-last" data-page="35"><i class="flaticon2-fast-next"></i></a></li>
-													</ul>
-													<div class="datatable-pager-info my-2 mb-sm-0">
+													</ul> -->
+													<!-- <div class="datatable-pager-info my-2 mb-sm-0">
 														<div class="dropdown bootstrap-select datatable-pager-size" style="width: 60px;">
 															<select class="selectpicker datatable-pager-size" title="Select page size" data-width="60px" data-container="body" data-selected="10">
 																<option class="bs-title-option" value=""></option>
@@ -395,10 +419,9 @@
 																<option value="50">50</option>
 																<option value="100">100</option>
 															</select>
-															 <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-5" aria-haspopup="listbox" aria-expanded="false" title="Select page size">
+															<button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-5" aria-haspopup="listbox" aria-expanded="false" title="Select page size">
 																<div class="filter-option">
 																	<div class="filter-option-inner">
-																		 <div class="filter-option-inner-inner">10</div>
 																	</div>
 																</div>
 															</button>
@@ -409,70 +432,12 @@
 															</div>
 														</div>
 														<span class="datatable-pager-detail">Showing 1 - 10 of 350</span>
-													</div>
-												</div> -->
+													</div> -->
+												</div>
 											</div>
 											<!--end: Datatable-->
 										</div>
 									</div> 
-													<!-- Modal -->
-													<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-													
-													<form id="form">
-													{{@csrf_field()}}
-														<div class="modal-dialog modal-dialog-centered" role="document">
-															<div class="modal-content">
-															<div class="row justify-content-center py-5" id="msg"></div>
-																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLongTitle">Update Lead</h5>
-																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<div class="modal-body">
-																<input id="feed_id" type="hidden" name="pid" value=""/>																			
-																	<div class="form-group row" data-select2-id="243">
-																		<label class="col-form-label text-left col-lg-12 col-sm-12">Status</label>
-																		<div class="col-lg-12 col-md-12 col-sm-12" data-select2-id="242">
-																			<select class="form-control" name="status" id="myOptions">
-																			<option value="">Select</option>
-																			<option value="Pending">Pending</option>
-																			<option value="NextFollowup">Next Follow-Up</option>
-																			<option value="InProgress">In Progress</option>
-																			<option value="Dead">Dead</option>
-																			<option value="Convert">Convert</option>
-																			</select>
-																			<span class="field_error text-danger" id="status_error"></span>
-																		</div>
-																	</div>																				
-																	<!-- <div class="form-group row">
-																				<label class="col-xl-12 col-lg-12 col-form-label">Next Follow-Up</label>
-																				<div class="col-lg-9 col-xl-9">
-																					<div class="input-group input-group-solid input-group-lg">
-																						<input type="date" class="form-control form-control-solid form-control-lg hiddenField" name="dob" placeholder="Username" value="NFU" id="myTextBox"/>
-																						<div class="input-group-append">
-																						</div>
-																					</div>
-																				</div>
-																			</div> -->
-																	<div class="row" style="margin:10px">
-																		<div class="form-group row">
-																			<label class="col-xl-12 col-lg-12 col-form-label">Comment</label>
-																				<div class="col-lg-12 col-xl-12">
-																					<textarea class="form-control form-control-solid form-control-lg" name="comment" cols="60" rows="4"></textarea>
-																					<span class="field_error text-danger" id="comment_error"></span>
-																				</div>
-																		</div>
-																	</div>
-																	<div class="row"></div>
-																</div>
-																<div class="modal-footer">
-																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-																	<button type="submit" class="btn btn-primary">Save changes</button>
-																</div>
-															</div>
-														</div>
-														</form>
 													</div>
 													<!--end::Body-->
 											</div>
@@ -511,6 +476,7 @@
 		</span>
 	</div>
 	<!--end::Scrolltop-->
+	</script>
 	<script>
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 	</script>
@@ -575,87 +541,42 @@
 			"font-family": "Poppins"
 		};
 	</script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-	<script type="text/javascript">
-        $(document).ready(function(){
-        $("#form").submit(function(e){
-          e.preventDefault();
-          $('.field_error').html('');
-          $.ajax({
-            url:'updateleads',
-            data:$("#form").serialize(),
-            type:'post',
-            success:function(result){
-              if (result.status == 'error') {
-				$('#msg').html("<div class='col-md-10 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
-                $.each(result.error,function(key,val){
-                  // console.log(key);
-                  // console.log(val);
-                  $('#'+key+'_error').html(val[0]);
-                })
-              }else if(result.status == 'success'){
-                $('.form')[0].reset();
-				$('#msg').html("<div class='col-md-10 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
-                setTimeout(function(){
-                   window.location.href = '../CRM/leads'; 
-                }, 1000);
-              }
-            },
-            complete:function(){
-          		$('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
-        	}
-          });
-        })
-      });
-    </script>
-	<script>
-	$(document).ready(function () {
-    $('body').on('click', '#editbutton',function(){
-        document.getElementById("feed_id").value = $(this).attr('data-id');
-            console.log($(this).attr('data-id'));
-        });
-    });
-	</script>
-    <!-- <script>
-		$(document).ready(function() {
-		$("select#myOptions").change(function() {
-			var selectedCountry = $("#myOptions option:selected").text();
-			if (selectedCountry == "Next Follow-Up") {
-			$('#myTextBox').css('display','block');
-			} else{
-			$('#myTextBox').css('display','none');
-			}
-		});
-		});
-	</script> -->
-<script>
-    var count = 1;
-    function setColor(btn, color) {
-        var property = document.getElementById(btn);
-        if (count == 0) {
-            property.style.backgroundColor = "green";
-						document.getElementById(btn).value ="Active";
-            count = 1;        
-        }
-        else {
-            property.style.backgroundColor = "red";
-						document.getElementById(btn).value ="Deactive";
-            count = 0;
-        }
-    }
+			<script>
+    // var count = 1;
+    // function setColor(btn, color) {
+    //     var property = document.getElementById(btn);
+    //     if (count == 0) {
+    //         property.style.backgroundColor = "green";
+				// 		document.getElementById(btn).value ="Active";
+    //         count = 1;        
+    //     }
+    //     else {
+    //         property.style.backgroundColor = "red";
+				// 		document.getElementById(btn).value ="Inactive";
+    //         count = 0;
+    //     }
+    // }
+				// document.getElementById("button").style.background='#000000';
+				function setColor(e, btn, color) {
+  var target = e.target,
+      count = +target.dataset.count;
+  
+   target.style.backgroundColor = count === 1 ? "green" : '#ff0000';
+   target.dataset.count = count === 1 ? 0 : 1;
+}
 </script>
 	<!--end::Global Config-->
 	<!--begin::Global Theme Bundle(used by all pages)-->
-	<script src="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.js?v=7.2.8"></script>
-	<script src="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.js?v=7.2.8"></script>
-	<script src="/../theme/html/demo4/dist/assets/js/scripts.bundle49d8.js?v=7.2.8"></script>
-	<!--end::Global Theme Bundle-->
-	<!--begin::Page Vendors(used by this page)-->
-	<script src="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.js?v=7.2.8"></script>
-	<script src="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.js?v=7.2.8"></script>
-	<!--end::Page Vendors-->
-	<!--begin::Page Scripts(used by this page)-->
-	<script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
+    <script src="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.js?v=7.2.8"></script>
+    <script src="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.js?v=7.2.8"></script>
+    <script src="/../theme/html/demo4/dist/assets/js/scripts.bundle49d8.js?v=7.2.8"></script>
+    <!--end::Global Theme Bundle-->
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.js?v=7.2.8"></script>
+    <script src="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.js?v=7.2.8"></script>
+    <!--end::Page Vendors-->
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
 	<!--end::Page Scripts-->
 </body>
 <!--end::Body-->

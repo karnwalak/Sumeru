@@ -8,7 +8,15 @@ use Illuminate\Support\Facades\DB;
 use Validator;
 class CrmLeadController extends Controller
 {
-    
+    public function sortleads(Request $req,$st){
+        $data = crm_lead::where('lead_status','=',$st)->join('flat_categories','crm_leads.product','=','flat_categories.id')
+                ->get(['crm_leads.*','flat_categories.category_name']);
+        if ($data) {
+            return view('../admin/CRM/sortleads',compact('data'));
+        }else{
+            return redirect('../admin/CRM/leads');
+        }
+    }
     public function addleads(Request $req)
     {
         $valid = Validator::make($req -> all(),[

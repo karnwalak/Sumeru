@@ -3,6 +3,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta charset="utf-8" />
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
@@ -219,22 +220,22 @@
 														<ul class="nav nav-pills" id="myTab" role="tablist">
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px 20px 20px;">
-																				<a href="#" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">My Tasks</a>
+																				<a href="task/{{'mytask'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">My Tasks</a>
 																		</div>
 																</li>
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px;">
-																				<a href="#" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">On Going</a>
+																				<a href="task/{{'ongoing'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">On Going</a>
 																		</div>
 																</li>
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px;">
-																				<a href="#" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Set By Me</a>
+																				<a href="task/{{'setbyme'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Set By Me</a>
 																		</div>
 																</li>
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px;">
-																				<a href="#" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Assisting</a>
+																				<a href="task/{{'assisting'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Assisting</a>
 																		</div>
 																</li>
 														</ul>
@@ -264,13 +265,15 @@
 										<div class="card-body">
 											<!--begin: Search Form-->
 											<!--begin::Search Form-->
+											<form action="serachtask" method="post">
+											{{@csrf_field()}}
 											<div class="mb-7">
 												<div class="row align-items-center">
 													<div class="col-lg-7 col-xl-7">
 														<div class="row align-items-center">
 															<div class="col-md-5 my-2 my-md-0">
 																<div class="input-icon">
-																	<input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query">
+																	<input type="text" name="task" class="form-control" placeholder="Search..." id="kt_datatable_search_query">
 																	<span>
 																	<i class="flaticon2-search-1 text-muted"></i>
 																	</span>
@@ -280,19 +283,11 @@
 																<div class="row">
 																	<label class="col-form-label text-left col-lg-4 col-sm-12">Status</label>
 																	<div class="col-lg-8 col-md-8	 col-sm-12" data-select2-id="242">
-																		<select class="form-control" id="kt_select2_1" name="param">
-																			<option value="AK">Alaska</option>
-																			<option value="HI">Hawaii</option>
-																			<option value="CA">California</option>
-																			<option value="NV">Nevada</option>
-																			<option value="OR">Oregon</option>
-																			<option value="WA">Washington</option>
-																			<option value="AZ">Arizona</option>
-																			<option value="CO">Colorado</option>
-																			<option value="ID">Idaho</option>
-																			<option value="MT">Montana</option>
-																			<option value="NE">Nebraska</option>
-																			<option value="NM">New Mexico</option>
+																		<select class="form-control" id="kt_select2_1" name="status">
+																			<option value="">Select</option>
+																			<option value="pending">Pending</option>
+																			<option value="ongoing">Ongoing</option>
+																			<option value="complete">Complete</option>
 																		</select>
 																	</div>
 																</div>
@@ -300,10 +295,11 @@
 														</div>
 													</div>
 													<div class="col-lg-5 col-xl-5 ">
-														<a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
+														<button type="submit" class="btn btn-light-primary px-6 font-weight-bold">Search</button>
 													</div>
 												</div>
 											</div>
+											</form>
 											<!--end::Search Form-->
 											<!--end: Search Form-->
 											<!--begin: Selected Rows Group Action Form-->
@@ -480,6 +476,7 @@
 		</span>
 	</div>
 	<!--end::Scrolltop-->
+	</script>
 	<script>
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 	</script>

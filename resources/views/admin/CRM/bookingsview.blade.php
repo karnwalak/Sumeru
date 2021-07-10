@@ -1,5 +1,6 @@
 <?php
-$data = $booking[0]
+$data = $booking[0];
+// $paymentdata = $payment[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">

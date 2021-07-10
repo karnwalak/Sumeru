@@ -173,7 +173,7 @@
 											<!--begin::Details-->
 											<div class="d-flex align-items-center flex-wrap mr-2">
 													<!--begin::Title-->
-													<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5 pl-10 pt-5">Boookings</h5>
+													<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5 pl-10 pt-5">Search Bookings</h5>
 													<!--end::Title-->
 													<!--begin::Separator-->
 													<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
@@ -227,20 +227,6 @@
 													<!--end::Group Actions-->
 											</div>
 											<!--end::Details-->								
-												<div class="row" style="justify-content:center;">
-														<ul class="nav nav-pills" id="myTab" role="tablist">
-																<li>
-																		<div class="col-md-3 col-6" style="padding:20px 0px 20px 20px;">
-																				<a href="sortbookings/{{'booked'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Booked</a>
-																		</div>
-																</li>
-																<li>
-																		<div class="col-md-3 col-6" style="padding:20px 0px;">
-																				<a href="sortbookings/{{'partiallybooked'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:175px !important;">Partially Booked</a>
-																		</div>
-																</li>
-														</ul>
-												</div>
 													<!--begin::Header-->
 													<div class="card-header flex-wrap border-0 pt-3 pb-1">
 															<div class="card-title">
@@ -251,7 +237,7 @@
 															<div class="card-toolbar">
 																	<!--begin::Button-->
 																	<a href="#">
-																	<a href="createbookings" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Create Bookings</a>
+																	<a href="bookings" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
 																	</a>
 																	<!--end::Button-->
 															</div>
@@ -262,43 +248,6 @@
 															<!--begin: Datatable-->
 															<div class="card card-custom gutter-b">
 																<div class="card-body">
-																	<!--begin: Search Form-->
-																	<form action="searchbooking" method="post">
-																	{{@csrf_field()}}
-																	<div class="mb-7">
-																		<div class="row align-items-center">
-																			<div class="col-lg-7 col-xl-7">
-																				<div class="row align-items-center">
-																					<div class="col-md-5 my-2 my-md-0">
-																						<div class="input-icon">
-																							<input type="text" class="form-control" name="name" placeholder="Search..." id="kt_datatable_search_query">
-																							<span>
-																							<i class="flaticon2-search-1 text-muted"></i>
-																							</span>
-																						</div>
-																					</div>
-																					<div class="col-md-7 my-2 my-md-0">
-																						<div class="row">
-																							<label class="col-form-label text-left col-lg-4 col-sm-12">Status</label>
-																							<div class="col-lg-8 col-md-8	 col-sm-12" data-select2-id="242">
-																								<select class="form-control" id="kt_select2_1" name="status">
-																									<option value="">Select</option>
-																									<option value="Active">Active</option>
-																									<option value="Inactive">Inactive</option>
-																								</select>
-																							</div>
-																						</div>
-																					</div>
-																				</div>
-																			</div>
-																			<div class="col-lg-5 col-xl-5 ">
-																				<button type="submit" class="btn btn-light-primary px-6 font-weight-bold">Search</button>
-																			</div>
-																		</div>
-																	</div>
-																	</form>
-																	<!--end::Search Form-->
-																	<!--end: Search Form-->
 																	<!--begin: Selected Rows Group Action Form-->
 																	<div class="mt-10 mb-5 collapse" id="kt_datatable_group_action_form">
 																		<div class="d-flex align-items-center">
@@ -351,7 +300,7 @@
 																			</thead>
 																			<tbody class="datatable-body" style="">
 																			<?php $a = 1; ?>
-                                                                                @foreach($data as $book)
+                                                                                @foreach($booking as $book)
 																				<tr data-row="0" class="datatable-row" style="left: 0px;">
 																					<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
 																					<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
@@ -361,8 +310,7 @@
 																					<td data-field="Product" aria-label="2BHK Flat" class="datatable-cell"><span style="width: 100px;">{{$book -> flat_stock_name}}</span></td>
 																					<td data-field="BookingAmount" aria-label="₹500000" class="datatable-cell"><span style="width: 100px;">₹{{$book -> booking_amount}}</span></td>
 																					<td data-field="StartDate" aria-label="19/1/2021" class="datatable-cell"><span style="width: 80px;">{{$book -> booking_date}}</span></td>
-																					<td data-field="Status" aria-label="5" class="datatable-cell">
-																					<span style="width: 100px;">
+																					<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;">
 																					@if($book -> status == 'partiallybooked')
 																					<input type="button" id="button" value = "P-Booked" style= "color:white" onclick="setColor('button', '#101010')";/>
 																					@elseif($book -> status == 'booked')
@@ -394,30 +342,10 @@
 																			</tbody>
 																		</table>
 																		<div class="datatable-pager datatable-paging-loaded">
-																		{{$data -> links()}}
-																			<!-- <ul class="datatable-pager-nav my-2 mb-sm-0">
-																				<li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
-																				<li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
-																				<li style="display: none;"><input type="text" class="datatable-pager-input form-control" title="Page number"></li>
-																				<li><a class="datatable-pager-link datatable-pager-link-number datatable-pager-link-active" data-page="1" title="1">1</a></li>
-																				<li><a class="datatable-pager-link datatable-pager-link-number" data-page="2" title="2">2</a></li>
-																				<li><a class="datatable-pager-link datatable-pager-link-number" data-page="3" title="3">3</a></li>
-																				<li><a class="datatable-pager-link datatable-pager-link-number" data-page="4" title="4">4</a></li>
-																				<li><a class="datatable-pager-link datatable-pager-link-number" data-page="5" title="5">5</a></li>
-																				<li><a title="Next" class="datatable-pager-link datatable-pager-link-next" data-page="2"><i class="flaticon2-next"></i></a></li>
-																				<li><a title="Last" class="datatable-pager-link datatable-pager-link-last" data-page="35"><i class="flaticon2-fast-next"></i></a></li>
-																			</ul> -->
+																			
 																			<div class="datatable-pager-info my-2 mb-sm-0">
 																				<div class="dropdown bootstrap-select datatable-pager-size" style="width: 60px;">
-																					<!-- <select class="selectpicker datatable-pager-size" title="Select page size" data-width="60px" data-container="body" data-selected="10">
-																						<option class="bs-title-option" value=""></option>
-																						<option value="5">5</option>
-																						<option value="10">10</option>
-																						<option value="20">20</option>
-																						<option value="30">30</option>
-																						<option value="50">50</option>
-																						<option value="100">100</option>
-																					</select> -->
+																					{{$booking -> links()}}
 																					<!-- <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-5" aria-haspopup="listbox" aria-expanded="false" title="Select page size"> -->
 																						<div class="filter-option">
 																							<div class="filter-option-inner">
@@ -431,7 +359,7 @@
 																						</div>
 																					</div>
 																				</div>
-																				<!-- <span class="datatable-pager-detail">Showing 1 - 10 of 350</span> -->
+																			
 																					</div>
 																				</div>
 																			</div>

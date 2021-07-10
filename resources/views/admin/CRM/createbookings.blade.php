@@ -269,7 +269,7 @@
 																				<label class="col-xl-3 col-lg-3 col-form-label">Product Price</label>
 																				<div class="col-lg-9 col-xl-9">
 																					<div class="input-group input-group-lg">
-																						<input type="number" class="form-control form-control-solid form-control-lg" name="productprice" id="productprice" readonly value="" placeholder="Product Price" />
+																						<input type="number" class="form-control form-control-solid form-control-lg" name="productprice" id="productprice" value="" placeholder="Product Price" />
 																					</div>
 																					<span class="text-danger field_error" id="productprice_error"></span>
 																				</div>
@@ -320,13 +320,23 @@
 																							<label class="col-xl-7 col-lg-7 col-form-label">Number Of Payments</label>
 																							<div class="col-lg-5 col-xl-5">
 																								<div class="input-group input-group-lg">
-																									<input type="number" class="form-control form-control-solid form-control-lg" name="no_of_payments" value="" placeholder="No." />
+																									<input type="number" class="form-control form-control-solid form-control-lg" id="no_of_payments" name="no_of_payments" value="" placeholder="No." />
 																								</div>
 																								<span class="text-danger field_error" id="no_of_payments_error"></span>
 																							</div>
 																						</div>
 																						<!--end::Group-->
 																					</div>
+																				</div>
+																				<div class="row d-none" id="payment_plan_div">
+																					<table class="table table-bordered" id="payment_plan">
+																						<tbody>
+																							<tr>
+																								<th>Amount</th>
+																								<th>Date</th>
+																							</tr>
+																						</tbody>
+																					</table>
 																				</div>
 																			<!--begin::Group-->
 																			<div class="form-group row">
@@ -603,9 +613,31 @@
 	$(document).ready(function(){
 		$('#selfamount').change(function(){
          var selfamount = $('#selfamount').val();
-         var bookingamount = $('#bookingamount').val();
-         $('#bank').val(bookingamount-selfamount);
+         var productprice = $('#productprice').val();
+		 var net = productprice-selfamount;
+         $('#bank').val(net);
+		$('#no_of_payments').change(function(){
+			$('#payment_plan_div').removeClass("d-none");
+            var numberofpayment = $('#no_of_payments').val();
+			var emi = net / numberofpayment;
+			var d = new Date();
+            var n = d.getMonth() + 1;
+			var i = 0;
+			while (i < numberofpayment) {
+				addRow();
+				i++;
+			}
+			function addRow()
+			{
+				var htmlRows = '';
+				htmlRows += '<tr>'; 
+				htmlRows +='<td><input type="text" value="'+emi+'" name="amount[]"  class="form-control" autocomplete="off"></td>';
+				htmlRows += '<td><input value="'+n+'" type="number" name="date[]" class="form-control price" autocomplete="off"></td>';		 
+				htmlRows += '</tr>';
+				$('tbody').append(htmlRows);
+			}; 
 		});
+	    });
 		$('#contact').change(function(){
 			var type = $('#contact option:selected').val(); 
 			$.ajax({

@@ -8,6 +8,63 @@ use App\Models\hr_employees;
 use Validator;
 class HrTaskController extends Controller
 {
+    public function index(Request $req)
+    {
+        $cname = $req -> post('task');
+        $category_name = $cname; 
+        $st = $req -> post('status');
+        $status = $st; 
+        // return $req;
+        if ($category_name == null && $status == null) {
+            $tasks = hr_task::where('task_status','!=','delete')->join('hr_task_emplyees','hr_tasks.id','=','hr_task_emplyees.task_id')
+            ->get(['hr_tasks.*','hr_task_emplyees.emplyee_id']);
+            if ($tasks) {
+                return view('../admin/HR/searchtask',compact('tasks'));
+            }else{
+                return redirect('../admin/HR/tasksandprojects');
+            }
+        }else if ($category_name == $cname && $status == null) {
+            $tasks = hr_task::where('task_status','!=','delete')
+            ->join('hr_task_emplyees','hr_tasks.id','=','hr_task_emplyees.task_id')
+            ->where('hr_tasks.task_title','like', '%' . $cname . '%')
+            ->get(['hr_tasks.*','hr_task_emplyees.emplyee_id']);
+            if ($tasks) {
+                return view('../admin/HR/searchtask',compact('tasks'));
+            }else{
+                return redirect('../admin/HR/tasksandprojects');
+            }
+        }else if ($category_name == null && $status == $st) {
+            $tasks = hr_task::where('task_status','!=','delete')
+            ->join('hr_task_emplyees','hr_tasks.id','=','hr_task_emplyees.task_id')
+            ->where('hr_tasks.task_status','=',$st)
+            ->get(['hr_tasks.*','hr_task_emplyees.emplyee_id']);
+            if ($tasks) {
+                return view('../admin/HR/searchtask',compact('tasks'));
+            }else{
+                return redirect('../admin/HR/tasksandprojects');
+            }
+        }else if ($category_name == $cname && $status == $st) {
+            $tasks = hr_task::where('task_status','!=','delete')
+            ->join('hr_task_emplyees','hr_tasks.id','=','hr_task_emplyees.task_id')
+            ->where('hr_tasks.task_title','like', '%' . $cname . '%')
+            ->where('hr_tasks.task_status','=',$st)
+            ->get(['hr_tasks.*','hr_task_emplyees.emplyee_id']);
+            if ($tasks) {
+                return view('../admin/HR/searchtask',compact('tasks'));
+            }else{
+                return redirect('../admin/HR/tasksandprojects');
+            }
+        }
+    }
+    public function mytask(Request $req,$st)
+    {
+        $tasks = hr_task::where('task_status','=',$st)->get();    
+        if ($tasks) {
+            return view('../admin/HR/shorttasks',compact('tasks'));
+        }else{
+            return redirect('../admin/HR/shorttasks');
+        }
+    }
     public function create(Request $req)
     {
         $valid = Validator::make($req -> all(),[

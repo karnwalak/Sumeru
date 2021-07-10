@@ -3,7 +3,8 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-<meta charset="utf-8" />
+    <base href="../">
+    <meta charset="utf-8" />
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -251,7 +252,7 @@
 															<div class="card-toolbar">
 																	<!--begin::Button-->
 																	<a href="#">
-																	<a href="createbookings" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Create Bookings</a>
+																	<a href="bookings" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
 																	</a>
 																	<!--end::Button-->
 															</div>
@@ -263,7 +264,7 @@
 															<div class="card card-custom gutter-b">
 																<div class="card-body">
 																	<!--begin: Search Form-->
-																	<form action="searchbooking" method="post">
+																	<!-- <form action="searchbooking" method="post">
 																	{{@csrf_field()}}
 																	<div class="mb-7">
 																		<div class="row align-items-center">
@@ -296,7 +297,7 @@
 																			</div>
 																		</div>
 																	</div>
-																	</form>
+																	</form> -->
 																	<!--end::Search Form-->
 																	<!--end: Search Form-->
 																	<!--begin: Selected Rows Group Action Form-->
@@ -361,8 +362,7 @@
 																					<td data-field="Product" aria-label="2BHK Flat" class="datatable-cell"><span style="width: 100px;">{{$book -> flat_stock_name}}</span></td>
 																					<td data-field="BookingAmount" aria-label="₹500000" class="datatable-cell"><span style="width: 100px;">₹{{$book -> booking_amount}}</span></td>
 																					<td data-field="StartDate" aria-label="19/1/2021" class="datatable-cell"><span style="width: 80px;">{{$book -> booking_date}}</span></td>
-																					<td data-field="Status" aria-label="5" class="datatable-cell">
-																					<span style="width: 100px;">
+																					<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;">
 																					@if($book -> status == 'partiallybooked')
 																					<input type="button" id="button" value = "P-Booked" style= "color:white" onclick="setColor('button', '#101010')";/>
 																					@elseif($book -> status == 'booked')
@@ -394,7 +394,6 @@
 																			</tbody>
 																		</table>
 																		<div class="datatable-pager datatable-paging-loaded">
-																		{{$data -> links()}}
 																			<!-- <ul class="datatable-pager-nav my-2 mb-sm-0">
 																				<li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
 																				<li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
