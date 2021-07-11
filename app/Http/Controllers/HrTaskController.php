@@ -162,6 +162,7 @@ class HrTaskController extends Controller
         $data = comment::join('users','task_history.employee_id','=','users.id')
                 ->where('task_history.task_id','=',$id)
                 ->get(['task_history.*','users.user_email']);
+        
         return view('../admin/HR/viewtasks') 
         -> with('viewtasks',hr_task::find($id)) 
         -> with('comment',$data);
