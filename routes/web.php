@@ -5,6 +5,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\HrDepartmentsController;
 use App\Http\Controllers\HrDesignationController;
 use App\Http\Controllers\HrShiftController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CrmBookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CrmLeadController;
@@ -118,6 +119,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::view('admin/HR/hrdepartment','admin/HR/hrdepartment');
         Route::view('admin/HR/employeeshift','admin/HR/employeeshift');
         Route::get('admin/HR/hrdepartment',[HrDepartmentsController::class,'show']);
+        Route::POST('admin/HR/addcomment',[CommentController::class,'addcomment']);
         Route::get('admin/HR/employeetask/{id}',[HrEmployeesController::class,'employeetask']);
         Route::get('admin/HR/employees',[HrEmployeesController::class,'showdata']);
         Route::get('admin/HR/addemployees',[HrEmployeesController::class,'show']);

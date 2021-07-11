@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -218,9 +219,9 @@
 												More..
 											</button>
 											<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-												<button class="dropdown-item btn btn-success" type="button">Copy</button>
-												<button class="dropdown-item btn btn-success" type="button">Delete</button>
-												<button class="dropdown-item btn btn-success" type="button">Create Subtask</button>
+												<button class="dropdown-item btn btn-success" id="copy" type="button">Copy</button>
+												<button class="dropdown-item btn btn-success" id="delete" type="button">Delete</button>
+												<button class="dropdown-item btn btn-success" id="create_subtask" type="button">Create Subtask</button>
 											</div>
 											</div>
 											<a href="edittask/{{$viewtasks -> id}}" class="btn btn-hover-bg-primary btn-text-dark btn-hover-text-white border-0 font-weight-bold mr-2">Edit</a>
@@ -238,26 +239,78 @@
 												<ul class="nav nav-pills" id="myTab" role="tablist">
 														<li>
 																<div class="col-md-3 col-6" style="padding:20px 0px 20px 20px;">
-																		<a href="#" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Comments</a>
+																		<a id="commentdiv" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Comments</a>
 																</div>
 														</li>
 														<li>
 																<div class="col-md-3 col-6" style="padding:20px 0px;">
-																		<a href="allowances" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">History</a>
+																		<a id="historydiv" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">History</a>
 																</div>
 														</li>
 														<li>
 																<div class="col-md-3 col-6" style="padding:20px 0px;">
-																		<a href="#" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Time Elapsed</a>
+																		<a id="filesdiv" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Files</a>
 																</div>
 														</li>
 												</ul>
 											</div>
 											<!--end::Header-->
 											<!--begin::Body-->
-											<div class="card-body pt-0 pb-3">
+											<div class="card-body pt-0 pb-3" id="comment">
+												@foreach($comment as $comm)
+												<div class="row">
+                                                   <div class="col-md-6 border border-rounded border-success p-3 my-3">
+													   <div class="row mx-3 text-primary font-weight-bold">
+													   {{$comm -> user_email}}
+													   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													   {{$comm -> updated_at}}
+													   </div>
+													   <div class="row mx-3">
+													   {{$comm -> comment}}
+													   </div>
+                                                      
+												   </div>
+												</div>
+												@endforeach
 												<label for="exampleTextarea">Add a comment</label>
-												<textarea class="form-control form-control-solid" rows="3"></textarea>
+												<form id="form">
+												{{@csrf_field()}}
+												<input type="hidden" name="task_id" value="{{$viewtasks -> id}}">
+												<input type="hidden" name="employee_id" value="{{session() -> get('id')}}">
+												<textarea name="comment" class="form-control form-control-solid" rows="3"></textarea>
+												<span class="field_error text-danger" id="comment_error"></span><br>
+												<button type="submit" class="btn btn-success">Add Comment</button><br>
+												<span class="text-success" id="success_msg"></span>
+												<span class="text-danger" id="error_msg"></span>
+												<span></span>
+												</form>
+											</div>
+											<div class="card-body pt-0 pb-3 d-none" id="history">
+												<!--  -->
+												<div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable" style="">
+												<table class="datatable-table" style="display: block;">
+															<thead class="datatable-head">
+																<tr class="datatable-row" style="left: 0px;">
+																	<th data-field="Name" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Date</span></th>
+																	<th data-field="Description" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Created By</span></th>
+																	<th data-field="Amount" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Comment</span></th>
+																</tr>
+															</thead>
+															<tbody class="datatable-body" style="">
+															@foreach($comment as $comm)
+																<tr class="datatable-row" style="left: 0px;">
+																	<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$comm -> updated_at}}</span></td>
+																	<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$comm -> user_email}}</span></td>
+																	<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$comm -> comment}}</span></td>
+																</tr>
+															@endforeach
+															</tbody>
+                                                </table>
+                                                </div>
+												<!--  -->
+											</div>
+											<div class="card-body pt-0 pb-3 d-none" id="files">
+												files
 											</div>
 											<!--end::Body-->
 										</div>
@@ -316,7 +369,7 @@
 													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
-															<span class="text-dark-75 font-weight-bolder font-size-h4">{{$viewtasks -> created_at}}</span>
+															<span class="text-dark-75">{{$viewtasks -> created_at}}</span>
 														</div>
 													</div>
 													<!--end::Info-->
@@ -333,7 +386,13 @@
 													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
-															<span class="text-dark-75 font-weight-bolder font-size-h4">None</span>
+															<span class="text-dark-75">
+																@if(isset($viewtasks -> start_date))
+																 {{$viewtasks -> start_date}}
+																@else
+																 Not Started Yet
+																@endif
+															</span>
 														</div>
 													</div>
 													<!--end::Info-->
@@ -350,7 +409,13 @@
 													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
-															<span class="text-dark-75 font-weight-bolder font-size-h4">None</span>
+															<span class="text-dark-75">
+															@if(isset($viewtasks -> end_date))
+																 {{$viewtasks -> end_date}}
+																@else
+																 In Progress
+																@endif
+															</span>
 														</div>
 													</div>
 													<!--end::Info-->
@@ -367,7 +432,7 @@
 													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
-															<span class="text-dark-75 font-weight-bolder font-size-h4">
+															<span class="text-dark-75">
 															<?php 
 																$pid = $viewtasks -> created_by;
 																$pdata = DB::SELECT("SELECT * FROM users WHERE id = $pid"); 
@@ -532,7 +597,48 @@
 		      }
 		    });
 		  });
-		  
+		$('#form').submit(function(e){
+          e.preventDefault();
+          $.ajax({
+			    url: 'addcomment',
+                method:"POST",
+                data:$('#form').serialize(),
+                dataType:'JSON',
+		      success: function (result) {
+				if (result.status == 'error') {
+					$('#error_msg').html(result.error);
+                  $.each(result.error,function(key,val){
+                  // console.log(key);
+                  // console.log(val);
+                  $('#'+key+'_error').html(val[0]);
+                  })
+                  }else if(result.status == 'success'){
+                  $('#form')[0].reset();
+				  $('#success_msg').html(result.msg);
+                  window.location.reload();
+                } 
+		      }
+		  });
+		})
+		});
+	</script>
+	<script>
+		$(document).ready(function(){
+          $('#historydiv').click(function(){
+			$('#history').removeClass('d-none');
+			 $('#files').addClass('d-none');
+             $('#comment').addClass('d-none');
+		  });
+		  $('#filesdiv').click(function(){
+			 $('#files').removeClass('d-none');
+			 $('#history').addClass('d-none');
+             $('#comment').addClass('d-none');
+		  });
+		  $('#commentdiv').click(function(){
+			 $('#files').addClass('d-none');
+			 $('#history').addClass('d-none');
+             $('#comment').removeClass('d-none');
+		  });
 		});
 	</script>
 </body>

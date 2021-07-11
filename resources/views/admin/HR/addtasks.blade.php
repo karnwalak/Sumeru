@@ -371,13 +371,9 @@ $('#myselect').select2({
 	allowClear: true
 });
 </script>
-<script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
 <script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+		CKEDITOR.replace( 'message' );
 </script>
 </body>
 <!--end::Body-->

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\comment;
 use App\Models\hr_task;
 use App\Models\hr_employees;
 use Validator;
@@ -14,7 +15,7 @@ class HrTaskController extends Controller
         DB::table('hr_tasks') 
             ->where('id', $id)
             ->limit(1) 
-            ->update(['task_status' => 'finish']); 
+            ->update(['task_status' => 'finish','end_date' => date('y-m-d')]); 
     }
     public function changetaskstatus(Request $req)
     {
@@ -32,7 +33,7 @@ class HrTaskController extends Controller
          $result = DB::table('hr_tasks') 
             ->where('id', $id)
             ->limit(1) 
-            ->update(['task_status' => 'start']);
+            ->update(['task_status' => 'start','start_date' =>  date('y-m-d')]);
         }
     }
     public function index(Request $req)
@@ -155,7 +156,15 @@ class HrTaskController extends Controller
         return view('../admin/HR/tasksandprojects') -> with('tasks',$tasks);
     }
     public function view(Request $req,$id){
-        return view('../admin/HR/viewtasks') -> with('viewtasks',hr_task::find($id));
+        // return $id;
+        // $data = DB::SELECT("SELECT * FROM task_history WHERE task_id = $id");
+        // return $data;
+        $data = comment::join('users','task_history.employee_id','=','users.id')
+                ->where('task_history.task_id','=',$id)
+                ->get(['task_history.*','users.user_email']);
+        return view('../admin/HR/viewtasks') 
+        -> with('viewtasks',hr_task::find($id)) 
+        -> with('comment',$data);
     }
     public function edit(Request $req,$id){
         return view('../admin/HR/edittask')

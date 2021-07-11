@@ -338,13 +338,14 @@
 																			<thead class="datatable-head">
 																				<tr class="datatable-row" style="left: 0px;">
 																					<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
-																					<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
+																					<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 50px;">S No.</span></th>
 																					<th data-field="Name" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Name</span></th>
 																					<th data-field="Contact" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Contact</span></th>
 																					<th data-field="Email" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Email</span></th>
 																					<th data-field="Product" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Product</span></th>
 																					<th data-field="BookingAmount" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Booking Amount</span></th>
-																					<th data-field="StartDate" class="datatable-cell datatable-cell-sort"><span style="width: 80px;">Start Date</span></th>
+																					<th data-field="BookingAmount" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Paid Amount</span></th>
+																					<th data-field="BookingAmount" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Balance</span></th>
 																					<th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Status</span></th>
 																					<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 150px;">Actions</span></th>
 																				</tr>
@@ -354,13 +355,15 @@
                                                                                 @foreach($data as $book)
 																				<tr data-row="0" class="datatable-row" style="left: 0px;">
 																					<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
-																					<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
+																					<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 20px;">{{$a++}}</span></td>
 																					<td data-field="Name" aria-label="Aman Rajvanshi" class="datatable-cell"><span style="width: 100px;">{{$book -> contact_full_name}}</span></td>
 																					<td data-field="Contact" aria-label="9876543210" class="datatable-cell"><span style="width: 100px;">{{$book -> contact_mob_no}}</span></td>
 																					<td data-field="Email" aria-label="abcd@email.com" class="datatable-cell"><span style="width: 100px;">{{$book -> contact_email}}</span></td>
 																					<td data-field="Product" aria-label="2BHK Flat" class="datatable-cell"><span style="width: 100px;">{{$book -> flat_stock_name}}</span></td>
 																					<td data-field="BookingAmount" aria-label="₹500000" class="datatable-cell"><span style="width: 100px;">₹{{$book -> booking_amount}}</span></td>
-																					<td data-field="StartDate" aria-label="19/1/2021" class="datatable-cell"><span style="width: 80px;">{{$book -> booking_date}}</span></td>
+																					<td data-field="BookingAmount" aria-label="₹500000" class="datatable-cell"><span style="width: 100px;">₹{{$book -> payment_by_self}}</span></td>
+																					<td data-field="BookingAmount" aria-label="₹500000" class="datatable-cell"><span style="width: 100px;">₹{{$book -> booking_amount-$book -> payment_by_self}}</span></td>
+																					<!-- <td data-field="StartDate" aria-label="19/1/2021" class="datatable-cell"><span style="width: 80px;">{{$book -> booking_date}}</span></td> -->
 																					<td data-field="Status" aria-label="5" class="datatable-cell">
 																					<span style="width: 100px;">
 																					@if($book -> status == 'partiallybooked')
