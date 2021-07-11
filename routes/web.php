@@ -6,6 +6,7 @@ use App\Http\Controllers\HrDepartmentsController;
 use App\Http\Controllers\HrDesignationController;
 use App\Http\Controllers\HrShiftController;
 use App\Http\Controllers\CrmBookingController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CrmLeadController;
 use App\Http\Controllers\CrmContactController;
 use App\Http\Controllers\HrAllowenceController;
@@ -66,7 +67,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/ERP/editmaterials/{id}','App\Http\Controllers\CategoryController@edit');
         // Route::view('admin/ERP/sellerprofile/{id}','admin/ERP/sellerprofile');
         Route::get('admin/ERP/sellerprofile/{id}','App\Http\Controllers\SellerController@showprofile');
-        Route::post('admin/ERP/statusupdatematerialcategory','App\Http\Controllers\CategoryController@statusupdate');
+        Route::post('admin/ERP/editcategorystatus',[CategoryController::class,'statusupdate']);
         Route::post('admin/ERP/statusupdatematerial','App\Http\Controllers\MaterialController@statusupdate');
         Route::post('admin/ERP/fetchtype','App\Http\Controllers\MaterialController@fetchtype');
         Route::post('admin/ERP/statusupdateseller','App\Http\Controllers\SellerController@statusupdate');
@@ -115,14 +116,19 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         /*****************************************HR AND PAYROLL*****************************************************************/
         Route::view('admin/HR/hrdashboard','admin/HR/hrdashboard');
         Route::view('admin/HR/hrdepartment','admin/HR/hrdepartment');
+        Route::view('admin/HR/employeeshift','admin/HR/employeeshift');
         Route::get('admin/HR/hrdepartment',[HrDepartmentsController::class,'show']);
+        Route::get('admin/HR/employeetask/{id}',[HrEmployeesController::class,'employeetask']);
         Route::get('admin/HR/employees',[HrEmployeesController::class,'showdata']);
         Route::get('admin/HR/addemployees',[HrEmployeesController::class,'show']);
         Route::get('admin/HR/addtasks',[HrTaskController::class,'show']);
         Route::get('admin/HR/edittask/{id}',[HrTaskController::class,'edit']);
         Route::POST('admin/HR/edittasks',[HrTaskController::class,'edittask']);
+        Route::post('admin/HR/changetaskstatus',[HrTaskController::class,'changetaskstatus']);
+        Route::post('admin/HR/finishstatus',[HrTaskController::class,'finishstatus']);
         Route::POST('admin/HR/addtasks',[HrTaskController::class,'create']);
         Route::POST('admin/HR/addemployee',[HrEmployeesController::class,'create']);
+        Route::get('admin/HR/fetchshift/{id}',[HrEmployeesController::class,'fetchshift']);
         Route::POST('admin/HR/addshift',[HrShiftController::class,'create']);
         Route::get('admin/HR/shifts',[HrShiftController::class,'show']);
         Route::view('admin/HR/addhrdepartment','admin/HR/addhrdepartment');
@@ -185,6 +191,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/CRM/leads',[CrmLeadController::class,'showdata']);
         Route::post('admin/CRM/addleads',[CrmLeadController::class,'addleads']);
         Route::post('admin/CRM/addContact',[CrmContactController::class,'addContact']);
+        Route::view('admin/CRM/addcontacts','admin/CRM/addcontacts');
         Route::post('admin/CRM/editContact',[CrmContactController::class,'editContact']);
         Route::get('admin/CRM/deletelead/{id}',[CrmLeadController::class,'delete']);
         Route::get('admin/CRM/deletecontact/{id}',[CrmContactController::class,'deletecontact']);

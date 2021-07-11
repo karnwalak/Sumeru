@@ -361,15 +361,11 @@
 																	<td data-field="Sno" aria-label="{{$value -> id}}" class="datatable-cell"><span style="width: 200px;">{{$a++}}</span></td>
 																	<td data-field="Category" aria-label="{{$value -> category_name}}" class="datatable-cell"><span style="width: 200px;">{{$value -> category_name}}</span></td>
 																	<td data-field="Status" aria-label="5" class="datatable-cell">
-										                               @if($value -> category_status == 'Active')
-										                                <div class="form-check form-switch">
-																		  <input class="form-check-input statuschange" name="status" type="checkbox" id="{{$value -> id}}" checked />
-																		</div>
-										                               @else
-										                                <div class="form-check form-switch">
-																		  <input class="form-check-input statuschange" name="status" type="checkbox" id="{{$value -> id}}"/>
-																		</div>
-		                               									@endif
+																	@if($value -> category_status == 'Active')
+																	<button class="btn btn-success statuschange" id="{{$value -> id}}" href="">{{$value -> category_status}}</button>
+																	@elseif($value -> category_status == 'Inactive')
+																	<button class="btn btn-danger statuschange" id="{{$value -> id}}" href="">{{$value -> category_status}}</button>
+																	@endif
 																        </td>
 																	<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
 																		<span style="overflow: visible; position: relative; width: 125px;">
@@ -584,18 +580,8 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 		  $(".statuschange").click(function () {
-		    if ($(this).prop("checked") == true) {
-		      $('.statuschange').val(1);
-		      var val = 1;
-		    } else {
-		      $('.statuschange').val(0);
-		      var val = 0;
-		    }
 		    var rowid = $(this).attr('id');
 		    // alert(rowid);
-		    // if($(this).prop("checked") == false){
-		    //    alert("bye");
-		    // }
 		    $.ajax({
 		      url: "statusupdateflatstockcategory",
 		      method: "POST",
@@ -604,10 +590,7 @@
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
 		      success: function (data) {
-		        // console.log(data);
-		        // $('#uploaded_image').html(data);
-		        // $('#progressBar').val(100);
-		        // $('#status').html('File Uploaded!');
+                window.location.href = '../FLAT/flatstockcategory'; 
 		      }
 		    });
 		  });

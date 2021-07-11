@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\hr_employees;
 use App\Models\hr_department;
+use App\Models\hr_task;
 use App\Models\hr_allowence;
 use App\Models\hr_employee_allowence;
 use App\Models\hr_shift;
@@ -12,6 +13,17 @@ use Validator;
 
 class HrEmployeesController extends Controller
 {
+    public function employeetask(request $req,$id){
+        $tasks = hr_task::where('task_status','!=','delete')->join('hr_task_emplyees','hr_tasks.id','=','hr_task_emplyees.task_id')
+        ->where('hr_task_emplyees.emplyee_id','=',$id)
+        ->get(['hr_tasks.*','hr_task_emplyees.emplyee_id']);
+        return view('../admin/HR/employeetask') -> with('tasks',$tasks);
+    }
+    public function fetchshift(Request $req,$id){
+        return view('../admin/HR/employeeshift') -> with('data',hr_shift::where('shift_status','!=','delete')
+        ->where('id','=',$id)
+        ->paginate(10));
+    }
     public function editstatus(Request $req){
         $id = $req -> id;
         // return $id;
@@ -69,6 +81,7 @@ class HrEmployeesController extends Controller
                'department_id' => $req -> post('department'),
                'shift_id' => $req -> post('shift'),
                'employee_contact_no' => $req -> post('phone'),
+               'employee_joining_date' => Date(),
                'employee_img' => $file_name,
                'email_id' => $req -> post('email'),
                'employee_basic_salary' => $req -> post('salary'),
@@ -98,8 +111,11 @@ class HrEmployeesController extends Controller
         }
     }
     public function profile(Request $req,$id){
+        $employee = hr_employees::join('hr_shifts','hr_employees.shift_id','=','hr_shifts.id')->
+        join('hr_departments','hr_employees.department_id','=','hr_departments.id')->
+        where('hr_employees.id','=',$id)->get(['hr_employees.*','hr_shifts.shift_name','hr_departments.name']);
         return view('../admin/HR/employeeprofile') 
-        -> with('employee',hr_employees::find($id));
+        -> with('data',$employee);
     }
     public function delete(Request $req,$id){
         $result=DB::table('hr_employees') 

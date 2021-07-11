@@ -8,6 +8,33 @@ use App\Models\hr_employees;
 use Validator;
 class HrTaskController extends Controller
 {
+    public function finishstatus(Request $req)
+    {
+        $id = $req -> id;
+        DB::table('hr_tasks') 
+            ->where('id', $id)
+            ->limit(1) 
+            ->update(['task_status' => 'finish']); 
+    }
+    public function changetaskstatus(Request $req)
+    {
+        $id = $req -> id;
+        $data = DB::SELECT("SELECT * FROM hr_tasks where id = $id");
+        foreach ($data as $value) {
+           
+        }
+        if($value -> task_status == "start"){
+         $result = DB::table('hr_tasks') 
+            ->where('id', $id)
+            ->limit(1) 
+            ->update(['task_status' => 'resume']); 
+        }else{
+         $result = DB::table('hr_tasks') 
+            ->where('id', $id)
+            ->limit(1) 
+            ->update(['task_status' => 'start']);
+        }
+    }
     public function index(Request $req)
     {
         $cname = $req -> post('task');
@@ -67,6 +94,7 @@ class HrTaskController extends Controller
     }
     public function create(Request $req)
     {
+        return $req;
         $valid = Validator::make($req -> all(),[
             'compose_subject' => 'required',
             'message' => 'required',
@@ -120,7 +148,9 @@ class HrTaskController extends Controller
     }
     public function showdata(Request $req)
     {
-        $tasks = hr_task::where('task_status','!=','delete')->join('hr_task_emplyees','hr_tasks.id','=','hr_task_emplyees.task_id')
+        $tasks = hr_task::where('task_status','!=','delete')
+        ->where('created_by','=',session()->get('id'))
+        ->join('hr_task_emplyees','hr_tasks.id','=','hr_task_emplyees.task_id')
         ->get(['hr_tasks.*','hr_task_emplyees.emplyee_id']);
         return view('../admin/HR/tasksandprojects') -> with('tasks',$tasks);
     }

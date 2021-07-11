@@ -324,7 +324,7 @@
 																	<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 																	<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">S No.</span></th>
 																	<th data-field="Name" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Name</span></th>
-																	<th data-field="Lead" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Lead</span></th>
+																	<th data-field="Lead" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Department</span></th>
 																	<th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Status</span></th>
 																	<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 125px;">Actions</span></th>
 																</tr>

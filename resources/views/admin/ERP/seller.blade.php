@@ -334,15 +334,11 @@
 															<td data-field="Contact" aria-label="{{$value -> seller_contact}}" class="datatable-cell"><span style="width: 120px;">{{$value -> seller_contact}}</span></td>
 															<td data-field="Email" aria-label="{{$value -> seller_email}}" class="datatable-cell"><span style="width: 120px;">{{$value -> seller_email}}</span></td>
 															<td data-field="Status" aria-label="5" class="datatable-cell">
-								                               @if($value -> seller_status == 'Active')
-								                                <div class="form-check form-switch">
-																  <input class="form-check-input statuschange" name="status" type="checkbox" id="{{$value -> id}}" checked />
-																</div>
-								                               @else
-								                                <div class="form-check form-switch">
-																  <input class="form-check-input statuschange" name="status" type="checkbox" id="{{$value -> id}}"/>
-																</div>
-                               									@endif
+															   @if($value -> seller_status == 'Active')
+															   <button class="btn btn-success statuschange" id="{{$value -> id}}" href="">{{$value -> seller_status}}</button>
+															   @elseif($value -> seller_status == 'Inactive')
+															   <button class="btn btn-danger statuschange" id="{{$value -> id}}" href="">{{$value -> seller_status}}</button>
+															   @endif
 														    </td>
 															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
 																<span style="width: 100px;">
@@ -519,18 +515,8 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 		  $(".statuschange").click(function () {
-		    if ($(this).prop("checked") == true) {
-		      $('.statuschange').val(1);
-		      var val = 1;
-		    } else {
-		      $('.statuschange').val(0);
-		      var val = 0;
-		    }
 		    var rowid = $(this).attr('id');
 		    // alert(rowid);
-		    // if($(this).prop("checked") == false){
-		    //    alert("bye");
-		    // }
 		    $.ajax({
 		      url: "statusupdateseller",
 		      method: "POST",
@@ -539,10 +525,7 @@
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
 		      success: function (data) {
-		        // console.log(data);
-		        // $('#uploaded_image').html(data);
-		        // $('#progressBar').val(100);
-		        // $('#status').html('File Uploaded!');
+                window.location.href = '../ERP/seller'; 
 		      }
 		    });
 		  });

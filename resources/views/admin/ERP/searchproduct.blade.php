@@ -297,15 +297,11 @@
 															<td data-field="Type" aria-label="{{$value -> type}}" class="datatable-cell"><span style="width: 100px;">{{$value -> type}}</span></td>
 															<td data-field="Stock" aria-label="Brazil" class="datatable-cell"><span style="width: 100px;"><a href="#">2016</a></span></td>
 															<td data-field="Status" aria-label="5" class="datatable-cell">
-								                               @if($value -> material_status == 'Active')
-								                                <div class="form-check form-switch">
-																  <input class="form-check-input statuschange" name="status" type="checkbox" id="{{$value -> id}}" checked />
-																</div>
-								                               @else
-								                                <div class="form-check form-switch">
-																  <input class="form-check-input statuschange" name="status" type="checkbox" id="{{$value -> id}}"/>
-																</div>
-                               									@endif
+															   @if($value -> material_status == 'Active')
+															   <button class="btn btn-success statuschange" id="{{$value -> id}}" href="">{{$value -> material_status}}</button>
+															   @elseif($value -> material_status == 'Inactive')
+															   <button class="btn btn-danger statuschange" id="{{$value -> id}}" href="">{{$value -> material_status}}</button>
+															   @endif
 														    </td>
 															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
 																<span style="overflow: visible; position: relative; width: 125px;">
@@ -503,21 +499,11 @@
 	<!--begin::Page Scripts(used by this page)-->
 	<script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
 	<!--end::Page Scripts-->
-		<script type="text/javascript">
+	<script type="text/javascript">
 		$(document).ready(function(){
 		  $(".statuschange").click(function () {
-		    if ($(this).prop("checked") == true) {
-		      $('.statuschange').val(1);
-		      var val = 1;
-		    } else {
-		      $('.statuschange').val(0);
-		      var val = 0;
-		    }
 		    var rowid = $(this).attr('id');
 		    // alert(rowid);
-		    // if($(this).prop("checked") == false){
-		    //    alert("bye");
-		    // }
 		    $.ajax({
 		      url: "statusupdatematerial",
 		      method: "POST",
@@ -526,10 +512,7 @@
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
 		      success: function (data) {
-		        console.log(data);
-		        // $('#uploaded_image').html(data);
-		        // $('#progressBar').val(100);
-		        // $('#status').html('File Uploaded!');
+                window.location.href = '../ERP/materialspage'; 
 		      }
 		    });
 		  });

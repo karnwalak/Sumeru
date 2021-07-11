@@ -3,6 +3,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
+    <base href="../">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta charset="utf-8" />
 	<title>ERP</title>
@@ -243,13 +244,13 @@
 													<!--begin::Header-->
 													<div class="card-header flex-wrap border-0 pt-6 pb-0">
 															<div class="card-title">
-																	<h3 class="card-label">Tasks And Project
+																	<h3 class="card-label">Employee's tasks and projects
 																			<!-- <span class="d-block text-muted pt-2 font-size-sm">User management made easy</span> -->
 																	</h3>
 															</div>
 															<div class="card-toolbar">
 																	<!--begin::Button-->
-																	<a href="addtasks" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Create Task</a>
+																	<a href="employeeprofile" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
 																	<!--end::Button-->
 															</div>
 													</div>
@@ -265,7 +266,7 @@
 										<div class="card-body">
 											<!--begin: Search Form-->
 											<!--begin::Search Form-->
-											<form action="serachtask" method="post">
+											<!-- <form action="serachtask" method="post">
 											{{@csrf_field()}}
 											<div class="mb-7">
 												<div class="row align-items-center">
@@ -299,7 +300,7 @@
 													</div>
 												</div>
 											</div>
-											</form>
+											</form> -->
 											<!--end::Search Form-->
 											<!--end: Search Form-->
 											<!--begin: Selected Rows Group Action Form-->
@@ -347,7 +348,7 @@
 															<th data-field="Deadline" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Deadline</span></th>
 															<th data-field="CreatedBy" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Created By</span></th>
 															<th data-field="Responsible" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Responsible</span></th>
-															<!-- <th data-field="Des" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Description</span></th> -->
+															<th data-field="Des" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Description</span></th>
 															<th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Status</span></th>
 															<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 170px;">Actions</span></th>
 														</tr>
@@ -379,7 +380,7 @@
 																echo $pval -> employee_name;
 															?>
 															</span></td>
-															<!-- <td data-field="CreatedBy" aria-label="#######" class="datatable-cell"><span style="width: 100px;">{!!$task -> task_discription!!}</span></td> -->
+															<td data-field="CreatedBy" aria-label="#######" class="datatable-cell"><span style="width: 100px;">{!!$task -> task_discription!!}</span></td>
 															<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value="{{$task -> task_status}}" style="color:white" onclick="setColor(event, 'button', '#101010')"; data-count="1" /></span></td>
 															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
 																<span style="overflow: visible; position: relative; width: 170px;">

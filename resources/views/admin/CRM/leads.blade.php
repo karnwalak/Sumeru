@@ -25,6 +25,7 @@
 	<!--end::Global Theme Styles-->
 	<!--begin::Layout Themes(used by all pages)-->
 	<link rel="shortcut icon" href="/../img/icon.jpg" />
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
 	<style>
 	#button{
 		height:30px;
@@ -352,7 +353,7 @@
 											<!--end: Selected Rows Group Action Form-->
 											<!--begin: Datatable-->
 											<div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable" style="">
-												<table class="datatable-table" style="display: block;">
+												<table class="datatable-table" style="display: block;" id="myTable">
 													<thead class="datatable-head">
 														<tr class="datatable-row" style="left: 0px;">
 															<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
@@ -473,7 +474,7 @@
 																	<div class="form-group row" data-select2-id="243">
 																		<label class="col-form-label text-left col-lg-12 col-sm-12">Status</label>
 																		<div class="col-lg-12 col-md-12 col-sm-12" data-select2-id="242">
-																			<select class="form-control" name="status" id="myOptions">
+																			<select class="form-control" onchange="next_date(this.value)" name="status" id="myOptions">
 																			<option value="">Select</option>
 																			<option value="Pending">Pending</option>
 																			<option value="NextFollowup">Next Follow-Up</option>
@@ -484,16 +485,16 @@
 																			<span class="field_error text-danger" id="status_error"></span>
 																		</div>
 																	</div>																				
-																	<!-- <div class="form-group row">
+																	<div class="form-group row " id="next_date" style="display:none">
 																				<label class="col-xl-12 col-lg-12 col-form-label">Next Follow-Up</label>
 																				<div class="col-lg-9 col-xl-9">
 																					<div class="input-group input-group-solid input-group-lg">
-																						<input type="date" class="form-control form-control-solid form-control-lg hiddenField" name="dob" placeholder="Username" value="NFU" id="myTextBox"/>
+																						<input type="date" class="form-control form-control-solid form-control-lg" name="date" placeholder="date" value="NFU" id="myTextBox"/>
 																						<div class="input-group-append">
 																						</div>
 																					</div>
 																				</div>
-																			</div> -->
+																			</div>
 																	<div class="row" style="margin:10px">
 																		<div class="form-group row">
 																			<label class="col-xl-12 col-lg-12 col-form-label">Comment</label>
@@ -655,19 +656,17 @@
         });
     });
 	</script>
-    <!-- <script>
-		$(document).ready(function() {
-		$("select#myOptions").change(function() {
-			var selectedCountry = $("#myOptions option:selected").text();
-			if (selectedCountry == "Next Follow-Up") {
-			$('#myTextBox').css('display','block');
-			} else{
-			$('#myTextBox').css('display','none');
-			}
-		});
-		});
-	</script> -->
-<script>
+    <script>
+	function next_date(str)
+	{
+		if(str=='NextFollowup')
+		{
+			$('#next_date').show();
+		}
+		else{
+			$('#next_date').hide();
+		}
+	}
     var count = 1;
     function setColor(btn, color) {
         var property = document.getElementById(btn);

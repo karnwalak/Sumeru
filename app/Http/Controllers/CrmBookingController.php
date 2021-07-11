@@ -86,19 +86,21 @@ class CrmBookingController extends Controller
         }else{
            $stat = 'partiallybooked';
         }
+        for ($i=0; $i < count($req -> amount) ; $i++) {
         $data = [
-         'id' =>12,
+         'id' =>17,
          'contact_id' =>$req -> post('contact'),
          'product_id' =>$req -> post('product'),
          'total_amount' =>$req -> post('productprice'),
          'booking_amount' =>$req -> post('bookingamount'),
          'booking_date' =>date('y-m-d'),
          'status' => $stat,
-         'next_remainder' =>'NA',
-         'employee_id' =>0,
+         'next_remainder' =>$req -> date[$i],
+         'employee_id' =>session()->get('id'),
          'payment_by_banker' =>$req -> post('bank'),
          'payment_by_self' =>$req -> post('self'),
         ];
+       }
         $res = crm_booking::insert($data);
         for ($i=0; $i < count($req -> amount) ; $i++) {
             $data2 = [
@@ -125,8 +127,8 @@ class CrmBookingController extends Controller
     ->where('status','!=','delete')
     ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
     ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
-    // ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_email','flat_ inventories.flat_stock_name'])
-    ->paginate(10);
+    ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_email','flat_ inventories.flat_stock_name']);
+    // ->paginate(10);
     return view('../admin/CRM/bookings') -> with('data',$booking);
    }
    public function deletebooking($id)

@@ -336,14 +336,18 @@
 																								<th>Date</th>
 																							</tr>
 																						</tbody>
+																						
 																					</table>
+																					<tr>
+																						<td><h6>Total Amount:- <span id="totalamount"></span></h6></td>
+																					</tr>
 																				</div>
 																			<!--begin::Group-->
 																			<div class="form-group row">
 																				<label class="col-xl-3 col-lg-3 col-form-label">User Amount</label>
 																				<div class="col-lg-9 col-xl-9">
 																					<div class="input-group input-group-lg">
-																						<input type="number" class="form-control form-control-solid form-control-lg" name="useramount" value="" placeholder="User Amount" />
+																						<input type="number" class="form-control form-control-solid form-control-lg" name="useramount" id="useramount" value="" placeholder="User Amount" />
 																					</div>
 																					<span class="text-danger field_error" id="useramount_error"></span>
 																				</div>
@@ -614,14 +618,18 @@
 		$('#selfamount').change(function(){
          var selfamount = $('#selfamount').val();
          var productprice = $('#productprice').val();
-		 var net = productprice-selfamount;
+         var bookingamount = $('#bookingamount').val();
+		 var net = bookingamount-selfamount;
          $('#bank').val(net);
-		$('#no_of_payments').change(function(){
+		$('#no_of_payments').keyup(function(){
 			$('#payment_plan_div').removeClass("d-none");
             var numberofpayment = $('#no_of_payments').val();
-			var emi = net / numberofpayment;
+			var emi = selfamount / numberofpayment;
+			$('#useramount').val(emi);
 			var d = new Date();
-            var n = d.getMonth() + 1;
+			var n = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+			// alert(n);
+			// $('.date').append(n);
 			var i = 0;
 			while (i < numberofpayment) {
 				addRow();
@@ -631,11 +639,27 @@
 			{
 				var htmlRows = '';
 				htmlRows += '<tr>'; 
-				htmlRows +='<td><input type="text" value="'+emi+'" name="amount[]"  class="form-control" autocomplete="off"></td>';
-				htmlRows += '<td><input value="'+n+'" type="number" name="date[]" class="form-control price" autocomplete="off"></td>';		 
+				htmlRows +='<td><input type="text" value="'+emi+'" name="amount[]"  class="form-control sumamount" autocomplete="off"></td>';
+				if (i==0) {
+					htmlRows += '<td><input type="text" value="'+n+'" name="date[]" id="date" class="form-control date" autocomplete="off"></td>';
+				} else {
+					htmlRows += '<td><input type="date" name="date[]" id="date" class="form-control date" autocomplete="off"></td>';
+				}
 				htmlRows += '</tr>';
 				$('tbody').append(htmlRows);
-			}; 
+			};
+			var sum = 0;
+			$(".sumamount").each(function (i) {
+				var val = $(this).val();
+				if (val != "") {
+
+					sum = sum+ parseFloat(val);
+				}
+				else {
+					sum = sum + 0;
+				}
+			});
+			$('#totalamount').html(sum);
 		});
 	    });
 		$('#contact').change(function(){

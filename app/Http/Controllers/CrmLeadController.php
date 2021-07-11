@@ -65,9 +65,10 @@ class CrmLeadController extends Controller
         return view('../admin/CRM/leads') -> with('data',$data);
     }
     public function updateleads(Request $req){
+        // return $req;
         $valid = Validator::make($req -> all(),[
             'status' => 'required|not_in:0',
-            'comment' => 'required'
+            'comment' => 'required',
            ]);
      
            if (!$valid -> passes()) {
@@ -76,11 +77,19 @@ class CrmLeadController extends Controller
            }else{
             $pid = $req -> post('pid');
             $status = $req -> post('status');
+            $date = $req -> post('date');
             $comment = $req -> post('comment');
-            $res = DB::table('crm_leads') 
-            ->where('id', $pid)
-            ->limit(1) 
-            ->update(['lead_status' => $status,'lead_comment' => $comment]);
+            if (isset($date)) {
+                $res = DB::table('crm_leads') 
+                ->where('id', $pid)
+                ->limit(1) 
+                ->update(['lead_status' => $status,'lead_start_date' => $date ,'lead_comment' => $comment]);
+            }else{
+                $res = DB::table('crm_leads') 
+                ->where('id', $pid)
+                ->limit(1) 
+                ->update(['lead_status' => $status,'lead_comment' => $comment]);
+            }
                if($res){
                 return response() -> json(['status' => 'success',
                 'msg' => 'Lead Updated!']);

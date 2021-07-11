@@ -249,7 +249,7 @@
                                                     <th data-field="EmployeeName" class="datatable-cell datatable-cell-sort"><span style="width: 250px;">Employee Name</span></th>
                                                     <th data-field="Contact" class="datatable-cell datatable-cell-sort" data-sort="asc"><span style="width: 158px;">Contact</span></th>
                                                     <th data-field="Department" class="datatable-cell datatable-cell-sort"><span style="width: 158px;">Department</span></th>
-                                                    <th data-field="Shift Timing" class="datatable-cell datatable-cell-sort"><span style="width: 158px;">Shift Timing</span></th>
+                                                    <th data-field="Shift Timing" class="datatable-cell datatable-cell-sort"><span style="width: 158px;">Shift</span></th>
                                                     <th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 158px;">Status</span></th>
                                                     <th data-field="Actions" data-autohide-disabled="false" class="datatable-cell datatable-cell-sort"><span style="width: 130px;">Actions</span></th>
                                                 </tr>
@@ -296,14 +296,13 @@
                                                             <div class="font-weight-bold text-muted">
                                                             <?php 
                                                                 $pid = $emp -> shift_id;
-                                                                $pdata = DB::SELECT("SELECT * FROM hr_shifts WHERE id = $pid"); 
+                                                                // echo $pid;
+                                                                $pdata = DB::SELECT("SELECT * FROM hr_shifts WHERE id = $pid");
+                                                                // echo $pdata -> shift_name; 
                                                                 // print_r($pdata);
-                                                                // // echo count($pdata);
-                                                                foreach ($pdata as  $pval) {
-                                                                }
-                                                                echo substr($pval -> mon_in,0,2);
-                                                                echo "-";
-                                                                echo substr($pval -> mon_out,0,2);
+                                                                // // // echo count($pdata);
+                                                                foreach ($pdata as  $pval){}
+                                                                echo "<a href='fetchshift/".$pid."'>" . $pval -> shift_name . "</a>";
                                                             ?>
                                                             </div>
                                                         </span>
@@ -395,28 +394,28 @@
     </div>
     <!--end::Scrolltop-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-		$(document).ready(function(){
-		  $(".statuschange").click(function () {
-		    var rowid = $(this).attr('id');
-		    // alert(rowid);
-		    $.ajax({
-		      url: "editemployeestatus",
-		      method: "POST",
-		      data : {id : rowid},
-		      headers: {
-			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			    },
-		      success: function (data) {
-                window.location.href = '../HR/employees'; 
-		      }
-		    });
-		  });
-		});
-	</script>
     <script>
         var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 
+    </script>
+     <script>
+    $(document).ready(function () {
+    $(".statuschange").click(function () {
+        var rowid = $(this).attr('id');
+        // alert(rowid);
+        $.ajax({
+            url: "editemployeestatus",
+            method: "POST",
+            data : {id : rowid},
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {
+            window.location.href = '../HR/employees'; 
+            }
+        });
+        });
+    });
     </script>
     <!--begin::Global Config(global config for global JS scripts)-->
     <script>

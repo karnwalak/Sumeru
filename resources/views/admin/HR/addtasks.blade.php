@@ -195,7 +195,7 @@
 								<p style="font-size:20px;"><b>Deadline</b></p><br>
 							</div>
 							<div class="row" style="margin:2em;">
-								<input type="date" class="form-control form-control-solid form-control-lg" min="<?php date('y-m-d');?>" name="deadline" />
+								<input type="datetime-local" value="<?php echo date("F j, Y, g:i a"); ?>" class="form-control form-control-solid form-control-lg" name="deadline" />
 								<span class="field_error text-danger" id="deadline_error"></span>
 							</div>
 							<div class="row" style="margin:2em;">

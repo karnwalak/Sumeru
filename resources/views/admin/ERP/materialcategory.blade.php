@@ -4,11 +4,11 @@
 
 <head>
 	<meta charset="utf-8" />
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!--begin::Fonts-->
-	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -304,16 +304,12 @@
 															</span>
 														    </td>
 															<td data-field="Status" aria-label="5" class="datatable-cell">
-								                               @if($value -> category_status == 'Active')
-								                                <div class="form-check form-switch">
-																								  <input class="form-check-input statuschange" name="status" type="checkbox" id="{{$value -> id}}" checked />
-																								</div>
-								                               @else
-								                                <div class="form-check form-switch">
-																								  <input class="form-check-input statuschange" name="status" type="checkbox" id="{{$value -> id}}"/>
-																								</div>
-								                               @endif
-														  </td>
+															   @if($value -> category_status == 'Active')
+															   <button class="btn btn-success statuschange" id="{{$value -> id}}" href="">{{$value -> category_status}}</button>
+															   @elseif($value -> category_status == 'Inactive')
+															   <button class="btn btn-danger statuschange" id="{{$value -> id}}" href="">{{$value -> category_status}}</button>
+															   @endif
+														    </td>
 															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
 																<span style="overflow: visible; position: relative; width: 125px;">
 																<a href="editmaterials/{{$value -> id}}" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">
@@ -392,6 +388,25 @@
 	<script>
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 	</script>
+    <script type="text/javascript">
+		$(document).ready(function(){
+		  $(".statuschange").click(function () {
+		    var rowid = $(this).attr('id');
+		    // alert(rowid);
+		    $.ajax({
+		      url: "editcategorystatus",
+		      method: "POST",
+		      data : {id : rowid},
+		      headers: {
+			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			    },
+		      success: function (data) {
+                window.location.href = '../ERP/materialcategory'; 
+		      }
+		    });
+		  });
+		});
+	</script>
 	<!--begin::Global Config(global config for global JS scripts)-->
 	<script>
 		var KTAppSettings = {
@@ -468,38 +483,6 @@
 	<!--begin::Page Scripts(used by this page)-->
 	<script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
 	<!--end::Page Scripts-->
-	<script type="text/javascript">
-		$(document).ready(function(){
-		  $(".statuschange").click(function () {
-		    if ($(this).prop("checked") == true) {
-		      $('.statuschange').val(1);
-		      var val = 1;
-		    } else {
-		      $('.statuschange').val(0);
-		      var val = 0;
-		    }
-		    var rowid = $(this).attr('id');
-		    // alert(rowid);
-		    // if($(this).prop("checked") == false){
-		    //    alert("bye");
-		    // }
-		    $.ajax({
-		      url: "statusupdatematerialcategory",
-		      method: "POST",
-		      data : {id : rowid},
-		      headers: {
-			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			    },
-		      success: function (data) {
-		        console.log(data);
-		        // $('#uploaded_image').html(data);
-		        // $('#progressBar').val(100);
-		        // $('#status').html('File Uploaded!');
-		      }
-		    });
-		  });
-		});
-	</script>
 </body>
 <!--end::Body-->
 

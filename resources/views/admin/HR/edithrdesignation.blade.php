@@ -197,7 +197,7 @@
                                                                         <!--end::Group-->
                                                                         <!-- begin::Group -->
                                                                         <div class="form-group row" data-select2-id="243">
-                                                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Lead</label>
+                                                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Department</label>
                                                                             <div class="col-lg-9 col-md-9 col-sm-12" data-select2-id="242">
                                                                                 <select class="form-control" id="kt_select2_1" name="lead">
                                                                                     <option value="">Select</option>

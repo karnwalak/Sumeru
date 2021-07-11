@@ -4,6 +4,7 @@
 
 <head>
 	<meta charset="utf-8" />
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<base href="../">
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
@@ -153,17 +154,17 @@
 													</div>
 													<div class="my-lg-0 my-1">
 														<a href="#">
-															<svg aria-hidden="true" focusable="false" data-prefix="fas" style="height:25px; margin:0 10px;" data-icon="bell" class="svg-inline--fa fa-bell fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64zm215.39-149.71c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71z"></path></svg>
+															<!-- <svg aria-hidden="true" focusable="false" data-prefix="fas" style="height:25px; margin:0 10px;" data-icon="bell" class="svg-inline--fa fa-bell fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64zm215.39-149.71c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71z"></path></svg> -->
 														</a>
 														<a href="#">
-														<svg aria-hidden="true" focusable="false" data-prefix="fas" style="height:25px; margin:0 10px;" data-icon="cog" class="svg-inline--fa fa-cog fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"></path></svg>
+														<!-- <svg aria-hidden="true" focusable="false" data-prefix="fas" style="height:25px; margin:0 10px;" data-icon="cog" class="svg-inline--fa fa-cog fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"></path></svg> -->
 														</a>
 														<a href="#">
 															<div class="btn-group">
-																	<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add </button>
-																<div class="dropdown-menu">
+																	<!-- <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add </button> -->
+																<!-- <div class="dropdown-menu">
 																		...
-																</div>
+																</div> -->
 															</div>
 														</a>
 													</div>
@@ -184,20 +185,34 @@
 								<div class="card card-custom gutter-b">
 									<div class="card-body">
 										<div class="d-flex">
-											<span class="text-muted">Task #54 - Pending</span>
+											<span class="text-muted">Task  #{{$viewtasks -> id}}- {{$viewtasks -> task_status}}</span>
 										</div>
 										<div class="separator separator-solid my-7"></div>
 										<div class="">
 										<label for="exampleTextarea">Provide more information</label>
-											<textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+											<textarea class="form-control" id="exampleTextarea" rows="3">
+											  {{strip_tags(htmlspecialchars_decode($viewtasks -> task_discription))}}
+											</textarea>
 										</div>
 										<div class="separator separator-solid my-7"></div>
 										<!--begin: Items-->
 										<div class="d-flex align-items-left flex-wrap">
 											<!--begin: Item-->
 											<div class="d-flex align-items-left flex-lg-fill mr-5 my-1">
-											<a href="#" class="btn btn-light-success font-weight-bold mr-2">Start</a>
-											<a href="#" class="btn btn-light-success font-weight-bold mr-2">Finish</a>
+											@if($viewtasks -> task_status == 'start')
+											<a data-id="{{$viewtasks -> id}}" class="btn btn-light-success font-weight-bold mr-2 changebtn">Resume</a>
+											@elseif($viewtasks -> task_status == 'resume')
+											<a data-id="{{$viewtasks -> id}}" class="btn btn-light-success font-weight-bold mr-2 changebtn">Start</a>
+											@elseif($viewtasks -> task_status == 'finish')
+											<a class="btn btn-light mr-2" disabled>Start</a>
+											@else
+											<a data-id="{{$viewtasks -> id}}" class="btn btn-light-success font-weight-bold mr-2 changebtn">Start</a>
+											@endif
+											@if($viewtasks -> task_status == 'finish')
+											<a data-id="{{$viewtasks -> id}}" class="d-none btn btn-light-success finishbtn font-weight-bold mr-2">Finish</a>
+											@else
+											<a data-id="{{$viewtasks -> id}}" class="btn btn-light-success finishbtn font-weight-bold mr-2">Finish</a>
+											@endif
 											<div class="dropdown">
 											<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												More..
@@ -253,7 +268,7 @@
 										<div class="card card-custom card-stretch gutter-b">
 											<!--begin::Header-->
 											<div class="card-header border-0">
-												<h3 class="card-title font-weight-bolder text-dark">Pending Since......</h3>
+												<h3 class="card-title font-weight-bolder text-dark">{{$viewtasks -> task_status}}</h3>
 											</div>
 											<!--end::Header-->
 											<!--begin::Body-->
@@ -269,21 +284,18 @@
 													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
-															<span class="text-dark-75 font-weight-bolder font-size-h6">{{$viewtasks -> deadline}}</span>
+															<span class="text-dark-75 font-size-h6">{{$viewtasks -> deadline}}</span>
 														</div>
 													</div>
 													<!--end::Info-->
 												</div>
 												<!--end::Item-->
-										<div class="separator separator-solid my-7"></div>
+										<!-- <div class="separator separator-solid my-7"></div> -->
 												<!--begin::Item-->
-												<div class="d-flex flex-wrap align-items-center mb-10">
-													<!--begin::Title-->
+												<!-- <div class="d-flex flex-wrap align-items-center mb-10">
 													<div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
 														<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">Reminder:</a>
 													</div>
-													<!--end::Title-->
-													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
 															<span class="text-dark-75 font-weight-bolder font-size-h6">Remind
@@ -291,8 +303,7 @@
 														</span>
 															</div>
 													</div>
-													<!--end::Info-->
-												</div>
+												</div> -->
 												<!--end::Item-->
 										<div class="separator separator-solid my-7"></div>
 												<!--begin::Item-->
@@ -488,6 +499,42 @@
     <!--begin::Page Scripts(used by this page)-->
     <script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
 	<!--end::Page Scripts-->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+		$(document).ready(function(){
+		  $(".changebtn").click(function () {
+		    var rowid = $(this).attr('data-id');
+		    // alert(rowid);
+		    $.ajax({
+		      url: "changetaskstatus",
+		      method: "POST",
+		      data : {id : rowid},
+		      headers: {
+			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			    },
+		      success: function (data) {
+                window.location.reload(); 
+		      }
+		    });
+		  });
+		  $(".finishbtn").click(function () {
+		    var rowid = $(this).attr('data-id');
+		    // alert(rowid);
+		    $.ajax({
+		      url: "finishstatus",
+		      method: "POST",
+		      data : {id : rowid},
+		      headers: {
+			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			    },
+		      success: function (data) {
+                window.location.reload(); 
+		      }
+		    });
+		  });
+		  
+		});
+	</script>
 </body>
 <!--end::Body-->
 

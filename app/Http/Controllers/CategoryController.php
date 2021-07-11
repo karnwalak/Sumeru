@@ -10,22 +10,23 @@ use Validator;
 class CategoryController extends Controller
 {
     public function statusupdate(Request $req){
-    $id = $req -> id;
-    $data = DB::SELECT("SELECT * FROM inventory_material_categories where id = $id");
-    foreach ($data as $value) {
-       
-    }
-    if($value -> category_status == "Active"){
-     $result = DB::table('inventory_material_categories') 
-        ->where('id', $id)
-        ->limit(1) 
-        ->update(['category_status' => 'Inactive']); 
-    }else{
-     $result = DB::table('inventory_material_categories') 
-        ->where('id', $id)
-        ->limit(1) 
-        ->update(['category_status' => 'Active']);
-    }
+        $id = $req -> id;
+        // return $id;
+        $data = DB::SELECT("SELECT * FROM inventory_material_categories where id = $id");
+        foreach ($data as $value) {
+           
+        }
+        if($value -> category_status == "Active"){
+         $result = DB::table('inventory_material_categories') 
+            ->where('id', $id)
+            ->limit(1) 
+            ->update(['category_status' => 'Inactive']); 
+        }else{
+         $result = DB::table('inventory_material_categories') 
+            ->where('id', $id)
+            ->limit(1) 
+            ->update(['category_status' => 'Active']);
+        }
     }
     public function addCategory(Request $req)
     {

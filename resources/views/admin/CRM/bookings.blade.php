@@ -394,7 +394,6 @@
 																			</tbody>
 																		</table>
 																		<div class="datatable-pager datatable-paging-loaded">
-																		{{$data -> links()}}
 																			<!-- <ul class="datatable-pager-nav my-2 mb-sm-0">
 																				<li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
 																				<li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
