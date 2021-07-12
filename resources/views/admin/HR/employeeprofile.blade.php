@@ -213,7 +213,7 @@ $employee = $data[0];
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr
 															</a>
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold">
-															<i class="flaticon2-placeholder mr-2 font-size-lg"></i>{{$employee -> employee_city}}</a>
+															<i class="flaticon2-placeholder mr-2 font-size-lg"></i>{{$employee -> employee_contact_no}}</a>
 														</div>
 														<span class="font-weight-bold text-dark-50">I distinguish three main text objectives could be merely to inform people.</span>
 														<span class="font-weight-bold text-dark-50">A second could be persuade people.You want people to bay objective</span>

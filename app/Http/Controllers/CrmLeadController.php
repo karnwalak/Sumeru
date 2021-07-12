@@ -41,6 +41,7 @@ class CrmLeadController extends Controller
                  'lead_source' => $req -> post('source'),
                  'lead_start_date' => $req -> post('date'),
                  'lead_status' => 'Pending',
+                 'follow_update' => 0,
                  'employee_id' => 0,
                  'lead_comment' =>  $req -> post('comment'),
                ];

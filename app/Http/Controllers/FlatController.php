@@ -150,7 +150,7 @@ class FlatController extends Controller
             }
    }
    public function show(Request $req){
-    $data = Flat::where('flat_status','!=','delete')->paginate(10);
+    $data = Flat::orderBy('id','DESC')->where('flat_status','!=','delete')->paginate(10);
     return view('../admin/Flat/flatstockinventory',compact('data'));
 }
 }

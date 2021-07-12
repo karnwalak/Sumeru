@@ -52,17 +52,10 @@ class MaterialStockController extends Controller
         }
      }
     public function show(Request $req,$id){
-        $data = MaterialStock::where('material_id',$id) -> paginate(10);
-        foreach($data as $val){}
-        $in = $val -> invoice_id;
-        $order = Purchase::where('invoice_id',$in)->get();
-        // return print_r($order);
-        $datas = Material::where('id',$id) -> get();
-        // return view('../admin/ERP/productstockrecord',compact('data'));
-        // return view('../admin/ERP/productstockrecord',compact('datas'));
-        return view('../admin/ERP/productstockrecord')
-        ->with('data',$data)
-        ->with('datas',$datas)
-        ->with('order',$order);
+        $data = MaterialStock::where('material_id',$id)
+        ->join('inventory_purchase_orders','material_stock_records.invoice_id','=','inventory_purchase_orders.invoice_id')
+        ->select(['inventory_purchase_orders.*','material_stock_records.*'])
+        -> paginate(10);
+        return view('../admin/ERP/productstockrecord')->with('data',$data);
     }
 }

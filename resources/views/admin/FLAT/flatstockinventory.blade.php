@@ -350,12 +350,12 @@
 																</tr>
 															</thead>
 															<tbody class="datatable-body" style="">
-																<?php //$a = 1; ?>
+																<?php $a = 1; ?>
 																@if(isset($data))
 																@foreach($data as $value)
 																<tr data-row="0" class="datatable-row" style="left: 0px;">
 																	<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
-																	<td data-field="Sno" aria-label="" class="datatable-cell"><span style="width: 140px;">{{$value -> id}}</span></td>
+																	<td data-field="Sno" aria-label="" class="datatable-cell"><span style="width: 140px;">{{$a++}}</span></td>
 																	<td data-field="{{$value -> flat_stock_name}}" aria-label="{{$value -> flat_stock_name}}" class="datatable-cell"><span style="width: 140px;">{{$value -> flat_stock_name}}</span></td>
 																	<td data-field="{{$value -> flat_category_id}}" aria-label="{{$value -> flat_category_id}}" class="datatable-cell"><span style="width: 140px;">
 																		<?php 

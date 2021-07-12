@@ -234,7 +234,7 @@
 																			<div class="col-md-2"></div>
 																		</div>
 																		<div id="oculto">
-																			<div id="sunDiv" class="box-info d-none">
+																			<div id="sunDiv" data-id="d-none" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Sunday</p>
 																				</div>
@@ -243,18 +243,18 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="sunfrom" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg sun" name="sunfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="sunto" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg sun" name="sunto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
 																			@if($data -> mon_in && $data -> mon_out)
-																			<div id="monDiv" class="box-info">
+																			<div id="monDiv"  class="box-info">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Monday</p>
 																				</div>
@@ -274,7 +274,7 @@
 																				</div>
 																			</div>
 																			@else
-																			<div id="monDiv" class="box-info d-none">
+																			<div id="monDiv" data-id="d-none" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Monday</p>
 																				</div>
@@ -283,13 +283,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="monfrom" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" id="monfrom" name="monfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="monto" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg" id="monto"  name="monto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -315,7 +315,7 @@
 																				</div>
 																			</div>
 																			@else
-																			<div id="tueDiv" class="box-info d-none">
+																			<div id="tueDiv" data-id="d-none" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Tuesday</p>
 																				</div>
@@ -324,13 +324,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="tuefrom" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg tue" name="tuefrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="tueto" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg tue" name="tueto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -356,7 +356,7 @@
 																				</div>
 																			</div>
 																			@else
-																			<div id="wedDiv" class="box-info d-none">
+																			<div id="wedDiv" data-id="d-none" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Wednesday</p>
 																				</div>
@@ -365,13 +365,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="wedfrom" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg wed" name="wedfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="wedto" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg wed" name="wedto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -397,7 +397,7 @@
 																				</div>
 																			</div>
 																			@else
-																			<div id="thuDiv" class="box-info d-none">
+																			<div id="thuDiv" data-id="d-none" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Thursday</p>
 																				</div>
@@ -406,13 +406,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="thufrom" type="time" />
+																						<input class="form-control form-control-solid form-control-lg thu" name="thufrom" type="time" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="thuto" type="time" />
+																						<input class="form-control form-control-solid form-control-lg thu" name="thuto" type="time" />
 																					</div>
 																				</div>
 																			</div>
@@ -438,7 +438,7 @@
 																				</div>
 																			</div>
 																			@else
-																			<div id="friDiv" class="box-info d-none">
+																			<div id="friDiv" data-id="d-none" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Friday</p>
 																				</div>
@@ -447,13 +447,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="frifrom" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg fri" name="frifrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="frito" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg fri" name="frito" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -479,7 +479,7 @@
 																				</div>
 																			</div>
 																			@else
-																			<div id="satDiv" class="box-info d-none">
+																			<div id="satDiv" data-id="d-none" class="box-info d-none">
 																				<div class="row" style="padding:20px;">
 																					<p><b>Time Slots</b> : Saturday</p>
 																				</div>
@@ -488,13 +488,13 @@
 																						<p>From:</p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="satfrom" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg sat" name="satfrom" type="time" value="" />
 																					</div>
 																					<div class="col-md-2 col-6">
 																						<p>To: </p>
 																					</div>
 																					<div class="col-md-4 col-6">
-																						<input class="form-control form-control-solid form-control-lg" name="satto" type="time" value="" />
+																						<input class="form-control form-control-solid form-control-lg sat" name="satto" type="time" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -568,24 +568,53 @@
 	   $(document).ready(function(){
 		  $('#sun').click(function(){
              $('#sunDiv').removeClass('d-none').toggle();
+			 var a = $("#sunDiv").attr('data-id');
+			 if(a == 'd-none'){
+				 $('#sun').val('');
+			 }
 		  });
 		  $('#mon').click(function(){
              $('#monDiv').removeClass('d-none').toggle();
+			 var a = $("#monDiv").attr('data-id');
+			 if(a == 'd-none'){
+				 $('#monfrom').val('');
+				 $('#monto').val('');
+			 }
 		  });
 		  $('#tue').click(function(){
              $('#tueDiv').removeClass('d-none').toggle();
+			 var a = $("#tueDiv").attr('data-id');
+			 if(a == 'd-none'){
+				 $('#tue').val('');
+			 }
 		  });
 		  $('#wed').click(function(){
              $('#wedDiv').removeClass('d-none').toggle();
+			 var a = $("#wedDiv").attr('data-id');
+			 if(a == 'd-none'){
+				 $('#wed').val('');
+			 }
 		  });
 		  $('#thu').click(function(){
              $('#thuDiv').removeClass('d-none').toggle();
+			 var a = $("#thuDiv").attr('data-id');
+			 if(a == 'd-none'){
+				 $('#thu').val('');
+			 }
 		  });
 		  $('#fri').click(function(){
              $('#friDiv').removeClass('d-none').toggle();
+			 var a = $("#friDiv").attr('data-id');
+			 if(a == 'd-none'){
+				 $('#fri').val('');
+			 }
 		  });
 		  $('#sat').click(function(){
              $('#satDiv').removeClass('d-none').toggle();
+			 var a = $("#satDiv").attr('data-id');
+			 if(a == 'd-none'){
+				 $('#sat').val('');
+			 }
 		  });
           $('#form').submit(function(e){
 			  e.preventDefault();

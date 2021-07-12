@@ -295,7 +295,13 @@
 															<td data-field="Modal" aria-label="{{$value -> modal}}" class="datatable-cell"><span style="width: 100px;">{{$value -> modal}}</span></td>
 															<td data-field="Sku" aria-label="{{$value -> sku}}" class="datatable-cell"><span style="width: 100px;">{{$value -> sku}}</span></td>
 															<td data-field="Type" aria-label="{{$value -> type}}" class="datatable-cell"><span style="width: 100px;">{{$value -> type}}</span></td>
-															<td data-field="Stock" aria-label="Brazil" class="datatable-cell"><span style="width: 100px;"><a href="#">2016</a></span></td>
+															<td data-field="Stock" aria-label="Brazil" class="datatable-cell"><span style="width: 100px;"><a href="#">
+															<?php 
+																$id = $value -> id;
+                                                                $result = DB::SELECT("SELECT * FROM material_stock_records WHERE material_id = $id");
+                                                                echo count($result);
+																?>
+															</a></span></td>
 															<td data-field="Status" aria-label="5" class="datatable-cell">
 															   @if($value -> material_status == 'Active')
 															   <button class="btn btn-success statuschange" id="{{$value -> id}}" href="">{{$value -> material_status}}</button>

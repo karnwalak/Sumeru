@@ -16,7 +16,19 @@ class CrmBookingController extends Controller
         $data = crm_booking::where('status','=',$st)
         ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
         ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
-        // ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_email','flat_ inventories.flat_stock_name']);
+        ->select(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_email','flat_ inventories.flat_stock_name'])
+        ->paginate(10);
+        if ($data) {
+            return view('../admin/CRM/shortbooking',compact('data'));
+        }else{
+            return redirect('../admin/CRM/bookings');
+        }
+    }
+    public function sortcash(Request $req,$st){
+        $data = crm_booking::where('status','=',$st)
+        ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
+        ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
+        ->g(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_email','flat_ inventories.flat_stock_name'])
         ->paginate(10);
         if ($data) {
             return view('../admin/CRM/shortbooking',compact('data'));
@@ -88,7 +100,7 @@ class CrmBookingController extends Controller
         }
         for ($i=0; $i < count($req -> amount) ; $i++) {
         $data = [
-         'id' =>17,
+         'id' =>18,
          'contact_id' =>$req -> post('contact'),
          'product_id' =>$req -> post('product'),
          'total_amount' =>$req -> post('productprice'),
@@ -127,8 +139,8 @@ class CrmBookingController extends Controller
     ->where('status','!=','delete')
     ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
     ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
-    ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_email','flat_ inventories.flat_stock_name']);
-    // ->paginate(10);
+    ->select(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_email','flat_ inventories.flat_stock_name'])
+    ->paginate(10);
     return view('../admin/CRM/bookings') -> with('data',$booking);
    }
    public function deletebooking($id)
@@ -154,7 +166,7 @@ class CrmBookingController extends Controller
     ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
     ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
     ->where('crm_bookings.id','=',$id)
-    ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name']);
+    ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_permanent_address','crm_contacts.contact_email','flat_ inventories.flat_stock_name']);
     return view('../admin/CRM/bookingsview') 
     -> with('payment',$payment)
     -> with('booking',$booking);
@@ -175,17 +187,12 @@ class CrmBookingController extends Controller
            'amount'  => $req -> post('amount'),
            'payment_method'  => $req -> post('transaction_type'),
            'transction_id'  => rand(1,1000),
-           'employee_id'  => 0,
+           'employee_id'  => session() -> get('id'),
+           'status' => 'Recieved',
            'comment'  => $req -> post('comment'),
         ];
         $res = crm_booking_payment_log::insert($data);
-        $data2 = [
-            'booking_id'  => $req -> post('booking_id'),
-            'booking_price'  => $req -> post('amount'),
-            'days'  =>  date('y-m-d'),
-        ];
-        $res2 = crm_booking_payment_plan::insert($data2);
-        if ($res && $res2) {
+        if ($res) {
             return response() -> json([
               'status' => 'success',
               'msg' => 'Payment Added!'
@@ -253,5 +260,9 @@ class CrmBookingController extends Controller
             return redirect('../admin/CRM/bookings');
         }
     }
+}
+public function showpayment(Request $req)
+{
+   return view('../admin/CRM/cashcredit') -> with('data',crm_booking_payment_log::paginate(10));
 }
 }

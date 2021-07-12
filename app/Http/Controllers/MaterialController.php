@@ -171,7 +171,7 @@ class MaterialController extends Controller
             }
     }
     public function show(Request $req){
-        $data = Material::where('material_status','!=','delete')->paginate(10);
+        $data = Material::orderBy('id','DESC')->where('material_status','!=','delete')->paginate(10);
         return view('../admin/ERP/materialspage',compact('data'));
     }
 }

@@ -95,7 +95,7 @@ class HrTaskController extends Controller
     }
     public function create(Request $req)
     {
-        return $req;
+        // return $req;
         $valid = Validator::make($req -> all(),[
             'compose_subject' => 'required',
             'message' => 'required',
@@ -149,7 +149,7 @@ class HrTaskController extends Controller
     }
     public function showdata(Request $req)
     {
-        $tasks = hr_task::where('task_status','!=','delete')
+        $tasks = hr_task::orderby('id','DESC')->where('task_status','!=','delete')
         ->where('created_by','=',session()->get('id'))
         ->join('hr_task_emplyees','hr_tasks.id','=','hr_task_emplyees.task_id')
         ->get(['hr_tasks.*','hr_task_emplyees.emplyee_id']);

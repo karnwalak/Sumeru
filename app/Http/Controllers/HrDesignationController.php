@@ -43,11 +43,11 @@ class HrDesignationController extends Controller
    }
    public function showdata(Request $req)
    {
-       $data = hr_designation::where('status','!=','delete')->paginate(10);
+       $data = hr_designation::orderBy('id','DESC')->where('status','!=','delete')->paginate(10);
        return view('../admin/HR/hrdesignation') -> with('data',$data);
    }
    public function edithrdesignation(Request $req,$id){
-      $department = hr_department::get();
+      $department = hr_department::where('status','!=','delete')-> get();
       return view('../admin/HR/edithrdesignation') -> with('data',hr_designation::find($id)) -> with('department',$department);
    }
    public function edit(Request $req)

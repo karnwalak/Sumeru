@@ -1,6 +1,3 @@
-<?php
-$seller = $order[0];
-?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -210,9 +207,9 @@ $seller = $order[0];
 										<div class="card-title">
 											<h3 class="card-label">Product Stock Record</h3>
 										</div>
-										<!-- <div class="row" style="display:grid;place-items:end;padding:10px 15px;">
+										<div class="row" style="display:grid;place-items:end;padding:10px 15px;">
 										<a href="../ERP/purchaseorder" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
-										</div> -->
+										</div>
 									</div>
 									<!--end::Header-->
 									<!--begin::Body-->
@@ -322,6 +319,7 @@ $seller = $order[0];
 													</thead>
 													<tbody class="datatable-body" style="">
 													<?php $a = 1; ?>
+													@if(isset($data))
 													@foreach($data as $value)
 														<tr data-row="0" class="datatable-row datatable-row-even" style="left: 0px;">
 															<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
@@ -340,7 +338,7 @@ $seller = $order[0];
 															<td data-field="Comment" aria-label="Brazil" class="datatable-cell"><span style="width: 100px;">{{$value -> comment}}</span></td>
 															<td data-field="Buyer/Seller" aria-label="Oriole Pass" class="datatable-cell"><span style="width: 100px;">
 															<?php 
-																$pid = $seller ->seller_id;
+																$pid = $value ->seller_id;
 																$pdata = DB::SELECT("SELECT * FROM sellers WHERE id = $pid"); 
 																foreach ($pdata as  $pval) {
 																}
@@ -350,6 +348,9 @@ $seller = $order[0];
 															<td data-field="Cost/Item" aria-label="Brazil" class="datatable-cell"><span style="width: 100px;">{{$value -> stock_cost}}</span></td>
 														</tr>
 													@endforeach
+													@else
+													<tr><h3>No Records Found!</h3></tr>
+													@endif
 													</tbody>
 												</table>
 												<div class="datatable-pager datatable-paging-loaded">

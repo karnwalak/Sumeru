@@ -51,7 +51,7 @@ class HrEmployeesController extends Controller
     }
     public function showdata(Request $req){
         return view('../admin/HR/employees') 
-        -> with('employee',hr_employees::where('employee_status','!=','delete')->paginate(10));
+        -> with('employee',hr_employees::orderBy('id','DESC')->where('employee_status','!=','delete')->paginate(10));
     }
     public function create(Request $req)
     {
@@ -81,7 +81,7 @@ class HrEmployeesController extends Controller
                'department_id' => $req -> post('department'),
                'shift_id' => $req -> post('shift'),
                'employee_contact_no' => $req -> post('phone'),
-               'employee_joining_date' => Date(),
+               'employee_joining_date' => Date('y-m-d'),
                'employee_img' => $file_name,
                'email_id' => $req -> post('email'),
                'employee_basic_salary' => $req -> post('salary'),

@@ -1,5 +1,7 @@
 <?php
 $data = $booking[0];
+// print_r($data);
+// exit;
 // $paymentdata = $payment[0];
 ?>
 <!DOCTYPE html>
@@ -175,9 +177,9 @@ $data = $booking[0];
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
 															<i class="flaticon2-new-email mr-2 font-size-lg"></i>{{$data -> contact_email}}</a>
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-															<i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>{{$data -> contact_occuption}}</a>
+															<i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>{{$data -> contact_mob_no}}</a>
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold">
-															<i class="flaticon2-placeholder mr-2 font-size-lg"></i>{{$data -> contact_state}}</a>
+															<i class="flaticon2-placeholder mr-2 font-size-lg"></i>{{$data -> contact_permanent_address}}</a>
 														</div>
 														<span class="font-weight-bold text-dark-50">I distinguish three main text objectives could be merely to inform people.</span>
 														<span class="font-weight-bold text-dark-50">A second could be persuade people.You want people to bay objective</span>
@@ -552,7 +554,7 @@ $data = $booking[0];
                 $('.form')[0].reset();
 				$('#success_msg').html(result.msg);
                 setTimeout(function(){
-                   window.location.href = '../CRM/bookings'; 
+					window.location.reload(); 
                 }, 1000);
               }
             }

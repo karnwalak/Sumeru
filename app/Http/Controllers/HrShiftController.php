@@ -66,7 +66,7 @@ class HrShiftController extends Controller
         }
    }
    public function show(Request $req){
-       return view('../admin/HR/shifts') -> with('data',hr_shift::where('shift_status','!=','delete')->paginate(10));
+       return view('../admin/HR/shifts') -> with('data',hr_shift::orderby('id','DESC')->where('shift_status','!=','delete')->paginate(10));
    }
    public function edit(Request $req,$id){
        return view('../admin/HR/editshifts') -> with('data',hr_shift::find($id));

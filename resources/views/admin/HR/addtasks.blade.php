@@ -165,7 +165,7 @@
 																	</div>
 																	<!--end::Subject-->
 																	<div id="">
-																	   <textarea id="editor" name="message" cols="30" rows="10"></textarea>
+																	   <textarea type="text" name="message" class="form-control border-0 px-8 min-h-45px" id="editor" ></textarea>
 																	   <span class="text-danger field_error" id="message_error"></span>
 																	</div>
 															</div>
@@ -323,22 +323,25 @@
 	<!--end::Page Vendors-->
 	<!--begin::Page Scripts(used by this page)-->
 	<script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
+	<script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+	<script>
+			CKEDITOR.replace( 'editor', { fullPage : false, bodyId : 'editor'});
+	</script>
 	<!--end::Page Scripts-->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
         $("#form").submit(function(e){
         e.preventDefault();
         $('.field_error').html('');
+		for (instance in CKEDITOR.instances) {
+        CKEDITOR.instances[instance].updateElement();
+        };
            $.ajax({
-                // headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 url: '../HR/addtasks',
                 method:"POST",
-                data:new FormData(this),
+                data:$('#form').serialize(),
                 dataType:'JSON',
-                cache:false,
-                contentType: false,
-                processData: false,
                 success:function(result) {
                   if (result.status == 'error') {
 					$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
@@ -371,10 +374,7 @@ $('#myselect').select2({
 	allowClear: true
 });
 </script>
-<script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
-<script>
-		CKEDITOR.replace( 'message' );
-</script>
+
 </body>
 <!--end::Body-->
 

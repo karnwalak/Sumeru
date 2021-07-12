@@ -166,7 +166,7 @@ class SellerController extends Controller
        }
     }
     public function show(Request $req){
-        $data = Seller::where('seller_status','!=','delete')->paginate(10);
+        $data = Seller::orderBy('id','DESC')->where('seller_status','!=','delete')->paginate(10);
         return view('../admin/ERP/seller',compact('data'));
     }
 }

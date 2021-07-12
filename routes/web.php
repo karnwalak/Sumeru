@@ -186,6 +186,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::view('admin/HR/viewtasks','admin/HR/viewtasks');
         /****************************************************CRM*****************************************************************/
         Route::view('admin/CRM/crmdashboard','admin/CRM/crmdashboard');
+        Route::get('admin/CRM/cashcredit',[CrmBookingController::class,'showpayment']);
         Route::get('admin/CRM/createleads',[CrmLeadController::class,'show']);
         Route::post('admin/CRM/updateleads',[CrmLeadController::class,'updateleads']);
         Route::post('admin/CRM/searchlead',[CrmLeadController::class,'index']);
@@ -206,6 +207,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/CRM/deletebooking/{id}',[CrmBookingController::class,'deletebooking']);
         Route::post('admin/CRM/fetchcontact',[CrmBookingController::class,'fetchcontact']);
         Route::get('admin/CRM/sortbookings/{st}',[CrmBookingController::class,'sortbookings']);
+        Route::get('admin/CRM/sortcash/{st}',[CrmBookingController::class,'sortcash']);
         Route::post('admin/CRM/fetchproduct',[CrmBookingController::class,'fetchproduct']);
         Route::post('admin/CRM/addBooking',[CrmBookingController::class,'addBooking']);
         Route::post('admin/CRM/addPayment',[CrmBookingController::class,'addPayment']);
@@ -215,7 +217,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/CRM/bookingsview/{id}',[CrmBookingController::class,'bookingsview']);
         // Route::view('admin/CRM/bookings','admin/CRM/bookings');
         // Route::view('admin/CRM/bookingsview','admin/CRM/bookingsview');
-        Route::view('admin/CRM/cashcredit','admin/CRM/cashcredit');
+        // Route::view('admin/CRM/cashcredit','admin/CRM/cashcredit');
         Route::view('admin/CRM/searchbooking','admin/CRM/searchbooking');
         Route::get('admin/CRM/contactview/{id}',[CrmContactController::class,'contactview']);
         Route::get('admin/CRM/editcontacts/{id}',[CrmContactController::class,'edit']);
