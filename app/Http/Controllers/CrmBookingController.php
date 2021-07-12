@@ -12,6 +12,44 @@ use Illuminate\Support\Facades\DB;
 use Validator;
 class CrmBookingController extends Controller
 {
+    public function searchcash(Request $req)
+    {
+        $cname = $req -> post('booking_id');
+        $category_name = $cname; 
+        $st = $req -> post('status');
+        $status = $st; 
+        // return $req;
+        if ($category_name == null && $status == null) {
+            $data = crm_booking_payment_log::where('status','!=','delete')->paginate(10);    
+            if ($data) {
+                return view('../admin/CRM/cashcredit',compact('data'));
+            }else{
+                return redirect('../admin/CRM/cashcredit');
+            }
+        }else  if ($category_name == $cname && $status == null) {
+            $data = crm_booking_payment_log::where('status','!=','delete')->where('booking_id','=',$cname)->paginate(10);    
+            if ($data) {
+                return view('../admin/CRM/cashcredit',compact('data'));
+            }else{
+                return redirect('../admin/CRM/cashcredit');
+            }
+        }else  if ($category_name == null && $status == $st) {
+            $data = crm_booking_payment_log::where('status','=',$st)->paginate(10);    
+            if ($data) {
+                return view('../admin/CRM/cashcredit',compact('data'));
+            }else{
+                return redirect('../admin/CRM/cashcredit');
+            }
+        }
+        else  if ($category_name == $cname && $status == $st) {
+            $data = crm_booking_payment_log::where('booking_id','=',$cname)->where('status','=',$st)->paginate(10);    
+            if ($data) {
+                return view('../admin/CRM/cashcredit',compact('data'));
+            }else{
+                return redirect('../admin/CRM/cashcredit');
+            }
+        }
+    }
     public function sortbookings(Request $req,$st){
         $data = crm_booking::where('status','=',$st)
         ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
@@ -25,15 +63,12 @@ class CrmBookingController extends Controller
         }
     }
     public function sortcash(Request $req,$st){
-        $data = crm_booking::where('status','=',$st)
-        ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
-        ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
-        ->g(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_email','flat_ inventories.flat_stock_name'])
-        ->paginate(10);
+        // return $st;
+        $data = crm_booking_payment_log::where('status','=',$st)->paginate(10);
         if ($data) {
-            return view('../admin/CRM/shortbooking',compact('data'));
+            return view('../admin/CRM/shortcash',compact('data'));
         }else{
-            return redirect('../admin/CRM/bookings');
+            return redirect('../admin/CRM/shortcash');
         }
     }
    public function showdata(Request $req)

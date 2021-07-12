@@ -380,7 +380,13 @@
 															<td data-field="StartDate" aria-label="19/1/2021" class="datatable-cell"><span style="width: 80px;">{{$value -> lead_start_date}}</span></td>
 															<td data-field="Status" aria-label="5" class="datatable-cell">
 															<span style="width: 100px;">
-															<button class="btn btn-danger">{{$value -> lead_status}}</button>
+															@if($value -> lead_status == 'NextFollowup')
+															<button class="btn btn-success">NF-UP</button>
+															@elseif($value -> lead_status == 'Pending')
+															<button class="btn btn-primary">Pending</button>
+															@elseif($value -> lead_status == 'Dead')
+															<button class="btn btn-danger">Dead</button>
+															@endif
 															</span>
 															</td>
 															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">

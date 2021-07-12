@@ -42,7 +42,7 @@ class CrmLeadController extends Controller
                  'lead_start_date' => $req -> post('date'),
                  'lead_status' => 'Pending',
                  'follow_update' => 0,
-                 'employee_id' => 0,
+                 'employee_id' => session() -> get('id'),
                  'lead_comment' =>  $req -> post('comment'),
                ];
                $res = crm_lead::insert($data);
@@ -84,7 +84,7 @@ class CrmLeadController extends Controller
                 $res = DB::table('crm_leads') 
                 ->where('id', $pid)
                 ->limit(1) 
-                ->update(['lead_status' => $status,'lead_start_date' => $date ,'lead_comment' => $comment]);
+                ->update(['lead_status' => $status,'follow_update' => $date ,'lead_comment' => $comment]);
             }else{
                 $res = DB::table('crm_leads') 
                 ->where('id', $pid)

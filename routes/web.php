@@ -206,6 +206,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/CRM/bookings',[CrmBookingController::class,'show']);
         Route::get('admin/CRM/deletebooking/{id}',[CrmBookingController::class,'deletebooking']);
         Route::post('admin/CRM/fetchcontact',[CrmBookingController::class,'fetchcontact']);
+        Route::post('admin/CRM/searchcash',[CrmBookingController::class,'searchcash']);
         Route::get('admin/CRM/sortbookings/{st}',[CrmBookingController::class,'sortbookings']);
         Route::get('admin/CRM/sortcash/{st}',[CrmBookingController::class,'sortcash']);
         Route::post('admin/CRM/fetchproduct',[CrmBookingController::class,'fetchproduct']);

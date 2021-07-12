@@ -4,6 +4,7 @@
 
 <head>
 <meta charset="utf-8" />
+    <base href="../">
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -159,21 +160,25 @@
 							<div class="d-flex flex-column-fluid">
 									<!--begin::Container-->
 									<div class="container">
+									<div class="card-header flex-wrap border-0 pt-6 pb-0">
+													<div class="card-title">
+													<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5 pl-10 pt-5">Cash/Credit</h5>
+													</div>
+													<div class="row" style="display:grid;place-items:end;padding:10px 15px;">
+														<a href="cashcredit" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
+													</div>
+												</div>
 											<!--begin::Card-->
 											<div class="card card-custom">
-												 <!--begin::Header-->
-												 <div class="card-header flex-wrap border-0 pt-6 pb-0">
-													<div class="card-title">
-														<h3 class="card-label">Cash-Credit
-															<!-- <span class="d-block text-muted pt-2 font-size-sm">Materials made easy</span></h3> -->
-													</div>
-													<!-- <div class="row" style="display:grid;place-items:end;padding:10px 15px;">
-														<a href="hrdepartment" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
-													</div> -->
-												</div>
-                                <!--end::Header-->
 											<!--begin::Details-->
 											<div class="d-flex align-items-center flex-wrap mr-2">
+													<!--begin::Title-->
+													
+													<!--end::Title-->
+													<!--begin::Separator-->
+													<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
+													<!--end::Separator-->
+
 													<!--begin::Group Actions-->
 													<div class="d-flex- align-items-center flex-wrap mr-2 d-none" id="kt_subheader_group_actions">
 															<div class="text-dark-50 font-weight-bold">
@@ -242,43 +247,7 @@
 															<!--begin: Datatable-->
 															<div class="card card-custom gutter-b">
 										<div class="card-body">
-											<form action="searchcash" method="post">
-											{{@csrf_field()}}
-											<!--begin: Search Form-->
-											<div class="mb-7">
-												<div class="row align-items-center">
-													<div class="col-lg-7 col-xl-7">
-														<div class="row align-items-center">
-															<div class="col-md-5 my-2 my-md-0">
-																<div class="input-icon">
-																	<input type="text" name="booking_id" class="form-control" placeholder="Search..." id="kt_datatable_search_query">
-																	<span>
-																	<i class="flaticon2-search-1 text-muted"></i>
-																	</span>
-																</div>
-															</div>
-															<div class="col-md-7 my-2 my-md-0">
-																<div class="row">
-																	<label class="col-form-label text-left col-lg-4 col-sm-12">Status</label>
-																	<div class="col-lg-8 col-md-8	 col-sm-12" data-select2-id="242">
-																		<select class="form-control" id="kt_select2_1" name="status">
-																			<option value="">Select</option>
-																			<option value="Pending">Pending</option>
-																			<option value="Submitted">Submitted</option>
-																			<option value="Recieved">Recieved</option>
-																		</select>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="col-lg-5 col-xl-5 ">
-														<button type="submit" class="btn btn-light-primary px-6 font-weight-bold">Search</button>
-													</div>
-												</div>
-											</div>
-											<!--end::Search Form-->
-											</form>
+											
 											<!--end: Search Form-->
 											<!--begin: Selected Rows Group Action Form-->
 											<div class="mt-10 mb-5 collapse" id="kt_datatable_group_action_form">
