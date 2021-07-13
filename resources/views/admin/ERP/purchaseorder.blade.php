@@ -259,8 +259,10 @@
 																	<div class="col-lg-8 col-md-8	 col-sm-12" data-select2-id="242">
 																		<select class="form-control" id="kt_select2_1" name="status">
 																			<option value="">Select</option>
-																			<option value="Active">Active</option>
-																			<option value="Inactive">Inactive</option>
+																			<option value="Accept">Accept</option>
+																			<option value="Pending">Pending</option>
+																			<option value="Recieved">Recieved</option>
+																			<option value="Reject">Reject</option>
 																		</select>
 																	</div>
 																</div>

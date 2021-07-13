@@ -121,9 +121,10 @@ class CrmLeadController extends Controller
         // return $req;
         if ($category_name == null && $status == null) {
             $data = crm_lead::where('lead_status','!=','delete')->join('flat_categories','crm_leads.product','=','flat_categories.id')
-            ->get(['crm_leads.*','flat_categories.category_name']);
+            ->select(['crm_leads.*','flat_categories.category_name'])
+            ->paginate(10);
             if ($data) {
-                return view('../admin/CRM/searchleads',compact('data'));
+                return view('../admin/CRM/leads',compact('data'));
             }else{
                 return redirect('../admin/CRM/leads');
             }
@@ -131,18 +132,20 @@ class CrmLeadController extends Controller
             $data = crm_lead::where('lead_status','!=','delete')
             ->where('lead_name', 'like', '%' . $cname . '%')
             ->join('flat_categories','crm_leads.product','=','flat_categories.id')
-            ->get(['crm_leads.*','flat_categories.category_name']);
+            ->select(['crm_leads.*','flat_categories.category_name'])
+            ->paginate(10);
             if ($data) {
-                return view('../admin/CRM/searchleads',compact('data'));
+                return view('../admin/CRM/leads',compact('data'));
             }else{
                 return redirect('../admin/CRM/leads');
             }
         }else if ($category_name == null && $status == $st) {
             $data = crm_lead::where('lead_status','=',$st)
             ->join('flat_categories','crm_leads.product','=','flat_categories.id')
-            ->get(['crm_leads.*','flat_categories.category_name']);
+            ->select(['crm_leads.*','flat_categories.category_name'])
+            ->paginate(10);
             if ($data) {
-                return view('../admin/CRM/searchleads',compact('data'));
+                return view('../admin/CRM/leads',compact('data'));
             }else{
                 return redirect('../admin/CRM/leads');
             }
@@ -150,9 +153,10 @@ class CrmLeadController extends Controller
             $data = crm_lead::where('lead_status','=',$st)
             ->where('lead_name', 'like', '%' . $cname . '%')
             ->join('flat_categories','crm_leads.product','=','flat_categories.id')
-            ->get(['crm_leads.*','flat_categories.category_name']);
+            ->select(['crm_leads.*','flat_categories.category_name'])
+            ->paginate(10);
             if ($data) {
-                return view('../admin/CRM/searchleads',compact('data'));
+                return view('../admin/CRM/leads',compact('data'));
             }else{
                 return redirect('../admin/CRM/leads');
             }

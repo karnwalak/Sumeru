@@ -50,7 +50,7 @@ class MaterialController extends Controller
        if ($sname == null && $ty == null) {
            $data = Material::orderBy('id')->where('material_status','!=','delete')->paginate(10);
            if ($data) {
-               return view('../admin/ERP/searchproduct',compact('data'));
+               return view('../admin/ERP/materialspage',compact('data'));
            }else{
                return redirect('../materialspage');
            }
@@ -58,14 +58,14 @@ class MaterialController extends Controller
            // $data = DB::SELECT("SELECT * FROM sellers WHERE seller_name LIKE '%$sname%'");
           $data = Material::where('material_name', 'like', '%' . $pname . '%')->where('material_status','!=','delete')->paginate(10);
           if ($data) {
-               return view('../admin/ERP/searchproduct',compact('data'));
+               return view('../admin/ERP/materialspage',compact('data'));
            }else{
                return redirect('../materialspage');
            }
        }else if ($sname == null && $ty == $type) {
            $data = Material::where('release_type', $type)->where('material_status','!=','delete')->paginate(10);
           if ($data) {
-               return view('../admin/ERP/searchproduct',compact('data'));
+               return view('../admin/ERP/materialspage',compact('data'));
            }else{
                return redirect('../materialspage');
            }
@@ -76,7 +76,7 @@ class MaterialController extends Controller
          ->paginate(10);
 
            if ($data) {
-               return view('../admin/ERP/searchproduct',compact('data'));
+               return view('../admin/ERP/materialspage',compact('data'));
            }else{
                return redirect('../materialspage');
            }

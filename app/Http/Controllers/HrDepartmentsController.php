@@ -139,7 +139,7 @@ class HrDepartmentsController extends Controller
         if ($sname == null && $ty == null) {
             $data = hr_department::where('status','!=','delete')->orderBy('id')->paginate(10);
             if ($data) {
-                return view('../admin/HR/searchdepartment',compact('data'));
+                return view('../admin/HR/hrdepartment',compact('data'));
             }else{
                 return redirect('../hrdepartment');
             }
@@ -147,14 +147,14 @@ class HrDepartmentsController extends Controller
             // $data = DB::SELECT("SELECT * FROM sellers WHERE seller_name LIKE '%$sname%'");
            $data = hr_department::where('status','!=','delete')->where('name', 'like', '%' . $pname . '%')->paginate(10);
            if ($data) {
-                return view('../admin/HR/searchdepartment',compact('data'));
+                return view('../admin/HR/hrdepartment',compact('data'));
             }else{
                 return redirect('../hrdepartment');
             }
         }else if ($sname == null && $ty == $type) {
             $data = hr_department::where('status', $type)->paginate(10);
            if ($data) {
-                return view('../admin/HR/searchdepartment',compact('data'));
+                return view('../admin/HR/hrdepartment',compact('data'));
             }else{
                 return redirect('../hrdepartment');
             }
@@ -164,7 +164,7 @@ class HrDepartmentsController extends Controller
           ->paginate(10);
  
             if ($data) {
-                return view('../admin/HR/searchdepartment',compact('data'));
+                return view('../admin/HR/hrdepartment',compact('data'));
             }else{
                 return redirect('../hrdepartment');
             }

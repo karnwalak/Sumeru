@@ -124,32 +124,38 @@ class CategoryController extends Controller
        $status = $st; 
        // return $req;
        if ($category_name == null && $status == null) {
-           $data = DB::SELECT("SELECT * FROM inventory_material_categories WHERE category_status != 'delete'");
+           $data = Category::orderby('id','DESC')->where('category_status','!=','delete')->paginate(10);
            if ($data) {
-               return view('../admin/ERP/searchcategory',compact('data'));
+               return view('../admin/ERP/materialcategory',compact('data'));
            }else{
-               return redirect('../admin/ERP/searchcategory');
+               return redirect('../admin/ERP/materialcategory');
            }
        }else if ($category_name == $cname && $status == null) {
-           $data = DB::SELECT("SELECT * FROM inventory_material_categories WHERE category_name LIKE '%$cname%' AND category_status != 'delete'");
+           $data =Category::orderby('id','DESC')
+           ->where('category_name', 'like', '%' . $cname . '%')
+           ->where('category_status','!=','delete')
+           ->paginate(10);
            if ($data) {
-               return view('../admin/ERP/searchcategory',compact('data'));
+               return view('../admin/ERP/materialcategory',compact('data'));
            }else{
-               return redirect('../admin/ERP/searchcategory');
+               return redirect('../admin/ERP/materialcategory');
            }
        }else if ($category_name == null && $status == $st) {
-           $data = DB::SELECT("SELECT * FROM inventory_material_categories WHERE category_status ='$st'");
+            $data =Category::orderby('id','DESC')
+            ->where('category_name', 'like', '%' . $cname . '%')
+            ->where('category_status','=',$st)
+            ->paginate(10);
            if ($data) {
-               return view('../admin/ERP/searchcategory',compact('data'));
+               return view('../admin/ERP/materialcategory',compact('data'));
            }else{
-               return redirect('../admin/ERP/searchcategory');
+               return redirect('../admin/ERP/materialcategory');
            }
        }else if ($category_name == $cname && $status == $st) {
            $data = DB::SELECT("SELECT * FROM inventory_material_categories WHERE category_status ='$st' AND category_name LIKE '%$cname%'");
            if ($data) {
-               return view('../admin/ERP/searchcategory',compact('data'));
+               return view('../admin/ERP/materialcategory',compact('data'));
            }else{
-               return redirect('../admin/ERP/searchcategory');
+               return redirect('../admin/ERP/materialcategory');
            }
        }
     }

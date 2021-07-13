@@ -65,34 +65,34 @@ class FlatController extends Controller
        $status = $st; 
        // return $req;
        if ($category_name == null && $status == null) {
-           $data = Flat::where('flat_status','!=','delete')->get();
+           $data = Flat::orderBy('id','DESC')->where('flat_status','!=','delete')->paginate(10);
            if ($data) {
-               return view('../admin/FLAT/searchflat',compact('data'));
+               return view('../admin/FLAT/flatstockinventory',compact('data'));
            }else{
-               return redirect('../admin/FLAT/searchflat');
+               return redirect('../admin/FLAT/flatstockinventory');
            }
        }else if ($category_name == $cname && $status == null) {
-           $data = Flat::where('flat_status','!=','delete')->where('flat_stock_name', 'like', '%' . $cname . '%')->paginate(10);
+           $data = Flat::orderBy('id','DESC')->where('flat_status','!=','delete')->where('flat_stock_name', 'like', '%' . $cname . '%')->paginate(10);
            if ($data) {
-               return view('../admin/FLAT/searchflat',compact('data'));
+               return view('../admin/FLAT/flatstockinventory',compact('data'));
            }else{
-               return redirect('../admin/FLAT/searchflat');
+               return redirect('../admin/FLAT/flatstockinventory');
            }
        }else if ($category_name == null && $status == $st) {
-           $data = Flat::where('flat_status', $status)->paginate(10);
+           $data = Flat::orderBy('id','DESC')->where('flat_status', $status)->paginate(10);
            if ($data) {
-               return view('../admin/FLAT/searchflat',compact('data'));
+               return view('../admin/FLAT/flatstockinventory',compact('data'));
            }else{
-               return redirect('../admin/FLAT/searchflat');
+               return redirect('../admin/FLAT/flatstockinventory');
            }
        }else if ($category_name == $cname && $status == $st) {
-           $data = Flat::where('flat_stock_name', 'like', '%' . $cname . '%')
+           $data = Flat::orderBy('id','DESC')->where('flat_stock_name', 'like', '%' . $cname . '%')
          ->Where('flat_status', $status)
          ->paginate(10);
            if ($data) {
-               return view('../admin/FLAT/searchflat',compact('data'));
+               return view('../admin/FLAT/flatstockinventory',compact('data'));
            }else{
-               return redirect('../admin/FLAT/searchflat');
+               return redirect('../admin/FLAT/flatstockinventory');
            }
        }
    }

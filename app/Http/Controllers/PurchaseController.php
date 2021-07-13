@@ -227,37 +227,37 @@ class PurchaseController extends Controller
        $status = $st; 
        // return $req;
        if ($category_name == null && $status == null) {
-           $data = Purchase::where('status','!=','delete')->paginate(10);
+           $data = Purchase::orderby('id','DESC')->where('status','!=','delete')->paginate(10);
            if ($data) {
-               return view('../admin/ERP/searchorder',compact('data'));
+               return view('../admin/ERP/purchaseorder',compact('data'));
            }else{
-               return redirect('../admin/FLAT/searchorder');
+               return redirect('../admin/FLAT/purchaseorder');
            }
        }
        else if ($category_name == $cname && $status == null) {
-           $data = Purchase::where('invoice_id', 'like', '%' . $cname . '%')->where('status','!=','delete')->paginate(10);
+           $data = Purchase::orderby('id','DESC')->where('invoice_id', 'like', '%' . $cname . '%')->where('status','!=','delete')->paginate(10);
            if ($data) {
-               return view('../admin/ERP/searchorder',compact('data'));
+               return view('../admin/ERP/purchaseorder',compact('data'));
            }else{
-               return redirect('../admin/ERP/searchorder');
+               return redirect('../admin/ERP/purchaseorder');
            }
        }
        else if ($category_name == null && $status == $st) {
-           $data = Purchase::where('order_status', $status)->paginate(10);
+           $data = Purchase::orderby('id','DESC')->where('order_status', $status)->paginate(10);
            if ($data) {
-               return view('../admin/ERP/searchorder',compact('data'));
+               return view('../admin/ERP/purchaseorder',compact('data'));
            }else{
-               return redirect('../admin/ERP/searchorder');
+               return redirect('../admin/ERP/purchaseorder');
            }
        }
        else if ($category_name == $cname && $status == $st) {
-           $data = Purchase::where('invoice_id', 'like', '%' . $cname . '%')
+           $data = Purchase::orderby('id','DESC')->where('invoice_id', 'like', '%' . $cname . '%')
          ->Where('order_status', $status)
          ->paginate(10);
            if ($data) {
-               return view('../admin/ERP/searchorder',compact('data'));
+               return view('../admin/ERP/purchaseorder',compact('data'));
            }else{
-               return redirect('../admin/ERP/searchorder');
+               return redirect('../admin/ERP/purchaseorder');
            }
        }
     }

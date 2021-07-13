@@ -247,50 +247,50 @@ class CrmBookingController extends Controller
     $status = $st; 
     // return $req;
     if ($category_name == null && $status == null) {
-        $booking = crm_booking::where('status','!=','delete')
+        $data = crm_booking::where('status','!=','delete')
                 ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
                 ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
-                // ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name'])
+                ->select(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name'])
                 ->paginate(10);    
-        if ($booking) {
-            return view('../admin/CRM/searchbooking',compact('booking'));
+        if ($data) {
+            return view('../admin/CRM/bookings',compact('data'));
         }else{
             return redirect('../admin/CRM/bookings');
         }
     }else if ($category_name == $cname && $status == null) {
-        $booking = crm_booking::where('status','!=','delete')
+        $data = crm_booking::where('status','!=','delete')
                 ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
                 ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
                 ->where('crm_contacts.contact_full_name','like', '%' . $cname . '%')
-                // ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name']);
+                ->select(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name'])
                 ->paginate(10);  
-        if ($booking) {
-            return view('../admin/CRM/searchbooking',compact('booking'));
+        if ($data) {
+            return view('../admin/CRM/bookings',compact('data'));
         }else{
             return redirect('../admin/CRM/bookings');
         }
     }else if ($category_name == null && $status == $st) {
-        $booking = crm_booking::where('status','!=','delete')
+        $data = crm_booking::where('status','!=','delete')
         ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
         ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
         ->where('crm_bookings.status','=', $st)
-        // ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name']); 
-        ->paginate(10);   
-        if ($booking) {
-            return view('../admin/CRM/searchbooking',compact('booking'));
+        ->select(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name'])
+        ->paginate(10);  
+        if ($data) {
+            return view('../admin/CRM/bookings',compact('data'));
         }else{
             return redirect('../admin/CRM/bookings');
         }
     }else if ($category_name == $cname && $status == $st) {
-        $booking = crm_booking::where('status','!=','delete')
+        $data = crm_booking::where('status','!=','delete')
         ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
         ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
         ->where('crm_contacts.contact_full_name','like', '%' . $cname . '%')
         ->where('crm_bookings.status','=', $st)
-        // ->get(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name']);  
+        ->select(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_img','crm_contacts.contact_email','flat_ inventories.flat_stock_name'])
         ->paginate(10);  
-        if ($booking) {
-            return view('../admin/CRM/searchbooking',compact('booking'));
+        if ($data) {
+            return view('../admin/CRM/bookings',compact('data'));
         }else{
             return redirect('../admin/CRM/bookings');
         }

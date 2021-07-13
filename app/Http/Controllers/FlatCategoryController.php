@@ -110,32 +110,37 @@ class FlatCategoryController extends Controller
        $status = $st; 
        // return $req;
        if ($category_name == null && $status == null) {
-           $data = DB::SELECT("SELECT * FROM flat_categories WHERE category_status!='delete'");
+           $data = FlatCategory::WHERE('category_status','!=','delete')->paginate(10);
            if ($data) {
-               return view('../admin/FLAT/searchflatcategory',compact('data'));
+               return view('../admin/FLAT/flatstockcategory',compact('data'));
            }else{
-               return redirect('../admin/FLAT/searchflatcategory');
+               return redirect('../admin/FLAT/flatstockcategory');
            }
        }else if ($category_name == $cname && $status == null) {
-           $data = DB::SELECT("SELECT * FROM flat_categories WHERE category_name LIKE '%$cname%' AND category_status!='delete'");
+           $data =FlatCategory::WHERE('category_status','!=','delete')
+           ->WHERE('category_name','like','%'.$cname.'%')
+           ->paginate(10);
            if ($data) {
-               return view('../admin/FLAT/searchflatcategory',compact('data'));
+               return view('../admin/FLAT/flatstockcategory',compact('data'));
            }else{
-               return redirect('../admin/FLAT/searchflatcategory');
+               return redirect('../admin/FLAT/flatstockcategory');
            }
        }else if ($category_name == null && $status == $st) {
-           $data = DB::SELECT("SELECT * FROM flat_categories WHERE category_status ='$st'");
+        $data =FlatCategory::WHERE('category_status','=',$st)
+        ->paginate(10);
            if ($data) {
-               return view('../admin/FLAT/searchflatcategory',compact('data'));
+               return view('../admin/FLAT/flatstockcategory',compact('data'));
            }else{
-               return redirect('../admin/FLAT/searchflatcategory');
+               return redirect('../admin/FLAT/flatstockcategory');
            }
        }else if ($category_name == $cname && $status == $st) {
-           $data = DB::SELECT("SELECT * FROM flat_categories WHERE category_status ='$st' AND category_name LIKE '%$cname%'");
+        $data =FlatCategory::WHERE('category_status','=',$st)
+        ->WHERE('category_name','like','%'.$cname.'%')
+        ->paginate(10);
            if ($data) {
-               return view('../admin/FLAT/searchflatcategory',compact('data'));
+               return view('../admin/FLAT/flatstockcategory',compact('data'));
            }else{
-               return redirect('../admin/FLAT/searchflatcategory');
+               return redirect('../admin/FLAT/flatstockcategory');
            }
        }
    }

@@ -47,7 +47,7 @@ class HrTaskController extends Controller
             $tasks = hr_task::where('task_status','!=','delete')->join('hr_task_emplyees','hr_tasks.id','=','hr_task_emplyees.task_id')
             ->get(['hr_tasks.*','hr_task_emplyees.emplyee_id']);
             if ($tasks) {
-                return view('../admin/HR/searchtask',compact('tasks'));
+                return view('../admin/HR/tasksandprojects',compact('tasks'));
             }else{
                 return redirect('../admin/HR/tasksandprojects');
             }
@@ -57,7 +57,7 @@ class HrTaskController extends Controller
             ->where('hr_tasks.task_title','like', '%' . $cname . '%')
             ->get(['hr_tasks.*','hr_task_emplyees.emplyee_id']);
             if ($tasks) {
-                return view('../admin/HR/searchtask',compact('tasks'));
+                return view('../admin/HR/tasksandprojects',compact('tasks'));
             }else{
                 return redirect('../admin/HR/tasksandprojects');
             }
@@ -67,7 +67,7 @@ class HrTaskController extends Controller
             ->where('hr_tasks.task_status','=',$st)
             ->get(['hr_tasks.*','hr_task_emplyees.emplyee_id']);
             if ($tasks) {
-                return view('../admin/HR/searchtask',compact('tasks'));
+                return view('../admin/HR/tasksandprojects',compact('tasks'));
             }else{
                 return redirect('../admin/HR/tasksandprojects');
             }
@@ -78,7 +78,7 @@ class HrTaskController extends Controller
             ->where('hr_tasks.task_status','=',$st)
             ->get(['hr_tasks.*','hr_task_emplyees.emplyee_id']);
             if ($tasks) {
-                return view('../admin/HR/searchtask',compact('tasks'));
+                return view('../admin/HR/tasksandprojects',compact('tasks'));
             }else{
                 return redirect('../admin/HR/tasksandprojects');
             }

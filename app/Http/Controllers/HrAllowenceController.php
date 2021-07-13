@@ -128,7 +128,7 @@ class HrAllowenceController extends Controller
         if ($sname == null && $ty == null) {
             $data = hr_allowence::where('allowence_status','!=','delete')->orderBy('id')->paginate(10);
             if ($data) {
-                return view('../admin/HR/searchallowence',compact('data'));
+                return view('../admin/HR/hrallowance',compact('data'));
             }else{
                 return redirect('../hrallowance');
             }
@@ -136,14 +136,14 @@ class HrAllowenceController extends Controller
             // $data = DB::SELECT("SELECT * FROM sellers WHERE seller_name LIKE '%$sname%'");
            $data = hr_allowence::where('allowence_status','!=','delete')->where('allowence_name', 'like', '%' . $pname . '%')->paginate(10);
            if ($data) {
-                return view('../admin/HR/searchallowence',compact('data'));
+                return view('../admin/HR/hrallowance',compact('data'));
             }else{
                 return redirect('../hrallowance');
             }
         }else if ($sname == null && $ty == $type) {
             $data = hr_allowence::where('allowence_status', $type)->paginate(10);
            if ($data) {
-                return view('../admin/HR/searchallowence',compact('data'));
+                return view('../admin/HR/hrallowance',compact('data'));
             }else{
                 return redirect('../hrallowance');
             }
@@ -153,7 +153,7 @@ class HrAllowenceController extends Controller
           ->paginate(10);
    
             if ($data) {
-                return view('../admin/HR/searchallowence',compact('data'));
+                return view('../admin/HR/hrallowance',compact('data'));
             }else{
                 return redirect('../hrallowance');
             }

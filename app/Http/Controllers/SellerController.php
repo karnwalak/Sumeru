@@ -136,30 +136,35 @@ class SellerController extends Controller
        $status = $st; 
        // return $req;
        if ($seller_name == null && $status == null) {
-           $data = DB::SELECT("SELECT * FROM sellers WHERE seller_status != 'delete'");
+           $data = Seller::where('seller_status','!=','delete')->paginate(10);
            if ($data) {
-               return view('../admin/ERP/searchresult',compact('data'));
+               return view('../admin/ERP/seller',compact('data'));
            }else{
                return redirect('../seller');
            }
        }else if ($seller_name == $sname && $status == null) {
-           $data = DB::SELECT("SELECT * FROM sellers WHERE seller_name LIKE '%$sname%' AND seller_status != 'delete'");
+           $data = Seller::where('seller_status','!=','delete')
+           ->where('seller_name','like','%'.$sname.'%')
+           ->paginate(10);
            if ($data) {
-               return view('../admin/ERP/searchresult',compact('data'));
+               return view('../admin/ERP/seller',compact('data'));
            }else{
                return redirect('../seller');
            }
        }else if ($seller_name == null && $status == $st) {
-           $data = DB::SELECT("SELECT * FROM sellers WHERE seller_status ='$st'");
+        $data = Seller::where('seller_status','=',$st)
+        ->paginate(10);
            if ($data) {
-               return view('../admin/ERP/searchresult',compact('data'));
+               return view('../admin/ERP/seller',compact('data'));
            }else{
                return redirect('../seller');
            }
        }else if ($seller_name == $sname && $status == $st) {
-           $data = DB::SELECT("SELECT * FROM sellers WHERE seller_status ='$st' AND seller_name LIKE '%$sname%'");
+        $data = Seller::where('seller_status','=',$st)
+        ->where('seller_name','like','%'.$sname.'%')
+        ->paginate(10);
            if ($data) {
-               return view('../admin/ERP/searchresult',compact('data'));
+               return view('../admin/ERP/seller',compact('data'));
            }else{
                return redirect('../seller');
            }

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class MaterialStockController extends Controller
 {
     public function index(Request $req){
-        // return $req;
+        return $req;
         $res = new MaterialStock;
         $sname = $req -> post('name');
         $pname = $sname; 
