@@ -582,339 +582,53 @@
 												</ul>
 											</div>
 										</li>
-										<li class="menu-item menu-item-submenu" data-menu-toggle="click" aria-haspopup="true">
+										<li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
 											<a href="javascript:;" class="menu-link menu-toggle">
 												<span class="menu-text">Finance</span>
 												<span class="menu-desc"></span>
 												<i class="menu-arrow"></i>
 											</a>
-											<div class="menu-submenu menu-submenu-fixed menu-submenu-center" style="width:1150px">
-												<div class="menu-subnav">
-													<ul class="menu-content">
-														<li class="menu-item">
-															<h3 class="menu-heading menu-toggle">
-																<span class="menu-text">Pricing Tables</span>
-																<i class="menu-arrow"></i>
-															</h3>
-															<ul class="menu-inner">
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/pricing/pricing-1.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Pricing Tables 1</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/pricing/pricing-2.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Pricing Tables 2</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/pricing/pricing-3.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Pricing Tables 3</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/pricing/pricing-4.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Pricing Tables 4</span>
-																	</a>
-																</li>
-															</ul>
-														</li>
-														<li class="menu-item">
-															<h3 class="menu-heading menu-toggle">
-																<span class="menu-text">Wizards</span>
-																<i class="menu-arrow"></i>
-															</h3>
-															<ul class="menu-inner">
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/wizard/wizard-1.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Wizard 1</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/wizard/wizard-2.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Wizard 2</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/wizard/wizard-3.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Wizard 3</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/wizard/wizard-4.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Wizard 4</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/wizard/wizard-5.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Wizard 5</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/wizard/wizard-6.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Wizard 6</span>
-																	</a>
-																</li>
-															</ul>
-														</li>
-														<li class="menu-item">
-															<h3 class="menu-heading menu-toggle">
-																<i class="menu-bullet menu-bullet-dot">
-																	<span></span>
-																</i>
-																<span class="menu-text">Invoices</span>
-																<i class="menu-arrow"></i>
-															</h3>
-															<ul class="menu-inner">
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/invoices/invoice-1.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Invoice 1</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/invoices/invoice-2.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Invoice 2</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/invoices/invoice-3.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Invoice 3</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/invoices/invoice-4.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Invoice 4</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/invoices/invoice-5.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Invoice 5</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/invoices/invoice-6.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Invoice 6</span>
-																	</a>
-																</li>
-															</ul>
-														</li>
-														<li class="menu-item">
-															<h3 class="menu-heading menu-toggle">
-																<i class="menu-bullet menu-bullet-dot">
-																	<span></span>
-																</i>
-																<span class="menu-text">Login</span>
-																<i class="menu-arrow"></i>
-															</h3>
-															<ul class="menu-inner">
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/login/login-1.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Login 1</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/login/login-2.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Login 2</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/login/login-3/signup.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Login 3</span>
-																		<span class="menu-label">
-																			<span class="label label-inline label-info">Wizard</span>
-																		</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/login/login-4/signup.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Login 4</span>
-																		<span class="menu-label">
-																			<span class="label label-inline label-info">Wizard</span>
-																		</span>
-																	</a>
-																</li>
-															</ul>
-														</li>
-														<li class="menu-item">
-															<h3 class="menu-heading menu-toggle">
-																<i class="menu-bullet menu-bullet-dot">
-																	<span></span>
-																</i>
-																<span class="menu-text">Classic Login</span>
-																<i class="menu-arrow"></i>
-															</h3>
-															<ul class="menu-inner">
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/login/classic/login-1.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Login 1</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/login/classic/login-2.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Login 2</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/login/classic/login-3.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Login 3</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/login/classic/login-4.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Login 4</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/login/classic/login-5.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Login 5</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/login/classic/login-6.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Login 6</span>
-																	</a>
-																</li>
-															</ul>
-														</li>
-														<li class="menu-item">
-															<h3 class="menu-heading menu-toggle">
-																<i class="menu-bullet menu-bullet-dot">
-																	<span></span>
-																</i>
-																<span class="menu-text">Error Pages</span>
-																<i class="menu-arrow"></i>
-															</h3>
-															<ul class="menu-inner">
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/error/error-1.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Error 1</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/error/error-2.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Error 2</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/error/error-3.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Error 3</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/error/error-4.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Error 4</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/error/error-5.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Error 5</span>
-																	</a>
-																</li>
-																<li class="menu-item" aria-haspopup="true">
-																	<a href="custom/pages/error/error-6.html" class="menu-link">
-																		<i class="menu-bullet menu-bullet-line">
-																			<span></span>
-																		</i>
-																		<span class="menu-text">Error 6</span>
-																	</a>
-																</li>
-															</ul>
-														</li>
-													</ul>
-												</div>
+											<div class="menu-submenu menu-submenu-classic menu-submenu-left">
+												<ul class="menu-subnav">
+													<li class="menu-item" aria-haspopup="true">
+														<a href="../FINANCE/financedashboard" class="menu-link">
+															<span class="svg-icon menu-icon">
+																<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="columns" class="svg-inline--fa fa-columns fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64V160h160v256zm224 0H288V160h160v256z"></path></svg>
+															</span>
+															<span class="menu-text">Dashboard</span>
+														</a>
+													</li>
+													<li class="menu-item" aria-haspopup="true">
+														<a href="../FINANCE/purchaseorder" class="menu-link">
+															<span class="svg-icon menu-icon">
+																<!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Home/Library.svg-->
+																<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="address-book" class="svg-inline--fa fa-address-book fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M436 160c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-20V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h320c26.5 0 48-21.5 48-48v-48h20c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-20v-64h20c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-20v-64h20zm-228-32c35.3 0 64 28.7 64 64s-28.7 64-64 64-64-28.7-64-64 28.7-64 64-64zm112 236.8c0 10.6-10 19.2-22.4 19.2H118.4C106 384 96 375.4 96 364.8v-19.2c0-31.8 30.1-57.6 67.2-57.6h5c12.3 5.1 25.7 8 39.8 8s27.6-2.9 39.8-8h5c37.1 0 67.2 25.8 67.2 57.6v19.2z"></path></svg>
+																<!--end::Svg Icon-->
+															</span>
+															<span class="menu-text">Purchase Order</span>
+														</a>
+													</li>
+													<li class="menu-item" aria-haspopup="true">
+														<a href="../FINANCE/salaries" class="menu-link">
+															<span class="svg-icon menu-icon">
+																<!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Home/Library.svg-->
+																<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="map-pin" class="svg-inline--fa fa-map-pin fa-w-9" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288 512"><path fill="currentColor" d="M112 316.94v156.69l22.02 33.02c4.75 7.12 15.22 7.12 19.97 0L176 473.63V316.94c-10.39 1.92-21.06 3.06-32 3.06s-21.61-1.14-32-3.06zM144 0C64.47 0 0 64.47 0 144s64.47 144 144 144 144-64.47 144-144S223.53 0 144 0zm0 76c-37.5 0-68 30.5-68 68 0 6.62-5.38 12-12 12s-12-5.38-12-12c0-50.73 41.28-92 92-92 6.62 0 12 5.38 12 12s-5.38 12-12 12z"></path></svg>
+																<!--end::Svg Icon-->
+															</span>
+															<span class="menu-text">Salaries</span>
+														</a>
+													</li>
+													<li class="menu-item" aria-haspopup="true">
+														<a href="../FINANCE/bookingcredit" class="menu-link">
+															<span class="svg-icon menu-icon">
+																<!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Home/Library.svg-->
+																<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="comments-dollar" class="svg-inline--fa fa-comments-dollar fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M416 192c0-88.37-93.12-160-208-160S0 103.63 0 192c0 34.27 14.13 65.95 37.97 91.98C24.61 314.22 2.52 338.16 2.2 338.5A7.995 7.995 0 0 0 8 352c36.58 0 66.93-12.25 88.73-24.98C128.93 342.76 167.02 352 208 352c114.88 0 208-71.63 208-160zm-224 96v-16.29c-11.29-.58-22.27-4.52-31.37-11.35-3.9-2.93-4.1-8.77-.57-12.14l11.75-11.21c2.77-2.64 6.89-2.76 10.13-.73 3.87 2.42 8.26 3.72 12.82 3.72h28.11c6.5 0 11.8-5.92 11.8-13.19 0-5.95-3.61-11.19-8.77-12.73l-45-13.5c-18.59-5.58-31.58-23.42-31.58-43.39 0-24.52 19.05-44.44 42.67-45.07V96c0-4.42 3.58-8 8-8h16c4.42 0 8 3.58 8 8v16.29c11.29.58 22.27 4.51 31.37 11.35 3.9 2.93 4.1 8.77.57 12.14l-11.75 11.21c-2.77 2.64-6.89 2.76-10.13.73-3.87-2.43-8.26-3.72-12.82-3.72h-28.11c-6.5 0-11.8 5.92-11.8 13.19 0 5.95 3.61 11.19 8.77 12.73l45 13.5c18.59 5.58 31.58 23.42 31.58 43.39 0 24.53-19.05 44.44-42.67 45.07V288c0 4.42-3.58 8-8 8h-16c-4.42 0-8-3.58-8-8zm346.01 123.99C561.87 385.96 576 354.27 576 320c0-66.94-53.49-124.2-129.33-148.07.86 6.6 1.33 13.29 1.33 20.07 0 105.87-107.66 192-240 192-10.78 0-21.32-.77-31.73-1.88C207.8 439.63 281.77 480 368 480c40.98 0 79.07-9.24 111.27-24.98C501.07 467.75 531.42 480 568 480c3.2 0 6.09-1.91 7.34-4.84 1.27-2.94.66-6.34-1.55-8.67-.31-.33-22.42-24.24-35.78-54.5z"></path></svg>
+																<!--end::Svg Icon-->
+															</span>
+															<span class="menu-text">Salaries Booking</span>
+														</a>
+													</li>
+												</ul>
 											</div>
 										</li>
 									</ul>

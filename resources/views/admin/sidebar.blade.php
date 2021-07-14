@@ -37,8 +37,7 @@
 						<!--begin::Item-->
 						<li class="nav-item mb-5" data-toggle="tooltip" data-placement="right" data-container="body"
 							data-boundary="window" title="Finance">
-							<a href="#" class="nnav-link btn btn-icon btn-icon-white btn-lg" data-toggle="tab"
-								data-target="#kt_aside_tab_5" role="tab">
+							<a href="../FINANCE/financedashboard" class="nnav-link btn btn-icon btn-icon-white btn-lg">
 								<i class="flaticon-envelope	icon-2x"></i>
 							</a>
 						</li>

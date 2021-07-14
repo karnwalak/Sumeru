@@ -34,7 +34,7 @@
 	<!--begin::Header Mobile-->
 	<div id="kt_header_mobile" class="header-mobile header-mobile-fixed">
 		<!--begin::Logo-->
-		<a href="..admin/dashboard">
+		<a href="../ERP/dashboard">
 			<img alt="Logo" src="/../img/logoicon.png"
 				class="logo-default max-h-30px" />
 		</a>
@@ -83,7 +83,7 @@
 				<!--begin::Brand-->
 				<div class="aside-brand d-flex flex-column align-items-center flex-column-auto py-4 py-lg-8">
 					<!--begin::Logo-->
-					<a href="../admin/dashboard">
+					<a href="../ERP/dashboard">
 						<img alt="Logo" src="/../img/logoicon.png" class="max-h-30px" />
 					</a>
 					<!--end::Logo-->
@@ -226,7 +226,7 @@
 												<!--end::User-->
 												<!--begin::Name-->
 												<div class="my-0">
-													<a href="financial_management" class="text-dark font-weight-bold text-hover-primary font-size-h4">Financial Management</a>
+													<a href="../FINANCE/financedashboard" class="text-dark font-weight-bold text-hover-primary font-size-h4">Financial Management</a>
 												</div>
 												<!--end::Name-->
 											</div>
