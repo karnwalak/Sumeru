@@ -12,16 +12,17 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 <!--end::Fonts-->
 <!--begin::Page Vendors Styles(used by this page)-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.css?v=7.2.8"
 rel="stylesheet" type="text/css" />
 <link href="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.css?v=7.2.8" rel="stylesheet"
 type="text/css" />
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 <!--begin::Global Theme Styles(used by all pages)-->
 <link href="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.css?v=7.2.8" rel="stylesheet"
 type="text/css" />
@@ -44,8 +45,6 @@ type="text/css" />
          rel = "stylesheet">
       <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
       <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      
       <!-- Javascript -->
       <script>
          $(function() {
@@ -256,7 +255,7 @@ type="text/css" />
 													</select>
 													<span style="color:red;" id="seller_error" class="field_error"></span>
 												</div>
-												<a href="addseller" style="margin-left:162px;">New Seller!</a>
+												<a href="addseller/{{'order_seller'}}" style="margin-left:162px;">New Seller!</a>
 											</div>
 											<!--end::Group-->
 											</div>
@@ -391,23 +390,19 @@ type="text/css" />
 					<label>Total</label>
 					<b class="" style="margin-left:20px;" id="fullamount"></b>
 					<input type="hidden" name="fullamount" id="full">
-					<input type="hidden" name="final" id="final">
+					<!-- <input type="hidden" name="final" id="final"> -->
 			</div>
 		</div>
 	</div>
   <!--end: Datatable-->
 </div>
 									<!--end::Body-->
-<div class="row" style="display:grid;place-items:end;padding:10px 40px;">		
+<div class="row px-5 py-5" style="display:grid;place-items:end;">		
 <!--begin::Dropdown-->
 <div class="col-md-10">
 </div>
 <div class="btn-group ml-2 col-md-2">
-		<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
-</div>
-<div class="btn-group ml-2 col-md-2">
-<span style="color:red" id="error_msg"></span>
-<span style="color:green" id="success_msg"></span>
+		<button type="submit" class="btn btn-primary font-weight-bold btn-sm py-3 font-size-base">Submit</button>
 </div>
 <!--end::Dropdown-->
 </div>
@@ -585,6 +580,7 @@ type="text/css" />
 			$('.total').each(function(){
 				var subtotal = $(this).val()-0;
 				stotal +=subtotal;
+				$('#full').val(stotal);
 			});
 			// alert(stotal);
 			$('#subtotal').html(stotal);
@@ -593,29 +589,10 @@ type="text/css" />
          	var discount = $('#discount').val();
 	        var subtotal = stotal - discount;
 	        $('#fullamount').html(subtotal);
-			$('#full').val(stotal);
-	        $('#final').val(subtotal);
-	         
+	       
          });
 		}
 	});
-    //    $('#price').change(function(){
-    //      var quantity = $('#quantity').val();
-    //      var price = $('#price').val();
-    //      var total = quantity * price;
-    //      $('#amount').val(total);
-    //      $('#subtotal').html(total);
-    //      $('#fullamount').html(total);
-	//       $('#final').val(total);
-    //      $('#discount').change(function(){
-    //      	var discount = $('#discount').val();
-	//          var subtotal = total -discount;
-	//          $('#fullamount').html(subtotal);
-	//          $('#final').val(subtotal);
-	         
-    //      })
-    //    });
-
 </script>
 <script>
 	$("#invoiceItem").on("click", ".remove", function() {

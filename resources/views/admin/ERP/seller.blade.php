@@ -226,7 +226,7 @@
 										</div>
 
 										<div class="row" style="display:grid;place-items:end;padding:10px 15px;">
-												<a href="../ERP/addseller" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Add a Seller</a>
+												<a href="../ERP/addseller/{{'seller_page'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Add a Seller</a>
 												</div>
 									</div>
 									<!--end::Header-->

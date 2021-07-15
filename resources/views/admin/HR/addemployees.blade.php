@@ -355,7 +355,7 @@
 																							</tr>
 																						</thead>
 																						<tbody>
-																							<tr>
+																							<!-- <tr>
 																								<td>
 																								<select class="form-control" id="kt_select2_1" name="allowence[]">
 																									<option value="">Select</option>
@@ -366,7 +366,7 @@
 																									<span class="field_error text-danger" id="allowence_error"></span>
 																								</td>
 																								<td><a href="#" class="btn btn-danger remove" style="">-</button></a></td>
-																							</tr>
+																							</tr> -->
 																						</tbody>
 
 																					</table>

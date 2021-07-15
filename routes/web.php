@@ -6,6 +6,7 @@ use App\Http\Controllers\HrDepartmentsController;
 use App\Http\Controllers\HrDesignationController;
 use App\Http\Controllers\HrShiftController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\SellerController;
 use App\Http\Controllers\FinancePurchaseController;
 use App\Http\Controllers\FinanceEmployeeController;
 use App\Http\Controllers\CrmBookingController;
@@ -39,7 +40,8 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         //inv
         Route::view('admin/ERP/dashboard','admin/ERP/dashboard');
         Route::view('admin/ERP/materialdashboard','admin/ERP/materialdashboard');
-        Route::view('admin/ERP/addseller','admin/ERP/addseller');
+        // Route::view('admin/ERP/addseller','admin/ERP/addseller');
+        Route::get('admin/ERP/addseller/{st}',[SellerController::class,'dataSeller']);
         Route::view('admin/ERP/addmaterial','admin/ERP/addmaterial');
         Route::view('admin/ERP/addproducts','admin/ERP/addproducts');
         // Route::view('admin/ERP/sellerpurchaseorder/{id}','admin/ERP/sellerpurchaseorder');

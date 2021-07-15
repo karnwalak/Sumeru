@@ -25,8 +25,13 @@ class SellerController extends Controller
         ->update(['seller_status' => 'Active']);
     }
     }
+    public function dataSeller(Request $req,$st)
+    {
+        return view('../admin/ERP/addseller') -> with('data',$st);
+    }
     public function addSeller(Request $req)
     {
+        // return $st;
         $valid = Validator::make($req -> all(),[
        'name' => 'required|regex:/^[a-zA-Z\s]+$/',
        'email' => 'required|email|unique:sellers,seller_email',

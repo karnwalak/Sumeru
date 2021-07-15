@@ -3,6 +3,12 @@ namespace App\Http\Controllers;
 use App\Models\hr_employees;
 use App\Models\crm_booking;
 use App\Models\PurchaseOrder;
+use App\Models\hr_department;
+use App\Models\hr_task;
+use App\Models\hr_allowence;
+use App\Models\hr_employee_allowence;
+use App\Models\hr_shift;
+use App\Models\hr_designation;
 use App\Models\purchase_order_payment_log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -26,10 +32,15 @@ class FinanceEmployeeController extends Controller
     }
     public function addtransactionsemployee(Request $req,$id)
     {
-        return $id;
+        return view('../admin/FINANCE/addtransactionsemployee') -> with('id',$id);
     }
     public function editemployees(Request $req,$id)
     {
-        return $id;
+        return view('../admin/FINANCE/editemployees')  
+        -> with('employee',hr_employees::find($id))
+        -> with('shift',hr_shift::where('shift_status','=','Active')->get())
+        -> with('allowance',hr_allowence::where('allowence_status','=','Active')->get())
+        -> with('employee_allowance',hr_employee_allowence::where('employee_id','=',$id)->get())
+        -> with('department',hr_department::where('status','=','Active')->get());;
     }
 }
