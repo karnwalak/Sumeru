@@ -3,6 +3,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
+	<base href="../">
 	<meta charset="utf-8" />
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
@@ -383,6 +384,7 @@ var KTAppSettings = {
 <!--end::Page Scripts-->
     <script type="text/javascript">
         $(document).ready(function(){
+		var langs = {!!json_encode($data)!!};
         $(".form").submit(function(e){
           e.preventDefault();
           $('.field_error').html('');
@@ -403,7 +405,11 @@ var KTAppSettings = {
                 $('.form')[0].reset();
                 $('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                 setTimeout(function(){
-                   window.location.href = '../ERP/seller'; 
+					if(langs == 'order_seller'){
+						window.location.href = '../ERP/createpurchaseorder'; 
+					}else if(langs == 'seller_page'){
+						window.location.href = '../ERP/seller'; 
+					}
                 }, 1000);
               }
             },

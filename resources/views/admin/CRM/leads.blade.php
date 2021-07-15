@@ -363,6 +363,7 @@
 															<th data-field="Product" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Product</span></th>
 															<th data-field="LeadSource" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Lead Source</span></th>
 															<th data-field="StartDate" class="datatable-cell datatable-cell-sort"><span style="width: 80px;">Start Date</span></th>
+															<th data-field="StartDate" class="datatable-cell datatable-cell-sort"><span style="width: 80px;">NF-UP Date</span></th>
 															<th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Status</span></th>
 															<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 150px;">Actions</span></th>
 														</tr>
@@ -378,6 +379,7 @@
 															<td data-field="Product" aria-label="2BHK Flat" class="datatable-cell"><span style="width: 100px;">{{$value -> category_name}}</span></td>
 															<td data-field="LeadSource" aria-label="Cold Calling" class="datatable-cell"><span style="width: 100px;">{{$value -> lead_source}}</span></td>
 															<td data-field="StartDate" aria-label="19/1/2021" class="datatable-cell"><span style="width: 80px;">{{$value -> lead_start_date}}</span></td>
+															<td data-field="StartDate" aria-label="19/1/2021" class="datatable-cell"><span style="width: 80px;">{{$value -> follow_update}}</span></td>
 															<td data-field="Status" aria-label="5" class="datatable-cell">
 															<span style="width: 100px;">
 															@if($value -> lead_status == 'NextFollowup')

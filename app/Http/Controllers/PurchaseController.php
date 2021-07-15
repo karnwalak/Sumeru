@@ -48,7 +48,7 @@ class PurchaseController extends Controller
         }
     }
     public function createpurchaseorder(Request $req){
-        // return $req -> all();
+        // return $req;
         $ids = Purchase::max('id');
         // return $ids;
         $po_id = $ids + 1;
@@ -60,14 +60,12 @@ class PurchaseController extends Controller
            'type' => 'required|array|distinct',
            'total' => 'required|array|distinct',
            'status' => 'required',
-           'fullamount' => 'required|numeric',
            'invoice_file' => 'required|mimes:pdf|max:512',
            'comment' => 'required|max:200',
-
            'item_name' => 'required|array|distinct|not_in:0',
            'quantity' => 'required|array|distinct',
            'price' => 'required|array|distinct',
-           'discount' => 'required|numeric',
+           'discount' => 'numeric',
       ]);
     // return dd($req -> all());
       if (!$valid -> passes()) {
@@ -77,7 +75,6 @@ class PurchaseController extends Controller
         $seller_id = $req -> seller;
         $invoice_id = $req -> invoice;
         $total = $req -> total;
-        $order_amount = $req -> final;
         $date = $req -> date;
         $order_status = $req -> status;
         $type = $req -> type;
@@ -89,26 +86,19 @@ class PurchaseController extends Controller
         $quantity = $req -> quantity;
         $file = $req -> file('invoice_file'); 
         $file_name = time().'.'.$file->getClientOriginalExtension();
-        // echo "$seller_id <br/>$invoice_id <br/>$order_amount <br/>$date <br/>$order_status  <br/>$comment <br/>$discount <br/>$sub_total <br/>
-        // $po_id  <br/>$file_name";
-        // print_r($total);
-        // print_r($type);
-        // print_r($material_id);
-        // print_r($price);
-        // print_r($quantity); 
-            $data = [
-                'seller_id' => $seller_id,
-                'invoice_id' => $invoice_id, 
-                'total' => $sub_total, 
-                'order_amount' => $order_amount, 
-                'date' => $date,
-                'order_status' => $order_status,
-                'invoice' =>  $file_name,
-                'comment' => $comment,
-                'status' => 'Active',
-                'discount' => $discount
-            ];
-           $dd1 = DB::table('inventory_purchase_orders') -> insert($data);
+        $data = [
+            'seller_id' => $seller_id,
+            'invoice_id' => $invoice_id, 
+            'total' => $sub_total, 
+            'order_amount' => $sub_total - $discount, 
+            'date' => $date,
+            'order_status' => $order_status,
+            'invoice' =>  $file_name,
+            'comment' => $comment,
+            'status' => 'Active',
+            'discount' => $discount
+        ];
+        $dd1 = DB::table('inventory_purchase_orders') -> insert($data);
         for ($i=0; $i < count($req -> item_name) ; $i++) {
            $data2 = [
             'material_id' => $material_id[$i] ,
