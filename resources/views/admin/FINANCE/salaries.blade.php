@@ -331,6 +331,7 @@
 																							<th data-field="Amount" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Amount</span></th>
 																							<th data-field="Released" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Released</span></th>
 																							<th data-field="Balance" class="datatable-cell datatable-cell-sort"><span style="width: 80px;">Balance</span></th>
+																							<th data-field="Balance" class="datatable-cell datatable-cell-sort"><span style="width: 80px;">Status</span></th>
 																							<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 80px;">Actions</span></th>
 																						</tr>
 																					</thead>
@@ -353,6 +354,7 @@
 																							?>
 																						    </span></td>
 																							<td data-field="Balance" aria-label="Rs. 10000" class="datatable-cell"><span style="width: 80px;">Rs. {{$value -> booking_amount-$purchases}}</span></td>
+																							<td data-field="Balance" aria-label="Rs. 10000" class="datatable-cell"><span style="width: 80px;">P-Booked</span></td>
 																							<td class="datatable-cell-left datatable-cell nowrap" data-field="Actions" data-autohide-disabled="false" aria-label="null">
 																							<a href="editemployees/{{$value -> employee_id}}" class="btn btn-sm btn-clean btn-icon mr-2" title="View">
 																									<span class="svg-icon svg-icon-md">
@@ -510,6 +512,7 @@
 																							<th data-field="Amount" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Amount</span></th>
 																							<th data-field="Released" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Released</span></th>
 																							<th data-field="Balance" class="datatable-cell datatable-cell-sort"><span style="width: 80px;">Balance</span></th>
+																							<th data-field="Balance" class="datatable-cell datatable-cell-sort"><span style="width: 80px;">Status</span></th>
 																							<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 80px;">Actions</span></th>
 																						</tr>
 																					</thead>
@@ -532,6 +535,7 @@
 																							?>
 																						    </span></td>
 																							<td data-field="Balance" aria-label="Rs. 10000" class="datatable-cell"><span style="width: 80px;">Rs. {{$value -> booking_amount-$purchases}}</span></td>
+																							<td data-field="Balance" aria-label="Rs. 10000" class="datatable-cell"><span style="width: 80px;">Booked</span></td>
 																							<td class="datatable-cell-left datatable-cell nowrap" data-field="Actions" data-autohide-disabled="false" aria-label="null">
 																							<a href="editemployees/{{$value -> employee_id}}" class="btn btn-sm btn-clean btn-icon mr-2" title="View">
 																									<span class="svg-icon svg-icon-md">

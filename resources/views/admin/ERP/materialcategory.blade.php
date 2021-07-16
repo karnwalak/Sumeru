@@ -15,20 +15,18 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 	<!--end::Fonts-->
 	<!--begin::Page Vendors Styles(used by this page)-->
-	<link href="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.css?v=7.2.8"
-		rel="stylesheet" type="text/css" />
-	<link href="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.css?v=7.2.8" rel="stylesheet"
-		type="text/css" />
+	<link href="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.css?v=7.2.8" rel="stylesheet" type="text/css" />
+	<link href="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.css?v=7.2.8" rel="stylesheet" type="text/css" />
 	<!--end::Page Vendors Styles-->
 	<!--begin::Global Theme Styles(used by all pages)-->
-	<link href="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.css?v=7.2.8" rel="stylesheet"
-		type="text/css" />
-	<link href="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.css?v=7.2.8" rel="stylesheet"
-		type="text/css" />
+	<link href="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.css?v=7.2.8" rel="stylesheet" type="text/css" />
+	<link href="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.css?v=7.2.8" rel="stylesheet" type="text/css" />
 	<link href="/../theme/html/demo4/dist/assets/css/style.bundle49d8.css?v=7.2.8" rel="stylesheet" type="text/css" />
 	<!--end::Global Theme Styles-->
 	<!--begin::Layout Themes(used by all pages)-->
 	<link rel="shortcut icon" href="/../img/icon.jpg" />
+	<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -199,8 +197,8 @@
 										<div class="card-body">
 											<!--begin: Search Form-->
 											<!--begin::Search Form-->
-											<form action="searchcategory" method="post">
-											@csrf
+											<!-- <form action="searchcategory" method="post">
+											
 											<div class="mb-7">
 												<div class="row align-items-center">
 													<div class="col-lg-7 col-xl-7">
@@ -232,7 +230,7 @@
 													</div>
 												</div>
 											  </div>
-										</form>
+										</form> -->
 											<!--end::Search Form-->
 											<!--end: Search Form-->
 											<!--begin: Selected Rows Group Action Form-->
@@ -269,8 +267,8 @@
 											</div>
 											<!--end: Selected Rows Group Action Form-->
 											<!--begin: Datatable-->
-											<div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable" style="">
-												<table class="datatable-table" style="display: block;">
+											<div >
+												<table class="yajra">
 													<thead class="datatable-head">
 														<tr class="datatable-row" style="left: 0px;">
 															<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
@@ -341,7 +339,7 @@
 													</tbody>
 												</table>
 												<div class="">
-													{{ $data->links()}}
+												
 												</div>
 											</div>
 											<!--end: Datatable-->
@@ -483,6 +481,16 @@
 	<!--begin::Page Scripts(used by this page)-->
 	<script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
 	<!--end::Page Scripts-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	<script>
+		$(function () {
+			var table = $('.yajra').DataTable({});
+		});
+	</script>
 </body>
 <!--end::Body-->
 

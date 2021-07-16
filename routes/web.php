@@ -7,6 +7,7 @@ use App\Http\Controllers\HrDesignationController;
 use App\Http\Controllers\HrShiftController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\BookingCreditController;
 use App\Http\Controllers\FinancePurchaseController;
 use App\Http\Controllers\FinanceEmployeeController;
 use App\Http\Controllers\CrmBookingController;
@@ -229,6 +230,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         /*******************************************************FINANCE************************************************************/
         Route::view('admin/FINANCE/financedashboard','admin/FINANCE/financedashboard');
         Route::get('admin/FINANCE/editemployees/{id}',[FinanceEmployeeController::class,'editemployees']);
+        Route::post('admin/FINANCE/editemployee',[FinanceEmployeeController::class,'editdata']);
         Route::get('admin/FINANCE/addtransactionsemployee/{id}',[FinanceEmployeeController::class,'addtransactionsemployee']);
         Route::Post('admin/FINANCE/searchorder',[FinancePurchaseController::class,'searchorder']);
         Route::view('admin/FINANCE/addtransactionsemployee','admin/FINANCE/addtransactionsemployee');
@@ -236,12 +238,16 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/FINANCE/addtransactionsorder/{id}',[FinancePurchaseController::class,'addtransactionsorder']);
         Route::get('admin/FINANCE/purchaseorders/{id}',[FinancePurchaseController::class,'purchaseorders']);
         Route::get('admin/FINANCE/addtransactionsseller/{id}',[FinancePurchaseController::class,'addtransactionsseller']);
+        Route::post('admin/FINANCE/checkbookingcheckbox',[FinanceEmployeeController::class,'checkbookingcheckbox']);
         // Route::view('admin/FINANCE/addtransactionsorder','admin/FINANCE/addtransactionsorder');
         // Route::view('admin/FINANCE/purchaseorder','admin/FINANCE/purchaseorder');
+        
         Route::get('admin/FINANCE/purchaseorder',[FinancePurchaseController::class,'show']);
         Route::get('admin/FINANCE/salaries',[FinanceEmployeeController::class,'show']);
-        Route::view('admin/FINANCE/bookingcredit','admin/FINANCE/bookingcredit');
+        // Route::view('admin/FINANCE/bookingcredit','admin/FINANCE/bookingcredit');
         Route::post('admin/FINANCE/payAmount',[FinancePurchaseController::class,'payAmount']);
+        Route::post('admin/FINANCE/payAmountEmployee',[FinanceEmployeeController::class,'payAmountEmployee']);
+        Route::get('admin/FINANCE/bookingcredit',[BookingCreditController::class,'showdata']);
         Route::get('admin/logout', function () {
         session()->flush();
         return redirect('/');

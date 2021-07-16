@@ -649,7 +649,7 @@
         $('.field_error').html('');
            $.ajax({
                 // headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                url: '../HR/editemployee',
+                url: '../FINANCE/editemployee',
                 method:"POST",
                 data:new FormData(this),
                 dataType:'JSON',
@@ -668,7 +668,7 @@
                   $('#form')[0].reset();
                   $('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                   setTimeout(function(){
-                   window.location.href = '../HR/employees'; 
+                   window.location.href = '../FINANCE/salaries'; 
                  }, 1000);
                 }   
                 },
@@ -795,13 +795,13 @@ function showAllowance(){
     </script>
 	<script>
 		$("#invoiceItem").on("click", ".remove", function() {
-			var last = $('tbody tr').length;
-			// alert(last);
-			if(last == 1){
-				alert('You can not remove last row!');
-			}else{
+			// var last = $('tbody tr').length;
+			// // alert(last);
+			// if(last == 1){
+			// 	alert('You can not remove last row!');
+			// }else{
 				$(this).closest("tr").remove();
-			}
+			// }
 		});
 	</script>
 	<!--end::Global Config-->

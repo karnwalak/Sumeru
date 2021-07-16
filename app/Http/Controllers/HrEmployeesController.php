@@ -63,7 +63,7 @@ class HrEmployeesController extends Controller
             'phone' => 'required|regex:/^([+]\d{2})?\d{10}$/|unique:hr_employees,employee_contact_no',
             'email' => 'required|email|unique:hr_employees,email_id',
             'salary' => 'required|numeric',
-            'allowence' => 'required|not_in:0',
+            // 'allowence' => 'required|not_in:0',
             'employee_status' => 'required|not_in:0',
            ]);
         if (!$valid -> passes()) {
@@ -89,14 +89,23 @@ class HrEmployeesController extends Controller
             ];
             // return count($req -> allowence);
             $res = hr_employees::insert($data);
-            for ($i=0; $i < count($req -> allowence) ; $i++) {
-                $data2 = [
-                 'employee_id' => $po_id ,
-                 'allowence_id' => $allowence[$i] 
-                ];
-                $dd2 = DB::table('hr_employee_allowences') -> insert($data2);
-             }
-            if($res && $dd2){
+            if(isset($allowence)){
+                for ($i=0; $i < count($req -> allowence) ; $i++) {
+                    $data2 = [
+                     'employee_id' => $po_id ,
+                     'allowence_id' => $allowence[$i] 
+                    ];
+                    $dd2 = DB::table('hr_employee_allowences') -> insert($data2);
+                 }
+            }
+            if($res){
+                $file->move('upload', $file_name);
+                return response()-> json([
+                    'status' => 'success',
+                    'msg'=>'Employee Added!'
+                  ]);
+            }
+            else if($res && $dd2){
                 $file->move('upload', $file_name);
                 return response()-> json([
                     'status' => 'success',
@@ -147,7 +156,7 @@ class HrEmployeesController extends Controller
             'phone' => 'required|regex:/^([+]\d{2})?\d{10}$/',
             'email' => 'required|email',
             'salary' => 'required|numeric',
-            'allowence' => 'required|not_in:0',
+            // 'allowence' => 'required|not_in:0',
             'employee_status' => 'required|not_in:0',
            ]);
         if (!$valid -> passes()) {
@@ -196,15 +205,23 @@ class HrEmployeesController extends Controller
                 'email_id'=>$email_id,'employee_basic_salary'=>$employee_basic_salary,'employee_status'=>$employee_status]); 
             }
             }
-            $de = DB::DELETE("DELETE FROM hr_employee_allowences WHERE employee_id = $pro_id");
-            for ($i=0; $i < count($req -> allowence) ; $i++) {
+            if (isset($allowence)) {
+                $de = DB::DELETE("DELETE FROM hr_employee_allowences WHERE employee_id = $pro_id");
+                for ($i=0; $i < count($req -> allowence) ; $i++) {
                 $data2 = [
                  'employee_id' => $pro_id ,
                  'allowence_id' => $allowence[$i] 
                 ];
                 $dd2 = DB::table('hr_employee_allowences') -> insert($data2);
-             }
+                }
+            }
+            
             if($result && $dd2){
+                return response()-> json([
+                    'status' => 'success',
+                    'msg'=>'Employee Updated!'
+                  ]);
+            }else if($result || $dd2){
                 return response()-> json([
                     'status' => 'success',
                     'msg'=>'Employee Updated!'
