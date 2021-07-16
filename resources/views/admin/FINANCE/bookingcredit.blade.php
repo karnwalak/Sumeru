@@ -318,53 +318,42 @@
 																				<table class="datatable-table" style="display: block;">
 																					<thead class="datatable-head">
 																						<tr class="datatable-row" style="left: 0px;">
-																							<th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th>
+																							<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 																							<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">S No.</span></th>
 																							<th data-field="EmployeeName" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Employee's Name</span></th>
 																							<th data-field="Contact" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Contact</span></th>
 																							<th data-field="Amount" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Amount</span></th>
 																							<th data-field="PaymentMethod" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Payment Method</span></th>
 																							<th data-field="BookingID" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Booking ID</span></th>
+																							<th data-field="BookingID" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Status</span></th>
 																							<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width:60px;">Action</span></th>
 																						</tr>
 																					</thead>
 																					<tbody class="datatable-body" style="">
+																					<?php $a = 1; ?>
+																					@foreach($data as $value)
 																						<tr data-row="0" class="datatable-row" style="left: 0px;">
-																							<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
-																							<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 120px;">64616-103</span></td>
-																							<td data-field="EmployeeName" aria-label="Aman Rajvanshi" class="datatable-cell"><span style="width: 120px;">Aman Rajvanshi</span></td>
-																							<td data-field="Contact" aria-label="9876543210" class="datatable-cell"><span style="width: 120px;">9876543210</span></td>
-																							<td data-field="Amount" aria-label="Rs. 30000" class="datatable-cell"><span style="width: 120px;">Rs. 30000</span></td>
-																							<td data-field="PaymentMethod" aria-label="Cash" class="datatable-cell"><span style="width: 120px;">Cash</span></td>
-																							<td data-field="BookingID" aria-label="#45646" class="datatable-cell"><span style="width: 120px;">#45646</span></td>
+																							<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
+																							<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 120px;">{{$a++}}</span></td>
+																							<td data-field="EmployeeName" aria-label="Aman Rajvanshi" class="datatable-cell"><span style="width: 120px;">{{$value -> employee_name}}</span></td>
+																							<td data-field="Contact" aria-label="9876543210" class="datatable-cell"><span style="width: 120px;">{{$value -> employee_contact_no}}</span></td>
+																							<td data-field="Amount" aria-label="Rs. 30000" class="datatable-cell"><span style="width: 120px;">Rs. {{$value -> booking_amount}}</span></td>
+																							<td data-field="PaymentMethod" aria-label="Cash" class="datatable-cell"><span style="width: 120px;">{{$value -> payment_method}}</span></td>
+																							<td data-field="BookingID" aria-label="#45646" class="datatable-cell"><span style="width: 120px;">#{{$value -> id}}</span></td>
+																							<td data-field="BookingID" aria-label="#45646" class="datatable-cell"><span style="width: 120px;">P-Booked</span></td>
 																							<td class="datatable-cell nowrap" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																							<a href="javascript;;" class="btn btn-sm btn-clean btn-icon mr-2" title="View">
+																							<a data-id="{{$value -> id}}" class="btn btn-sm btn-clean btn-icon mr-2 check" title="View">
 																									<span class="svg-icon svg-icon-md">
 																									<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check-square" class="svg-inline--fa fa-check-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"></path></svg>
 																									</span>
 																								</a>
 																							</td>
 																						</tr>
-																						<tr data-row="1" class="datatable-row" style="left: 0px;">
-																							<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
-																							<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 120px;">64616-103</span></td>
-																							<td data-field="EmployeeName" aria-label="Aman Rajvanshi" class="datatable-cell"><span style="width: 120px;">Aman Rajvanshi</span></td>
-																							<td data-field="Contact" aria-label="9876543210" class="datatable-cell"><span style="width: 120px;">9876543210</span></td>
-																							<td data-field="Amount" aria-label="Rs. 30000" class="datatable-cell"><span style="width: 120px;">Rs. 30000</span></td>
-																							<td data-field="PaymentMethod" aria-label="Cash" class="datatable-cell"><span style="width: 120px;">Cash</span></td>
-																							<td data-field="BookingID" aria-label="#45646" class="datatable-cell"><span style="width: 120px;">#45646</span></td>
-																							<td class="datatable-cell nowrap" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																							<a href="javascript;;" class="btn btn-sm btn-clean btn-icon mr-2" title="View">
-																									<span class="svg-icon svg-icon-md">
-																									<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check-square" class="svg-inline--fa fa-check-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"></path></svg>
-																									</span>
-																								</a>
-																							</td>
-																						</tr>
+																					@endforeach
 																					</tbody>
 																				</table>
 																				<div class="datatable-pager datatable-paging-loaded">
-																					<ul class="datatable-pager-nav my-2 mb-sm-0">
+																					<!-- <ul class="datatable-pager-nav my-2 mb-sm-0">
 																						<li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
 																						<li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
 																						<li style="display: none;"><input type="text" class="datatable-pager-input form-control" title="Page number"></li>
@@ -375,10 +364,11 @@
 																						<li><a class="datatable-pager-link datatable-pager-link-number" data-page="5" title="5">5</a></li>
 																						<li><a title="Next" class="datatable-pager-link datatable-pager-link-next" data-page="2"><i class="flaticon2-next"></i></a></li>
 																						<li><a title="Last" class="datatable-pager-link datatable-pager-link-last" data-page="35"><i class="flaticon2-fast-next"></i></a></li>
-																					</ul>
+																					</ul> -->
 																					<div class="datatable-pager-info my-2 mb-sm-0">
 																						<div class="dropdown bootstrap-select datatable-pager-size" style="width: 60px;">
-																							<select class="selectpicker datatable-pager-size" title="Select page size" data-width="60px" data-container="body" data-selected="10">
+																						{{$data -> links()}}
+																							<!-- <select class="selectpicker datatable-pager-size" title="Select page size" data-width="60px" data-container="body" data-selected="10">
 																								<option class="bs-title-option" value=""></option>
 																								<option value="5">5</option>
 																								<option value="10">10</option>
@@ -386,7 +376,7 @@
 																								<option value="30">30</option>
 																								<option value="50">50</option>
 																								<option value="100">100</option>
-																							</select>
+																							</select> -->
 																							<!-- <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-5" aria-haspopup="listbox" aria-expanded="false" title="Select page size"> -->
 																								<div class="filter-option">
 																									<div class="filter-option-inner">
@@ -395,12 +385,12 @@
 																								</div>
 																							</button>
 																							<div class="dropdown-menu ">
-																								<div class="inner show" role="listbox" id="bs-select-5" tabindex="-1">
+																								<!-- <div class="inner show" role="listbox" id="bs-select-5" tabindex="-1">
 																									<ul class="dropdown-menu inner show" role="presentation"></ul>
-																								</div>
+																								</div> -->
 																							</div>
 																						</div>
-																						<span class="datatable-pager-detail">Showing 1 - 10 of 350</span>
+																						<!-- <span class="datatable-pager-detail">Showing 1 - 10 of 350</span> -->
 																							</div>
 																						</div>
 																					</div>
@@ -493,56 +483,46 @@
 																		<!--end: Selected Rows Group Action Form-->
 																		<!--begin: Datatable-->
 																			<div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable" style="">
-																				<table class="datatable-table" style="display: block;">
+																			<table class="datatable-table" style="display: block;">
 																					<thead class="datatable-head">
 																						<tr class="datatable-row" style="left: 0px;">
-																							<th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th>
+																							<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 																							<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">S No.</span></th>
 																							<th data-field="EmployeeName" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Employee's Name</span></th>
 																							<th data-field="Contact" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Contact</span></th>
 																							<th data-field="Amount" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Amount</span></th>
 																							<th data-field="PaymentMethod" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Payment Method</span></th>
 																							<th data-field="BookingID" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Booking ID</span></th>
+																							<th data-field="BookingID" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Status</span></th>
 																							<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width:60px;">Action</span></th>
 																						</tr>
 																					</thead>
 																					<tbody class="datatable-body" style="">
+																					<?php $b = 1; ?>
+																					@foreach($datas as $value)
 																						<tr data-row="0" class="datatable-row" style="left: 0px;">
-																							<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
-																							<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 120px;">64616-103</span></td>
-																							<td data-field="EmployeeName" aria-label="Aman Rajvanshi" class="datatable-cell"><span style="width: 120px;">Aman Rajvanshi</span></td>
-																							<td data-field="Contact" aria-label="9876543210" class="datatable-cell"><span style="width: 120px;">9876543210</span></td>
-																							<td data-field="Amount" aria-label="Rs. 30000" class="datatable-cell"><span style="width: 120px;">Rs. 30000</span></td>
-																							<td data-field="PaymentMethod" aria-label="Cash" class="datatable-cell"><span style="width: 120px;">Cash</span></td>
-																							<td data-field="BookingID" aria-label="#45646" class="datatable-cell"><span style="width: 120px;">#45646</span></td>
+																							<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
+																							<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 120px;">{{$b++}}</span></td>
+																							<td data-field="EmployeeName" aria-label="Aman Rajvanshi" class="datatable-cell"><span style="width: 120px;">{{$value -> employee_name}}</span></td>
+																							<td data-field="Contact" aria-label="9876543210" class="datatable-cell"><span style="width: 120px;">{{$value -> employee_contact_no}}</span></td>
+																							<td data-field="Amount" aria-label="Rs. 30000" class="datatable-cell"><span style="width: 120px;">Rs. {{$value -> booking_amount}}</span></td>
+																							<td data-field="PaymentMethod" aria-label="Cash" class="datatable-cell"><span style="width: 120px;">{{$value -> payment_method}}</span></td>
+																							<td data-field="BookingID" aria-label="#45646" class="datatable-cell"><span style="width: 120px;">#{{$value -> id}}</span></td>
+																							<td data-field="BookingID" aria-label="#45646" class="datatable-cell"><span style="width: 120px;">Booked</span></td>
 																							<td class="datatable-cell nowrap" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																							<a href="javascript;;" class="btn btn-sm btn-clean btn-icon mr-2" title="View">
+																							<a class="btn btn-sm btn-clean btn-icon mr-2" title="View">
 																									<span class="svg-icon svg-icon-md">
-																									<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check-square" class="svg-inline--fa fa-check-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"></path></svg>
+																									<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check-square" class="svg-inline--fa fa-check-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#8950fc" d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"></path></svg>
 																									</span>
 																								</a>
 																							</td>
 																						</tr>
-																						<tr data-row="1" class="datatable-row" style="left: 0px;">
-																							<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
-																							<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 120px;">64616-103</span></td>
-																							<td data-field="EmployeeName" aria-label="Aman Rajvanshi" class="datatable-cell"><span style="width: 120px;">Aman Rajvanshi</span></td>
-																							<td data-field="Contact" aria-label="9876543210" class="datatable-cell"><span style="width: 120px;">9876543210</span></td>
-																							<td data-field="Amount" aria-label="Rs. 30000" class="datatable-cell"><span style="width: 120px;">Rs. 30000</span></td>
-																							<td data-field="PaymentMethod" aria-label="Cash" class="datatable-cell"><span style="width: 120px;">Cash</span></td>
-																							<td data-field="BookingID" aria-label="#45646" class="datatable-cell"><span style="width: 120px;">#45646</span></td>
-																							<td class="datatable-cell nowrap" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																							<a href="javascript;;" class="btn btn-sm btn-clean btn-icon mr-2" title="View">
-																									<span class="svg-icon svg-icon-md">
-																									<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check-square" class="svg-inline--fa fa-check-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"></path></svg>
-																									</span>
-																								</a>
-																							</td>
-																						</tr>
+																					@endforeach
 																					</tbody>
 																				</table>
 																				<div class="datatable-pager datatable-paging-loaded">
-																					<ul class="datatable-pager-nav my-2 mb-sm-0">
+																					{{$datas -> links()}}
+																					<!-- <ul class="datatable-pager-nav my-2 mb-sm-0">
 																						<li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
 																						<li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
 																						<li style="display: none;"><input type="text" class="datatable-pager-input form-control" title="Page number"></li>
@@ -553,10 +533,10 @@
 																						<li><a class="datatable-pager-link datatable-pager-link-number" data-page="5" title="5">5</a></li>
 																						<li><a title="Next" class="datatable-pager-link datatable-pager-link-next" data-page="2"><i class="flaticon2-next"></i></a></li>
 																						<li><a title="Last" class="datatable-pager-link datatable-pager-link-last" data-page="35"><i class="flaticon2-fast-next"></i></a></li>
-																					</ul>
+																					</ul> -->
 																					<div class="datatable-pager-info my-2 mb-sm-0">
 																						<div class="dropdown bootstrap-select datatable-pager-size" style="width: 60px;">
-																							<select class="selectpicker datatable-pager-size" title="Select page size" data-width="60px" data-container="body" data-selected="10">
+																							<!-- <select class="selectpicker datatable-pager-size" title="Select page size" data-width="60px" data-container="body" data-selected="10">
 																								<option class="bs-title-option" value=""></option>
 																								<option value="5">5</option>
 																								<option value="10">10</option>
@@ -564,7 +544,7 @@
 																								<option value="30">30</option>
 																								<option value="50">50</option>
 																								<option value="100">100</option>
-																							</select>
+																							</select> -->
 																							<!-- <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-5" aria-haspopup="listbox" aria-expanded="false" title="Select page size"> -->
 																								<div class="filter-option">
 																									<div class="filter-option-inner">
@@ -578,7 +558,7 @@
 																								</div>
 																							</div>
 																						</div>
-																						<span class="datatable-pager-detail">Showing 1 - 10 of 350</span>
+																						<!-- <span class="datatable-pager-detail">Showing 1 - 10 of 350</span> -->
 																							</div>
 																						</div>
 																					</div>
@@ -625,6 +605,7 @@
 		</span>
 	</div>
 	<!--end::Scrolltop-->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script>
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 	</script>
@@ -709,11 +690,13 @@
 <script>
 	function showorders()
 	{
+		// alert('showorders');
 		$('.orders').show();
 		$('.sellers').hide();
 	}
 	function showsellers()
 	{
+		// alert('showsellers');
 		$('.orders').hide();
 		$('.sellers').show();
 	}
@@ -730,6 +713,24 @@
 	<!--end::Page Vendors-->
 	<!--begin::Page Scripts(used by this page)-->
 	<script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+		  $(".check").click(function () {
+		    var rowid = $(this).attr('data-id');
+		    $.ajax({
+		      url: "checkbookingcheckbox",
+		      method: "POST",
+		      data : {id : rowid},
+		      headers: {
+			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			    },
+		      success: function (data) {
+                window.location.href = '../FINANCE/bookingcredit'; 
+		      }
+		    });
+		  });
+		});
+	</script>
 </body>
 <!--end::Body-->
 

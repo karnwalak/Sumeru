@@ -29,6 +29,8 @@
 	<!--end::Global Theme Styles-->
 	<!--begin::Layout Themes(used by all pages)-->
 	<link rel="shortcut icon" href="/../img/icon.jpg" />
+	<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -189,7 +191,7 @@
 										<div class="card-body">
 											<!--begin: Search Form-->
 											<!--begin::Search Form-->
-											<div class="mb-7">
+											<!-- <div class="mb-7">
                                                     <form method="post" action="searchproduct">
 														<div class="row align-items-center">
 		                                                    	{{@csrf_field()}}
@@ -203,7 +205,7 @@
 																				</span>
 																			</div>
 																		</div>
-																		<!-- <div class="col-md-4 my-2 my-md-0">
+																		<div class="col-md-4 my-2 my-md-0">
 																			<div class="row">
 																				<label class="col-form-label text-left col-lg-4 col-sm-12">Status</label>
 																				<div class="col-lg-8 col-md-8	 col-sm-12" data-select2-id="242">
@@ -214,7 +216,7 @@
 																					</select>
 																				</div>
 																			</div>
-																		</div> -->
+																		</div>
 																		<div class="col-md-4 my-2 my-md-0">
 																			<div class="row">
 																				<label class="col-form-label text-left col-lg-4 col-sm-12">Type</label>
@@ -234,7 +236,7 @@
 																</div>
 														</div>
 													</form>
-											</div>
+											</div> -->
 											<!--end::Search Form-->
 											<!--end: Search Form-->
 											<!--begin: Selected Rows Group Action Form-->
@@ -272,30 +274,30 @@
 											<!--end: Selected Rows Group Action Form-->
 											<!--begin: Datatable-->
 											
-											<div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable" style="">
-												<table class="datatable-table" style="display: block;">
-													<thead class="datatable-head">
-														<tr class="datatable-row" style="left: 0px;">
+											<div style="">
+												<table class="yajra table-bordered border-primary">
+													<thead>
+														<tr>
 															<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
-															<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
-															<th data-field="Name" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Name</span></th>
-															<th data-field="Category" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Category</span></th>
-															<th data-field="Modal" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Modal</span></th>
-															<th data-field="Sku" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Sku</span></th>
-															<th data-field="Type" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Type</span></th>
-															<th data-field="Stock" class="datatable-cell datatable-cell-sort"><span style="width: 100px;"><a href="productstockrecord.php">Stock</a></span></th>
-															<th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Status</span></th>
-															<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 125px;">Actions</span></th>
+															<th>S No.</th>
+															<th>Name</th>
+															<th>Category</th>
+															<th>Modal</th>
+															<th>Sku</th>
+															<th>Type</th>
+															<th>Stock</th>
+															<th>Status</th>
+															<th>Actions</th>
 														</tr>
 													</thead>
-													<tbody class="datatable-body" style="">
+													<tbody>
 														<?php $a = 1; ?>
 														@foreach($data as $value)
 														<tr data-row="0" class="datatable-row" style="left: 0px;">
 															<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
-															<td data-field="Sno" aria-label="{{$value -> id}}" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
-															<td data-field="Name" aria-label="{{$value -> material_name}}" class="datatable-cell"><span style="width: 100px;">{{$value -> material_name}}</span></td>
-															<td data-field="{{$value -> material_category}}" aria-label="{{$value -> material_category}}" class="datatable-cell"><span style="width: 100px;">
+															<td>{{$a++}}</td>
+															<td>{{$value -> material_name}}</td>
+															<td>
 																<?php 
 																$id = $value -> material_category;
                                                                 $result = DB::SELECT("SELECT * FROM inventory_material_categories WHERE id = $id");
@@ -304,26 +306,25 @@
                                                                 }
                                                                 echo $valu -> category_name;
 																?>
-															</span></td>
-															<td data-field="Modal" aria-label="{{$value -> modal}}" class="datatable-cell"><span style="width: 100px;">{{$value -> modal}}</span></td>
-															<td data-field="Sku" aria-label="{{$value -> sku}}" class="datatable-cell"><span style="width: 100px;">{{$value -> sku}}</span></td>
-															<td data-field="Type" aria-label="{{$value -> type}}" class="datatable-cell"><span style="width: 100px;">{{$value -> type}}</span></td>
-															<td data-field="Stock" aria-label="Brazil" class="datatable-cell"><span style="width: 100px;"><a href="#">
+															</td>
+															<td>{{$value -> modal}}</td>
+															<td>{{$value -> sku}}</td>
+															<td>{{$value -> type}}</td>
+															<td><a href="#">
 															<?php 
 																$id = $value -> id;
                                                                 $result = DB::SELECT("SELECT * FROM material_stock_records WHERE material_id = $id");
                                                                 echo count($result);
 																?>
-															</a></span></td>
-															<td data-field="Status" aria-label="5" class="datatable-cell">
+															</a></td>
+															<td>
 															   @if($value -> material_status == 'Active')
 															   <button class="btn btn-success statuschange" id="{{$value -> id}}" href="">{{$value -> material_status}}</button>
 															   @elseif($value -> material_status == 'Inactive')
 															   <button class="btn btn-danger statuschange" id="{{$value -> id}}" href="">{{$value -> material_status}}</button>
 															   @endif
 														    </td>
-															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																<span style="overflow: visible; position: relative; width: 125px;">
+															<td>
 																<a href="productstockrecord/{{$value -> id}}" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">
 																			<span class="svg-icon svg-icon-md">
 																				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
@@ -354,7 +355,6 @@
 																				</svg>
 																			</span>
 																		</a>
-																</span>
 															</td>
 														</tr>
 														@endforeach
@@ -400,7 +400,7 @@
 											</div>
 											<!--end: Datatable-->
 											<div class="">
-													{{ $data->links()}}
+													
 											</div>
 										</div>
 									</div> 
@@ -517,8 +517,17 @@
 	<!--end::Page Vendors-->
 	<!--begin::Page Scripts(used by this page)-->
 	<script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	
 	<!--end::Page Scripts-->
 	<script type="text/javascript">
+		$(function () {
+			var table = $('.yajra').DataTable({});
+		});
 		$(document).ready(function(){
 		  $(".statuschange").click(function () {
 		    var rowid = $(this).attr('id');

@@ -160,7 +160,7 @@ class CategoryController extends Controller
        }
     }
     public function show(Request $req){
-        $data = Category::orderBy('id','DESC')->where('category_status','!=','delete')->paginate(10);
+        $data = Category::orderBy('id','DESC')->where('category_status','!=','delete')->get();
         return view('../admin/ERP/materialcategory',compact('data'));
     }
 }
