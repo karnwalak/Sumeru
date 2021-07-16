@@ -35,11 +35,11 @@ class PurchaseController extends Controller
             ->where('id', $id)
             ->limit(1) 
             ->update(['status' => 'delete']);
-        $query2 = DB::table('material_stock_records') 
-            ->where('purchase_order_id', $id)
-            ->limit(1) 
-            ->update(['status' => 'remove']);
-        if ($query && $query2) {
+        // $query2 = DB::table('material_stock_records') 
+        //     ->where('purchase_order_id', $id)
+        //     ->limit(1) 
+        //     ->update(['status' => 'remove']);
+        if ($query) {
             session() -> flash('success','Order Deleted!');
             return redirect('admin/ERP/purchaseorder');
         }else{

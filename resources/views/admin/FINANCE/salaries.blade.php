@@ -330,33 +330,30 @@
 																							<th data-field="Contact" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Contact</span></th>
 																							<th data-field="Amount" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Amount</span></th>
 																							<th data-field="Released" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Released</span></th>
-																							<th data-field="Balance" class="datatable-cell datatable-cell-sort"><span style="width: 80px;">Balance</span></th>
-																							<th data-field="Balance" class="datatable-cell datatable-cell-sort"><span style="width: 80px;">Status</span></th>
+																							<th data-field="Balance" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Balance</span></th>
 																							<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 80px;">Actions</span></th>
 																						</tr>
 																					</thead>
 																					<tbody class="datatable-body" style="">
 																					<?php $a = 1; ?>
 																					@foreach($data as $value)
+																						<?php
+																							$ids = $value -> id;
+																							$sum = DB::table('employee_salaries')
+																							->where('employee_id', '=', $ids)
+																							->sum('amount');
+																						?>
+																						@if($value -> employee_basic_salary - $sum > 0)
 																						<tr data-row="0" class="datatable-row" style="left: 0px;">
 																							<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
 																							<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
 																							<td data-field="EmployeeName" aria-label="Aman Rajvanshi" class="datatable-cell"><span style="width: 100px;">{{$value -> employee_name}}</span></td>
 																							<td data-field="Contact" aria-label="9876543210" class="datatable-cell"><span style="width: 100px;">{{$value -> employee_contact_no}}</span></td>
-																							<td data-field="Amount" aria-label="Rs. 30000" class="datatable-cell"><span style="width: 100px;">Rs. {{$value -> booking_amount}}</span></td>
-																							<td data-field="Released" aria-label="Rs. 20000" class="datatable-cell"><span style="width: 100px;">Rs. 
-																							<?php
-																							$ids = $value -> id;
-																							$purchases = DB::table('crm_booking_payment_logs')
-																							->where('booking_id', '=', $ids)
-																							->sum('amount');
-																							echo $purchases;
-																							?>
-																						    </span></td>
-																							<td data-field="Balance" aria-label="Rs. 10000" class="datatable-cell"><span style="width: 80px;">Rs. {{$value -> booking_amount-$purchases}}</span></td>
-																							<td data-field="Balance" aria-label="Rs. 10000" class="datatable-cell"><span style="width: 80px;">P-Booked</span></td>
+																							<td data-field="Amount" aria-label="Rs. 30000" class="datatable-cell"><span style="width: 100px;">Rs. {{$value -> employee_basic_salary}}</span></td>
+																							<td data-field="Released" aria-label="Rs. 20000" class="datatable-cell"><span style="width: 100px;">Rs.{{$sum}}</span></td>
+																							<td data-field="Balance" aria-label="Rs. 10000" class="datatable-cell"><span style="width: 100px;">Rs. {{$value -> employee_basic_salary-$sum}}</span></td>
 																							<td class="datatable-cell-left datatable-cell nowrap" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																							<a href="editemployees/{{$value -> employee_id}}" class="btn btn-sm btn-clean btn-icon mr-2" title="View">
+																							<a href="editemployees/{{$value -> id}}" class="btn btn-sm btn-clean btn-icon mr-2" title="View">
 																									<span class="svg-icon svg-icon-md">
 																										<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
 																									</span>
@@ -368,11 +365,12 @@
 																								</a>
 																							</td>
 																						</tr>
+																						@endif
 																					@endforeach
 																					</tbody>
 																				</table>
 																				<div class="datatable-pager datatable-paging-loaded">
-																					{{$data -> links()}}
+																					
 																					<!-- <ul class="datatable-pager-nav my-2 mb-sm-0">
 																						<li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
 																						<li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
@@ -518,26 +516,24 @@
 																					</thead>
 																					<tbody class="datatable-body" style="">
 																					<?php $a = 1; ?>
-																					@foreach($datas as $value)
+																					@foreach($data as $value)
+																						<?php
+																							$ids = $value -> id;
+																							$sum = DB::table('employee_salaries')
+																							->where('employee_id', '=', $ids)
+																							->sum('amount');
+																						?>
+																						@if($value -> employee_basic_salary - $sum <= 0)
 																						<tr data-row="0" class="datatable-row" style="left: 0px;">
 																							<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
 																							<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
 																							<td data-field="EmployeeName" aria-label="Aman Rajvanshi" class="datatable-cell"><span style="width: 100px;">{{$value -> employee_name}}</span></td>
 																							<td data-field="Contact" aria-label="9876543210" class="datatable-cell"><span style="width: 100px;">{{$value -> employee_contact_no}}</span></td>
-																							<td data-field="Amount" aria-label="Rs. 30000" class="datatable-cell"><span style="width: 100px;">Rs. {{$value -> booking_amount}}</span></td>
-																							<td data-field="Released" aria-label="Rs. 20000" class="datatable-cell"><span style="width: 100px;">Rs. 
-																							<?php
-																							$ids = $value -> id;
-																							$purchases = DB::table('crm_booking_payment_logs')
-																							->where('booking_id', '=', $ids)
-																							->sum('amount');
-																							echo $purchases;
-																							?>
-																						    </span></td>
-																							<td data-field="Balance" aria-label="Rs. 10000" class="datatable-cell"><span style="width: 80px;">Rs. {{$value -> booking_amount-$purchases}}</span></td>
-																							<td data-field="Balance" aria-label="Rs. 10000" class="datatable-cell"><span style="width: 80px;">Booked</span></td>
+																							<td data-field="Amount" aria-label="Rs. 30000" class="datatable-cell"><span style="width: 100px;">Rs. {{$value -> employee_basic_salary}}</span></td>
+																							<td data-field="Released" aria-label="Rs. 20000" class="datatable-cell"><span style="width: 100px;">Rs.{{$sum}}</span></td>
+																							<td data-field="Balance" aria-label="Rs. 10000" class="datatable-cell"><span style="width: 100px;">Rs. {{$value -> employee_basic_salary-$sum}}</span></td>
 																							<td class="datatable-cell-left datatable-cell nowrap" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																							<a href="editemployees/{{$value -> employee_id}}" class="btn btn-sm btn-clean btn-icon mr-2" title="View">
+																							<a href="editemployees/{{$value -> id}}" class="btn btn-sm btn-clean btn-icon mr-2" title="View">
 																									<span class="svg-icon svg-icon-md">
 																										<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
 																									</span>
@@ -549,11 +545,12 @@
 																								</a>
 																							</td>
 																						</tr>
+																						@endif
 																					@endforeach
 																					</tbody>
 																				</table>
 																				<div class="datatable-pager datatable-paging-loaded">
-																				{{$datas -> links()}}
+																		
 																					<!-- <ul class="datatable-pager-nav my-2 mb-sm-0">
 																						<li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
 																						<li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>

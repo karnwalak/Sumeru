@@ -1,6 +1,4 @@
 <?php
-// print_r($data);
-// exit;
 foreach ($data as $value) {}
 ?>
 <!DOCTYPE html>

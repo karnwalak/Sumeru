@@ -238,7 +238,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/FINANCE/addtransactionsorder/{id}',[FinancePurchaseController::class,'addtransactionsorder']);
         Route::get('admin/FINANCE/purchaseorders/{id}',[FinancePurchaseController::class,'purchaseorders']);
         Route::get('admin/FINANCE/addtransactionsseller/{id}',[FinancePurchaseController::class,'addtransactionsseller']);
-        Route::post('admin/FINANCE/checkbookingcheckbox',[FinanceEmployeeController::class,'checkbookingcheckbox']);
+        Route::post('admin/FINANCE/checkbookingcheckbox',[BookingCreditController::class,'checkbookingcheckbox']);
         // Route::view('admin/FINANCE/addtransactionsorder','admin/FINANCE/addtransactionsorder');
         // Route::view('admin/FINANCE/purchaseorder','admin/FINANCE/purchaseorder');
         

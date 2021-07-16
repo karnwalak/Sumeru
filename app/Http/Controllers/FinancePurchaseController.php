@@ -50,14 +50,19 @@ class FinancePurchaseController extends Controller
         $data = Purchase::where('status','!=','delete')
         ->where('inventory_purchase_orders.id','=',$id)
         ->join('sellers','inventory_purchase_orders.seller_id','=','sellers.id')
-        ->join('purchase_order_payment_logs','inventory_purchase_orders.id','=','purchase_order_payment_logs.purchase_order_id')
-        ->select(['inventory_purchase_orders.*','sellers.seller_name','sellers.seller_contact','purchase_order_payment_logs.txn_amount'])
+        // ->join('purchase_order_payment_logs','inventory_purchase_orders.id','=','purchase_order_payment_logs.purchase_order_id')
+        ->select(['inventory_purchase_orders.*','sellers.seller_name','sellers.seller_contact'])
         ->paginate(10);
         $material = PurchaseOrder::where('purchase_order_materials.purchase_order_id','=',$id)
         ->join('inventory_materials','purchase_order_materials.material_id','=','inventory_materials.id')
         // ->join('inventory_purchase_orders','purchase_order_materials.purchase_order_id','=','inventory_purchase_orders.id')
         ->get();
-        return view('../admin/FINANCE/viewpurchaseorder')->with('data',$data)->with('material',$material);
+        // return count($data);
+        if(count($material) > 0){
+            return view('../admin/FINANCE/viewpurchaseorder')->with('data',$data)->with('material',$material);
+        }else{
+            return redirect('../admin/FINANCE/purchaseorder')->with('error','Order details not found!');
+        }
     }
     public function addtransactionsorder(Request $req,$id){
         return view('../admin/FINANCE/addtransactionsorder')->with('id',$id)->with('data',purchase_order_payment_log::where('purchase_order_id','=',$id)->paginate(10));
