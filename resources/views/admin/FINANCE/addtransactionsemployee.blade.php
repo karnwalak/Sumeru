@@ -252,7 +252,7 @@
                                                                                     <th data-field="Amount" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Amount</span></th>
                                                                                     <th data-field="Type" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Type</span></th>
                                                                                     <th data-field="Date" class="datatable-cell datatable-cell-sort"><span style="width: 80px;">Date</span></th>
-                                                                                    <th data-field="Method" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Status</span></th>
+                                                                                    <!-- <th data-field="Method" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Status</span></th> -->
                                                                                     <th data-field="Comment" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 150px;">Comment</span></th>
                                                                                 </tr>
                                                                             </thead>
@@ -262,9 +262,9 @@
                                                                                     <!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
                                                                                     <td data-field="EmployeeID" aria-label="#1234" class="datatable-cell"><span style="width: 100px;">#{{$value -> employee_id}}</span></td>
                                                                                     <td data-field="Amount" aria-label="Rs. 30000" class="datatable-cell"><span style="width: 100px;">Rs. {{$value -> amount}}</span></td>
-                                                                                    <td data-field="Type" aria-label="Cash" class="datatable-cell"><span style="width: 100px;">{{$value -> payment_method}}</span></td>
+                                                                                    <td data-field="Type" aria-label="Cash" class="datatable-cell"><span style="width: 100px;">{{$value -> payment_type}}</span></td>
                                                                                     <td data-field="Date" aria-label="26/12/2021" class="datatable-cell"><span style="width: 80px;">{{$value -> date}}</span></td>
-                                                                                    <td data-field="Method" aria-label="Online" class="datatable-cell"><span style="width: 100px;">{{$value -> status}}</span></td>
+                                                                                    <!-- <td data-field="Method" aria-label="Online" class="datatable-cell"><span style="width: 100px;">{{$value -> status}}</span></td> -->
                                                                                     <td data-field="Comment" aria-label="Lorem ipsum dolor sit amet." class="datatable-cell"><span style="width: 150px;">{{$value -> comment}}</span></td>
                                                                                 </tr>
                                                                                 @endforeach

@@ -31,14 +31,14 @@ class FinanceEmployeeController extends Controller
         $employee_id = $value-> employee_id;
         $transction_id = $value-> transction_id;
         $comment = $value-> comment;
-        $insert = [
-           'date' => date('y-m-d'),
-           'amount' => $total - $paid,
-           'payment_type' => $payment_method,
-           'employee_id' =>  $employee_id,
-           'comment' => 'Recieved!',
-        ];
-        $res = employee_salarie::insert($insert);
+        // $insert = [
+        //    'date' => date('y-m-d'),
+        //    'amount' => $total - $paid,
+        //    'payment_type' => $payment_method,
+        //    'employee_id' =>  $employee_id,
+        //    'comment' => 'Recieved!',
+        // ];
+        // $res = employee_salarie::insert($insert);
         $query = DB::table('crm_bookings') 
         ->where('id', $id)
         ->limit(1) 
@@ -46,24 +46,14 @@ class FinanceEmployeeController extends Controller
     }
     public function show(Request $req)
     {
-        $data = crm_booking::orderBy('id','DESC')
-                ->where('status','=','partiallybooked')
-                ->join('hr_employees','crm_bookings.employee_id','=','hr_employees.id')
-                ->select(['hr_employees.employee_name','hr_employees.employee_contact_no','crm_bookings.*'])
-                ->paginate(10);
-        $datas = crm_booking::orderBy('id','DESC')
-                ->where('status','=','booked')
-                ->join('hr_employees','crm_bookings.employee_id','=','hr_employees.id')
-                ->select(['hr_employees.employee_name','hr_employees.employee_contact_no','crm_bookings.*'])
-                ->paginate(10);
-        return view('../admin/FINANCE/salaries') -> with('data',$data)-> with('datas',$datas);
+        $data = hr_employees::orderBy('id','DESC')->where('employee_status','!=','delete')->get();
+        return view('../admin/FINANCE/salaries') -> with('data',$data);
     }
     public function addtransactionsemployee(Request $req,$id)
     {
-
         return view('../admin/FINANCE/addtransactionsemployee') 
         -> with('id',$id) 
-        -> with('data',crm_booking_payment_log::where('booking_id',$id)->paginate(10));
+        -> with('data',employee_salarie::where('employee_id',$id)->paginate(10));
     }
     public function editemployees(Request $req,$id)
     {
@@ -180,16 +170,13 @@ class FinanceEmployeeController extends Controller
             'error' => $valid -> errors()]);
         }else{
             $data = [
-                'booking_id' => $req -> post('booking_id'),
                 'amount' => $req -> post('amount'),
                 'date' => $req -> post('date'),
-                'payment_method' => $req -> post('transaction_type'),
+                'payment_type' => $req -> post('transaction_type'),
                 'employee_id' => session()->get('id'),
-                'transction_id' => rand(100,999),
-                'status' => 'success',
                 'comment' => $req -> post('comment'),
             ];
-            $res = crm_booking_payment_log::insert($data);
+            $res = employee_salarie::insert($data);
             if($res){
                 return response() -> json(['status' => 'success',
                 'msg' => 'Payment Added!']);
