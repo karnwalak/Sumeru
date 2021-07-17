@@ -3,32 +3,29 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-<meta charset="utf-8" />
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<title>ERP</title>
-	<meta name="description" content="Updates and statistics" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<!--begin::Fonts-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-	<!--end::Fonts-->
-	<!--begin::Page Vendors Styles(used by this page)-->
-	<link href="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.css?v=7.2.8"
-		rel="stylesheet" type="text/css" />
-	<link href="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.css?v=7.2.8" rel="stylesheet"
-		type="text/css" />
-	<!--end::Page Vendors Styles-->
-	<!--begin::Global Theme Styles(used by all pages)-->
-	<link href="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.css?v=7.2.8" rel="stylesheet"
-		type="text/css" />
-	<link href="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.css?v=7.2.8" rel="stylesheet"
-		type="text/css" />
-	<link href="/../theme/html/demo4/dist/assets/css/style.bundle49d8.css?v=7.2.8" rel="stylesheet" type="text/css" />
-	<!--end::Global Theme Styles-->
-	<!--begin::Layout Themes(used by all pages)-->
-	<link rel="shortcut icon" href="/../img/icon.jpg" />
+    <meta charset="utf-8" />
+    <title>ERP</title>
+    <meta name="description" content="Updates and statistics" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Page Vendors Styles(used by this page)-->
+    <link href="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.css?v=7.2.8"
+    rel="stylesheet" type="text/css" />
+    <link href="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.css?v=7.2.8" rel="stylesheet"
+    type="text/css" />
+    <!--end::Page Vendors Styles-->
+    <!--begin::Global Theme Styles(used by all pages)-->
+    <link href="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.css?v=7.2.8" rel="stylesheet"
+    type="text/css" />
+    <link href="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.css?v=7.2.8" rel="stylesheet"
+    type="text/css" />
+    <link href="/../theme/html/demo4/dist/assets/css/style.bundle49d8.css?v=7.2.8" rel="stylesheet" type="text/css" />
+    <!--end::Global Theme Styles-->
+    <!--begin::Layout Themes(used by all pages)-->
+    <link rel="shortcut icon" href="/../img/icon.jpg" />
+    <!--begin::Layout Themes(used by all pages)-->
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -38,10 +35,10 @@
     <!--begin::Header Mobile-->
     <div id="kt_header_mobile" class="header-mobile header-mobile-fixed">
         <!--begin::Logo-->
-        <a href="../admin/dashboard">
-			<img alt="Logo" src="/../img/logoicon.png"
-				class="logo-default max-h-30px" />
-		</a>
+        <a href="../ERP/dashboard">
+            <img alt="Logo" src="/../img/logoicon.png"
+                class="logo-default max-h-30px" />
+        </a>
         <!--end::Logo-->
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
@@ -82,15 +79,16 @@
                 <!--begin::Brand-->
                 <div class="aside-brand d-flex flex-column align-items-center flex-column-auto py-4 py-lg-8">
                     <!--begin::Logo-->
-                    <a href="../admin/dashboard">
-			<img alt="Logo" src="/../img/logoicon.png"
-				class="logo-default max-h-30px" />
-		</a>
+                   <a href="../ERP/dashboard">
+            <img alt="Logo" src="/../img/logoicon.png"
+                class="logo-default max-h-30px" />
+        </a>
                     <!--end::Logo-->
                 </div>
                 <!--end::Brand-->
                 <!--begin::Nav Wrapper-->
-                @include('admin/sidebar')               <!--end::Nav Wrapper-->
+                @include('admin/sidebar')
+                <!--end::Nav Wrapper-->
                 <!--begin::Footer-->
                 <div class="aside-footer d-flex flex-column align-items-center flex-column-auto py-8">
                     <!--begin::Quick Panel-->
@@ -115,7 +113,8 @@
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
                 <!-- add header -->
-                @include('admin/FINANCE/header')               <!-- add header end -->
+                @include('admin/FINANCE/header')
+                <!-- add header end -->
 
                 <!--begin::Entry-->
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -138,7 +137,7 @@
                             <!--begin::Toolbar-->
                             <div class="d-flex align-items-center">
                                 <!--begin::Button-->
-                                <!-- <a href="hrdesignation" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a> -->
+                                <!-- <a href="hrdesignation.php" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a> -->
                                 <!--end::Button-->
                             </div>
                             <!--end::Toolbar-->
@@ -159,9 +158,10 @@
                                             <div class="card-body p-0">
                                                 <div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
                                                     <div class="col-xl-12 col-xxl-10">
-                                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Add Employee Transactions</h5>
-                                                        <div class="row" style="display:grid; justify-content:end;">
-                                                            <a href="purchaseorder" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
+                               												 <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Add Employee Transactions</h5>
+                                                        <div class="row" style="display:flex; justify-content:end;">
+																														<button data-toggle="modal" data-target="#exampleModalCenter"  type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base" style="margin:0px 10px;">Add Expenses</button>
+                                                            <a href="purchaseorder" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base" style="margin:0px 10px;">Back</a>
                                                         </div>
                                                         <!--begin::Wizard Form-->
                                                         <form class="form" id="kt_form">
@@ -174,13 +174,14 @@
 																																					<!--begin::Group-->
 																																					<div class="col-xl-5 col-12">
 																																						<div class="form-group row">
-																																								<label class="col-xl-4 col-lg- col-form-label">Payment Date</label>
-																																								<div class="col-lg-8 col-xl-8">
-																																									<div class="input-group input-group-solid input-group-lg">
+																																								<label class="col-xl-3 col-lg-3 col-form-label">From</label>
+																																								<div class="col-lg-9 col-xl-9">
+																																								<input class="form-control form-control-solid form-control-lg" name="from" type="text" value="" />
+																																									<!-- <div class="input-group input-group-solid input-group-lg">
 																																										<input type="date" class="form-control form-control-solid form-control-lg" name="companywebsite" placeholder="Username" value="Rs." />
 																																										<div class="input-group-append">
 																																										</div>
-																																									</div>
+																																									</div> -->
 																																								</div>
 																																						</div>
 																																					</div>
@@ -188,13 +189,14 @@
 																																					<!--begin::Group-->
 																																					<div class="col-xl-5 col-12">
 																																						<div class="form-group row">
-																																								<label class="col-xl-4 col-lg- col-form-label">Payment Date</label>
-																																								<div class="col-lg-8 col-xl-8">
-																																									<div class="input-group input-group-solid input-group-lg">
+																																								<label class="col-xl-3 col-lg-3 col-form-label">To</label>
+																																								<div class="col-lg-9 col-xl-9">
+																																								<input class="form-control form-control-solid form-control-lg" name="to" type="text" value="" />
+																																									<!-- <div class="input-group input-group-solid input-group-lg">
 																																										<input type="date" class="form-control form-control-solid form-control-lg" name="companywebsite" placeholder="Username" value="Rs." />
 																																										<div class="input-group-append">
 																																										</div>
-																																									</div>
+																																									</div> -->
 																																								</div>
 																																						</div>
 																																					</div>
@@ -299,7 +301,41 @@
                                                         <!--end::Wizard Form-->
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>																								
+																							<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLongTitle">Add Cash Incentives</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">		
+																	<div class="row" style="margin:10px">
+																		<div class="form-group row">
+																			<label class="col-xl-12 col-lg-12 col-form-label">Amount</label>
+																				<div class="col-lg-12 col-xl-12">
+																					<input class="form-control form-control-solid form-control-lg" name="amount" type="text" placeholder="Amount" value="" style="width: 100% !important;" />
+																				</div>
+																		</div>
+																	</div>
+																	<div class="row" style="margin:10px">
+																		<div class="form-group row">
+																			<label class="col-xl-12 col-lg-12 col-form-label">Comment</label>
+																				<div class="col-lg-12 col-xl-12">
+																					<input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" style="width: 100% !important;" />
+																				</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																	<button type="button" class="btn btn-primary">Save changes</button>
+																</div>
+															</div>
+														</div>
+													</div>
                                             <!--end::Body-->
                                         </div>
                                         <!--end::Card-->
@@ -315,14 +351,16 @@
                 </div>
                 <!--end::Entry-->
                 <!--begin::Footer-->
-                @include('admin/footer')                <!--end::Footer-->
+                @include('admin/footer')
+                <!--end::Footer-->
             </div>
             <!--end::Wrapper-->
         </div>
         <!--end::Page-->
     </div>
     <!--end::Main-->
-    @include('admin/usersidebar')    <!--begin::Scrolltop-->
+    @include('admin/usersidebar')
+    <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop">
         <span class="svg-icon">
             <!--begin::Svg Icon | path:/metronic/theme/html/demo4/dist/assets/media/svg/icons/Navigation/Up-2.svg-->
@@ -405,16 +443,17 @@
     </script>
     <!--end::Global Config-->
    <!--begin::Global Theme Bundle(used by all pages)-->
-	<script src="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.js?v=7.2.8"></script>
-	<script src="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.js?v=7.2.8"></script>
-	<script src="/../theme/html/demo4/dist/assets/js/scripts.bundle49d8.js?v=7.2.8"></script>
-	<!--end::Global Theme Bundle-->
-	<!--begin::Page Vendors(used by this page)-->
-	<script src="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.js?v=7.2.8"></script>
-	<script src="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.js?v=7.2.8"></script>
-	<!--end::Page Vendors-->
-	<!--begin::Page Scripts(used by this page)-->
-	<script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
+    <script src="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.js?v=7.2.8"></script>
+    <script src="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.js?v=7.2.8"></script>
+    <script src="/../theme/html/demo4/dist/assets/js/scripts.bundle49d8.js?v=7.2.8"></script>
+    <!--end::Global Theme Bundle-->
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.js?v=7.2.8"></script>
+    <script src="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.js?v=7.2.8"></script>
+    <!--end::Page Vendors-->
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
+    <!--end::Page Scripts-->
 </body>
 <!--end::Body-->
 
