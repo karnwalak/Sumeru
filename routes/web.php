@@ -18,6 +18,8 @@ use App\Http\Controllers\HrAllowenceController;
 use App\Http\Controllers\HrEmployeesController;
 use App\Http\Controllers\HrTaskController;
 use App\Http\Controllers\HrDailyReportController;
+use App\Http\Controllers\PurchaseOrderRequestController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,9 +43,11 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
     Route::group(['middleware' => 'admin_auth'],function(){
         //inv
         Route::view('admin/ERP/dashboard','admin/ERP/dashboard');
-        Route::view('admin/ERP/viewrequest','admin/ERP/viewrequest');
-        Route::view('admin/ERP/purchaseorderrequest','admin/ERP/purchaseorderrequest');
-        Route::view('admin/ERP/editrequest','admin/ERP/editrequest');
+        Route::get('admin/ERP/viewrequest/{id}',[PurchaseOrderRequestController::class,'viewrequest']); 
+        Route::get('admin/ERP/editrequest/{id}',[PurchaseOrderRequestController::class,'edit']);
+        Route::post('admin/ERP/updaterequest',[PurchaseOrderRequestController::class,'update']);
+        Route::get('admin/ERP/purchaseorderrequest',[PurchaseOrderRequestController::class,'show']);
+        Route::post('admin/ERP/addrequest',[PurchaseOrderRequestController::class,'create']);
         Route::view('admin/ERP/addrequest','admin/ERP/addrequest');
         Route::view('admin/ERP/materialdashboard','admin/ERP/materialdashboard');
         // Route::view('admin/ERP/addseller','admin/ERP/addseller');
@@ -255,6 +259,8 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/FINANCE/purchaseorders/{id}',[FinancePurchaseController::class,'purchaseorders']);
         Route::get('admin/FINANCE/addtransactionsseller/{id}',[FinancePurchaseController::class,'addtransactionsseller']);
         Route::post('admin/FINANCE/checkbookingcheckbox',[BookingCreditController::class,'checkbookingcheckbox']);
+        Route::post('admin/FINANCE/addcashincentive',[FinanceEmployeeController::class,'addcashincentive']);
+        Route::get('admin/FINANCE/dailycashincentive',[FinanceEmployeeController::class,'showinsentive']);
         // Route::view('admin/FINANCE/addtransactionsorder','admin/FINANCE/addtransactionsorder');
         // Route::view('admin/FINANCE/purchaseorder','admin/FINANCE/purchaseorder');
         

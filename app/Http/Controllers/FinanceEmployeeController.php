@@ -18,6 +18,37 @@ use Illuminate\Support\Facades\DB;
 use Validator;
 class FinanceEmployeeController extends Controller
 {
+    public function showinsentive(Request $req)
+    {
+        return view('../admin/FINANCE/dailycashincentive') -> with('data',employee_salarie::where('employee_id',session()->get('id'))->get());
+    }
+    public function addcashincentive(Request $req)
+    {
+        $valid = Validator::make($req -> all(),[
+            'amount' => 'required|numeric',
+            'comment' => 'required',
+        ]);
+        if (!$valid -> passes()) {
+            return response() -> json(['status' => 'error',
+            'error' => $valid -> errors()]);
+        }else{
+            $data = [
+            'employee_id' => $req -> post('employee_id'),
+            'date' => date('y-m-d'),
+            'amount' => $req -> post('amount'),
+            'comment' => $req -> post('comment'),
+            'payment_type' => 'UPI',
+            ];
+            $res = employee_salarie::insert($data);
+            if($res){
+                return response() -> json(['status' => 'success',
+                'msg' => 'Icentive Added!']);
+            }else{
+                return response() -> json(['status' => 'error',
+                'error' => 'Icentive Not Added!']);
+            }
+        }
+    }
     public function checkbookingcheckbox(Request $req)
     {
         $id = $req -> id;
