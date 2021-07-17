@@ -1,3 +1,7 @@
+<?php
+// print_r($data);
+// exit;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -170,120 +174,123 @@
                                                                     <!--begin::Wizard Step 1-->
                                                                     <div class="my-5 step" data-wizard-type="step-content" data-wizard-state="current">
                                                                         <!-- <h5 class="text-dark font-weight-bold mb-10">Details:</h5> -->
-																																				<div class="row">
-																																					<!--begin::Group-->
-																																					<div class="col-xl-5 col-12">
-																																						<div class="form-group row">
-																																								<label class="col-xl-3 col-lg-3 col-form-label">From</label>
-																																								<div class="col-lg-9 col-xl-9">
-																																								<input class="form-control form-control-solid form-control-lg" name="from" type="text" value="" />
-																																									<!-- <div class="input-group input-group-solid input-group-lg">
-																																										<input type="date" class="form-control form-control-solid form-control-lg" name="companywebsite" placeholder="Username" value="Rs." />
-																																										<div class="input-group-append">
-																																										</div>
-																																									</div> -->
-																																								</div>
-																																						</div>
-																																					</div>
-																																					<!--end::Group-->
-																																					<!--begin::Group-->
-																																					<div class="col-xl-5 col-12">
-																																						<div class="form-group row">
-																																								<label class="col-xl-3 col-lg-3 col-form-label">To</label>
-																																								<div class="col-lg-9 col-xl-9">
-																																								<input class="form-control form-control-solid form-control-lg" name="to" type="text" value="" />
-																																									<!-- <div class="input-group input-group-solid input-group-lg">
-																																										<input type="date" class="form-control form-control-solid form-control-lg" name="companywebsite" placeholder="Username" value="Rs." />
-																																										<div class="input-group-append">
-																																										</div>
-																																									</div> -->
-																																								</div>
-																																						</div>
-																																					</div>
-																																					<!--end::Group-->
-																																					<!--begin::Dropdown-->
-																																					<div class="col-xl-2 col-12">
-																																						<div class="btn-group ml-2">
-																																								<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Search</button>
-																																						</div>
-																																					</div>
-																																					<!--end::Dropdown-->
-																																				</div>
-																																				<div class="row">
-																																					<!--begin::Group-->
-																																					<div class="col-xl-5 col-12">
-																																						<div class="form-group row">
-																																								<label class="col-xl-3 col-lg-3 col-form-label">Total</label>
-																																								<div class="col-lg-9 col-xl-9">
-																																										<input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" />
-																																								</div>
-																																						</div>
-																																					</div>
-																																					<!--end::Group-->
-																																				</div>
+                                                                        <div class="row">
+                                                                            <!--begin::Group-->
+                                                                            <div class="col-xl-5 col-12">
+                                                                                <div class="form-group row">
+                                                                                        <label class="col-xl-3 col-lg-3 col-form-label">From</label>
+                                                                                        <div class="col-lg-9 col-xl-9">
+                                                                                        <input class="form-control form-control-solid form-control-lg" name="from" type="text" value="" />
+                                                                                            <!-- <div class="input-group input-group-solid input-group-lg">
+                                                                                                <input type="date" class="form-control form-control-solid form-control-lg" name="companywebsite" placeholder="Username" value="Rs." />
+                                                                                                <div class="input-group-append">
+                                                                                                </div>
+                                                                                            </div> -->
+                                                                                        </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!--end::Group-->
+                                                                            <!--begin::Group-->
+                                                                            <div class="col-xl-5 col-12">
+                                                                                <div class="form-group row">
+                                                                                        <label class="col-xl-3 col-lg-3 col-form-label">To</label>
+                                                                                        <div class="col-lg-9 col-xl-9">
+                                                                                        <input class="form-control form-control-solid form-control-lg" name="to" type="text" value="" />
+                                                                                            <!-- <div class="input-group input-group-solid input-group-lg">
+                                                                                                <input type="date" class="form-control form-control-solid form-control-lg" name="companywebsite" placeholder="Username" value="Rs." />
+                                                                                                <div class="input-group-append">
+                                                                                                </div>
+                                                                                            </div> -->
+                                                                                        </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!--end::Group-->
+                                                                            <!--begin::Dropdown-->
+                                                                            <div class="col-xl-2 col-12">
+                                                                                <div class="btn-group ml-2">
+                                                                                        <button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Search</button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!--end::Dropdown-->
+                                                                        </div>
+                                                                    <div class="row">
+                                                                        <!--begin::Group-->
+                                                                        <div class="col-xl-5 col-12">
+                                                                            <div class="form-group row">
+                                                                                    <label class="col-xl-3 col-lg-3 col-form-label">Total</label>
+                                                                                    <div class="col-lg-9 col-xl-9">
+                                                                                            <input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" />
+                                                                                    </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--end::Group-->
                                                                     </div>
-																																			<!-- table -->
-																																			<div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable" style="">
-																																				<table class="datatable-table" style="display: block;">
-																																					<thead class="datatable-head">
-																																						<tr class="datatable-row" style="left: 0px;">
-																																							<th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th>
-																																							<th data-field="SNo." class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
-																																							<th data-field="Amount" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Amount</span></th>
-																																							<th data-field="Reasons" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Reasons</span></th>
-																																						</tr>
-																																					</thead>
-																																					<tbody class="datatable-body" style="">
-																																						<tr data-row="0" class="datatable-row" style="left: 0px;">
-																																							<td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td>
-																																							<td data-field="SNo." aria-label="1234-56" class="datatable-cell"><span style="width: 100px;">1234-56</span></td>
-																																							<td data-field="Amount" aria-label="Rs. 30000" class="datatable-cell"><span style="width: 100px;">Rs. 30000</span></td>
-																																							<td data-field="Reasons" aria-label="Lorem ipsum dolor sit." class="datatable-cell"><span style="width: 100px;">Lorem ipsum dolor sit.</span></td>
-																																						</tr>
-																																					</tbody>
-																																				</table>
-																																				<div class="datatable-pager datatable-paging-loaded">
-																																					<ul class="datatable-pager-nav my-2 mb-sm-0">
-																																						<li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
-																																						<li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
-																																						<li style="display: none;"><input type="text" class="datatable-pager-input form-control" title="Page number"></li>
-																																						<li><a class="datatable-pager-link datatable-pager-link-number datatable-pager-link-active" data-page="1" title="1">1</a></li>
-																																						<li><a class="datatable-pager-link datatable-pager-link-number" data-page="2" title="2">2</a></li>
-																																						<li><a class="datatable-pager-link datatable-pager-link-number" data-page="3" title="3">3</a></li>
-																																						<li><a class="datatable-pager-link datatable-pager-link-number" data-page="4" title="4">4</a></li>
-																																						<li><a class="datatable-pager-link datatable-pager-link-number" data-page="5" title="5">5</a></li>
-																																						<li><a title="Next" class="datatable-pager-link datatable-pager-link-next" data-page="2"><i class="flaticon2-next"></i></a></li>
-																																						<li><a title="Last" class="datatable-pager-link datatable-pager-link-last" data-page="35"><i class="flaticon2-fast-next"></i></a></li>
-																																					</ul>
-																																					<div class="datatable-pager-info my-2 mb-sm-0">
-																																						<div class="dropdown bootstrap-select datatable-pager-size" style="width: 60px;">
-																																							<select class="selectpicker datatable-pager-size" title="Select page size" data-width="60px" data-container="body" data-selected="10">
-																																								<option class="bs-title-option" value=""></option>
-																																								<option value="5">5</option>
-																																								<option value="10">10</option>
-																																								<option value="20">20</option>
-																																								<option value="30">30</option>
-																																								<option value="50">50</option>
-																																								<option value="100">100</option>
-																																							</select>
-																																							<!-- <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-5" aria-haspopup="listbox" aria-expanded="false" title="Select page size"> -->
-																																								<div class="filter-option">
-																																									<div class="filter-option-inner">
-																																										<!-- <div class="filter-option-inner-inner">10</div> -->
-																																									</div>
-																																								</div>
-																																							</button>
-																																							<div class="dropdown-menu ">
-																																								<div class="inner show" role="listbox" id="bs-select-5" tabindex="-1">
-																																									<ul class="dropdown-menu inner show" role="presentation"></ul>
-																																								</div>
-																																							</div>
-																																						</div>
-																																						<span class="datatable-pager-detail">Showing 1 - 10 of 350</span>
-																																							</div>
-																																						</div>
-																																			</div>
-																																			<!-- table -->
+                                                                    </div>
+                                                                    <!-- table -->
+                                                                    <div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable" style="">
+                                                                        <table class="datatable-table" style="display: block;">
+                                                                            <thead class="datatable-head">
+                                                                                <tr class="datatable-row" style="left: 0px;">
+                                                                                    <!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
+                                                                                    <th data-field="SNo." class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
+                                                                                    <th data-field="Amount" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Amount</span></th>
+                                                                                    <th data-field="Reasons" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Reasons</span></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody class="datatable-body" style="">
+                                                                                <?php $a = 1; ?>
+                                                                                @foreach($data as $value)
+                                                                                <tr data-row="0" class="datatable-row" style="left: 0px;">
+                                                                                    <!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
+                                                                                    <td data-field="SNo." aria-label="1234-56" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
+                                                                                    <td data-field="Amount" aria-label="Rs. 30000" class="datatable-cell"><span style="width: 100px;">Rs. {{$value -> amount}}</span></td>
+                                                                                    <td data-field="Reasons" aria-label="Lorem ipsum dolor sit." class="datatable-cell"><span style="width: 110px;">{{$value -> comment}}</span></td>
+                                                                                </tr>
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <div class="datatable-pager datatable-paging-loaded">
+                                                                            <!-- <ul class="datatable-pager-nav my-2 mb-sm-0">
+                                                                                <li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
+                                                                                <li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
+                                                                                <li style="display: none;"><input type="text" class="datatable-pager-input form-control" title="Page number"></li>
+                                                                                <li><a class="datatable-pager-link datatable-pager-link-number datatable-pager-link-active" data-page="1" title="1">1</a></li>
+                                                                                <li><a class="datatable-pager-link datatable-pager-link-number" data-page="2" title="2">2</a></li>
+                                                                                <li><a class="datatable-pager-link datatable-pager-link-number" data-page="3" title="3">3</a></li>
+                                                                                <li><a class="datatable-pager-link datatable-pager-link-number" data-page="4" title="4">4</a></li>
+                                                                                <li><a class="datatable-pager-link datatable-pager-link-number" data-page="5" title="5">5</a></li>
+                                                                                <li><a title="Next" class="datatable-pager-link datatable-pager-link-next" data-page="2"><i class="flaticon2-next"></i></a></li>
+                                                                                <li><a title="Last" class="datatable-pager-link datatable-pager-link-last" data-page="35"><i class="flaticon2-fast-next"></i></a></li>
+                                                                            </ul> -->
+                                                                            <div class="datatable-pager-info my-2 mb-sm-0">
+                                                                                <div class="dropdown bootstrap-select datatable-pager-size" style="width: 60px;">
+                                                                                    <!-- <select class="selectpicker datatable-pager-size" title="Select page size" data-width="60px" data-container="body" data-selected="10">
+                                                                                        <option class="bs-title-option" value=""></option>
+                                                                                        <option value="5">5</option>
+                                                                                        <option value="10">10</option>
+                                                                                        <option value="20">20</option>
+                                                                                        <option value="30">30</option>
+                                                                                        <option value="50">50</option>
+                                                                                        <option value="100">100</option>
+                                                                                    </select> -->
+                                                                                    <!-- <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-5" aria-haspopup="listbox" aria-expanded="false" title="Select page size"> -->
+                                                                                        <div class="filter-option">
+                                                                                            <div class="filter-option-inner">
+                                                                                                <!-- <div class="filter-option-inner-inner">10</div> -->
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </button>
+                                                                                    <div class="dropdown-menu ">
+                                                                                        <div class="inner show" role="listbox" id="bs-select-5" tabindex="-1">
+                                                                                            <ul class="dropdown-menu inner show" role="presentation"></ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- <span class="datatable-pager-detail">Showing 1 - 10 of 350</span> -->
+                                                                                    </div>
+                                                                                </div>
+                                                                    </div>
+                                                                    <!-- table -->
                                                                     <!--begin::Wizard Actions-->
                                                                     <div class="d-flex justify-content-between border-top pt-10 mt-15">
                                                                         <div class="mr-2">
@@ -302,40 +309,48 @@
                                                     </div>
                                                 </div>
                                             </div>																								
-																							<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-														<div class="modal-dialog modal-dialog-centered" role="document">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLongTitle">Add Cash Incentives</h5>
-																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<div class="modal-body">		
-																	<div class="row" style="margin:10px">
-																		<div class="form-group row">
-																			<label class="col-xl-12 col-lg-12 col-form-label">Amount</label>
-																				<div class="col-lg-12 col-xl-12">
-																					<input class="form-control form-control-solid form-control-lg" name="amount" type="text" placeholder="Amount" value="" style="width: 100% !important;" />
-																				</div>
-																		</div>
-																	</div>
-																	<div class="row" style="margin:10px">
-																		<div class="form-group row">
-																			<label class="col-xl-12 col-lg-12 col-form-label">Comment</label>
-																				<div class="col-lg-12 col-xl-12">
-																					<input class="form-control form-control-solid form-control-lg" name="firstname" type="text" value="" style="width: 100% !important;" />
-																				</div>
-																		</div>
-																	</div>
-																</div>
-																<div class="modal-footer">
-																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-																	<button type="button" class="btn btn-primary">Save changes</button>
-																</div>
-															</div>
-														</div>
-													</div>
+                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                      <form id="form">
+                                                        {{@csrf_field()}}
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Add Cash Incentives</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <span id="error_msg" class="text-danger px-5"></span>
+                                                        <span id="success_msg" class="text-success px-5"></span>
+                                                        <div class="modal-body">		
+                                                            <div class="row" style="margin:10px">
+                                                                <div class="form-group row">
+                                                                    <label class="col-xl-12 col-lg-12 col-form-label">Amount</label>
+                                                                        <div class="col-lg-12 col-xl-12">
+                                                                            <input class="form-control form-control-solid form-control-lg" name="amount" type="text" placeholder="Amount" value="" style="width: 100% !important;" />
+                                                                            <input name="employee_id" type="hidden" value="{{session()->get('id')}}"/>
+                                                                        </div>
+                                                                        <span class="field_error text-danger" id="amount_error"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="margin:10px">
+                                                                <div class="form-group row">
+                                                                    <label class="col-xl-12 col-lg-12 col-form-label">Comment</label>
+                                                                        <div class="col-lg-12 col-xl-12">
+                                                                            <textarea class="form-control form-control-solid form-control-lg" name="comment" type="text" value="" style="width: 100% !important;"></textarea>
+                                                                        </div>
+                                                                        <span class="field_error text-danger" id="comment_error"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                      </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <!--end::Body-->
                                         </div>
                                         <!--end::Card-->
@@ -454,6 +469,38 @@
     <!--begin::Page Scripts(used by this page)-->
     <script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
     <!--end::Page Scripts-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $("#form").submit(function(e){
+            e.preventDefault();
+            $('.field_error').html('');
+            $.ajax({
+                url:'addcashincentive',
+                method:"POST",
+                data:$('#form').serialize(),
+                dataType:'JSON',
+                success:function(result){
+                if (result.status == 'error') {
+                    $('#error_msg').html(result.error);
+                    $.each(result.error,function(key,val){
+                    // console.log(key);
+                    // console.log(val);
+                    $('#'+key+'_error').html(val[0]);
+                    })
+                }else if(result.status == 'success'){
+                    $('.form')[0].reset();
+                    $('#success_msg').html(result.msg);
+                    window.location.reload();
+                }
+                },
+                complete:function(){
+                    $('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
+                }
+            });
+            });
+        });
+    </script>
 </body>
 <!--end::Body-->
 

@@ -3,6 +3,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
+	<base href="../">
 	<meta charset="utf-8" />
     <title>ERP</title>
     <meta name="description" content="Updates and statistics" />
@@ -137,16 +138,18 @@
 				</div>
 				<!--end::Toolbar-->
 				<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+					<div class="row justify-content-center" id="msg"></div>
 					<div class="row">
 						<div class="col-md-12 col-12" >
 							<div class="show" id="kt_inbox_compose" data-backdrop="false" style="display: block; padding-left: 0px;" aria-modal="true" role="dialog">
 									<div class="modal-dialog" role="document">
 											<div class="modal-content">
 													<!--begin::Form-->
-													<form id="kt_inbox_compose_form">
+													<form id="form">
+														{{@csrf_field()}}
 															<!--begin::Header-->
 															<div class="d-flex align-items-center justify-content-between py-5 pl-8 pr-5 border-bottom">
-																	<h5 class="font-weight-bold m-0">Edit Request</h5>
+																	<h5 class="font-weight-bold m-0">Update Request</h5>
 															</div>
 															<!--end::Header-->
 															<!--begin::Body-->
@@ -154,43 +157,47 @@
 																	<!--begin::Subject-->
 																	<div class="border-bottom">
 																		<div class="d-flex align-items-center">
-																			<input class="form-control border-0 px-8 min-h-45px" name="compose_subject" placeholder="What's on your mind.">
-																			<span class="field_error text-danger" id="compose_subject_error"></span>
+																			<input type="hidden" name="pid" value="{{$data -> id}}">
+																			<input class="form-control border-0 px-8 min-h-45px" value="{{$data -> title}}" name="title" placeholder="What's on your mind.">
 																		</div>
+																		<span class="field_error text-danger" id="title_error"></span>
 																	</div>
 																	<!--end::Subject-->
 																	<div id="">
-																	   <textarea type="text" name="message" class="form-control border-0 px-8 min-h-45px" id="editor" ></textarea>
+																	   <textarea type="text" name="message" class="form-control border-0 px-8 min-h-45px" id="editor" >{{$data -> description}}</textarea>
 																	   <span class="text-danger field_error" id="message_error"></span>
 																	</div>
 															</div>
 															<!--end::Body-->
+															<div class="form-group row">
+																<label class="col-lg-3 col-form-label text-lg-right">Status</label>
+																<div class="col-lg-9">
+																<select  class="form-control form-control-solid form-control-lg" name="status">
+																	<option value="">Select</option>
+																	@if($data->status =='Active')
+																		<option value="Active" selected>Active</option>
+																		<option value="Inactive">Inactive</option>									
+																	@else
+																		<option value="Active">Active</option>
+																		<option value="Inactive" selected>Inactive</option>
+																	@endif
+																</select>
+																	<span class="text-danger field_error" id="status_error"></span>
+																</div>
+															</div>
+															<div class="row" style="display: grid;place-items: end;margin: 25px;">
+																<!--begin::Dropdown-->
+																<div class="btn-group ml-2">
+																	<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Update Request</button>
+																</div>
+																<!--end::Dropdown-->
+															</div>
 													</form>
 													<!--end::Form-->
 											</div>
 									</div>
 							</div>
-							<div class="form-group row">
-								<label class="col-lg-3 col-form-label text-lg-right">Upload Files:</label>
-								<div class="col-lg-9">
-											<a class="dropzone-select btn btn-light-primary font-weight-bold btn-sm dz-clickable">Attach files</a>
-									<span class="form-text text-muted">Max file size is 1MB and max number of files is 5.</span>
-								</div>
-							</div>
-							<div class="row" style="display: grid;place-items: end;margin: 25px;">
-								<!--begin::Dropdown-->
-								<div class="btn-group ml-2">
-									<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Accept Request</button>
-								</div>
-								<!--end::Dropdown-->
-							</div>
-							<div class="row" style="display: grid;place-items: end;margin: 25px;">
-								<!--begin::Dropdown-->
-								<div class="btn-group ml-2">
-									<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Reject Request</button>
-								</div>
-								<!--end::Dropdown-->
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -287,7 +294,7 @@
 		};
 	</script>
 	<!--end::Global Config-->
-	 <!--begin::Global Theme Bundle(used by all pages)-->
+	<!--begin::Global Theme Bundle(used by all pages)-->
     <script src="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.js?v=7.2.8"></script>
     <script src="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.js?v=7.2.8"></script>
     <script src="/../theme/html/demo4/dist/assets/js/scripts.bundle49d8.js?v=7.2.8"></script>
@@ -308,16 +315,19 @@
     <script type="text/javascript">
     $(document).ready(function(){
         $("#form").submit(function(e){
-        e.preventDefault();
-        $('.field_error').html('');
-		for (instance in CKEDITOR.instances) {
-        CKEDITOR.instances[instance].updateElement();
-        };
+           e.preventDefault();
+           $('.field_error').html('');
+		   for (instance in CKEDITOR.instances) {
+			CKEDITOR.instances[instance].updateElement();
+		   };
            $.ajax({
-                url: '../HR/addtasks',
+                url: '../ERP/updaterequest',
                 method:"POST",
-                data:$('#form').serialize(),
+                data:new FormData(this),
                 dataType:'JSON',
+                cache:false,
+                contentType: false,
+                processData: false,
                 success:function(result) {
                   if (result.status == 'error') {
 					$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
@@ -330,7 +340,7 @@
                   $('#form')[0].reset();
                   $('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                   setTimeout(function(){
-                   window.location.href = '../HR/tasksandprojects'; 
+                   window.location.href = '../ERP/purchaseorderrequest'; 
                  }, 1000);
                 }   
                 },

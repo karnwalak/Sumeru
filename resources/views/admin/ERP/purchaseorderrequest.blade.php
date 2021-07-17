@@ -1,3 +1,7 @@
+<?php
+// print_r($data);
+// exit;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -239,42 +243,52 @@
                                                 </tr>
                                             </thead>
                                             <tbody style="" class="datatable-body">
+                                                <?php $a=1; ?>
+                                                @foreach($data as $value)
                                                 <tr data-row="0" class="datatable-row" style="left: 0px;">
-                                                    <td class="datatable-cell-sorted datatable-cell-left datatable-cell" data-field="RecordID" aria-label="1"><span style="width: 40px;"><span class="font-weight-bolder">1</span></span></td>
+                                                    <td class="datatable-cell-sorted datatable-cell-left datatable-cell" data-field="RecordID" aria-label="1"><span style="width: 40px;"><span class="font-weight-bolder">{{$a++}}</span></span></td>
                                                     <td data-field="EmployeeName" aria-label="Aman Rajvanshi" class="datatable-cell">
                                                         <span style="width: 170px;">
-                                                            <div class="font-weight-bold mb-0"><a href="#" style="color:black;">Aman Rajvanshi</a></div>
+                                                            <div class="font-weight-bold mb-0"><a href="#" style="color:black;">{{$value -> employee_name}}</a></div>
                                                             <!-- <div class="text-muted">Rejected</div> -->
                                                         </span>
                                                     </td>
                                                     <td data-field="EmployeeContact" aria-label="9876543210" class="datatable-cell">
                                                         <span style="width: 140px;">
-                                                            <div class=" mb-0">9876543210</div>
+                                                            <div class=" mb-0">{{$value -> employee_contact_no}}</div>
                                                             <!-- <div class="text-muted">Rejected</div> -->
                                                         </span>
                                                     </td>
                                                     <td data-field="Department" aria-label="Civil" class="datatable-cell">
                                                         <span style="width: 110px;">
-                                                            <div class=" mb-0">Civil</div>
+                                                            <div class=" mb-0">
+                                                                <?php 
+																$pid = $value -> department_id;
+																$pdata = DB::SELECT("SELECT * FROM hr_departments WHERE id = $pid"); 
+																foreach ($pdata as  $pval) {
+																}
+																echo $pval -> name;
+															?>
+                                                            </div>
                                                             <!-- <div class="text-muted">Rejected</div> -->
                                                         </span>
                                                     </td>
                                                     <td data-field="Title" aria-label="Task Allocation" class="datatable-cell">
                                                         <span style="width: 110px;">
-                                                            <div class=" mb-0">Task Allocation</div>
+                                                            <div class=" mb-0">{{$value -> title}}</div>
                                                         </span>
                                                     </td>
-                                                    <td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 110px;"><input type="button" id="button" value="Status" style="color:white" onclick="setColor(event, 'button', '#101010')" ; data-count="1" /></span></td>
+                                                    <td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 110px;"><input type="button" id="button" value="{{$value -> status}}" style="color:white" /></span></td>
                                                     <td data-field="Actions" data-autohide-disabled="false" aria-label="null" class="datatable-cell">
                                                         <span style="overflow: visible; position: relative; width: 130px;">
-                                                            <a href="viewrequest" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
+                                                            <a href="viewrequest/{{$value -> id}}" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
                                                                 <span class="svg-icon svg-icon-md">
                                                                     <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                                                         <path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path>
                                                                     </svg>
                                                                 </span>
                                                             </a>
-                                                            <a href="editrequest" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
+                                                            <a href="editrequest/{{$value -> id}}" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
                                                                 <span class="svg-icon svg-icon-md">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -288,10 +302,11 @@
                                                         </span>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                         <div class="datatable-pager datatable-paging-loaded">
-                                            <ul class="datatable-pager-nav my-2 mb-sm-0">
+                                            <!-- <ul class="datatable-pager-nav my-2 mb-sm-0">
                                                 <li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
                                                 <li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
                                                 <li style="display: none;"><input type="text" class="datatable-pager-input form-control" title="Page number"></li>
@@ -302,17 +317,17 @@
                                                 <li><a class="datatable-pager-link datatable-pager-link-number" data-page="5" title="5">5</a></li>
                                                 <li><a title="Next" class="datatable-pager-link datatable-pager-link-next" data-page="2"><i class="flaticon2-next"></i></a></li>
                                                 <li><a title="Last" class="datatable-pager-link datatable-pager-link-last" data-page="35"><i class="flaticon2-fast-next"></i></a></li>
-                                            </ul>
+                                            </ul> -->
                                             <div class="datatable-pager-info my-2 mb-sm-0">
                                                 <div class="dropdown bootstrap-select datatable-pager-size" style="width: 60px;">
-                                                    <select class="selectpicker datatable-pager-size" title="10" data-width="60px" data-container="body" data-selected="10">
+                                                    <!-- <select class="selectpicker datatable-pager-size" title="10" data-width="60px" data-container="body" data-selected="10">
                                                         <option class="bs-title-option" value=""></option>
                                                         <option value="10">10</option>
                                                         <option value="20">20</option>
                                                         <option value="30">30</option>
                                                         <option value="50">50</option>
                                                         <option value="100">100</option>
-                                                    </select>
+                                                    </select> -->
                                                     <!-- <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-2" aria-haspopup="listbox" aria-expanded="false" title="Select page size"> -->
                                                     <div class="filter-option">
                                                         <div class="filter-option-inner">
@@ -326,7 +341,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <span class="datatable-pager-detail">Showing 1 - 10 of 350</span>
+                                                <!-- <span class="datatable-pager-detail">Showing 1 - 10 of 350</span> -->
                                             </div>
                                         </div>
                                     </div>

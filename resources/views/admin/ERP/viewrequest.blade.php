@@ -1,8 +1,16 @@
+<?php
+foreach ($data as  $val) {
+}
+// print_r($data);
+// echo $value -> employee_name;
+// exit;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
+	<base href="../">
 	<meta charset="utf-8" />
     <title>ERP</title>
     <meta name="description" content="Updates and statistics" />
@@ -150,41 +158,44 @@
 															</div>
 															<!--end::Header-->
 															<!--begin::Body-->
-															<div class="d-block">
-																	<!--begin::Subject-->
-																	<div class="border-bottom">
+														<!--begin::Subject-->
+														<div class="border-bottom">
 																		<div class="d-flex align-items-center px-10 py-10">
-																			<div class="symbol symbol-40 symbol-sm flex-shrink-0"> <img class="" src="" alt="photo"> </div>
+																			<div class="symbol symbol-40 symbol-sm flex-shrink-0"> <img class="" src="/../upload/{{$val -> employee_img}}" alt="photo"> </div>
 																			<div class="ml-4">
-																					<div class="font-weight-bolder mb-0">Hayes Boule (Civil Department)</div>
-																					<div class=" mb-0">Employee ID : 1234</div>				
+																					<div class="font-weight-bolder mb-0">{{$val -> employee_name}} (<?php 
+																											$pid = $val -> department_id;
+																											$pdata = DB::SELECT("SELECT * FROM hr_departments WHERE id = $pid"); 
+																											foreach ($pdata as  $pval) {
+																											}
+																											echo $pval -> name;
+																										?>)</div>
+																					<div class=" mb-0">Employee ID : {{$val -> emp_id}}</div>				
 																			</div>				
 																					<div class="row" style="display: grid;place-items: end;margin: 15px;">
-																							<a href="#" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">View Employee</a>
+																							<a href="../HR/employeeprofile/{{$val -> emp_id}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">View Employee</a>
 																					</div>
 																			</div>
 																	</div>
 																	<div class="border-bottom">
 																		<div class="d-flex align-items-center px-10 py-10">
-																	   <textarea type="text" name="message" class="form-control border-0 px-8 min-h-45px" id="editor" placeholder="This is the Title" ></textarea>
+																	   <textarea type="text" name="message" class="form-control border-0 px-8 min-h-45px" id="editor" readonly placeholder="This is the Title" >{{$val -> title}}</textarea>
 																		</div>
 																	</div>
 																	<div class="border-bottom">
 																		<div class="d-flex align-items-center px-10 py-10">
-																	   <textarea type="text" name="message" class="form-control border-0 px-8 min-h-45px" id="editor" placeholder="This is the Description" ></textarea>
+																	   <textarea type="text" name="message" class="form-control border-0 px-8 min-h-45px" id="editor" readonly placeholder="This is the Description" >{{strip_tags($val->description)}}</textarea>
 																		</div>
 																	</div>
 																	<div class="form-group row px-10 py-10">
-																		<label class="col-lg-3 col-form-label text-lg-right"> Files:</label>
+																		<label class="col-lg-3 col-form-label text-lg-right"> Status:</label>
 																		<div class="col-lg-9">
-																					<a class="dropzone-select btn btn-light-primary font-weight-bold btn-sm dz-clickable">View files</a>
-																					<a class="dropzone-select btn btn-light-primary font-weight-bold btn-sm dz-clickable">View files</a>
-																					<a class="dropzone-select btn btn-light-primary font-weight-bold btn-sm dz-clickable">View files</a>
+																					<!-- <a class="dropzone-select btn btn-light-primary font-weight-bold btn-sm dz-clickable">View files</a> -->
+																					<a  class="dropzone-select btn btn-light-primary font-weight-bold btn-sm dz-clickable">{{$val -> status}}</a>
 																		</div>
 																	</div>
 																	<div>
 																	<!--end::Subject-->
-															</div>
 															<!--end::Body-->
 													</form>
 													<!--end::Form-->
