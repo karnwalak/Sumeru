@@ -17,6 +17,7 @@ use App\Http\Controllers\CrmContactController;
 use App\Http\Controllers\HrAllowenceController;
 use App\Http\Controllers\HrEmployeesController;
 use App\Http\Controllers\HrTaskController;
+use App\Http\Controllers\HrDailyReportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +41,10 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
     Route::group(['middleware' => 'admin_auth'],function(){
         //inv
         Route::view('admin/ERP/dashboard','admin/ERP/dashboard');
+        Route::view('admin/ERP/viewrequest','admin/ERP/viewrequest');
+        Route::view('admin/ERP/purchaseorderrequest','admin/ERP/purchaseorderrequest');
+        Route::view('admin/ERP/editrequest','admin/ERP/editrequest');
+        Route::view('admin/ERP/addrequest','admin/ERP/addrequest');
         Route::view('admin/ERP/materialdashboard','admin/ERP/materialdashboard');
         // Route::view('admin/ERP/addseller','admin/ERP/addseller');
         Route::get('admin/ERP/addseller/{st}',[SellerController::class,'dataSeller']);
@@ -184,11 +189,21 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/HR/deleteemployee/{id}',[HrEmployeesController::class,'delete']);
         Route::post('admin/HR/editshift',[HrShiftController::class,'editshift']);
         Route::get('admin/HR/employeeprofile/{id}',[HrEmployeesController::class,'profile']);
+        Route::view('admin/HR/viewtasks','admin/HR/viewtasks');
+        // Route::view('admin/HR/dailyreports','admin/HR/dailyreports');
+        Route::view('admin/HR/adddailyreports','admin/HR/adddailyreports');
+        Route::get('admin/HR/viewdailyreports/{id}',[HrDailyReportController::class,'viewdailyreports']);
+        Route::get('admin/HR/editdailyreports/{id}',[HrDailyReportController::class,'editdailyreports']);
+        Route::get('admin/HR/dailyreports',[HrDailyReportController::class,'show']);
+        Route::POST('admin/HR/addreport',[HrDailyReportController::class,'addreport']);
+        Route::POST('admin/HR/editreport',[HrDailyReportController::class,'editreport']);
+        
         // Route::view('admin/HR/employees','admin/HR/employees');
         // Route::view('admin/HR/hrdesignation','admin/HR/hrdesignation');
         // Route::view('admin/HR/shifts','admin/HR/shifts');
         // Route::view('admin/HR/tasksandprojects','admin/HR/tasksandprojects');
-        Route::view('admin/HR/viewtasks','admin/HR/viewtasks');
+       
+        
         /****************************************************CRM*****************************************************************/
         Route::view('admin/CRM/crmdashboard','admin/CRM/crmdashboard');
         Route::get('admin/CRM/cashcredit',[CrmBookingController::class,'showpayment']);
@@ -230,6 +245,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         /*******************************************************FINANCE************************************************************/
         Route::view('admin/FINANCE/financedashboard','admin/FINANCE/financedashboard');
         Route::get('admin/FINANCE/editemployees/{id}',[FinanceEmployeeController::class,'editemployees']);
+        Route::view('admin/FINANCE/dailycashincentive','admin/FINANCE/dailycashincentive');
         Route::post('admin/FINANCE/editemployee',[FinanceEmployeeController::class,'editdata']);
         Route::get('admin/FINANCE/addtransactionsemployee/{id}',[FinanceEmployeeController::class,'addtransactionsemployee']);
         Route::Post('admin/FINANCE/searchorder',[FinancePurchaseController::class,'searchorder']);
