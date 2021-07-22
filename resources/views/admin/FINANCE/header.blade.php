@@ -263,7 +263,7 @@
 										</li>
 										<li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
 											<a href="javascript:;" class="menu-link menu-toggle">
-												<span class="menu-text">CRM</span>
+												<span class="menu-text">CRM & Sales</span>
 												<span class="menu-desc"></span>
 												<i class="menu-arrow"></i>
 											</a>
@@ -410,7 +410,7 @@
 												</ul>
 											</div>
 										</li>
-										<li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
+										<!-- <li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
 											<a href="javascript:;" class="menu-link menu-toggle">
 												<span class="menu-text">Sales</span>
 												<span class="menu-desc"></span>
@@ -421,7 +421,7 @@
 													<li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
 														<a href="javascript:;" class="menu-link menu-toggle">
 															<span class="svg-icon menu-icon">
-																<!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Communication/Add-user.svg-->
+																begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Communication/Add-user.svg
 																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 																	width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 																	<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -434,7 +434,7 @@
 																			fill="#000000" fill-rule="nonzero" />
 																	</g>
 																</svg>
-																<!--end::Svg Icon-->
+																end::Svg Icon
 															</span>
 															<span class="menu-text">Flat Inventory</span>
 															<i class="menu-arrow"></i>
@@ -535,7 +535,7 @@
 													<li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
 														<a href="javascript:;" class="menu-link menu-toggle">
 															<span class="svg-icon menu-icon">
-																<!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Files/Pictures1.svg-->
+																begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Files/Pictures1.svg
 																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 																	width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 																	<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -550,7 +550,7 @@
 																			fill="#000000" opacity="0.3" />
 																	</g>
 																</svg>
-																<!--end::Svg Icon-->
+																end::Svg Icon
 															</span>
 															<span class="menu-text">Stock Inventory</span>
 															<i class="menu-arrow"></i>
@@ -667,7 +667,7 @@
 													<li class="menu-item" aria-haspopup="true">
 														<a href="builder.html" class="menu-link">
 															<span class="svg-icon menu-icon">
-																<!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Home/Library.svg-->
+																begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Home/Library.svg
 																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 																	width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 																	<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -680,14 +680,14 @@
 																			x="16.3255682" y="2.94551858" width="3" height="18" rx="1" />
 																	</g>
 																</svg>
-																<!--end::Svg Icon-->
+																end::Svg Icon
 															</span>
 															<span class="menu-text">Layout Builder</span>
 														</a>
 													</li>
 												</ul>
 											</div>
-										</li>
+										</li> -->
 										
 									</ul>
 									<!--end::Header Nav-->

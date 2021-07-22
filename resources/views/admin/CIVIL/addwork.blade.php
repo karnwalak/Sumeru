@@ -3,28 +3,35 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-	<meta charset="utf-8" />
+<meta charset="utf-8" />
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!--begin::Fonts-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 	<!--end::Fonts-->
-	<!--begin::Page Vendors Styles(used by this page)-->
 	<link href="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.css?v=7.2.8"
-		rel="stylesheet" type="text/css" />
+	rel="stylesheet" type="text/css" />
 	<link href="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.css?v=7.2.8" rel="stylesheet"
-		type="text/css" />
+	type="text/css" />
 	<!--end::Page Vendors Styles-->
 	<!--begin::Global Theme Styles(used by all pages)-->
 	<link href="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.css?v=7.2.8" rel="stylesheet"
-		type="text/css" />
+	type="text/css" />
 	<link href="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.css?v=7.2.8" rel="stylesheet"
-		type="text/css" />
+	type="text/css" />
 	<link href="/../theme/html/demo4/dist/assets/css/style.bundle49d8.css?v=7.2.8" rel="stylesheet" type="text/css" />
 	<!--end::Global Theme Styles-->
-	<link rel="shortcut icon" href="/../img/icon.jpg" />
 	<!--begin::Layout Themes(used by all pages)-->
+	<link rel="shortcut icon" href="/../img/icon.jpg" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
+	<!--end::Global Theme Styles-->
+	<!--begin::Layout Themes(used by all pages)-->
+	<style>
+		#kt_content{
+			overflow-x:hidden;
+		}
+	</style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -84,13 +91,14 @@
 				<div class="aside-brand d-flex flex-column align-items-center flex-column-auto py-4 py-lg-8">
 					<!--begin::Logo-->
 					<a href="../ERP/dashboard">
-						<img alt="Logo" src="/../img/logoicon.png" class="max-h-30px" />
-					</a>
+			<img alt="Logo" src="/../img/logoicon.png"
+				class="logo-default max-h-30px" />
+		</a>
 					<!--end::Logo-->
 				</div>
 				<!--end::Brand-->
 				<!--begin::Nav Wrapper-->
-					@include('admin/sidebar')
+			    @include('admin/sidebar')
 				<!--end::Nav Wrapper-->
 				<!--begin::Footer-->
 				<div class="aside-footer d-flex flex-column align-items-center flex-column-auto py-8">
@@ -120,178 +128,108 @@
 			<!--begin::Wrapper-->
 			<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 				<!-- add header -->
-				@include('admin/ERP/header')
+				@include('admin/CIVIL/header')
 				<!-- add header end -->
+				<!--begin::Toolbar-->
+				<div class="row" style="display:grid;place-items:end;margin:5px 20px">
+					<!--begin::Button-->
+					<a href="works" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
+					<!--end::Button-->
+				</div>
+				<!--end::Toolbar-->
 				<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						<!--begin::Subheader-->
-						<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
-						</div>
-						<!--end::Subheader-->
-						<!--begin::Entry-->
-						<div class="d-flex flex-column-fluid">
-							<!--begin::Container-->
-							<div class="container">
-								<!--begin::Row-->
-								<div class="row">									
-									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-										<div class="card card-custom card-stretch gutter-b">
-											<!--begin::Body-->
-											<div class="card-body text-center pt-4">
-												<!--begin::Toolbar-->
-												<div class="d-flex justify-content-end">
-												</div>
-												<!--end::Toolbar-->
-												<!--begin::User-->
-												<div class="mt-0">
-													<div class="symbol symbol-circle symbol-lg-90">
-														<img src="/../theme/html/demo4/dist/assets/media/project-logos/2.png" alt="image" />
-													</div>
-												</div>
-												<!--end::User-->
-												<!--begin::Name-->
-												<div class="my-0">
-													<a href="../CRM/crmdashboard" class="text-dark font-weight-bold text-hover-primary font-size-h4">CRM & Sales</a>
-												</div>
-												<!--end::Name-->
+				<div class="row justify-content-center" id="msg"></div>
+				<form id="form">
+				{{@csrf_field()}}
+					<div class="row">
+						<div class="col-md-6 col-12" >
+						    <input type="hidden" name="admin_id" value="{{session() -> get('id')}}">
+							<div class="show" id="kt_inbox_compose" data-backdrop="false" style="display: block; padding-left: 0px;" aria-modal="true" role="dialog">
+									<div class="modal-dialog" role="document">
+											<div class="modal-content">
+													<!--begin::Form-->
+													
+															<!--begin::Header-->
+															<div class="d-flex align-items-center justify-content-between py-5 pl-8 pr-5 border-bottom">
+																	<h5 class="font-weight-bold m-0">Add Work</h5>
+															</div>
+															<!--end::Header-->
+															<!--begin::Body-->
+															<div class="d-block">
+																	<!--begin::Subject-->
+																	<div class="border-bottom">
+																		<div class="d-flex align-items-center">
+																			<input class="form-control border-0 px-8 min-h-45px" name="compose_subject" placeholder="What's on your mind.">
+																			<span class="field_error text-danger" id="compose_subject_error"></span>
+																		</div>
+																	</div>
+																	<!--end::Subject-->
+																	<div id="">
+																	   <textarea type="text" name="message" class="form-control border-0 px-8 min-h-45px" id="editor" ></textarea>
+																	   <span class="text-danger field_error" id="message_error"></span>
+																	</div>
+															</div>
+															<!--end::Body-->
 											</div>
-											<!--end::Body-->
-										</div>
-									</div>									
-									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-										<div class="card card-custom card-stretch gutter-b">
-											<!--begin::Body-->
-											<div class="card-body text-center pt-4">
-												<!--begin::Toolbar-->
-												<div class="d-flex justify-content-end">
-												</div>
-												<!--end::Toolbar-->
-												<!--begin::User-->
-												<div class="mt-0">
-													<div class="symbol symbol-circle symbol-lg-90">
-														<img src="/../theme/html/demo4/dist/assets/media/project-logos/2.png" alt="image" />
-													</div>
-												</div>
-												<!--end::User-->
-												<!--begin::Name-->
-												<div class="my-0">
-													<a href="materialdashboard" class="text-dark font-weight-bold text-hover-primary font-size-h4">Inventory Management</a>
-												</div>
-												<!--end::Name-->
-											</div>
-											<!--end::Body-->
-										</div>
 									</div>
-								</div>
-								<!--end::Row-->
-								<!--begin::Row-->
-								<div class="row">									
-									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-										<div class="card card-custom card-stretch gutter-b">
-											<!--begin::Body-->
-											<div class="card-body text-center pt-4">
-												<!--begin::Toolbar-->
-												<div class="d-flex justify-content-end">
-												</div>
-												<!--end::Toolbar-->
-												<!--begin::User-->
-												<div class="mt-0">
-													<div class="symbol symbol-circle symbol-lg-90">
-														<img src="/../theme/html/demo4/dist/assets/media/project-logos/2.png" alt="image" />
-													</div>
-												</div>
-												<!--end::User-->
-												<!--begin::Name-->
-												<div class="my-0">
-													<a href="../CIVIL/workers" class="text-dark font-weight-bold text-hover-primary font-size-h4">Civil</a>
-												</div>
-												<!--end::Name-->
-											</div>
-											<!--end::Body-->
-										</div>
-									</div>									
-									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-										<div class="card card-custom card-stretch gutter-b">
-											<!--begin::Body-->
-											<div class="card-body text-center pt-4">
-												<!--begin::Toolbar-->
-												<div class="d-flex justify-content-end">
-												</div>
-												<!--end::Toolbar-->
-												<!--begin::User-->
-												<div class="mt-0">
-													<div class="symbol symbol-circle symbol-lg-90">
-														<img src="/../theme/html/demo4/dist/assets/media/project-logos/2.png" alt="image" />
-													</div>
-												</div>
-												<!--end::User-->
-												<!--begin::Name-->
-												<div class="my-0">
-													<a href="../FINANCE/financedashboard" class="text-dark font-weight-bold text-hover-primary font-size-h4">Financial Management</a>
-												</div>
-												<!--end::Name-->
-											</div>
-											<!--end::Body-->
-										</div>
-									</div>
-								</div>
-								<!--end::Row-->
-								<!--begin::Row-->
-								<div class="row">									
-									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-										<div class="card card-custom card-stretch gutter-b">
-											<!--begin::Body-->
-											<div class="card-body text-center pt-4">
-												<!--begin::Toolbar-->
-												<div class="d-flex justify-content-end">
-												</div>
-												<!--end::Toolbar-->
-												<!--begin::User-->
-												<div class="mt-0">
-													<div class="symbol symbol-circle symbol-lg-90">
-														<img src="/../theme/html/demo4/dist/assets/media/project-logos/2.png" alt="image" />
-													</div>
-												</div>
-												<!--end::User-->
-												<!--begin::Name-->
-												<div class="my-0">
-													<a href="../HR/hrdashboard" class="text-dark font-weight-bold text-hover-primary font-size-h4">HR & Payroll Management</a>
-												</div>
-												<!--end::Name-->
-											</div>
-											<!--end::Body-->
-										</div>
-									</div>									
-									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-										<div class="card card-custom card-stretch gutter-b">
-											<!--begin::Body-->
-											<div class="card-body text-center pt-4">
-												<!--begin::Toolbar-->
-												<div class="d-flex justify-content-end">
-												</div>
-												<!--end::Toolbar-->
-												<!--begin::User-->
-												<div class="mt-0">
-													<div class="symbol symbol-circle symbol-lg-90">
-														<img src="/../theme/html/demo4/dist/assets/media/project-logos/2.png" alt="image" />
-													</div>
-												</div>
-												<!--end::User-->
-												<!--begin::Name-->
-												<div class="my-0">
-													<a href="project_management" class="text-dark font-weight-bold text-hover-primary font-size-h4">Projtect Management</a>
-												</div>
-												<!--end::Name-->
-											</div>
-											<!--end::Body-->
-										</div>
-									</div>
-								</div>
-								<!--end::Row-->
 							</div>
-							<!--end::Container-->
 						</div>
-						<!--end::Entry-->
+						<div class="col-md-6 col-12">
+							<div class="row" style="margin: 25px; justify-content:center;">
+								<input type="checkbox" id="priority" name="priority" value="high" style="margin: 2px;margin-bottom: 8px;!important">
+								<label for="priority">High Priority</label>
+							</div>
+                            <div class="row" style="margin:2em;">
+								<p style="font-size:20px;"><b>Inventory Access</b></p><br>
+							</div>
+                            <div class="row" style="margin: 25px;">
+								<input type="radio" name="inventory_access" value="yes" style="margin: 2px;margin-bottom: 8px;!important"> Yes
+								<input type="radio" name="inventory_access" value="no" style="margin: 2px;margin-bottom: 8px;!important"> No
+							</div>
+                            <div class="row" style="margin:2em;">
+								<p style="font-size:20px;"><b>Payment</b></p><br>
+							</div>
+                            <div class="row" style="margin: 25px;">
+								<input type="text" id="payment" class="form-control" name="payment" style="margin: 2px;margin-bottom: 8px;!important">
+							</div>
+							<div class="row" style="margin:2em;">
+								<p style="font-size:20px;"><b>Responsible Person</b></p><br>
+							</div>
+							<div class="row" style="margin:2em;">
+								<select id="myselect" class="form-select form-select-lg mb-3" name="responsible_person[]" multiple aria-label=".form-select-lg example" style="width:100%;background-color:transparent;border:1px solid black;border-radius:5px;height:40px;">
+										<option value="">Open this select menu</option>
+										
+								</select>
+								<span class="field_error text-danger" id="responsible_person_error"></span>
+							</div>
+							<div class="row" style="margin:2em;">
+								<p style="font-size:20px;"><b>Deadline</b></p><br>
+							</div>
+							<div class="row" style="margin:2em;">
+								<input type="datetime-local" value="<?php echo date("F j, Y, g:i a"); ?>" class="form-control form-control-solid form-control-lg" name="deadline" />
+								<span class="field_error text-danger" id="deadline_error"></span>
+							</div>
+							<div class="row" style="margin:2em;">
+							<p style="font-size:20px;"><b>Status</b></p><br>
+                              <select class="form-control" name="status" id="">
+							    <option value="">Select</option>
+								<option value="Pending">Pending</option>
+								<option value="Ongoing">Ongoing</option>
+								<option value="Complete">Complete</option>
+							  </select>
+							  <span class="field_error text-danger" id="status_error"></span>
+							</div>
+							<div class="row" style="display: grid;place-items: end;margin: 25px;">
+								<!--begin::Dropdown-->
+								<div class="btn-group ml-2">
+									<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
+								</div>
+								<!--end::Dropdown-->
+							</div>
+						</div>
 					</div>
+				</form>
+				</div>
 				<!--begin::Footer-->
 				@include('admin/footer')
 				<!--end::Footer-->
@@ -396,7 +334,58 @@
 	<!--end::Page Vendors-->
 	<!--begin::Page Scripts(used by this page)-->
 	<script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
+	<script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+	<script>
+			CKEDITOR.replace( 'editor', { fullPage : false, bodyId : 'editor'});
+	</script>
 	<!--end::Page Scripts-->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#form").submit(function(e){
+        e.preventDefault();
+        $('.field_error').html('');
+		for (instance in CKEDITOR.instances) {
+        CKEDITOR.instances[instance].updateElement();
+        };
+           $.ajax({
+                url: '../CIVIL/addwork',
+                method:"POST",
+                data:$('#form').serialize(),
+                dataType:'JSON',
+                success:function(result) {
+                  if (result.status == 'error') {
+					$('#msg').html("<div class='col-md-4 alert alert-danger alert-block'><strong>"+result.error+"</strong></div>");
+                  $.each(result.error,function(key,val){
+                  // console.log(key);
+                  // console.log(val);
+                  $('#'+key+'_error').html(val[0]);
+                  })
+                  }else if(result.status == 'success'){
+                  $('#form')[0].reset();
+                  $('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
+                  setTimeout(function(){
+                   window.location.href = '../CIVIL/works'; 
+                 }, 1000);
+                }   
+                },
+             complete:function(){
+          		$('body, html').animate({scrollTop:$('form').offset().top}, 'slow');
+        	}
+           });
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+<script>
+$('#myselect').select2({
+	width: '100%',
+	placeholder: "Select an Option",
+	allowClear: true
+});
+</script>
+
 </body>
 <!--end::Body-->
 

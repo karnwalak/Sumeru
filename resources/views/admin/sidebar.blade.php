@@ -42,6 +42,14 @@
 							</a>
 						</li>
 						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="nav-item mb-5" data-toggle="tooltip" data-placement="right" data-container="body"
+							data-boundary="window" title="Civil">
+							<a href="../CIVIL/workers" class="nnav-link btn btn-icon btn-icon-white btn-lg">
+								<i class="flaticon2-user	icon-2x"></i>
+							</a>
+						</li>
+						<!--end::Item-->
 					</ul>
 					<!--end::Nav-->
 				</div>

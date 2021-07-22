@@ -271,6 +271,13 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/FINANCE/bookingcredit',[BookingCreditController::class,'showdata']);
         /*******************************************************CIVIL************************************************************/
         Route::view('admin/CIVIL/workers','admin/CIVIL/workers');
+        Route::view('admin/CIVIL/addworkers','admin/CIVIL/addworkers');
+        Route::view('admin/CIVIL/editworker','admin/CIVIL/editworker');
+        Route::view('admin/CIVIL/works','admin/CIVIL/works');
+        Route::view('admin/CIVIL/addwork','admin/CIVIL/addwork');
+        Route::view('admin/CIVIL/viewwork','admin/CIVIL/viewwork');
+        Route::view('admin/CIVIL/editwork','admin/CIVIL/editwork');
+        Route::view('admin/CIVIL/workerprofile','admin/CIVIL/workerprofile');
         Route::get('admin/logout', function () {
         session()->flush();
         return redirect('/');

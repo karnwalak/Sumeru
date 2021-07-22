@@ -6,32 +6,46 @@
 	<meta charset="utf-8" />
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<!--begin::Fonts-->
+    <meta name="viewport" content="width=d<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-	<!--end::Fonts-->
-	<!--begin::Page Vendors Styles(used by this page)-->
+	<meta charset="utf-8" />
+	<title>ERP</title>
+	<meta name="description" content="Updates and statistics" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Page Vendors Styles(used by this page)-->
 	<link href="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.css?v=7.2.8"
-		rel="stylesheet" type="text/css" />
+	rel="stylesheet" type="text/css" />
 	<link href="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.css?v=7.2.8" rel="stylesheet"
-		type="text/css" />
+	type="text/css" />
 	<!--end::Page Vendors Styles-->
 	<!--begin::Global Theme Styles(used by all pages)-->
 	<link href="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.css?v=7.2.8" rel="stylesheet"
-		type="text/css" />
+	type="text/css" />
 	<link href="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.css?v=7.2.8" rel="stylesheet"
-		type="text/css" />
+	type="text/css" />
 	<link href="/../theme/html/demo4/dist/assets/css/style.bundle49d8.css?v=7.2.8" rel="stylesheet" type="text/css" />
 	<!--end::Global Theme Styles-->
 	<!--begin::Layout Themes(used by all pages)-->
 	<link rel="shortcut icon" href="/../img/icon.jpg" />
-	<script src="https://use.fontawesome.com/ee1148104a.js"></script>
-	<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<!--end::Global Theme Styles-->
+	<!--begin::Layout Themes(used by all pages)-->	
+	<style>
+	#button{
+		height:30px;
+		width:80px;
+		border:none;
+		border-radius:5px;
+		background:green;
+		color:white;
+	}
+	</style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -91,7 +105,8 @@
 				<div class="aside-brand d-flex flex-column align-items-center flex-column-auto py-4 py-lg-8">
 					<!--begin::Logo-->
 					<a href="../ERP/dashboard">
-						<img alt="Logo" src="/../img/logoicon.png" class="max-h-30px" />
+						<img alt="Logo" src="/../img/logoicon.png"
+							class="logo-default max-h-30px" />
 					</a>
 					<!--end::Logo-->
 				</div>
@@ -129,126 +144,144 @@
 				<!-- add header -->
 				@include('admin/CIVIL/header')
 				<!-- add header end -->
-				<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						<!--begin::Subheader-->
-						<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
-							<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-								<!--begin::Details-->
-								<div class="d-flex align-items-center flex-wrap mr-2">
-									<!--begin::Title-->
-									<!-- <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Products</h5> -->
-									<!--end::Title-->
-									<!--begin::Separator-->
-									<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
-									<!--end::Separator-->
-									<!--begin::Group Actions-->
-									<div class="d-flex- align-items-center flex-wrap mr-2 d-none" id="kt_subheader_group_actions">
-										<div class="text-dark-50 font-weight-bold">
-										<span id="kt_subheader_group_selected_rows">23</span>Selected:</div>
-										<div class="d-flex ml-6">
-											<div class="dropdown mr-2" id="kt_subheader_group_actions_status_change">
-												<button type="button" class="btn btn-light-primary font-weight-bolder btn-sm dropdown-toggle" data-toggle="dropdown">Update Status</button>
-												<div class="dropdown-menu p-0 m-0 dropdown-menu-sm">
-													<ul class="navi navi-hover pt-3 pb-4">
-														<li class="navi-header font-weight-bolder text-uppercase text-primary font-size-lg pb-0">Change status to:</li>
-														<li class="navi-item">
-															<a href="#" class="navi-link" data-toggle="status-change" data-status="1">
-																<span class="navi-text">
-																	<span class="label label-light-success label-inline font-weight-bold">Approved</span>
-																</span>
-															</a>
-														</li>
-														<li class="navi-item">
-															<a href="#" class="navi-link" data-toggle="status-change" data-status="2">
-																<span class="navi-text">
-																	<span class="label label-light-danger label-inline font-weight-bold">Rejected</span>
-																</span>
-															</a>
-														</li>
-														<li class="navi-item">
-															<a href="#" class="navi-link" data-toggle="status-change" data-status="3">
-																<span class="navi-text">
-																	<span class="label label-light-warning label-inline font-weight-bold">Pending</span>
-																</span>
-															</a>
-														</li>
-														<li class="navi-item">
-															<a href="#" class="navi-link" data-toggle="status-change" data-status="4">
-																<span class="navi-text">
-																	<span class="label label-light-info label-inline font-weight-bold">On Hold</span>
-																</span>
-															</a>
-														</li>
-													</ul>
-												</div>
+					<!--begin::Content-->
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+							<!--begin::Subheader-->
+							<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
+									<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+											<!--begin::Details-->
+											<div class="d-flex align-items-center flex-wrap mr-2">
+													<!--begin::Title-->
+													<!-- <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Employees</h5> -->
+													<!--end::Title-->
+													<!--begin::Separator-->
+													<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
+													<!--end::Separator-->
+													<!--begin::Group Actions-->
+													<div class="d-flex- align-items-center flex-wrap mr-2 d-none" id="kt_subheader_group_actions">
+															<div class="text-dark-50 font-weight-bold">
+																	<span id="kt_subheader_group_selected_rows">23</span>Selected:
+															</div>
+															<div class="d-flex ml-6">
+																	<div class="dropdown mr-2" id="kt_subheader_group_actions_status_change">
+																			<button type="button" class="btn btn-light-primary font-weight-bolder btn-sm dropdown-toggle" data-toggle="dropdown">Update Status</button>
+																			<div class="dropdown-menu p-0 m-0 dropdown-menu-sm">
+																					<ul class="navi navi-hover pt-3 pb-4">
+																							<li class="navi-header font-weight-bolder text-uppercase text-primary font-size-lg pb-0">Change status to:</li>
+																							<li class="navi-item">
+																									<a href="#" class="navi-link" data-toggle="status-change" data-status="1">
+																									<span class="navi-text">
+																									<span class="label label-light-success label-inline font-weight-bold">Approved</span>
+																									</span>
+																									</a>
+																							</li>
+																							<li class="navi-item">
+																									<a href="#" class="navi-link" data-toggle="status-change" data-status="2">
+																									<span class="navi-text">
+																									<span class="label label-light-danger label-inline font-weight-bold">Rejected</span>
+																									</span>
+																									</a>
+																							</li>
+																							<li class="navi-item">
+																									<a href="#" class="navi-link" data-toggle="status-change" data-status="3">
+																									<span class="navi-text">
+																									<span class="label label-light-warning label-inline font-weight-bold">Pending</span>
+																									</span>
+																									</a>
+																							</li>
+																							<li class="navi-item">
+																									<a href="#" class="navi-link" data-toggle="status-change" data-status="4">
+																									<span class="navi-text">
+																									<span class="label label-light-info label-inline font-weight-bold">On Hold</span>
+																									</span>
+																									</a>
+																							</li>
+																					</ul>
+																			</div>
+																	</div>
+																	<button class="btn btn-light-success font-weight-bolder btn-sm mr-2" id="kt_subheader_group_actions_fetch" data-toggle="modal" data-target="#kt_datatable_records_fetch_modal">Fetch Selected</button>
+																	<button class="btn btn-light-danger font-weight-bolder btn-sm mr-2" id="kt_subheader_group_actions_delete_all">Delete All</button>
+															</div>
+													</div>
+													<!--end::Group Actions-->
 											</div>
-											<button class="btn btn-light-success font-weight-bolder btn-sm mr-2" id="kt_subheader_group_actions_fetch" data-toggle="modal" data-target="#kt_datatable_records_fetch_modal">Fetch Selected</button>
-											<button class="btn btn-light-danger font-weight-bolder btn-sm mr-2" id="kt_subheader_group_actions_delete_all">Delete All</button>
-										</div>
+											<!--end::Details-->
+											<!--begin::Toolbar-->
+											<div class="d-flex align-items-center">
+													<!--begin::Button-->
+													<a href="/metronic/demo4/.html" class=""></a>
+													<!--end::Button-->
+													<!--begin::Button-->
+													<!--end::Button-->
+											</div>
+											<!--end::Toolbar-->
 									</div>
-									<!--end::Group Actions-->
-								</div>
-								<!--end::Details-->
-								<!--begin::Toolbar-->
-								<div class="d-flex align-items-center">
-									<!--begin::Button-->
-									<a href="/..//..//../.html" class=""></a>
-									<!--end::Button-->
-									<!--begin::Button-->
-
-									<!--end::Button-->
-								</div>
-								<!--end::Toolbar-->
 							</div>
-						</div>
-						<!--end::Subheader-->
-						<!--begin::Entry-->
-						<div class="d-flex flex-column-fluid">
-							<!--begin::Container-->
-							<div class="container">
-							<div class="row p-3 justify-content-center">
-							@if ($message = Session::get('success'))
-							<div class="col-md-6 alert alert-primary alert-block">
-								<button type="button" class="close" data-dismiss="alert">×</button>    
-								<strong>{{ $message }}</strong>
-							</div>
-							@endif
-							@if ($message = Session::get('error'))
-							<div class="col-md-6 alert alert-danger alert-block">
-								<button type="button" class="close" data-dismiss="alert">×</button>    
-								<strong>{{ $message }}</strong>
-							</div>
-							@endif
-								<!--begin::Card-->
-								<div class="card card-custom">
-									<!--begin::Header-->
-									<div class="card-header flex-wrap border-0 pt-6 pb-0">
-										<div class="card-title">
-											<h3 class="card-label">Workers</h3>
-										</div>
-
-										<div class="row" style="display:grid;place-items:end;padding:10px 15px;">
-												<a href="../CIVIL/addworkers" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Add a Worker</a>
+							<!--end::Subheader-->
+							<!--begin::Entry-->
+							<div class="d-flex flex-column-fluid">
+									<!--begin::Container-->
+									<div class="container">
+											<!--begin::Card-->
+											<div class="card card-custom">
+												<div class="row" style="justify-content:center;">
+														<ul class="nav nav-pills" id="myTab" role="tablist">
+																<li>
+																		<div class="col-md-3 col-6" style="padding:20px 0px 20px 20px;">
+																				<a href="work/{{'mywork'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">My Works</a>
+																		</div>
+																</li>
+																<li>
+																		<div class="col-md-3 col-6" style="padding:20px 0px;">
+																				<a href="work/{{'ongoing'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">On Going</a>
+																		</div>
+																</li>
+																<li>
+																		<div class="col-md-3 col-6" style="padding:20px 0px;">
+																				<a href="work/{{'setbyme'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Set By Me</a>
+																		</div>
+																</li>
+																<li>
+																		<div class="col-md-3 col-6" style="padding:20px 0px;">
+																				<a href="work/{{'assisting'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Assisting</a>
+																		</div>
+																</li>
+														</ul>
 												</div>
-									</div>
-									<!--end::Header-->
-									<!--begin::Body-->
-									<div class="card-body">
+													<!--begin::Header-->
+													<div class="card-header flex-wrap border-0 pt-6 pb-0">
+															<div class="card-title">
+																	<h3 class="card-label">Works
+																			<!-- <span class="d-block text-muted pt-2 font-size-sm">User management made easy</span> -->
+																	</h3>
+															</div>
+															<div class="card-toolbar">
+																	<!--begin::Button-->
+																	<a href="addwork" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Assign Work</a>
+																	<!--end::Button-->
+															</div>
+													</div>
+													<!--end::Header-->
+													<!--begin::Body-->
+
+
+													<div class="card-body">
 											<!--begin: Datatable-->
 
 
-									<div class="card card-custom gutter-b">
+											<div class="card card-custom gutter-b">
 										<div class="card-body">
 											<!--begin: Search Form-->
 											<!--begin::Search Form-->
-										    <!-- <form action="search" method="post"> 
+											<form action="serachtask" method="post">
+											{{@csrf_field()}}
 											<div class="mb-7">
 												<div class="row align-items-center">
 													<div class="col-lg-7 col-xl-7">
 														<div class="row align-items-center">
 															<div class="col-md-5 my-2 my-md-0">
 																<div class="input-icon">
-																	<input type="text" class="form-control" name="seller_name" placeholder="Search..." id="kt_datatable_search_query">
+																	<input type="text" name="task" class="form-control" placeholder="Search..." id="kt_datatable_search_query">
 																	<span>
 																	<i class="flaticon2-search-1 text-muted"></i>
 																	</span>
@@ -260,8 +293,9 @@
 																	<div class="col-lg-8 col-md-8	 col-sm-12" data-select2-id="242">
 																		<select class="form-control" id="kt_select2_1" name="status">
 																			<option value="">Select</option>
-																			<option value="Active">Active</option>
-																			<option value="Inactive">Inactive</option>
+																			<option value="pending">Pending</option>
+																			<option value="ongoing">Ongoing</option>
+																			<option value="complete">Complete</option>
 																		</select>
 																	</div>
 																</div>
@@ -273,7 +307,7 @@
 													</div>
 												</div>
 											</div>
-											</form> -->
+											</form>
 											<!--end::Search Form-->
 											<!--end: Search Form-->
 											<!--begin: Selected Rows Group Action Form-->
@@ -310,63 +344,47 @@
 											</div>
 											<!--end: Selected Rows Group Action Form-->
 											<!--begin: Datatable-->
-											<div>
-												<table class="yajra">
+											<div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable" style="">
+												<table class="datatable-table" style="display: block;">
 													<thead class="datatable-head">
 														<tr class="datatable-row" style="left: 0px;">
 															<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
-															<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">S No.</span></th>
-															<th data-field="Name" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Name</span></th>
-															<th data-field="Address" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Address</span></th>
-															<th data-field="Contact" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Contact</span></th>
-															<th data-field="Email" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Email</span></th>
-															<th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Status</span></th>
+															<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
+															<th data-field="TaskName" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Work</span></th>
+															<th data-field="Active" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Active</span></th>
+															<th data-field="Deadline" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Deadline</span></th>
+															<th data-field="CreatedBy" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Created By</span></th>
+															<th data-field="Responsible" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Responsible</span></th>
+															<th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Status</span></th>
 															<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 170px;">Actions</span></th>
 														</tr>
 													</thead>
 													<tbody class="datatable-body" style="">
-														<tr data-row="1" class="datatable-row datatable-row-even" style="left: 0px;">
+														<tr data-row="0" class="datatable-row" style="left: 0px;">
 															<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
-															<td data-field="Sno" aria-label="" class="datatable-cell"><span style="width: 120px;">1</span></td>
-															<td data-field="Name" aria-label="" class="datatable-cell"><span style="width: 120px;">AKSHAY KUMAR</span></td>
-															<td data-field="Address" aria-label="" class="datatable-cell"><span style="width: 120px;">SAHARANPUR</span></td>
-															<td data-field="Contact" aria-label="" class="datatable-cell"><span style="width: 120px;">9568936879</span></td>
-															<td data-field="Email" aria-label="" class="datatable-cell"><span style="width: 120px;">karnwalakshay7@gmail.com</span></td>
-															<td data-field="Status" aria-label="5" class="datatable-cell">
-															   <button class="btn btn-success statuschange" id="" href="">Active</button>
-														    </td>
+															<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">1</span></td>
+															<td data-field="Name" aria-label="Flooring" class="datatable-cell"><span style="width: 100px;">Report preperation</span></td>
+															<td data-field="Active" aria-label="09876543212" class="datatable-cell"><span style="width: 100px;">09876543212</span></td>
+															<td data-field="Deadline" aria-label="06/2/2024" class="datatable-cell"><span style="width: 100px;">today</span></td>
+															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">Me</span></td>
+															<td data-field="Responsible" aria-label="Akash Rikh" class="datatable-cell"><span style="width: 100px;">XYZ</span></td>
+															<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value="Active" style="color:white" onclick="setColor(event, 'button', '#101010')"; data-count="1" /></span></td>
 															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																<span style="width: 100px;">
-																	 <a href="works"><i class="fa fa-cog"></i></a>
-																	 <a href="workerprofile"><i class="fa fa-eye"></i></a>
-																	 <a onclick="return confirm('Are you sure?')" href="workerdelete"><i class="fa fa-trash"></i></a>
-																	 <a href="editworker"><i class="fa fa-pencil"></i></a>
+																<span style="overflow: visible; position: relative; width: 170px;">
+																	<a href="viewwork" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
+																		<span class="svg-icon svg-icon-md">
+																		<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
+																		</span>
+																	</a>
 																</span>
 															</td>
 														</tr>
-														<tr data-row="1" class="datatable-row datatable-row-even" style="left: 0px;">
-															<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
-															<td data-field="Sno" aria-label="" class="datatable-cell"><span style="width: 120px;">2</span></td>
-															<td data-field="Name" aria-label="" class="datatable-cell"><span style="width: 120px;">ANUJ KUMAR</span></td>
-															<td data-field="Address" aria-label="" class="datatable-cell"><span style="width: 120px;">Meerut</span></td>
-															<td data-field="Contact" aria-label="" class="datatable-cell"><span style="width: 120px;">9068689609</span></td>
-															<td data-field="Email" aria-label="" class="datatable-cell"><span style="width: 120px;">karnwalanuj@gmail.com</span></td>
-															<td data-field="Status" aria-label="5" class="datatable-cell">
-															   <button class="btn btn-success statuschange" id="" href="">Active</button>
-														    </td>
-															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																<span style="width: 100px;">
-																	 <a href="works"><i class="fa fa-cog"></i></a>
-																	 <a href="workerprofile"><i class="fa fa-eye"></i></a>
-																	 <a onclick="return confirm('Are you sure?')" href="workerdelete"><i class="fa fa-trash"></i></a>
-																	 <a href="editworker"><i class="fa fa-pencil"></i></a>
-																</span>
-															</td>
-														</tr>
+												
 													</tbody>
 												</table>
-												<!-- <div class="datatable-pager datatable-paging-loaded">
-													<ul class="datatable-pager-nav my-2 mb-sm-0">
+												<div class="datatable-pager datatable-paging-loaded">
+												
+													<!-- <ul class="datatable-pager-nav my-2 mb-sm-0">
 														<li><a title="First" class="datatable-pager-link datatable-pager-link-first datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
 														<li><a title="Previous" class="datatable-pager-link datatable-pager-link-prev datatable-pager-link-disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
 														<li style="display: none;"><input type="text" class="datatable-pager-input form-control" title="Page number"></li>
@@ -377,10 +395,10 @@
 														<li><a class="datatable-pager-link datatable-pager-link-number" data-page="5" title="5">5</a></li>
 														<li><a title="Next" class="datatable-pager-link datatable-pager-link-next" data-page="2"><i class="flaticon2-next"></i></a></li>
 														<li><a title="Last" class="datatable-pager-link datatable-pager-link-last" data-page="35"><i class="flaticon2-fast-next"></i></a></li>
-													</ul>
-													<div class="datatable-pager-info my-2 mb-sm-0">
-														<div class="dropdown bootstrap-select datatable-pager-size" style="width: 150px;">
-															<select class="selectpicker datatable-pager-size" title="Select page size" data-width="150px" data-container="body" data-selected="10">
+													</ul> -->
+													<!-- <div class="datatable-pager-info my-2 mb-sm-0">
+														<div class="dropdown bootstrap-select datatable-pager-size" style="width: 60px;">
+															<select class="selectpicker datatable-pager-size" title="Select page size" data-width="60px" data-container="body" data-selected="10">
 																<option class="bs-title-option" value=""></option>
 																<option value="5">5</option>
 																<option value="10">10</option>
@@ -389,6 +407,7 @@
 																<option value="50">50</option>
 																<option value="100">100</option>
 															</select>
+															<button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="combobox" aria-owns="bs-select-5" aria-haspopup="listbox" aria-expanded="false" title="Select page size">
 																<div class="filter-option">
 																	<div class="filter-option-inner">
 																	</div>
@@ -401,25 +420,24 @@
 															</div>
 														</div>
 														<span class="datatable-pager-detail">Showing 1 - 10 of 350</span>
-													</div>
-												</div> -->
-												<div class="">
+													</div> -->
 												</div>
 											</div>
 											<!--end: Datatable-->
 										</div>
-										
 									</div> 
-									<!--end::Body-->
-								</div>
-								<!--end::Card-->
+													</div>
+													<!--end::Body-->
+											</div>
+											<!--end::Card-->
+									</div>
+									<!--end::Container-->
 							</div>
-							<!--end::Container-->
-						</div>
-						<!--end::Entry-->
+							<!--end::Entry-->
 					</div>
+					<!--end::Content-->
 				<!--begin::Footer-->
-			
+				@include('admin/footer')
 				<!--end::Footer-->
 			</div>
 			<!--end::Wrapper-->
@@ -446,7 +464,7 @@
 		</span>
 	</div>
 	<!--end::Scrolltop-->
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</script>
 	<script>
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 	</script>
@@ -511,46 +529,43 @@
 			"font-family": "Poppins"
 		};
 	</script>
+			<script>
+    // var count = 1;
+    // function setColor(btn, color) {
+    //     var property = document.getElementById(btn);
+    //     if (count == 0) {
+    //         property.style.backgroundColor = "green";
+				// 		document.getElementById(btn).value ="Active";
+    //         count = 1;        
+    //     }
+    //     else {
+    //         property.style.backgroundColor = "red";
+				// 		document.getElementById(btn).value ="Inactive";
+    //         count = 0;
+    //     }
+    // }
+				// document.getElementById("button").style.background='#000000';
+				function setColor(e, btn, color) {
+  var target = e.target,
+      count = +target.dataset.count;
+  
+   target.style.backgroundColor = count === 1 ? "green" : '#ff0000';
+   target.dataset.count = count === 1 ? 0 : 1;
+}
+</script>
 	<!--end::Global Config-->
 	<!--begin::Global Theme Bundle(used by all pages)-->
-	<script src="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.js?v=7.2.8"></script>
-	<script src="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.js?v=7.2.8"></script>
-	<script src="/../theme/html/demo4/dist/assets/js/scripts.bundle49d8.js?v=7.2.8"></script>
-	<!--end::Global Theme Bundle-->
-	<!--begin::Page Vendors(used by this page)-->
-	<script src="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.js?v=7.2.8"></script>
-	<script src="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.js?v=7.2.8"></script>
-	<!--end::Page Vendors-->
-	<!--begin::Page Scripts(used by this page)-->
-	<script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
+    <script src="/../theme/html/demo4/dist/assets/plugins/global/plugins.bundle49d8.js?v=7.2.8"></script>
+    <script src="/../theme/html/demo4/dist/assets/plugins/custom/prismjs/prismjs.bundle49d8.js?v=7.2.8"></script>
+    <script src="/../theme/html/demo4/dist/assets/js/scripts.bundle49d8.js?v=7.2.8"></script>
+    <!--end::Global Theme Bundle-->
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="/../theme/html/demo4/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle49d8.js?v=7.2.8"></script>
+    <script src="/../theme/html/demo4/dist/assets/plugins/custom/leaflet/leaflet.bundle49d8.js?v=7.2.8"></script>
+    <!--end::Page Vendors-->
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
 	<!--end::Page Scripts-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-	<script type="text/javascript">
-	    $(function () {
-			var table = $('.yajra').DataTable({});
-		});
-		$(document).ready(function(){
-		  $(".statuschange").click(function () {
-		    var rowid = $(this).attr('id');
-		    // alert(rowid);
-		    $.ajax({
-		      url: "statusupdateseller",
-		      method: "POST",
-		      data : {id : rowid},
-		      headers: {
-			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			    },
-		      success: function (data) {
-                window.location.href = '../ERP/seller'; 
-		      }
-		    });
-		  });
-		});
-	</script>
 </body>
 <!--end::Body-->
 

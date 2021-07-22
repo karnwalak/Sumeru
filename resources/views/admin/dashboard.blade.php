@@ -150,7 +150,7 @@
 												<!--end::User-->
 												<!--begin::Name-->
 												<div class="my-0">
-													<a href="../CRM/crmdashboard" class="text-dark font-weight-bold text-hover-primary font-size-h4">CRM & Sales</a>
+													<a href="../CRM/crmdashboard" class="text-dark font-weight-bold text-hover-primary font-size-h4">CRM</a>
 												</div>
 												<!--end::Name-->
 											</div>
@@ -202,7 +202,7 @@
 												<!--end::User-->
 												<!--begin::Name-->
 												<div class="my-0">
-													<a href="../CIVIL/workers" class="text-dark font-weight-bold text-hover-primary font-size-h4">Civil</a>
+													<a href="sales_management" class="text-dark font-weight-bold text-hover-primary font-size-h4">Sales Management</a>
 												</div>
 												<!--end::Name-->
 											</div>
