@@ -1,16 +1,11 @@
+<?php
+$ids = request()->route('id');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-
 <head>
-	<meta charset="utf-8" />
-	<title>ERP</title>
-	<meta name="description" content="Updates and statistics" />
-    <meta name="viewport" content="width=d<!DOCTYPE html>
-<html lang="en">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-
-<head>
+	<base href="../">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta charset="utf-8" />
 	<title>ERP</title>
@@ -257,7 +252,7 @@
 															</div>
 															<div class="card-toolbar">
 																	<!--begin::Button-->
-																	<a href="addwork" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Assign Work</a>
+																	<a href="addwork/{{$ids}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Assign Work</a>
 																	<!--end::Button-->
 															</div>
 													</div>
@@ -351,27 +346,29 @@
 															<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 															<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
 															<th data-field="TaskName" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Work</span></th>
-															<th data-field="Active" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Active</span></th>
+															<!-- <th data-field="Active" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Active</span></th> -->
 															<th data-field="Deadline" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Deadline</span></th>
-															<th data-field="CreatedBy" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Created By</span></th>
+															<!-- <th data-field="CreatedBy" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Created By</span></th> -->
 															<th data-field="Responsible" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Responsible</span></th>
 															<th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Status</span></th>
 															<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 170px;">Actions</span></th>
 														</tr>
 													</thead>
 													<tbody class="datatable-body" style="">
+													<?php $a=1; ?>
+                                                    @foreach($data as $value)
 														<tr data-row="0" class="datatable-row" style="left: 0px;">
 															<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
-															<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">1</span></td>
-															<td data-field="Name" aria-label="Flooring" class="datatable-cell"><span style="width: 100px;">Report preperation</span></td>
-															<td data-field="Active" aria-label="09876543212" class="datatable-cell"><span style="width: 100px;">09876543212</span></td>
-															<td data-field="Deadline" aria-label="06/2/2024" class="datatable-cell"><span style="width: 100px;">today</span></td>
-															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">Me</span></td>
-															<td data-field="Responsible" aria-label="Akash Rikh" class="datatable-cell"><span style="width: 100px;">XYZ</span></td>
-															<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value="Active" style="color:white" onclick="setColor(event, 'button', '#101010')"; data-count="1" /></span></td>
+															<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
+															<td data-field="Name" aria-label="Flooring" class="datatable-cell"><span style="width: 100px;">{{$value->task_title}}</span></td>
+															<!-- <td data-field="Active" aria-label="09876543212" class="datatable-cell"><span style="width: 100px;">09876543212</span></td> -->
+															<td data-field="Deadline" aria-label="06/2/2024" class="datatable-cell"><span style="width: 100px;">{{$value->deadline}}</span></td>
+															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">{{$value->worker_name}}</span></td>
+															<!-- <td data-field="Responsible" aria-label="Akash Rikh" class="datatable-cell"><span style="width: 100px;">XYZ</span></td> -->
+															<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value="{{$value->status}}" style="color:white" onclick="setColor(event, 'button', '#101010')"; data-count="1" /></span></td>
 															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
 																<span style="overflow: visible; position: relative; width: 170px;">
-																	<a href="viewwork" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
+																	<a href="viewwork/{{$value->id}}" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
 																		<span class="svg-icon svg-icon-md">
 																		<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
 																		</span>
@@ -379,7 +376,7 @@
 																</span>
 															</td>
 														</tr>
-												
+												    @endforeach
 													</tbody>
 												</table>
 												<div class="datatable-pager datatable-paging-loaded">

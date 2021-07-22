@@ -1,4 +1,10 @@
-
+<?php
+// print_r($data);
+// exit;
+foreach ($data as $value) {
+	# code...
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -149,7 +155,7 @@
 												<div class="d-flex align-items-center justify-content-between flex-wrap">
 													<div class="mr-3">
 														<!--begin::Name-->
-														<a href="#" class="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">Title
+														<a href="#" class="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">{{$value -> task_title}}
 														<!-- <i class="flaticon2-correct text-success icon-md ml-2"></i></a> -->
 														<!--end::Name-->
 													</div>
@@ -186,13 +192,13 @@
 								<div class="card card-custom gutter-b">
 									<div class="card-body">
 										<div class="d-flex">
-											<span class="text-muted">Task  #</span>
+											<span class="text-muted">Task  #{{$value->id}}</span>
 										</div>
 										<div class="separator separator-solid my-7"></div>
 										<div class="">
 										<label for="exampleTextarea">Provide more information</label>
 											<textarea class="form-control" id="exampleTextarea" rows="3">
-											  
+											{{strip_tags(htmlspecialchars_decode($value -> task_description))}}
 											</textarea>
 										</div>
 										<div class="separator separator-solid my-7"></div>
@@ -200,7 +206,20 @@
 										<div class="d-flex align-items-left flex-wrap">
 											<!--begin: Item-->
 											<div class="d-flex align-items-left flex-lg-fill mr-5 my-1">
-											
+											@if($value -> status == 'start')
+											<a data-id="{{$value -> id}}" class="btn btn-light-success font-weight-bold mr-2 changebtn">Resume</a>
+											@elseif($value -> status == 'resume')
+											<a data-id="{{$value -> id}}" class="btn btn-light-success font-weight-bold mr-2 changebtn">Start</a>
+											@elseif($value -> status == 'finish')
+											<a class="btn btn-light mr-2" disabled>Start</a>
+											@else
+											<a data-id="{{$value -> id}}" class="btn btn-light-success font-weight-bold mr-2 changebtn">Start</a>
+											@endif
+											@if($value -> status == 'finish')
+											<a data-id="{{$value -> id}}" class="d-none btn btn-light-success finishbtn font-weight-bold mr-2">Finish</a>
+											@else
+											<a data-id="{{$value -> id}}" class="btn btn-light-success finishbtn font-weight-bold mr-2">Finish</a>
+											@endif
 											<div class="dropdown">
 											<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												More..
@@ -211,7 +230,7 @@
 												<button class="dropdown-item btn btn-success" id="create_subtask" type="button">Create Subtask</button>
 											</div>
 											</div>
-											<a href="CIVIL/editwork" class="btn btn-hover-bg-primary btn-text-dark btn-hover-text-white border-0 font-weight-bold mr-2">Edit</a>
+											<a href="editwork/{{$value->id}}" class="btn btn-hover-bg-primary btn-text-dark btn-hover-text-white border-0 font-weight-bold mr-2">Edit</a>
 										</div>
 											<!--end: Item-->
 											<!--begin: Item-->
@@ -322,7 +341,7 @@
 													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
-															<span class="text-dark-75 font-size-h6"></span>
+															<span class="text-dark-75 font-size-h6">{{$value->deadline}}</span>
 														</div>
 													</div>
 													<!--end::Info-->
@@ -354,7 +373,7 @@
 													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
-															<span class="text-dark-75"></span>
+															<span class="text-dark-75">{{$value->created_at}}</span>
 														</div>
 													</div>
 													<!--end::Info-->
@@ -365,14 +384,14 @@
 												<div class="d-flex flex-wrap align-items-center mb-10">
 													<!--begin::Title-->
 													<div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
-														<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">Started :</a>
+														<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">Starte Date:</a>
 													</div>
 													<!--end::Title-->
 													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
 															<span class="text-dark-75">
-															
+															{{$value->start_date}}
 															</span>
 														</div>
 													</div>
@@ -384,14 +403,14 @@
 												<div class="d-flex flex-wrap align-items-center mb-10">
 													<!--begin::Title-->
 													<div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
-														<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">End</a>
+														<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">End Date:</a>
 													</div>
 													<!--end::Title-->
 													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
 															<span class="text-dark-75">
-															
+															{{$value->end_date}}
 															</span>
 														</div>
 													</div>
@@ -400,21 +419,17 @@
 												<!--end::Item-->
 										<div class="separator separator-solid my-7"></div>
 												<!--begin::Item-->
-												<div class="d-flex flex-wrap align-items-center mb-10">
-													<!--begin::Title-->
+												<!-- <div class="d-flex flex-wrap align-items-center mb-10">
 													<div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
 														<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">Created By</a>
 													</div>
-													<!--end::Title-->
-													<!--begin::Info-->
 													<div class="d-flex align-items-center py-lg-0 py-2">
 														<div class="d-flex flex-column text-right">
 															<span class="text-dark-75">
 															</span>
 														</div>
 													</div>
-													<!--end::Info-->
-												</div>
+												</div> -->
 												<!--end::Item-->
 										<div class="separator separator-solid my-7"></div>
 											</div>
@@ -539,12 +554,12 @@
     <script type="text/javascript">
 		$(document).ready(function(){
 		  $(".changebtn").click(function () {
-		   
+		    var rowid = $(this).attr('data-id');
 		    // alert(rowid);
 		    $.ajax({
 		      url: "changeworkstatus",
 		      method: "POST",
-		    
+			  data : {id : rowid},
 		      headers: {
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
@@ -554,12 +569,12 @@
 		    });
 		  });
 		  $(".finishbtn").click(function () {
-		   
+		    var rowid = $(this).attr('data-id');
 		    // alert(rowid);
 		    $.ajax({
 		      url: "finishstatus",
 		      method: "POST",
-		     
+			  data : {id : rowid},
 		      headers: {
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
@@ -568,29 +583,29 @@
 		      }
 		    });
 		  });
-		$('#form').submit(function(e){
-          e.preventDefault();
-          $.ajax({
-			    url: 'addcomment',
-                method:"POST",
-                data:$('#form').serialize(),
-                dataType:'JSON',
-		      success: function (result) {
-				if (result.status == 'error') {
-					$('#error_msg').html(result.error);
-                  $.each(result.error,function(key,val){
-                  // console.log(key);
-                  // console.log(val);
-                  $('#'+key+'_error').html(val[0]);
-                  })
-                  }else if(result.status == 'success'){
-                  $('#form')[0].reset();
-				  $('#success_msg').html(result.msg);
-                  window.location.reload();
-                } 
-		      }
-		  });
-		})
+		// $('#form').submit(function(e){
+        //   e.preventDefault();
+        //   $.ajax({
+		// 	    url: 'addcomment',
+        //         method:"POST",
+        //         data:$('#form').serialize(),
+        //         dataType:'JSON',
+		//       success: function (result) {
+		// 		if (result.status == 'error') {
+		// 			$('#error_msg').html(result.error);
+        //           $.each(result.error,function(key,val){
+        //           // console.log(key);
+        //           // console.log(val);
+        //           $('#'+key+'_error').html(val[0]);
+        //           })
+        //           }else if(result.status == 'success'){
+        //           $('#form')[0].reset();
+		// 		  $('#success_msg').html(result.msg);
+        //           window.location.reload();
+        //         } 
+		//       }
+		//   });
+		// })
 		});
 	</script>
 	<script>

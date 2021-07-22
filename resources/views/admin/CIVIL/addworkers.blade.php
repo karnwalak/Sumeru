@@ -176,7 +176,7 @@ fill="#000000" opacity="0.3" />
                 <h3 class="card-label">Add Workers</h3>
             </div>
             <div class="col-md-6" style="display:grid;place-items:end;padding:10px 15px;">
-            <a href="CIVIL/workers" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
+            <a href="workers" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
             </div>
         </div>
 		<div class="row justify-content-center">
@@ -383,7 +383,6 @@ var KTAppSettings = {
 <!--end::Page Scripts-->
     <script type="text/javascript">
         $(document).ready(function(){
-		var langs = <?php //json_encode($data);?>;
         $(".form").submit(function(e){
           e.preventDefault();
           $('.field_error').html('');
