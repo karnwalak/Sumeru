@@ -263,13 +263,14 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/FINANCE/dailycashincentive',[FinanceEmployeeController::class,'showinsentive']);
         // Route::view('admin/FINANCE/addtransactionsorder','admin/FINANCE/addtransactionsorder');
         // Route::view('admin/FINANCE/purchaseorder','admin/FINANCE/purchaseorder');
-        
         Route::get('admin/FINANCE/purchaseorder',[FinancePurchaseController::class,'show']);
         Route::get('admin/FINANCE/salaries',[FinanceEmployeeController::class,'show']);
         // Route::view('admin/FINANCE/bookingcredit','admin/FINANCE/bookingcredit');
         Route::post('admin/FINANCE/payAmount',[FinancePurchaseController::class,'payAmount']);
         Route::post('admin/FINANCE/payAmountEmployee',[FinanceEmployeeController::class,'payAmountEmployee']);
         Route::get('admin/FINANCE/bookingcredit',[BookingCreditController::class,'showdata']);
+        /*******************************************************CIVIL************************************************************/
+        Route::view('admin/CIVIL/workers','admin/CIVIL/workers');
         Route::get('admin/logout', function () {
         session()->flush();
         return redirect('/');

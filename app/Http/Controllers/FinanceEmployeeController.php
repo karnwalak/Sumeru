@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Validator;
+use Carbon\Carbon;
 class FinanceEmployeeController extends Controller
 {
     public function showinsentive(Request $req)
@@ -79,6 +80,13 @@ class FinanceEmployeeController extends Controller
     {
         $data = hr_employees::orderBy('id','DESC')->where('employee_status','!=','delete')->get();
         return view('../admin/FINANCE/salaries') -> with('data',$data);
+        // $data = employee_salaries::join('hr_employees','employee_salaries.employee_id','=','hr_employees.employee_id')
+        // ->select('hr_employees.*','SUM(employee_salaries.amount) as amount')
+        // // ->groupBy('employee_salaries')
+        // // ->where('employee_salaries.date', Carbon::now()->month)
+        // // ->where('employee_status','!=','delete')
+        // ->get();
+        // return view('../admin/FINANCE/salaries') -> with('data',$data);
     }
     public function addtransactionsemployee(Request $req,$id)
     {

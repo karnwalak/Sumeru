@@ -1,8 +1,7 @@
 <?php
 // print_r($data);
-// echo "<br/>";
-// print_r($datas);
 // exit;
+use Carbon\Carbon;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -341,7 +340,9 @@
 																							$ids = $value -> id;
 																							$sum = DB::table('employee_salaries')
 																							->where('employee_id', '=', $ids)
+																							// ->where("date","=", Carbon::now()->month)
 																							->sum('amount');
+																							// print_r($sum);
 																						?>
 																						@if($value -> employee_basic_salary - $sum > 0)
 																						<tr data-row="0" class="datatable-row" style="left: 0px;">
