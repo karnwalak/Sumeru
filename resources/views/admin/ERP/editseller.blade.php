@@ -50,7 +50,7 @@ class="logo-default max-h-30px" />
 	<button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle">
 	</button>
 	<!--end::Header Menu Mobile Toggle-->
-	<!--begin::Topbar Mobile Toggle-->
+	<!--begin::Topbar Mobile Toggle--> 
 	<button class="btn btn-hover-text-primary p-0 ml-2" id="kt_header_mobile_topbar_toggle">
 		<span class="svg-icon svg-icon-xl">
 			<!--begin::Svg Icon | path:/metronic/theme/html/demo4/dist/assets/media/svg/icons/General/User.svg-->

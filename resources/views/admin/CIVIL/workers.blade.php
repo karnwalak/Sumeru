@@ -325,44 +325,32 @@
 														</tr>
 													</thead>
 													<tbody class="datatable-body" style="">
+													<?php $a = 1; ?>
+													@foreach($data as $value)
 														<tr data-row="1" class="datatable-row datatable-row-even" style="left: 0px;">
 															<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
-															<td data-field="Sno" aria-label="" class="datatable-cell"><span style="width: 120px;">1</span></td>
-															<td data-field="Name" aria-label="" class="datatable-cell"><span style="width: 120px;">AKSHAY KUMAR</span></td>
-															<td data-field="Address" aria-label="" class="datatable-cell"><span style="width: 120px;">SAHARANPUR</span></td>
-															<td data-field="Contact" aria-label="" class="datatable-cell"><span style="width: 120px;">9568936879</span></td>
-															<td data-field="Email" aria-label="" class="datatable-cell"><span style="width: 120px;">karnwalakshay7@gmail.com</span></td>
+															<td data-field="Sno" aria-label="" class="datatable-cell"><span style="width: 120px;">{{$a++}}</span></td>
+															<td data-field="Name" aria-label="" class="datatable-cell"><span style="width: 120px;">{{$value -> worker_name}}</span></td>
+															<td data-field="Address" aria-label="" class="datatable-cell"><span style="width: 120px;">{{$value -> worker_address}}</span></td>
+															<td data-field="Contact" aria-label="" class="datatable-cell"><span style="width: 120px;">{{$value -> worker_contact}}</span></td>
+															<td data-field="Email" aria-label="" class="datatable-cell"><span style="width: 120px;">{{$value -> worker_email}}</span></td>
 															<td data-field="Status" aria-label="5" class="datatable-cell">
-															   <button class="btn btn-success statuschange" id="" href="">Active</button>
+															   @if($value -> worker_status == 'Active')
+															   <button class="btn btn-success statuschange" id="{{$value -> id}}" href="">{{$value -> worker_status}}</button>
+															   @elseif($value -> worker_status == 'Inactive')
+															   <button class="btn btn-danger statuschange" id="{{$value -> id}}" href="">{{$value -> worker_status}}</button>
+															   @endif
 														    </td>
 															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
 																<span style="width: 100px;">
-																	 <a href="works"><i class="fa fa-cog"></i></a>
-																	 <a href="workerprofile"><i class="fa fa-eye"></i></a>
-																	 <a onclick="return confirm('Are you sure?')" href="workerdelete"><i class="fa fa-trash"></i></a>
-																	 <a href="editworker"><i class="fa fa-pencil"></i></a>
+																	 <a href="works/{{$value -> id}}"><i class="fa fa-cog"></i></a>
+																	 <a href="workerprofile/{{$value -> id}}"><i class="fa fa-eye"></i></a>
+																	 <a onclick="return confirm('Are you sure?')" href="workerdelete/{{$value -> id}}"><i class="fa fa-trash"></i></a>
+																	 <a href="editworker/{{$value -> id}}"><i class="fa fa-pencil"></i></a>
 																</span>
 															</td>
 														</tr>
-														<tr data-row="1" class="datatable-row datatable-row-even" style="left: 0px;">
-															<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
-															<td data-field="Sno" aria-label="" class="datatable-cell"><span style="width: 120px;">2</span></td>
-															<td data-field="Name" aria-label="" class="datatable-cell"><span style="width: 120px;">ANUJ KUMAR</span></td>
-															<td data-field="Address" aria-label="" class="datatable-cell"><span style="width: 120px;">Meerut</span></td>
-															<td data-field="Contact" aria-label="" class="datatable-cell"><span style="width: 120px;">9068689609</span></td>
-															<td data-field="Email" aria-label="" class="datatable-cell"><span style="width: 120px;">karnwalanuj@gmail.com</span></td>
-															<td data-field="Status" aria-label="5" class="datatable-cell">
-															   <button class="btn btn-success statuschange" id="" href="">Active</button>
-														    </td>
-															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																<span style="width: 100px;">
-																	 <a href="works"><i class="fa fa-cog"></i></a>
-																	 <a href="workerprofile"><i class="fa fa-eye"></i></a>
-																	 <a onclick="return confirm('Are you sure?')" href="workerdelete"><i class="fa fa-trash"></i></a>
-																	 <a href="editworker"><i class="fa fa-pencil"></i></a>
-																</span>
-															</td>
-														</tr>
+													@endforeach
 													</tbody>
 												</table>
 												<!-- <div class="datatable-pager datatable-paging-loaded">
@@ -538,14 +526,14 @@
 		    var rowid = $(this).attr('id');
 		    // alert(rowid);
 		    $.ajax({
-		      url: "statusupdateseller",
+		      url: "statusupdateworker",
 		      method: "POST",
 		      data : {id : rowid},
 		      headers: {
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
 		      success: function (data) {
-                window.location.href = '../ERP/seller'; 
+                window.location.href = '../CIVIL/workers'; 
 		      }
 		    });
 		  });

@@ -19,7 +19,8 @@ use App\Http\Controllers\HrEmployeesController;
 use App\Http\Controllers\HrTaskController;
 use App\Http\Controllers\HrDailyReportController;
 use App\Http\Controllers\PurchaseOrderRequestController;
-
+use App\Http\Controllers\WorkerController;
+use App\Http\Controllers\WorkerTaskController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -270,14 +271,23 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::post('admin/FINANCE/payAmountEmployee',[FinanceEmployeeController::class,'payAmountEmployee']);
         Route::get('admin/FINANCE/bookingcredit',[BookingCreditController::class,'showdata']);
         /*******************************************************CIVIL************************************************************/
-        Route::view('admin/CIVIL/workers','admin/CIVIL/workers');
+        Route::get('admin/CIVIL/workers',[WorkerController::class,'showdata']);
+        Route::POST('admin/CIVIL/addWorker',[WorkerController::class,'create']);
+        Route::POST('admin/CIVIL/statusupdateworker',[WorkerController::class,'statusupdate']);
         Route::view('admin/CIVIL/addworkers','admin/CIVIL/addworkers');
-        Route::view('admin/CIVIL/editworker','admin/CIVIL/editworker');
-        Route::view('admin/CIVIL/works','admin/CIVIL/works');
-        Route::view('admin/CIVIL/addwork','admin/CIVIL/addwork');
-        Route::view('admin/CIVIL/viewwork','admin/CIVIL/viewwork');
-        Route::view('admin/CIVIL/editwork','admin/CIVIL/editwork');
-        Route::view('admin/CIVIL/workerprofile','admin/CIVIL/workerprofile');
+        Route::get('admin/CIVIL/editworker/{id}',[WorkerController::class,'edit']);
+        Route::get('admin/CIVIL/workerdelete/{id}',[WorkerController::class,'destroy']);
+        Route::POST('admin/CIVIL/editWorker',[WorkerController::class,'update']);
+        Route::get('admin/CIVIL/addwork/{ids}',[WorkerTaskController::class,'showdata']);
+        Route::POST('admin/CIVIL/addWork',[WorkerTaskController::class,'create']);
+        Route::get('admin/CIVIL/viewwork/{id}',[WorkerTaskController::class,'viewwork']);
+        // Route::get('admin/CIVIL/viewwork/{id}',[WorkerTaskController::class,'viewwork']);
+        Route::POST('admin/CIVIL/changeworkstatus',[WorkerTaskController::class,'changeworkstatus']);
+        Route::POST('admin/CIVIL/finishstatus',[WorkerTaskController::class,'finishstatus']);
+        Route::get('admin/CIVIL/editwork/{id}',[WorkerTaskController::class,'editwork']);
+        Route::POST('admin/CIVIL/updatework',[WorkerTaskController::class,'updatework']);
+        Route::get('admin/CIVIL/workerprofile/{id}',[WorkerController::class,'workerprofile']);
+        Route::get('admin/CIVIL/works/{id}',[WorkerTaskController::class,'show']);
         Route::get('admin/logout', function () {
         session()->flush();
         return redirect('/');

@@ -177,7 +177,7 @@ fill="#000000" opacity="0.3" />
                 <h3 class="card-label">Add Workers</h3>
             </div>
             <div class="col-md-6" style="display:grid;place-items:end;padding:10px 15px;">
-            <a href="CIVIL/workers" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
+            <a href="workers" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Back</a>
             </div>
         </div>
 		<div class="row justify-content-center">
@@ -189,7 +189,8 @@ fill="#000000" opacity="0.3" />
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Name</label>
 						<div class="col-lg-9 col-xl-9">
-							<input class="form-control form-control-solid form-control-lg" name="name" type="text"/>
+							<input type="hidden" name="worker_id" value="{{$data -> id}}">
+							<input class="form-control form-control-solid form-control-lg" value="{{$data -> worker_name}}" name="name" type="text"/>
 							<span style="color:red;" id="name_error" class="field_error"></span>
 						</div>
 					</div>
@@ -198,7 +199,7 @@ fill="#000000" opacity="0.3" />
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Contact</label>
 						<div class="col-lg-9 col-xl-9">
-							<input class="form-control form-control-solid form-control-lg" name="contact" type="text"/>
+							<input class="form-control form-control-solid form-control-lg" value="{{$data -> worker_contact}}" name="contact" type="text"/>
 							<span style="color:red;" id="contact_error" class="field_error"></span>
 						</div>
 					</div>
@@ -207,7 +208,7 @@ fill="#000000" opacity="0.3" />
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Email</label>
 						<div class="col-lg-9 col-xl-9">
-							<input class="form-control form-control-solid form-control-lg" name="email" type="text"/>
+							<input class="form-control form-control-solid form-control-lg" value="{{$data -> worker_email}}" name="email" type="text"/>
 							<span style="color:red;" id="email_error" class="field_error"></span>
 						</div>
 					</div>
@@ -216,7 +217,7 @@ fill="#000000" opacity="0.3" />
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label">Address</label>
 						<div class="col-lg-9 col-xl-9">
-							<input class="form-control form-control-solid form-control-lg" name="address" type="text"/>
+							<input class="form-control form-control-solid form-control-lg" value="{{$data -> worker_address}}" name="address" type="text"/>
 							<span style="color:red;" id="address_error" class="field_error"></span>
 						</div>
 					</div>
@@ -226,9 +227,14 @@ fill="#000000" opacity="0.3" />
 						<label class="col-xl-3 col-lg-3 col-form-label">Status</label>
 						<div class="col-lg-9 col-xl-9">
 							<select  class="form-control form-control-solid form-control-lg" name="status">
-								<option value="">Select</option>
-								<option value="Active">Active</option>
-								<option value="Inactive">Inactive</option>
+							        <option value="">Select</option>
+								@if($data->worker_status =='Active')
+									<option value="Active" selected>Active</option>
+									<option value="Inactive">Inactive</option>									
+                                @else
+									<option value="Active">Active</option>
+									<option value="Inactive" selected>Inactive</option>
+                                @endif
 							</select>
 							<span style="color:red;" id="status_error" class="field_error"></span>
 							<br><br>
@@ -384,12 +390,11 @@ var KTAppSettings = {
 <!--end::Page Scripts-->
     <script type="text/javascript">
         $(document).ready(function(){
-		var langs = <?php //json_encode($data);?>;
         $(".form").submit(function(e){
           e.preventDefault();
           $('.field_error').html('');
           $.ajax({
-            url:'addWorker',
+            url:'editWorker',
             data:$(".form").serialize(),
             type:'post',
             success:function(result){

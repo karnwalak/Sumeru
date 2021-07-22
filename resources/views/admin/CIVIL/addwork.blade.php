@@ -3,7 +3,8 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-<meta charset="utf-8" />
+    <meta charset="utf-8" />
+	<base href="../">
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -133,7 +134,7 @@
 				<!--begin::Toolbar-->
 				<div class="row" style="display:grid;place-items:end;margin:5px 20px">
 					<!--begin::Button-->
-					<a href="works" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
+					<a href="works/{{$id}}" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
 					<!--end::Button-->
 				</div>
 				<!--end::Toolbar-->
@@ -175,10 +176,10 @@
 							</div>
 						</div>
 						<div class="col-md-6 col-12">
-							<div class="row" style="margin: 25px; justify-content:center;">
+							<!-- <div class="row" style="margin: 25px; justify-content:center;">
 								<input type="checkbox" id="priority" name="priority" value="high" style="margin: 2px;margin-bottom: 8px;!important">
 								<label for="priority">High Priority</label>
-							</div>
+							</div> -->
                             <div class="row" style="margin:2em;">
 								<p style="font-size:20px;"><b>Inventory Access</b></p><br>
 							</div>
@@ -198,7 +199,9 @@
 							<div class="row" style="margin:2em;">
 								<select id="myselect" class="form-select form-select-lg mb-3" name="responsible_person[]" multiple aria-label=".form-select-lg example" style="width:100%;background-color:transparent;border:1px solid black;border-radius:5px;height:40px;">
 										<option value="">Open this select menu</option>
-										
+										@foreach($worker as $emp)
+										<option value="{{$emp -> id}}">{{$emp -> worker_name}}</option>
+										@endforeach
 								</select>
 								<span class="field_error text-danger" id="responsible_person_error"></span>
 							</div>
@@ -349,7 +352,7 @@
         CKEDITOR.instances[instance].updateElement();
         };
            $.ajax({
-                url: '../CIVIL/addwork',
+                url: '../CIVIL/addWork',
                 method:"POST",
                 data:$('#form').serialize(),
                 dataType:'JSON',
@@ -365,7 +368,7 @@
                   $('#form')[0].reset();
                   $('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                   setTimeout(function(){
-                   window.location.href = '../CIVIL/works'; 
+                   window.location.href = '../CIVIL/works/{{$id}}'; 
                  }, 1000);
                 }   
                 },

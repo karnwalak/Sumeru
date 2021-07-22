@@ -1,9 +1,14 @@
+<?php
+// print_r($workedit);
+// exit;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-<meta charset="utf-8" />
+    <meta charset="utf-8" />
+	<base href="../">
 	<title>ERP</title>
 	<meta name="description" content="Updates and statistics" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -133,7 +138,7 @@
 				<!--begin::Toolbar-->
 				<div class="row" style="display:grid;place-items:end;margin:5px 20px">
 					<!--begin::Button-->
-					<a href="works" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
+					<a href="works/{{$workedit -> id}}" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">Back</a>
 					<!--end::Button-->
 				</div>
 				<!--end::Toolbar-->
@@ -159,13 +164,14 @@
 																	<!--begin::Subject-->
 																	<div class="border-bottom">
 																		<div class="d-flex align-items-center">
-																			<input class="form-control border-0 px-8 min-h-45px" name="compose_subject" placeholder="What's on your mind.">
+																			<input class="form-control border-0 px-8 min-h-45px" value="{{$workedit -> task_title}}" name="compose_subject" placeholder="What's on your mind.">
+																			<input type="hidden" value="{{$workedit -> id}}" name="task_id">
 																			<span class="field_error text-danger" id="compose_subject_error"></span>
 																		</div>
 																	</div>
 																	<!--end::Subject-->
 																	<div id="">
-																	   <textarea type="text" name="message" class="form-control border-0 px-8 min-h-45px" id="editor" ></textarea>
+																	   <textarea type="text" name="message" class="form-control border-0 px-8 min-h-45px" id="editor" >{{$workedit -> task_description}}</textarea>
 																	   <span class="text-danger field_error" id="message_error"></span>
 																	</div>
 															</div>
@@ -175,22 +181,22 @@
 							</div>
 						</div>
 						<div class="col-md-6 col-12">
-							<div class="row" style="margin: 25px; justify-content:center;">
+							<!-- <div class="row" style="margin: 25px; justify-content:center;">
 								<input type="checkbox" id="priority" name="priority" value="high" style="margin: 2px;margin-bottom: 8px;!important">
 								<label for="priority">High Priority</label>
-							</div>
+							</div> -->
                             <div class="row" style="margin:2em;">
 								<p style="font-size:20px;"><b>Inventory Access</b></p><br>
 							</div>
                             <div class="row" style="margin: 25px;">
-								<input type="radio" name="inventory_access" value="yes" style="margin: 2px;margin-bottom: 8px;!important"> Yes
-								<input type="radio" name="inventory_access" value="no" style="margin: 2px;margin-bottom: 8px;!important"> No
+								<input type="radio" name="inventory_access" value="yes" style="margin: 2px;margin-bottom: 8px;!important"{{ $workedit->inventory_access == 'yes' ? 'checked' : ''}}> Yes
+								<input type="radio" name="inventory_access" value="no" style="margin: 2px;margin-bottom: 8px;!important" {{ $workedit->inventory_access == 'no' ? 'checked' : ''}}> No
 							</div>
                             <div class="row" style="margin:2em;">
 								<p style="font-size:20px;"><b>Payment</b></p><br>
 							</div>
                             <div class="row" style="margin: 25px;">
-								<input type="text" id="payment" class="form-control" name="payment" style="margin: 2px;margin-bottom: 8px;!important">
+								<input type="text" id="payment" class="form-control" value="{{$workedit -> payment}}" name="payment" style="margin: 2px;margin-bottom: 8px;!important">
 							</div>
 							<div class="row" style="margin:2em;">
 								<p style="font-size:20px;"><b>Responsible Person</b></p><br>
@@ -198,7 +204,12 @@
 							<div class="row" style="margin:2em;">
 								<select id="myselect" class="form-select form-select-lg mb-3" name="responsible_person[]" multiple aria-label=".form-select-lg example" style="width:100%;background-color:transparent;border:1px solid black;border-radius:5px;height:40px;">
 										<option value="">Open this select menu</option>
-										
+										@foreach($worker as $emp)
+										<option value="{{$emp -> id}}" selected>{{$emp -> worker_name}}</option>
+										@endforeach
+										@foreach($workers as $work)
+										<option value="{{$work -> id}}">{{$work -> worker_name}}</option>
+										@endforeach
 								</select>
 								<span class="field_error text-danger" id="responsible_person_error"></span>
 							</div>
@@ -206,23 +217,39 @@
 								<p style="font-size:20px;"><b>Deadline</b></p><br>
 							</div>
 							<div class="row" style="margin:2em;">
-								<input type="datetime-local" value="<?php echo date("F j, Y, g:i a"); ?>" class="form-control form-control-solid form-control-lg" name="deadline" />
+								<input type="datetime-local" value="{{$workedit -> deadline}}" class="form-control form-control-solid form-control-lg" name="deadline" />
 								<span class="field_error text-danger" id="deadline_error"></span>
 							</div>
 							<div class="row" style="margin:2em;">
 							<p style="font-size:20px;"><b>Status</b></p><br>
-                              <select class="form-control" name="status" id="">
+							  @if($workedit -> status = 'Pending')
+                             <select class="form-control" name="status" id="">
 							    <option value="">Select</option>
-								<option value="Pending">Pending</option>
+								<option value="Pending" selected>Pending</option>
 								<option value="Ongoing">Ongoing</option>
 								<option value="Complete">Complete</option>
 							  </select>
+                             @elseif($workedit -> status = 'Ongoing')
+                             <select class="form-control" name="status" id="">
+							    <option value="">Select</option>
+								<option value="Pending">Pending</option>
+								<option value="Ongoing" selected>Ongoing</option>
+								<option value="Complete">Complete</option>
+							  </select>
+                             @elseif($workedit -> status = 'Complete')
+                             <select class="form-control" name="status" id="">
+							    <option value="">Select</option>
+								<option value="Pending">Pending</option>
+								<option value="Ongoing">Ongoing</option>
+								<option value="Complete" selected>Complete</option>
+							  </select>
+                             @endif
 							  <span class="field_error text-danger" id="status_error"></span>
 							</div>
 							<div class="row" style="display: grid;place-items: end;margin: 25px;">
 								<!--begin::Dropdown-->
 								<div class="btn-group ml-2">
-									<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Submit</button>
+									<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">Update</button>
 								</div>
 								<!--end::Dropdown-->
 							</div>
@@ -349,7 +376,7 @@
         CKEDITOR.instances[instance].updateElement();
         };
            $.ajax({
-                url: '../CIVIL/addwork',
+                url: 'updatework',
                 method:"POST",
                 data:$('#form').serialize(),
                 dataType:'JSON',
@@ -365,7 +392,7 @@
                   $('#form')[0].reset();
                   $('#msg').html("<div class='col-md-4 alert alert-success alert-block'><strong>"+result.msg+"</strong></div>");
                   setTimeout(function(){
-                   window.location.href = '../CIVIL/works'; 
+                   window.location.href = '../CIVIL/works/{{$workedit -> id}}'; 
                  }, 1000);
                 }   
                 },
