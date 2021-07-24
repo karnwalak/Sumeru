@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\worker;
+use App\Models\work;
+use App\Models\worker_task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -135,6 +137,17 @@ class WorkerController extends Controller
     }
     public function workerprofile(Request $req,$id)
     {
-        
+        $data = work::join('worker_tasks','works.task_id','=','worker_tasks.id')
+        ->where('works.worker_id','=',$id)
+        ->get(['worker_tasks.*','works.*']);
+        return view('../admin/CIVIL/workerprofile')->with('data',worker::find($id))->with('task',$data);
+    }
+    public function showwork(Request $req,$id)
+    {
+        $data = work::join('worker_tasks','works.task_id','=','worker_tasks.id')
+        ->join('workers','works.worker_id','=','workers.id')
+        ->where('works.worker_id','=',$id)
+        ->get(['worker_tasks.*','works.status','workers.worker_name']);
+        return view('../admin/CIVIL/employeework')->with('data',$data);
     }
 }

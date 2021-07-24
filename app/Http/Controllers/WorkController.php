@@ -1,85 +1,23 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\work;
+use App\Models\worker_task;
 use Illuminate\Http\Request;
 
 class WorkController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function sortwork(Request $req,$st)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\work  $work
-     * @return \Illuminate\Http\Response
-     */
-    public function show(work $work)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\work  $work
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(work $work)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\work  $work
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, work $work)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\work  $work
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(work $work)
-    {
-        //
+        // return $st;
+        $data = work::join('worker_tasks','works.task_id','=','worker_tasks.id')
+        ->join('workers','works.worker_id','=','workers.id')
+        ->where('works.status','=',$st)
+        ->where('workers.id','=',session()->get('id'))
+        ->get(['worker_tasks.*','works.*','workers.worker_name']);    
+        if ($data) {
+            return view('../admin/CIVIL/works',compact('data'));
+        }else{
+            return redirect('../admin/CIVIL/works');
+        }
     }
 }

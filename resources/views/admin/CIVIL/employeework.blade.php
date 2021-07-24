@@ -1,6 +1,4 @@
 <?php
-// print_r($data);
-// exit;
 $ids = request()->route('id');
 ?>
 <!DOCTYPE html>
@@ -225,22 +223,22 @@ $ids = request()->route('id');
 														<ul class="nav nav-pills" id="myTab" role="tablist">
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px 20px 20px;">
-																				<a href="sortwork/{{'Pending'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Pending</a>
+																				<a href="work/{{'mywork'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">My Works</a>
 																		</div>
 																</li>
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px;">
-																				<a href="sortwork/{{'ongoing'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">On Going</a>
+																				<a href="work/{{'ongoing'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">On Going</a>
 																		</div>
 																</li>
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px;">
-																				<a href="sortwork/{{'setbyme'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Set By Me</a>
+																				<a href="work/{{'setbyme'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Set By Me</a>
 																		</div>
 																</li>
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px;">
-																				<a href="sortwork/{{'assisting'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Assisting</a>
+																				<a href="work/{{'assisting'}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2" style="width:125px !important;">Assisting</a>
 																		</div>
 																</li>
 														</ul>
@@ -270,7 +268,7 @@ $ids = request()->route('id');
 										<div class="card-body">
 											<!--begin: Search Form-->
 											<!--begin::Search Form-->
-											<!-- <form action="serachtask" method="post">
+											<form action="serachtask" method="post">
 											{{@csrf_field()}}
 											<div class="mb-7">
 												<div class="row align-items-center">
@@ -304,7 +302,7 @@ $ids = request()->route('id');
 													</div>
 												</div>
 											</div>
-											</form> -->
+											</form>
 											<!--end::Search Form-->
 											<!--end: Search Form-->
 											<!--begin: Selected Rows Group Action Form-->
