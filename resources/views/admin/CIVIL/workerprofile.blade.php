@@ -1,3 +1,7 @@
+<?php
+// print_r($task);
+// exit;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -162,28 +166,29 @@
 										<!--begin::Details-->
 										<div class="d-flex mb-9">
 											<!--begin: Pic-->
-											<div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
+											<!-- <div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
 												<div class="symbol symbol-50 symbol-lg-120">
 													<img src="" alt="image" />
 												</div>
 												<div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
 													<span class="font-size-h3 symbol-label font-weight-boldest">JM</span>
 												</div>
-											</div>
+											</div> -->
 											<!--end::Pic-->
 											<!--begin::Info-->
 											<div class="flex-grow-1">
 												<!--begin::Title-->
 												<div class="d-flex justify-content-between flex-wrap mt-1">
 													<div class="d-flex mr-3">
-														<a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3"></a>
-														<a href="#">
-															<i class="flaticon2-correct text-success font-size-h5"></i>
-														</a>
+														<!-- <a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3"></a> -->
+														<!-- <a href="#"> -->
+															<!-- <i class="flaticon2-correct text-success font-size-h5"></i> -->
+														<!-- </a> -->
+														<h3 class="card-label font-weight-bolder text-primary">{{$data -> worker_name}}</h3>
 													</div>
 													<div class="my-lg-0 my-3">
 														<!-- <a href="#" class="btn btn-sm btn-light-success font-weight-bolder text-uppercase mr-3">ask</a> -->
-														<a href="CIVIL/workers" class="btn  btn-info font-weight-bolder text-uppercase">Back</a>
+														<a href="workers" class="btn  btn-info font-weight-bolder text-uppercase">Back</a>
 													</div>
 												</div>
 												<!--end::Title-->
@@ -192,14 +197,17 @@
 													<div class="d-flex flex-column flex-grow-1 pr-8">
 														<div class="d-flex flex-wrap mb-4">
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-															<i class="flaticon2-new-email mr-2 font-size-lg"></i></a>
+															<i class="flaticon2-new-email mr-2 font-size-lg"></i>
+															{{$data -> worker_email}}
+														    </a>
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
 															<i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>
-															</a>
-															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr
+															{{$data -> worker_contact}}
 															</a>
 															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold">
-															<i class="flaticon2-placeholder mr-2 font-size-lg"></i></a>
+															<i class="flaticon2-placeholder mr-2 font-size-lg"></i>
+															{{$data -> worker_address}}
+														    </a>
 														</div>
 														<span class="font-weight-bold text-dark-50">I distinguish three main text objectives could be merely to inform people.</span>
 														<span class="font-weight-bold text-dark-50">A second could be persuade people.You want people to bay objective</span>
@@ -226,34 +234,45 @@
 													<i class="flaticon-piggy-bank display-4 text-muted font-weight-bold"></i>
 												</span>
 												<div class="d-flex flex-column text-dark-75">
-													<span class="font-weight-bolder font-size-sm">Salary</span>
+													<span class="font-weight-bolder font-size-sm">Payment</span>
 													<span class="font-weight-bolder font-size-h5">
-													<span class="text-dark-50 font-weight-bold">Rs.</span></span>
+													<span class="text-dark-50 font-weight-bold">Rs.
+													@foreach($task as $payment)
+													<?php
+														$ids = $payment -> task_id;
+														$sum = DB::table('worker_tasks')
+														->where('id', '=', $ids)
+														->sum('payment');
+														// print_r($sum);
+													?>
+													@endforeach
+													{{$sum}}
+													</span></span>
 												</div>
 											</div>
 											<!--end::Item-->
 											<!--begin::Item-->
-											<div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-												<span class="mr-4">
+											<!-- <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2"> -->
+												<!-- <span class="mr-4">
 													<i class="flaticon-confetti display-4 text-muted font-weight-bold"></i>
-												</span>
+												</span> -->
 												<!-- <div class="d-flex flex-column text-dark-75">
 													<span class="font-weight-bolder font-size-sm">Shift</span>
 													<span class="font-weight-bolder font-size-h5">
 													<span class="text-dark-50 font-weight-bold"></span></span>
 												</div> -->
-											</div>
+											<!-- </div> -->
 											<!--end::Item-->
 											<!--begin::Item-->
 											<div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
 												<span class="mr-4">
 													<i class="flaticon-pie-chart display-4 text-muted font-weight-bold"></i>
 												</span>
-												<!-- <div class="d-flex flex-column text-dark-75">
-													<span class="font-weight-bolder font-size-sm">Date of Joining</span>
+												<div class="d-flex flex-column text-dark-75">
+													<span class="font-weight-bolder font-size-sm">Worker Added On</span>
 													<span class="font-weight-bolder font-size-h5">
-													<span class="text-dark-50 font-weight-bold"><?php //$employee -> employee_joining_date;?></span></span>
-												</div> -->
+													<span class="text-dark-50 font-weight-bold">{{$data -> created_at}}</span></span>
+												</div>
 											</div>
 											<!--end::Item-->
 											<!--begin::Item-->
@@ -263,7 +282,7 @@
 												</span>
 												<div class="d-flex flex-column flex-lg-fill">
 													<span class="text-dark-75 font-weight-bolder font-size-sm">Works</span>
-													<a href="employeework" class="text-primary font-weight-bolder">View</a>
+													<a href="employeework/{{$data->id}}" class="text-primary font-weight-bolder">View</a>
 												</div>
 											</div>
 											<!--end::Item-->
@@ -318,7 +337,7 @@
 											<!--begin::Header-->
 											<div class="card-header border-0 pt-5">
 												<h3 class="card-title align-items-start flex-column">
-													<span class="card-label font-weight-bolder text-dark">Tasks and Projects</span>
+													<span class="card-label font-weight-bolder text-dark">Works</span>
 													<!-- <span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span> -->
 												</h3>
 												<!-- <div class="card-toolbar">
@@ -348,28 +367,30 @@
 														<tr class="datatable-row" style="left: 0px;">
 															<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 															<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
-															<th data-field="TaskName" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Task Name</span></th>
+															<th data-field="TaskName" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Work Name</span></th>
 															<th data-field="Deadline" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Deadline</span></th>
-															<th data-field="CreatedBy" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Created By</span></th>
+															<!-- <th data-field="CreatedBy" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Created By</span></th> -->
 															<th data-field="Des" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Description</span></th>
 															<th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Status</span></th>
 															<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 170px;">Actions</span></th>
 														</tr>
 													</thead>
 													<tbody class="datatable-body" style="">
+													<?php $a = 1; ?>
+                                                    @foreach($task as $value)
 														<tr data-row="0" class="datatable-row" style="left: 0px;">
 															<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
-															<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">1</span></td>
-															<td data-field="Name" aria-label="Flooring" class="datatable-cell"><span style="width: 100px;">Title</span></td>
-															<td data-field="Deadline" aria-label="06/2/2024" class="datatable-cell"><span style="width: 100px;">today</span></td>
-															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">
+															<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
+															<td data-field="Name" aria-label="Flooring" class="datatable-cell"><span style="width: 100px;">{{$value->task_title}}</span></td>
+															<td data-field="Deadline" aria-label="06/2/2024" class="datatable-cell"><span style="width: 100px;">{{$value->deadline}}</span></td>
+															<!-- <td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">
 															Me
-															</span></td>
-															<td data-field="CreatedBy" aria-label="#######" class="datatable-cell"><span style="width: 100px;">Description</span></td>
-															<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value="Active" style="color:white" onclick="setColor(event, 'button', '#101010')"; data-count="1" /></span></td>
+															</span></td> -->
+															<td data-field="CreatedBy" aria-label="#######" class="datatable-cell"><span style="width: 100px;">{{strip_tags(htmlspecialchars_decode($value -> task_description))}}</span></td>
+															<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" class="btn btn-sm btn-primary" value="{{$value->status}}" style="color:white"  data-count="1" /></span></td>
 															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
 																<span style="overflow: visible; position: relative; width: 170px;">
-																	<a href="viewwork" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
+																	<a href="viewwork/{{$value->id}}" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
 																		<span class="svg-icon svg-icon-md">
 																		<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
 																		</span>
@@ -377,7 +398,7 @@
 																</span>
 															</td>
 														</tr>
-												
+												    @endforeach
 													</tbody>
 												</table>
 														</div>
@@ -390,78 +411,31 @@
 										</div>
 										<!--end::Advance Table Widget 2-->
 									</div>
-									<div class="col-lg-4">
-										<!--begin::Mixed Widget 14-->
+									<!-- <div class="col-lg-4">
 										<div class="card card-custom card-stretch gutter-b">
-											<!--begin::Header-->
 											<div class="card-header border-0 pt-5">
 												<h3 class="card-title font-weight-bolder">Allowances</h3>
 												<div class="card-toolbar">
-													<!--begin: Datatable-->
 													<div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable" style="">
 														<table class="datatable-table" style="display: block;">
 															<thead class="datatable-head">
 																<tr class="datatable-row" style="left: 0px;">
-																	<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
-																	<!-- <th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">S No.</span></th> -->
 																	<th data-field="Name" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Name</span></th>
-																	<!-- <th data-field="Description" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Description</span></th> -->
 																	<th data-field="Amount" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Amount</span></th>
-																	<!-- <th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 120px;">Status</span></th> -->
-																	<!-- <th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 125px;">Actions</span></th> -->
 																</tr>
 															</thead>
 															<tbody class="datatable-body" style="">
 																<tr data-row="0" class="datatable-row datatable-row-even" style="left: 0px;">
-																	<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
-																	<!-- <td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 120px;"></span></td> -->
 																	<td data-field="Name" aria-label="Petrol" class="datatable-cell"><span style="width: 120px;"></span></td>
-																	<!-- <td data-field="Description" aria-label="abcdxyz" class="datatable-cell"><span style="width: 120px;"><?php //$value -> allowence_description?></span></td> -->
 																	<td data-field="Amount" aria-label="987" class="datatable-cell"><span style="width: 120px;"></span></td>
-																	<!-- <td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 120px;"> -->
-																	<!-- 
-                                                                    <button class="btn btn-success statuschange" id="" href=""></button>
-                                                                    <button class="btn btn-danger statuschange" id="" href=""></button>
-																	</span></td> -->
-																	<!-- <td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																		<span style="overflow: visible; position: relative; width: 125px;">
-																		<a href="edithrallowances" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">
-																			<span class="svg-icon svg-icon-md">
-																				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																						<rect x="0" y="0" width="24" height="24"></rect>
-																						<path d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "></path>
-																						<rect fill="#000000" opacity="0.3" x="5" y="20" width="15" height="2" rx="1"></rect>
-																					</g>
-																				</svg>
-																			</span>
-																		</a>
-																		<a href="deletehrallowances" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-clean btn-icon" title="Delete">
-																			<span class="svg-icon svg-icon-md">
-																				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																						<rect x="0" y="0" width="24" height="24"></rect>
-																						<path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero"></path>
-																						<path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"></path>
-																					</g>
-																				</svg>
-																			</span>
-																		</a>
-																		</span>
-																	</td> -->
 																</tr>
 															</tbody>
 														</table>
-														
 													</div>
-													<!--end: Datatable-->
 												</div>
 											</div>
-											<!--end::Header-->
-											
 										</div>
-										<!--end::Mixed Widget 14-->
-									</div>
+									</div> -->
 								</div>
 								<!--end::Row-->
 								<!--begin::Row-->

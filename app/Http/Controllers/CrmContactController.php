@@ -1,17 +1,18 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\crm_contact;
+use App\Models\statesandcity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Validator;
 class CrmContactController extends Controller
 {
-    public function index()
+    public function showcity(Request $req)
     {
-        //
+        $data = statesandcity::distinct()->get(['state']);
+        return view('../admin/CRM/addcontacts')->with('data',$data);
     }
-
     public function addContact(Request $req)
     {
         $valid = Validator::make($req -> all(),[

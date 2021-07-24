@@ -5,6 +5,7 @@
 <head>
 <meta charset="utf-8" />
 	<title>ERP</title>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="description" content="Updates and statistics" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!--begin::Fonts-->
@@ -304,10 +305,11 @@
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
 																							<select class="form-control" id="state" name="state">
 																								<option value="">Select</option>
-																								<option value="Delhi">Delhi</option>
-																								<option value="Uttarakhand">Uttarakhand</option>
-																								<option value="Uttar Pradesh">Uttar Pradesh</option>
-																								<option value="Haryana">Haryana</option>
+																								@if(isset($data))
+																								@foreach($data as $value)
+																								<option value="{{$value->state}}">{{$value->state}}</option>
+																								@endforeach
+																								@endif
 																							</select>
 																							<span class="field_error text-danger" id="state_error"></span>
 																						</div>
@@ -317,13 +319,10 @@
 																					<div class="form-group row" data-select2-id="243">
 																						<label class="col-form-label text-left col-lg-4 col-sm-12">City</label>
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
-																							<select class="form-control" id="district" name="city">
-																								<option value="">Select</option>
-																								<option value="Saharanpur">Saharanpur</option>
-																								<option value="Meerut">Meerut</option>
-																								<option value="Dehradun">Dehradun</option>
-																							</select>
-																							<span class="field_error text-danger" id="city_error"></span>
+																						<select name="city" class="form-control" id="district">
+                                                                                           <option value="">Select City</option>
+																						</select>
+																							<span class="field_error text-danger" id="district_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -366,10 +365,9 @@
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
 																						    <select class="form-control" name="statepermanent" id="statec">
 																								<option value="">Select</option>
-																								<option value="Delhi">Delhi</option>
-																								<option value="Uttarakhand">Uttarakhand</option>
-																								<option value="Uttar Pradesh">Uttar Pradesh</option>
-																								<option value="Haryana">Haryana</option>
+																								@foreach($data as $value)
+																								<option value="{{$value->state}}">{{$value->state}}</option>
+																								@endforeach
 																							</select>
 																							<span class="field_error text-danger" id="statepermanent_error"></span>
 																						</div>
@@ -379,13 +377,10 @@
 																					<div class="form-group row" data-select2-id="243">
 																						<label class="col-form-label text-left col-lg-4 col-sm-12">City</label>
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
-																						    <select class="form-control" id="districtc" name="citypermanent">
+																						<select class="form-control" name="citypermanent" id="districtc">
 																								<option value="">Select</option>
-																								<option value="Saharanpur">Saharanpur</option>
-																								<option value="Meerut">Meerut</option>
-																								<option value="Dehradun">Dehradun</option>
-																							</select>
-																							<span class="field_error text-danger" id="citypermanent_error"></span>
+																						</select>
+																						<span class="field_error text-danger" id="citypermanent_error"></span>
 																						</div>
 																					</div>
 																				</div>
@@ -601,10 +596,9 @@
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
 																							<select class="form-control" id="stateco" name="coapplicantstate">
 																								<option value="">Select</option>
-																								<option value="Delhi">Delhi</option>
-																								<option value="Uttarakhand">Uttarakhand</option>
-																								<option value="Uttar Pradesh">Uttar Pradesh</option>
-																								<option value="Haryana">Haryana</option>
+																								@foreach($data as $value)
+																								<option value="{{$value->state}}">{{$value->state}}</option>
+																								@endforeach
 																							</select>
 																							<span class="text-danger field_error" id="coapplicantstate_error"></span>
 																						</div>
@@ -616,9 +610,6 @@
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
 																							<select class="form-control" id="districtco" name="coapplicantcity">
 																								<option value="">Select</option>
-																								<option value="Saharanpur">Saharanpur</option>
-																								<option value="Meerut">Meerut</option>
-																								<option value="Dehradun">Dehradun</option>
 																							</select>
 																							<span class="text-danger field_error" id="coapplicantcity_error"></span>
 																						</div>
@@ -663,10 +654,9 @@
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
 																						    <select class="form-control" id="statecco" name="coapplicantstatepermanent">
 																								<option value="">Select</option>
-																								<option value="Delhi">Delhi</option>
-																								<option value="Uttarakhand">Uttarakhand</option>
-																								<option value="Uttar Pradesh">Uttar Pradesh</option>
-																								<option value="Haryana">Haryana</option>
+																								@foreach($data as $value)
+																								<option value="{{$value->state}}">{{$value->state}}</option>
+																								@endforeach
 																							</select>
 																							<span class="text-danger field_error" id="coapplicantstatepermanent_error"></span>
 																						</div>
@@ -678,9 +668,6 @@
 																						<div class="col-lg-8 col-md-8 col-sm-12" data-select2-id="242">
 																						    <select class="form-control" id="districtcco" name="coapplicantcitypermanent">
 																								<option value="">Select</option>
-																								<option value="Saharanpur">Saharanpur</option>
-																								<option value="Meerut">Meerut</option>
-																								<option value="Dehradun">Dehradun</option>
 																							</select>
 																							<span class="text-danger field_error" id="coapplicantcitypermanent_error"></span>
 																						</div>
@@ -1000,10 +987,12 @@
 	<script>
 	  $(document).ready(function(){
 		$("#checkbox").on("click", function(){
+			var dis = $("#district").val();
+			// alert(dis);
          if (this.checked) { 
                 $("#addressc").val($("#address").val());
                 $("#statec").val($("#state").val());
-                $("#districtc").val($("#district").val());                         
+				$("#districtc").append('<option value="'+dis+'" selected>'+dis+'</option>');
                 $("#pincodec").val($("#pincode").val());                         
 		}
 		else {
@@ -1014,10 +1003,12 @@
 		}
 		});
 		$("#checkboxco").on("click", function(){
+			var diss=$("#districtco").val();
+			alert(diss);
          if (this.checked) { 
                 $("#addresscco").val($("#addressco").val());
                 $("#statecco").val($("#stateco").val());
-                $("#districtcco").val($("#districtco").val());                         
+                $("#districtcco").append('<option value="'+diss+'" selected>'+diss+'</option>');                        
                 $("#pincodecco").val($("#pincodeco").val());                         
 		}
 		else {
@@ -1096,6 +1087,94 @@
 	<!--end::Global Config-->
 	<script type="text/javascript">
         $(document).ready(function(){
+		$('#state').change(function(){
+		var val = $('#state').val();
+	    //    alert(val);
+		$.ajax({
+			url: "../fetchcity",
+			method: "POST",
+			data : {state : val},
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			success: function (res) {
+			if(res){
+				$("#district").empty();
+				$.each(res,function(key,value){
+					$("#district").append('<option value="'+value.city+'">'+value.city+'</option>');
+				});
+			}else{
+				$("#district").empty();
+			}
+			}
+		});
+		});
+		$('#statec').change(function(){
+		var val = $('#statec').val();
+	    //    alert(val);
+		$.ajax({
+			url: "../fetchcity",
+			method: "POST",
+			data : {state : val},
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			success: function (res) {
+			if(res){
+				$("#districtc").empty();
+				$.each(res,function(key,value){
+					$("#districtc").append('<option value="'+value.city+'">'+value.city+'</option>');
+				});
+			}else{
+				$("#districtc").empty();
+			}
+			}
+		});
+		});
+		$('#stateco').change(function(){
+		var val = $('#stateco').val();
+	    //    alert(val);
+		$.ajax({
+			url: "../fetchcity",
+			method: "POST",
+			data : {state : val},
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			success: function (res) {
+			if(res){
+				$("#districtco").empty();
+				$.each(res,function(key,value){
+					$("#districtco").append('<option value="'+value.city+'">'+value.city+'</option>');
+				});
+			}else{
+				$("#districtco").empty();
+			}
+			}
+		});
+		});
+		$('#statecco').change(function(){
+		var val = $('#statecco').val();
+	    //    alert(val);
+		$.ajax({
+			url: "../fetchcity",
+			method: "POST",
+			data : {state : val},
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			success: function (res) {
+			if(res){
+				$("#districtcco").empty();
+				$.each(res,function(key,value){
+					$("#districtcco").append('<option value="'+value.city+'">'+value.city+'</option>');
+				});
+			}else{
+				$("#districtcco").empty();
+			}
+			}
+		});
+		});
         $(".form").submit(function(e){
           e.preventDefault();
           $('.field_error').html('');

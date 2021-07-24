@@ -1,13 +1,8 @@
-<?php
-// print_r($data);
-// exit;
-$ids = request()->route('id');
-?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-	<base href="../">
+	<!-- <base href="../"> -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta charset="utf-8" />
 	<title>ERP</title>
@@ -31,6 +26,8 @@ $ids = request()->route('id');
 	<!--end::Global Theme Styles-->
 	<!--begin::Layout Themes(used by all pages)-->
 	<link rel="shortcut icon" href="/../img/icon.jpg" />
+	<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 	<!--end::Global Theme Styles-->
 	<!--begin::Layout Themes(used by all pages)-->	
 	<style>
@@ -219,9 +216,23 @@ $ids = request()->route('id');
 							<div class="d-flex flex-column-fluid">
 									<!--begin::Container-->
 									<div class="container">
+									<div class="row p-3 justify-content-center">
+									@if ($message = Session::get('success'))
+									<div class="col-md-6 alert alert-primary alert-block">
+										<button type="button" class="close" data-dismiss="alert">×</button>    
+										<strong>{{ $message }}</strong>
+									</div>
+									@endif
+									@if ($message = Session::get('error'))
+									<div class="col-md-6 alert alert-danger alert-block">
+										<button type="button" class="close" data-dismiss="alert">×</button>    
+										<strong>{{ $message }}</strong>
+									</div>
+									@endif
+									</div>
 											<!--begin::Card-->
 											<div class="card card-custom">
-												<div class="row" style="justify-content:center;">
+												<!-- <div class="row" style="justify-content:center;">
 														<ul class="nav nav-pills" id="myTab" role="tablist">
 																<li>
 																		<div class="col-md-3 col-6" style="padding:20px 0px 20px 20px;">
@@ -244,17 +255,17 @@ $ids = request()->route('id');
 																		</div>
 																</li>
 														</ul>
-												</div>
+												</div> -->
 													<!--begin::Header-->
 													<div class="card-header flex-wrap border-0 pt-6 pb-0">
 															<div class="card-title">
-																	<h3 class="card-label">Works
+																	<h3 class="card-label">Projects
 																			<!-- <span class="d-block text-muted pt-2 font-size-sm">User management made easy</span> -->
 																	</h3>
 															</div>
 															<div class="card-toolbar">
 																	<!--begin::Button-->
-																	<a href="addwork/{{$ids}}" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Assign Work</a>
+																	<a href="addprojects" class="btn btn-light-primary font-weight-bold btn-sm px-4 font-size-base ml-2">Add Projects</a>
 																	<!--end::Button-->
 															</div>
 													</div>
@@ -342,43 +353,77 @@ $ids = request()->route('id');
 											<!--end: Selected Rows Group Action Form-->
 											<!--begin: Datatable-->
 											<div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable" style="">
-												<table class="datatable-table" style="display: block;">
+												<table class="datatable-table yajra">
 													<thead class="datatable-head">
 														<tr class="datatable-row" style="left: 0px;">
 															<!-- <th data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check"><span style="width: 20px;"><label class="checkbox checkbox-single checkbox-all"><input type="checkbox">&nbsp;<span></span></label></span></th> -->
 															<th data-field="Sno" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">S No.</span></th>
-															<th data-field="TaskName" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Work</span></th>
+															<th data-field="TaskName" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Project Name</span></th>
 															<!-- <th data-field="Active" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Active</span></th> -->
-															<th data-field="Deadline" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Deadline</span></th>
+															<th data-field="Deadline" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Location</span></th>
+															<th data-field="Deadline" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">State</span></th>
+															<th data-field="Deadline" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">City</span></th>
 															<!-- <th data-field="CreatedBy" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Created By</span></th> -->
-															<th data-field="Responsible" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Responsible</span></th>
+															<th data-field="Responsible" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Office Contact</span></th>
+															<th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Budget</span></th>
 															<th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Status</span></th>
 															<th data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort"><span style="width: 170px;">Actions</span></th>
 														</tr>
 													</thead>
 													<tbody class="datatable-body" style="">
 													<?php $a=1; ?>
-                                                    @foreach($data as $value)
+													@foreach($data as $value)
 														<tr data-row="0" class="datatable-row" style="left: 0px;">
 															<!-- <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1"><span style="width: 20px;"><label class="checkbox checkbox-single"><input type="checkbox" value="1">&nbsp;<span></span></label></span></td> -->
 															<td data-field="Sno" aria-label="64616-103" class="datatable-cell"><span style="width: 100px;">{{$a++}}</span></td>
-															<td data-field="Name" aria-label="Flooring" class="datatable-cell"><span style="width: 100px;">{{$value->task_title}}</span></td>
+															<td data-field="Name" aria-label="Flooring" class="datatable-cell"><span style="width: 100px;">{{$value -> project_name}}</span></td>
 															<!-- <td data-field="Active" aria-label="09876543212" class="datatable-cell"><span style="width: 100px;">09876543212</span></td> -->
-															<td data-field="Deadline" aria-label="06/2/2024" class="datatable-cell"><span style="width: 100px;">{{$value->deadline}}</span></td>
-															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">{{$value->worker_name}}</span></td>
+															<td data-field="Deadline" aria-label="06/2/2024" class="datatable-cell"><span style="width: 100px;">{{$value -> project_location}}</span></td>
+															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">{{$value -> project_state}}</span></td>
+															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">{{$value -> project_city}}</span></td>
+															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">{{$value -> office_contact}}</span></td>
+															<td data-field="CreatedBy" aria-label="AmanRajvanshi" class="datatable-cell"><span style="width: 100px;">{{$value -> project_budget}}</span></td>
 															<!-- <td data-field="Responsible" aria-label="Akash Rikh" class="datatable-cell"><span style="width: 100px;">XYZ</span></td> -->
-															<td data-field="Status" aria-label="5" class="datatable-cell"><span style="width: 100px;"><input type="button" id="button" value="{{$value->status}}" style="color:white" onclick="setColor(event, 'button', '#101010')"; data-count="1" /></span></td>
-															<td class="datatable-cell-left datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
-																<span style="overflow: visible; position: relative; width: 170px;">
-																	<a href="viewwork/{{$value->id}}" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
+															<td data-field="Status" aria-label="5" class="datatable-cell">
+															   @if($value -> project_status == 'Active')
+															   <button class="btn btn-success statuschange" id="{{$value -> id}}" href="">{{$value -> project_status}}</button>
+															   @elseif($value -> project_status == 'Inactive')
+															   <button class="btn btn-danger statuschange" id="{{$value -> id}}" href="">{{$value -> project_status}}</button>
+															   @endif
+														    </td>
+															<td data-field="Actions" data-autohide-disabled="false" aria-label="null" class="datatable-cell">
+																<span style="overflow: visible; position: relative; width: 130px;">
+																<a href="projectview/{{$value -> id}}" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
 																		<span class="svg-icon svg-icon-md">
 																		<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" class="svg-inline--fa fa-eye fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>
 																		</span>
-																	</a>
+																</a>
+																<a href="editproject/{{$value -> id}}" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2" title="Edit details">
+																		<span class="svg-icon svg-icon-md">
+																				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24"></rect>
+																								<path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953) "></path>
+																								<path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+																						</g>
+																				</svg>
+																		</span>
+																</a>
+																<a href="deleteproject/{{$value -> id}}" onclick="return confirm('Are you sure!')" class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon" title="Delete">
+																		<span class="svg-icon svg-icon-md">
+																				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24"></rect>
+																								<path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero"></path>
+																								<path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"></path>
+																						</g>
+																				</svg>
+																		</span>
+																</a>
 																</span>
 															</td>
 														</tr>
-												    @endforeach
+													@endforeach
 													</tbody>
 												</table>
 												<div class="datatable-pager datatable-paging-loaded">
@@ -463,7 +508,7 @@ $ids = request()->route('id');
 		</span>
 	</div>
 	<!--end::Scrolltop-->
-	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script>
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 	</script>
@@ -565,6 +610,33 @@ $ids = request()->route('id');
     <!--begin::Page Scripts(used by this page)-->
     <script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
 	<!--end::Page Scripts-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	<script type="text/javascript">
+	    $(function () {
+			var table = $('.yajra').DataTable({});
+		});
+		$(document).ready(function(){
+		  $(".statuschange").click(function () {
+		    var rowid = $(this).attr('id');
+		    // alert(rowid);
+		    $.ajax({
+		      url: "statusupdateproject",
+		      method: "POST",
+		      data : {id : rowid},
+		      headers: {
+			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			    },
+		      success: function (data) {
+                window.location.href = '../CIVIL/projects'; 
+		      }
+		    });
+		  });
+		});
+	</script>
 </body>
 <!--end::Body-->
 

@@ -19,19 +19,11 @@ use App\Http\Controllers\HrEmployeesController;
 use App\Http\Controllers\HrTaskController;
 use App\Http\Controllers\HrDailyReportController;
 use App\Http\Controllers\PurchaseOrderRequestController;
+use App\Http\Controllers\WorkController;
 use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\WorkerTaskController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\FetchCityController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -219,7 +211,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::get('admin/CRM/leads',[CrmLeadController::class,'showdata']);
         Route::post('admin/CRM/addleads',[CrmLeadController::class,'addleads']);
         Route::post('admin/CRM/addContact',[CrmContactController::class,'addContact']);
-        Route::view('admin/CRM/addcontacts','admin/CRM/addcontacts');
+        Route::get('admin/CRM/addcontacts',[CrmContactController::class,'showcity']);
         Route::post('admin/CRM/editContact',[CrmContactController::class,'editContact']);
         Route::get('admin/CRM/deletelead/{id}',[CrmLeadController::class,'delete']);
         Route::get('admin/CRM/deletecontact/{id}',[CrmContactController::class,'deletecontact']);
@@ -245,6 +237,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         // Route::view('admin/CRM/bookingsview','admin/CRM/bookingsview');
         // Route::view('admin/CRM/cashcredit','admin/CRM/cashcredit');
         Route::view('admin/CRM/searchbooking','admin/CRM/searchbooking');
+       
         Route::get('admin/CRM/contactview/{id}',[CrmContactController::class,'contactview']);
         Route::get('admin/CRM/editcontacts/{id}',[CrmContactController::class,'edit']);
         /*******************************************************FINANCE************************************************************/
@@ -288,6 +281,18 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::POST('admin/CIVIL/updatework',[WorkerTaskController::class,'updatework']);
         Route::get('admin/CIVIL/workerprofile/{id}',[WorkerController::class,'workerprofile']);
         Route::get('admin/CIVIL/works/{id}',[WorkerTaskController::class,'show']);
+        Route::get('admin/CIVIL/employeework/{id}',[WorkerController::class,'showwork']);
+        Route::get('admin/CIVIL/sortwork/{st}',[WorkController::class,'sortwork']);
+        Route::get('admin/CIVIL/projects',[ProjectController::class,'show']);
+        Route::get('admin/CIVIL/addprojects',[ProjectController::class,'showcity']);
+        // Route::view('admin/CIVIL/addprojects','admin/CIVIL/addprojects');
+        Route::POST('admin/CIVIL/addproject',[ProjectController::class,'create']);
+        Route::get('admin/CIVIL/projectview/{id}',[ProjectController::class,'projectview']);
+        Route::get('admin/CIVIL/editproject/{id}',[ProjectController::class,'edit']);
+        Route::get('admin/CIVIL/deleteproject/{id}',[ProjectController::class,'destroy']);
+        Route::post('admin/CIVIL/updateproject',[ProjectController::class,'update']);
+        Route::post('admin/CIVIL/statusupdateproject',[ProjectController::class,'statusupdateproject']);
+        Route::post('admin/fetchcity',[FetchCityController::class,'fetchcity']);
         Route::get('admin/logout', function () {
         session()->flush();
         return redirect('/');
