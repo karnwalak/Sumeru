@@ -88,7 +88,7 @@ class WorkerTaskController extends Controller
        $res -> start_date = NULL;
        $res -> end_date = NULL;
     //    $res -> task_status = $req -> post('status');
-    //    $res -> created_by = $req -> post('admin_id');
+       $res -> created_by =session()->get('id');
     //    $res -> updated_by = $req -> post('admin_id');
        $res -> save();
        for ($i=0; $i < count($rep) ; $i++) {

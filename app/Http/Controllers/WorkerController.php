@@ -31,7 +31,7 @@ class WorkerController extends Controller
     }
     public function showdata(Request $req)
     {
-        return view('admin/CIVIL/workers') -> with('data',worker::where('worker_status','!=','delete')->get());
+        return view('admin/CIVIL/workers') -> with('data',worker::where('worker_status','!=','delete')->where('created_by','=',session()->get('id'))->get());
     }
     public function create(Request $req)
     {
@@ -54,6 +54,7 @@ class WorkerController extends Controller
          $res -> worker_email = $req -> post('email');
          $res -> worker_address = $req -> post('address');
          $res -> worker_status = $req -> post('status');
+         $res -> created_by = $req -> session()->get('id');
          $res -> save();
          if ($res -> save()) {
              // session() -> flash('success','worker added!');

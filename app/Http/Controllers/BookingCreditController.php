@@ -41,12 +41,14 @@ class BookingCreditController extends Controller
         ->join('hr_employees','crm_booking_payment_logs.employee_id','=','hr_employees.id')
         ->join('crm_bookings','crm_booking_payment_logs.booking_id','=','crm_bookings.id')
         ->select(['hr_employees.employee_name','hr_employees.employee_contact_no','crm_bookings.booking_amount','crm_booking_payment_logs.*'])
+        ->where('hr_employees.id','=',session()->get('id'))
         ->paginate(10);
 
         $datas =crm_booking_payment_log::where('crm_booking_payment_logs.status','=','Submitted')
         ->join('hr_employees','crm_booking_payment_logs.employee_id','=','hr_employees.id')
         ->join('crm_bookings','crm_booking_payment_logs.booking_id','=','crm_bookings.id')
         ->select(['hr_employees.employee_name','hr_employees.employee_contact_no','crm_bookings.booking_amount','crm_booking_payment_logs.*'])
+        ->where('hr_employees.id','=',session()->get('id'))
         ->paginate(10);
 
         return view('../admin/FINANCE/bookingcredit')->with('data',$data)->with('datas',$datas);

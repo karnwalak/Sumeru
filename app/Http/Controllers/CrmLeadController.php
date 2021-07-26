@@ -61,7 +61,7 @@ class CrmLeadController extends Controller
     }
     public function showdata(Request $req)
     {
-        $data = crm_lead::orderBy('id', 'DESC')->where('lead_status','!=','delete')->join('flat_categories','crm_leads.product','=','flat_categories.id')
+        $data = crm_lead::orderBy('id', 'DESC')->where('lead_status','!=','delete')->where('employee_id','=',session()->get('id'))->join('flat_categories','crm_leads.product','=','flat_categories.id')
         ->get(['crm_leads.*','flat_categories.category_name']);
         return view('../admin/CRM/leads') -> with('data',$data);
     }

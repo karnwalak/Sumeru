@@ -172,6 +172,7 @@ class CrmBookingController extends Controller
    {
     $booking = crm_booking::orderBy('crm_bookings.id', 'DESC')
     ->where('status','!=','delete')
+    ->where('employee_id','=',session()->get('id'))
     ->join('crm_contacts','crm_bookings.contact_id','=','crm_contacts.id')
     ->join('flat_ inventories','crm_bookings.product_id','=','flat_ inventories.id')
     ->select(['crm_bookings.*','crm_contacts.contact_full_name','crm_contacts.contact_mob_no','crm_contacts.contact_email','flat_ inventories.flat_stock_name'])
@@ -298,6 +299,6 @@ class CrmBookingController extends Controller
 }
 public function showpayment(Request $req)
 {
-   return view('../admin/CRM/cashcredit') -> with('data',crm_booking_payment_log::paginate(10));
+   return view('../admin/CRM/cashcredit') -> with('data',crm_booking_payment_log::where('employee_id','=',session()->get('id'))->paginate(10));
 }
 }

@@ -48,31 +48,34 @@
                     <div class="login-signin">
                         <div class="mb-20">
                             <h2 class="opacity-60 font-weight-bold">Welcome to<strong> Sumeru Infrastructures</strong></h2>
-                            <h3>Log In To Admin</h3>
+                            <h3>Log In To Employee</h3>
                             <p class="opacity-60 font-weight-bold">Enter your details to login to your account</p>
                         </div>
                         <form id="form">
                             {{@csrf_field()}}
-                            <div class="form-group">
-                                <input
-                                    class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mb-5"
-                                    type="text" placeholder="Email" name="username" autocomplete="off" />
-                                    <span style="color: red;" id="username_error" class="field_error"></span>
+                            <div class="message_div py-3 d-none">
+                            OTP has been sent to the!<span id="otpmsg" class="mx-1"></span>Not you!<a href="employeelogin" class="text-success">Click Here!</a>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mobilediv">
                                 <input
                                     class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mb-5"
-                                    type="password" placeholder="Password" name="password" />
-                                    <span style="color: red;" id="password_error" class="field_error"></span>
+                                    type="text" placeholder="Mobile" id="mobile" name="mobile" autocomplete="off" />
+                                    <span style="color: red;" id="mobile_error" class="field_error"></span>
+                            </div>
+                            <div class="form-group d-none otpdiv">
+                                <input
+                                    class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mb-5"
+                                    type="text" placeholder="OTP" name="otp" />
+                                    <span style="color: red;" id="otp_error" class="field_error"></span>
                             </div>
                             <div class="form-group text-center">
                             <a href="forgotpassword" class="text-light mx5">Forgot Password?</a>
-                            <a href="employeelogin" class="text-light mx-5">Employee Login!</a>
+                            <a href="/" class="text-light mx-5">Admin Login!</a>
                             </div>
                             <div class="form-group text-center mt-10">
                                 <!-- <input type="submit" value="Log In" name=""> -->
-                                   <button type="submit" id="kt_login_signin_submit"
-                                        class="btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3">Sign In</button><br>
+                                   <button type="submit" id="kt_login_signin_submit" class="buttonOTP btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3">Get OTP!</button><br>
+                                   <button type="submit" id="kt_login_signin_submit" class="buttonLogin btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3 d-none">Sign In</button><br>
                                     <span style="color:red;">{{session() -> get('error')}}</span>
                                     <span id="error_msg" style="color:red;"></span>
                                     <span id="success_msg" style="color:white;"></span>
@@ -162,11 +165,13 @@
     <!--end::Page Scripts-->
     <script type="text/javascript">
         $(document).ready(function(){
-        $("#form").submit(function(e){
+        $(".buttonOTP").click(function(e){
           e.preventDefault();
           $('.field_error').html('');
+          var mobile = $('#mobile').val();
+        // alert(mobile);
           $.ajax({
-            url:'auth',
+            url:'fetchmobile',
             data:$("#form").serialize(),
             type:'post',
             success:function(result){
@@ -178,8 +183,33 @@
                   $('#'+key+'_error').html(val[0]);
                 })
               }else if(result.status == 'success'){
-                $('#form')[0].reset();
-                $('#success_msg').html(result.msg);
+                $('.message_div').removeClass('d-none');
+                $('.buttonOTP').addClass('d-none');
+                $('.buttonLogin').removeClass('d-none');
+                $('.mobilediv').addClass('d-none');
+                $('.otpdiv').removeClass('d-none');
+                $('#otpmsg').html(mobile);
+
+              }
+            }
+          });
+        });
+        $(".buttonLogin").click(function(e){
+          e.preventDefault();
+          $('.field_error').html('');
+          $.ajax({
+            url:'emplogin',
+            data:$("#form").serialize(),
+            type:'post',
+            success:function(result){
+              if (result.status == 'error') {
+                $('#error_msg').html(result.error);
+                $.each(result.error,function(key,val){
+                  // console.log(key);
+                  // console.log(val);
+                  $('#'+key+'_error').html(val[0]);
+                })
+              }else if(result.status == 'success'){
                 setTimeout(function(){
                  window.location.href = '../admin/ERP/dashboard'; 
                }, 1000);

@@ -44,6 +44,7 @@ class HrDepartmentsController extends Controller
        ->join('hr_employees', 'hr_departments.employee_id', '=', 'hr_employees.id')
        ->select('hr_departments.*', 'hr_employees.employee_name')
        ->where('hr_departments.status','!=','delete')
+       ->where('hr_departments.employee_id','=',session()->get('id'))
        ->get();
        return view('../admin/HR/hrdepartment') -> with('data',$data);
     }

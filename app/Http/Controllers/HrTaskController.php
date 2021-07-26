@@ -150,7 +150,7 @@ class HrTaskController extends Controller
     public function showdata(Request $req)
     {
         $tasks = hr_task::orderby('id','DESC')->where('task_status','!=','delete')
-        ->where('created_by','=',session()->get('id'))
+        ->where('hr_task_emplyees.emplyee_id','=',session()->get('id'))
         ->join('hr_task_emplyees','hr_tasks.id','=','hr_task_emplyees.task_id')
         ->get(['hr_tasks.*','hr_task_emplyees.emplyee_id']);
         return view('../admin/HR/tasksandprojects') -> with('tasks',$tasks);

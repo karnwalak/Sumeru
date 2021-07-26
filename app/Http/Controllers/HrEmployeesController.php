@@ -13,6 +13,117 @@ use Validator;
 
 class HrEmployeesController extends Controller
 {
+    public function editloginpermission(Request $req)
+    {
+        $id = $req -> id;
+        // return $id;
+        $data = DB::SELECT("SELECT * FROM hr_employees where id = $id");
+        foreach ($data as $value) {
+           
+        }
+        if($value -> employee_login == "yes"){
+         $res = DB::table('hr_employees') 
+            ->where('id', $id)
+            ->limit(1) 
+            ->update(['employee_login' => 'no']);
+        }else{
+         $result = DB::table('hr_employees') 
+            ->where('id', $id)
+            ->limit(1) 
+            ->update(['employee_login' => 'yes']);
+        }
+    }
+    public function fetchmobile(Request $req)
+    {
+        $valid = Validator::make($req -> all(),[
+            'mobile' => 'required|regex:/^([+]\d{2})?\d{10}$/',
+            // 'otp' => 'numeric|digits:6',
+           ]);
+        if (!$valid -> passes()) {
+            return response() -> json(['status' => 'error',
+            'error' => $valid -> errors()]);
+        }else{
+            $mobile = $req -> post('mobile');
+            $res = hr_employees::where('employee_contact_no','=',$mobile)->get();
+            foreach ($res as $value) {
+                $id = $value->id;
+            }
+            if (isset($id)) {
+                $date = date("Y-m-d H:i:s");
+                $currentDate = strtotime($date);
+                $futureDate = $currentDate+(60*5);
+                $formatDate = date("Y-m-d H:i:s", $futureDate);
+                $otp = 123456;
+                $password= md5($otp);
+                $result = DB::table('hr_employees') 
+                ->where('id', $id)
+                ->limit(1) 
+                ->update(['employee_password' => $password,'expire_password'=>$formatDate]);
+                return response() -> json([
+                    'status'=> 'success',
+                    'msg'=>'User Found!'
+                ]);
+            } else {
+                return response() -> json([
+                    'status'=> 'error',
+                    'error'=>'User Not Found!'
+                ]);
+            }
+        }
+    }
+    public function emplogin(Request $req)
+    {
+        $valid = Validator::make($req -> all(),[
+            'otp' => 'required|numeric|digits:6',
+           ]);
+        if (!$valid -> passes()) {
+            return response() -> json(['status' => 'error',
+            'error' => $valid -> errors()]);
+        }else{
+            $mobile = $req -> post('mobile');
+            $otp = $req -> post('otp');
+            $password = md5($otp);
+            $res = hr_employees::where('employee_contact_no','=',$mobile)
+            ->where('employee_password','=',$password)
+            ->get();
+            // return $res;
+            foreach ($res as $value) {
+                $id = $value -> id;
+                $username = $value -> employee_name;
+                $employee_login = $value -> employee_login;
+                $expire = $value -> expire_password;
+            }
+            // return $employee_login;
+            if ($employee_login == 'yes') {
+                $cur_time = date("Y-m-d H:i:s");
+                // return $cur_time;
+                if($cur_time <= $expire){
+                    if (isset($res['0'] -> id)) {
+                        $data = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz{}[]$!/+';
+                        $pass = substr(str_shuffle($data), 0, 10);
+                        $result = DB::table('hr_employees') 
+                        ->where('id', $id)
+                        ->limit(1) 
+                        ->update(['employee_password' => $pass,'expire_password'=>date("Y-m-d H:i:s")]);        
+                        session() -> put('id',$id);
+                        session() -> put('username',$username);
+                        $req -> session() -> put('ADMIN_LOGIN',true);
+                        $req -> session() -> put('ADMIN_ID',$res['0'] -> id);
+                        return response() -> json(['status' => 'success',
+                           'msg' => 'You are logged in now!']);
+                      }else{
+                        return response() -> json(['status' => 'error',
+                           'error' => 'Please enter correct details!']);
+                      }
+                }else{
+                    return response()->json(['status'=>'error','error'=>'OTP has been expired!']);
+                }
+            } else {
+                return response()->json(['status'=>'error','error'=>'User is disabled by admin!']);
+            }
+            
+        }
+    }
     public function employeetask(request $req,$id){
         $tasks = hr_task::where('task_status','!=','delete')->join('hr_task_emplyees','hr_tasks.id','=','hr_task_emplyees.task_id')
         ->where('hr_task_emplyees.emplyee_id','=',$id)

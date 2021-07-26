@@ -32,6 +32,9 @@ Route::view('setpassword/{id}','setpassword');
 Route::post('forgotPassword','App\Http\Controllers\AdminController@forgotPassword');
 Route::post('setPassword','App\Http\Controllers\AdminController@setPassword');
 Route::post('auth','App\Http\Controllers\AdminController@auth');
+Route::view('employeelogin','employeelogin');
+Route::post('fetchmobile',[HrEmployeesController::class,'fetchmobile']);
+Route::post('emplogin',[HrEmployeesController::class,'emplogin']);
 Route::group(['middleware' => 'disable_back_btn'],function(){
     Route::group(['middleware' => 'admin_auth'],function(){
         //inv
@@ -137,6 +140,7 @@ Route::group(['middleware' => 'disable_back_btn'],function(){
         Route::post('admin/HR/finishstatus',[HrTaskController::class,'finishstatus']);
         Route::POST('admin/HR/addtasks',[HrTaskController::class,'create']);
         Route::POST('admin/HR/addemployee',[HrEmployeesController::class,'create']);
+        Route::POST('admin/HR/editloginpermission',[HrEmployeesController::class,'editloginpermission']);
         Route::get('admin/HR/fetchshift/{id}',[HrEmployeesController::class,'fetchshift']);
         Route::POST('admin/HR/addshift',[HrShiftController::class,'create']);
         Route::get('admin/HR/shifts',[HrShiftController::class,'show']);

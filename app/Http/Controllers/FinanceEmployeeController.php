@@ -78,7 +78,7 @@ class FinanceEmployeeController extends Controller
     }
     public function show(Request $req)
     {
-        $data = hr_employees::orderBy('id','DESC')->where('employee_status','!=','delete')->get();
+        $data = hr_employees::orderBy('id','DESC')->where('employee_status','!=','delete')->where('id','=',session()->get('id'))->get();
         return view('../admin/FINANCE/salaries') -> with('data',$data);
         // $data = employee_salaries::join('hr_employees','employee_salaries.employee_id','=','hr_employees.employee_id')
         // ->select('hr_employees.*','SUM(employee_salaries.amount) as amount')

@@ -25,6 +25,7 @@
 	<link href="/../theme/html/demo4/dist/assets/css/style.bundle49d8.css?v=7.2.8" rel="stylesheet" type="text/css" />
 	<!--end::Global Theme Styles-->
 	<!--begin::Layout Themes(used by all pages)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"/>
 	<link rel="shortcut icon" href="/../img/icon.jpg" />
     <!--begin::Layout Themes(used by all pages)-->
     <style>
@@ -246,11 +247,12 @@
                                             <thead class="datatable-head">
                                                 <tr class="datatable-row" style="left: 0px;">
                                                     <th data-field="RecordID" class="datatable-cell-left datatable-cell datatable-cell-sort datatable-cell-sorted" data-sort="asc"><span style="width: 40px;">#<i class="flaticon2-arrow-up"></i></span></th>
-                                                    <th data-field="EmployeeName" class="datatable-cell datatable-cell-sort"><span style="width: 250px;">Employee Name</span></th>
-                                                    <th data-field="Contact" class="datatable-cell datatable-cell-sort" data-sort="asc"><span style="width: 158px;">Contact</span></th>
-                                                    <th data-field="Department" class="datatable-cell datatable-cell-sort"><span style="width: 158px;">Department</span></th>
-                                                    <th data-field="Shift Timing" class="datatable-cell datatable-cell-sort"><span style="width: 158px;">Shift</span></th>
-                                                    <th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 158px;">Status</span></th>
+                                                    <th data-field="EmployeeName" class="datatable-cell datatable-cell-sort"><span style="width: 150px;">Employee Name</span></th>
+                                                    <th data-field="Contact" class="datatable-cell datatable-cell-sort" data-sort="asc"><span style="width: 100px;">Contact</span></th>
+                                                    <th data-field="Department" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Department</span></th>
+                                                    <th data-field="Shift Timing" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Shift</span></th>
+                                                    <th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Status</span></th>
+                                                    <th data-field="Status" class="datatable-cell datatable-cell-sort"><span style="width: 100px;">Employee Login</span></th>
                                                     <th data-field="Actions" data-autohide-disabled="false" class="datatable-cell datatable-cell-sort"><span style="width: 130px;">Actions</span></th>
                                                 </tr>
                                             </thead>
@@ -260,7 +262,7 @@
                                                 <tr data-row="0" class="datatable-row datatable-row-even datatable-row-hover" style="left: 0px;">
                                                     <td class="datatable-cell-sorted datatable-cell-left datatable-cell" data-field="RecordID" aria-label="1"><span style="width: 40px;"><span class="font-weight-bolder">{{$a++}}</span></span></td>
                                                     <td data-field="OrderID" aria-label="64616-103" class="datatable-cell">
-                                                        <span style="width: 250px;">
+                                                        <span style="width: 150px;">
                                                             <div class="d-flex align-items-center">
                                                                 <div class="symbol symbol-40 symbol-sm flex-shrink-0"> <img class="" src="/../upload/{{$emp -> employee_img}}" alt="photo"> </div>
                                                                 <div class="ml-4">
@@ -271,13 +273,13 @@
                                                         </span>
                                                     </td>
                                                     <td data-field="ShipDate" aria-label="10/15/2017" class="datatable-cell">
-                                                        <span style="width: 158px;">
+                                                        <span style="width: 100px;">
                                                             <div class="font-weight-bolder mb-0">{{$emp -> employee_contact_no}}</div>
                                                             <!-- <div class="text-muted">Rejected</div> -->
                                                         </span>
                                                     </td>
                                                     <td data-field="ShipDate" aria-label="10/15/2017" class="datatable-cell">
-                                                        <span style="width: 158px;">
+                                                        <span style="width: 100px;">
                                                             <div class="font-weight-bolder mb-0">
                                                             <?php 
                                                                 $pid = $emp -> department_id;
@@ -292,7 +294,7 @@
                                                         </span>
                                                     </td>
                                                     <td data-field="CompanyName" aria-label="Casper-Kerluke" class="datatable-cell">
-                                                        <span style="width: 158px;">
+                                                        <span style="width: 100px;">
                                                             <div class="font-weight-bold text-muted">
                                                             <?php 
                                                                 $pid = $emp -> shift_id;
@@ -302,17 +304,30 @@
                                                                 // print_r($pdata);
                                                                 // // // echo count($pdata);
                                                                 foreach ($pdata as  $pval){}
-                                                                echo "<a href='fetchshift/".$pid."'>" . $pval -> shift_name . "</a>";
+                                                                echo "<a class='text-decoration-none fw-5' href='fetchshift/".$pid."'>" . $pval -> shift_name . "</a>";
                                                             ?>
                                                             </div>
                                                         </span>
                                                     </td>
                                                     <td data-field="Status" aria-label="5" class="datatable-cell">
-                                                    <span style="width: 120px;">
+                                                    <span style="width: 100px;">
                                                     @if($emp -> employee_status == 'Active')
                                                     <button class="btn btn-success statuschange" id="{{$emp -> id}}" href="">{{$emp -> employee_status}}</button>
                                                     @elseif($emp -> employee_status == 'Inactive')
                                                     <button class="btn btn-danger statuschange" id="{{$emp -> id}}" href="">{{$emp -> employee_status}}</button>
+                                                    @endif
+                                                    </span>
+                                                    </td>
+                                                    <td data-field="Status" aria-label="5" class="datatable-cell">
+                                                    <span style="width: 100px;">
+                                                    @if($emp -> employee_login == 'yes')
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input switch_check" id="{{$emp->id}}" type="checkbox" checked>
+                                                    </div>
+                                                    @elseif($emp -> employee_login == 'no')
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input switch_check" id="{{$emp->id}}" type="checkbox">
+                                                    </div>
                                                     @endif
                                                     </span>
                                                     </td>
@@ -412,6 +427,20 @@
             },
             success: function (data) {
             window.location.href = '../HR/employees'; 
+            }
+        });
+        });
+        $(".switch_check").click(function () {
+        var rowid = $(this).attr('id');
+        // alert(rowid);
+        $.ajax({
+            url: "editloginpermission",
+            method: "POST",
+            data : {id : rowid},
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {
             }
         });
         });
@@ -516,7 +545,8 @@
 <!--end::Page Vendors-->
 <!--begin::Page Scripts(used by this page)-->
 <script src="/../theme/html/demo4/dist/assets/js/pages/widgets49d8.js?v=7.2.8"></script>
-    <!--end::Page Scripts-->
+<!--end::Page Scripts-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 <!--end::Body-->
 
